@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.33502.453
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppGCT", "AppGCT.csproj", "{FB0EF680-D9B8-48C0-996D-B0CDE7CBC6EA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FB0EF680-D9B8-48C0-996D-B0CDE7CBC6EA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FB0EF680-D9B8-48C0-996D-B0CDE7CBC6EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FB0EF680-D9B8-48C0-996D-B0CDE7CBC6EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FB0EF680-D9B8-48C0-996D-B0CDE7CBC6EA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D430F012-0E69-4839-885C-3681D9CCE0E5}
+	EndGlobalSection
+EndGlobal
