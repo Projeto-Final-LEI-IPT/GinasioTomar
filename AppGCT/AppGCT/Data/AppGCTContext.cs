@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Identity;
 
 namespace AppGCT.Data
 {
-    public class AppGCTContext : IdentityDbContext<IdentityUser>
+    public class AppGCTContext : IdentityDbContext<Utilizador>
     {
         public AppGCTContext (DbContextOptions<AppGCTContext> options)
             : base(options)
