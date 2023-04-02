@@ -9,7 +9,9 @@ namespace AppGCT.Areas.Identity.Data;
 // Add profile data for application users by adding properties to the AppGCTUser class
 public class AppGCTUser : IdentityUser
 {
+
     [PersonalData]
+
     public string? Nome { get; set; }
     [PersonalData]
     public string? NIF { get; set; }
