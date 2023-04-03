@@ -15,11 +15,11 @@ namespace AppGCT.Areas.Identity.Pages.Account.Manage
 {
     public class GenerateRecoveryCodesModel : PageModel
     {
-        private readonly UserManager<AppGCTUser> _userManager;
+        private readonly UserManager<Utilizador> _userManager;
         private readonly ILogger<GenerateRecoveryCodesModel> _logger;
 
         public GenerateRecoveryCodesModel(
-            UserManager<AppGCTUser> userManager,
+            UserManager<Utilizador> userManager,
             ILogger<GenerateRecoveryCodesModel> logger)
         {
             _userManager = userManager;

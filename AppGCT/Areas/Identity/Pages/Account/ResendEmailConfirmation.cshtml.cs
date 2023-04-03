@@ -20,10 +20,10 @@ namespace AppGCT.Areas.Identity.Pages.Account
     [AllowAnonymous]
     public class ResendEmailConfirmationModel : PageModel
     {
-        private readonly UserManager<AppGCTUser> _userManager;
+        private readonly UserManager<Utilizador> _userManager;
         private readonly IEmailSender _emailSender;
 
-        public ResendEmailConfirmationModel(UserManager<AppGCTUser> userManager, IEmailSender emailSender)
+        public ResendEmailConfirmationModel(UserManager<Utilizador> userManager, IEmailSender emailSender)
         {
             _userManager = userManager;
             _emailSender = emailSender;

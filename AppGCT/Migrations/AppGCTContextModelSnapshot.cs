@@ -22,7 +22,7 @@ namespace AppGCT.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("AppGCT.Areas.Identity.Data.AppGCTUser", b =>
+            modelBuilder.Entity("AppGCT.Areas.Identity.Data.Utilizador", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
@@ -91,28 +91,6 @@ namespace AppGCT.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
-                });
-
-            modelBuilder.Entity("AppGCT.Models.Utilizadores", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int?>("FK_idRole")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("estadoUtilizador")
-                        .HasColumnType("int");
-
-                    b.Property<string>("nome")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Utilizadores");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -263,7 +241,7 @@ namespace AppGCT.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("AppGCT.Areas.Identity.Data.AppGCTUser", null)
+                    b.HasOne("AppGCT.Areas.Identity.Data.Utilizador", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -272,7 +250,7 @@ namespace AppGCT.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("AppGCT.Areas.Identity.Data.AppGCTUser", null)
+                    b.HasOne("AppGCT.Areas.Identity.Data.Utilizador", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -287,7 +265,7 @@ namespace AppGCT.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("AppGCT.Areas.Identity.Data.AppGCTUser", null)
+                    b.HasOne("AppGCT.Areas.Identity.Data.Utilizador", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -296,7 +274,7 @@ namespace AppGCT.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("AppGCT.Areas.Identity.Data.AppGCTUser", null)
+                    b.HasOne("AppGCT.Areas.Identity.Data.Utilizador", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)

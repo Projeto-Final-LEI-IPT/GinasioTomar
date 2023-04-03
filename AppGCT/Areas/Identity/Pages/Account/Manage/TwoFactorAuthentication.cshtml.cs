@@ -14,12 +14,12 @@ namespace AppGCT.Areas.Identity.Pages.Account.Manage
 {
     public class TwoFactorAuthenticationModel : PageModel
     {
-        private readonly UserManager<AppGCTUser> _userManager;
-        private readonly SignInManager<AppGCTUser> _signInManager;
+        private readonly UserManager<Utilizador> _userManager;
+        private readonly SignInManager<Utilizador> _signInManager;
         private readonly ILogger<TwoFactorAuthenticationModel> _logger;
 
         public TwoFactorAuthenticationModel(
-            UserManager<AppGCTUser> userManager, SignInManager<AppGCTUser> signInManager, ILogger<TwoFactorAuthenticationModel> logger)
+            UserManager<Utilizador> userManager, SignInManager<Utilizador> signInManager, ILogger<TwoFactorAuthenticationModel> logger)
         {
             _userManager = userManager;
             _signInManager = signInManager;

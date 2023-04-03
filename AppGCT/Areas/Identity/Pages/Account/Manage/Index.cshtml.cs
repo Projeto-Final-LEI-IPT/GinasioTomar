@@ -15,12 +15,12 @@ namespace AppGCT.Areas.Identity.Pages.Account.Manage
 {
     public class IndexModel : PageModel
     {
-        private readonly UserManager<AppGCTUser> _userManager;
-        private readonly SignInManager<AppGCTUser> _signInManager;
+        private readonly UserManager<Utilizador> _userManager;
+        private readonly SignInManager<Utilizador> _signInManager;
 
         public IndexModel(
-            UserManager<AppGCTUser> userManager,
-            SignInManager<AppGCTUser> signInManager)
+            UserManager<Utilizador> userManager,
+            SignInManager<Utilizador> signInManager)
         {
             _userManager = userManager;
             _signInManager = signInManager;
@@ -71,7 +71,7 @@ namespace AppGCT.Areas.Identity.Pages.Account.Manage
             public string PhoneNumber { get; set; }
         }
 
-        private async Task LoadAsync(AppGCTUser user)
+        private async Task LoadAsync(Utilizador user)
         {
             var userName = await _userManager.GetUserNameAsync(user);
             var phoneNumber = await _userManager.GetPhoneNumberAsync(user);

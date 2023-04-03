@@ -6,8 +6,8 @@ using Microsoft.AspNetCore.Identity;
 
 namespace AppGCT.Areas.Identity.Data;
 
-// Add profile data for application users by adding properties to the AppGCTUser class
-public class AppGCTUser : IdentityUser
+// Add profile data for application users by adding properties to the Utilizador class
+public class Utilizador : IdentityUser
 {
 
     [PersonalData]

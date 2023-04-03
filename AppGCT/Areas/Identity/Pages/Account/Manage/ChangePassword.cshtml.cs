@@ -15,13 +15,13 @@ namespace AppGCT.Areas.Identity.Pages.Account.Manage
 {
     public class ChangePasswordModel : PageModel
     {
-        private readonly UserManager<AppGCTUser> _userManager;
-        private readonly SignInManager<AppGCTUser> _signInManager;
+        private readonly UserManager<Utilizador> _userManager;
+        private readonly SignInManager<Utilizador> _signInManager;
         private readonly ILogger<ChangePasswordModel> _logger;
 
         public ChangePasswordModel(
-            UserManager<AppGCTUser> userManager,
-            SignInManager<AppGCTUser> signInManager,
+            UserManager<Utilizador> userManager,
+            SignInManager<Utilizador> signInManager,
             ILogger<ChangePasswordModel> logger)
         {
             _userManager = userManager;

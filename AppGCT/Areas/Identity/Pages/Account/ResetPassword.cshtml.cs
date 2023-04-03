@@ -17,9 +17,9 @@ namespace AppGCT.Areas.Identity.Pages.Account
 {
     public class ResetPasswordModel : PageModel
     {
-        private readonly UserManager<AppGCTUser> _userManager;
+        private readonly UserManager<Utilizador> _userManager;
 
-        public ResetPasswordModel(UserManager<AppGCTUser> userManager)
+        public ResetPasswordModel(UserManager<Utilizador> userManager)
         {
             _userManager = userManager;
         }

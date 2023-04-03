@@ -19,10 +19,10 @@ namespace AppGCT.Areas.Identity.Pages.Account
 {
     public class ForgotPasswordModel : PageModel
     {
-        private readonly UserManager<AppGCTUser> _userManager;
+        private readonly UserManager<Utilizador> _userManager;
         private readonly IEmailSender _emailSender;
 
-        public ForgotPasswordModel(UserManager<AppGCTUser> userManager, IEmailSender emailSender)
+        public ForgotPasswordModel(UserManager<Utilizador> userManager, IEmailSender emailSender)
         {
             _userManager = userManager;
             _emailSender = emailSender;

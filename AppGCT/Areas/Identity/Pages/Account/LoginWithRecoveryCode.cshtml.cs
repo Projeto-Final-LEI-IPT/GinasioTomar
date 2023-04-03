@@ -15,13 +15,13 @@ namespace AppGCT.Areas.Identity.Pages.Account
 {
     public class LoginWithRecoveryCodeModel : PageModel
     {
-        private readonly SignInManager<AppGCTUser> _signInManager;
-        private readonly UserManager<AppGCTUser> _userManager;
+        private readonly SignInManager<Utilizador> _signInManager;
+        private readonly UserManager<Utilizador> _userManager;
         private readonly ILogger<LoginWithRecoveryCodeModel> _logger;
 
         public LoginWithRecoveryCodeModel(
-            SignInManager<AppGCTUser> signInManager,
-            UserManager<AppGCTUser> userManager,
+            SignInManager<Utilizador> signInManager,
+            UserManager<Utilizador> userManager,
             ILogger<LoginWithRecoveryCodeModel> logger)
         {
             _signInManager = signInManager;

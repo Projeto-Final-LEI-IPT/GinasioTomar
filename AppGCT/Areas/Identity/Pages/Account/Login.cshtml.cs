@@ -20,10 +20,10 @@ namespace AppGCT.Areas.Identity.Pages.Account
 {
     public class LoginModel : PageModel
     {
-        private readonly SignInManager<AppGCTUser> _signInManager;
+        private readonly SignInManager<Utilizador> _signInManager;
         private readonly ILogger<LoginModel> _logger;
 
-        public LoginModel(SignInManager<AppGCTUser> signInManager, ILogger<LoginModel> logger)
+        public LoginModel(SignInManager<Utilizador> signInManager, ILogger<LoginModel> logger)
         {
             _signInManager = signInManager;
             _logger = logger;

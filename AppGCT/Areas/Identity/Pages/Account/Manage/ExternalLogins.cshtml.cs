@@ -17,14 +17,14 @@ namespace AppGCT.Areas.Identity.Pages.Account.Manage
 {
     public class ExternalLoginsModel : PageModel
     {
-        private readonly UserManager<AppGCTUser> _userManager;
-        private readonly SignInManager<AppGCTUser> _signInManager;
-        private readonly IUserStore<AppGCTUser> _userStore;
+        private readonly UserManager<Utilizador> _userManager;
+        private readonly SignInManager<Utilizador> _signInManager;
+        private readonly IUserStore<Utilizador> _userStore;
 
         public ExternalLoginsModel(
-            UserManager<AppGCTUser> userManager,
-            SignInManager<AppGCTUser> signInManager,
-            IUserStore<AppGCTUser> userStore)
+            UserManager<Utilizador> userManager,
+            SignInManager<Utilizador> signInManager,
+            IUserStore<Utilizador> userStore)
         {
             _userManager = userManager;
             _signInManager = signInManager;
@@ -70,7 +70,7 @@ namespace AppGCT.Areas.Identity.Pages.Account.Manage
                 .ToList();
 
             string passwordHash = null;
-            if (_userStore is IUserPasswordStore<AppGCTUser> userPasswordStore)
+            if (_userStore is IUserPasswordStore<Utilizador> userPasswordStore)
             {
                 passwordHash = await userPasswordStore.GetPasswordHashAsync(user, HttpContext.RequestAborted);
             }

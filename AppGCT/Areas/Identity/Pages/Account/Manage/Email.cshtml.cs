@@ -18,13 +18,13 @@ namespace AppGCT.Areas.Identity.Pages.Account.Manage
 {
     public class EmailModel : PageModel
     {
-        private readonly UserManager<AppGCTUser> _userManager;
-        private readonly SignInManager<AppGCTUser> _signInManager;
+        private readonly UserManager<Utilizador> _userManager;
+        private readonly SignInManager<Utilizador> _signInManager;
         private readonly IEmailSender _emailSender;
 
         public EmailModel(
-            UserManager<AppGCTUser> userManager,
-            SignInManager<AppGCTUser> signInManager,
+            UserManager<Utilizador> userManager,
+            SignInManager<Utilizador> signInManager,
             IEmailSender emailSender)
         {
             _userManager = userManager;
@@ -74,7 +74,7 @@ namespace AppGCT.Areas.Identity.Pages.Account.Manage
             public string NewEmail { get; set; }
         }
 
-        private async Task LoadAsync(AppGCTUser user)
+        private async Task LoadAsync(Utilizador user)
         {
             var email = await _userManager.GetEmailAsync(user);
             Email = email;

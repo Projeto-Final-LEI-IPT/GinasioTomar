@@ -17,9 +17,9 @@ namespace AppGCT.Areas.Identity.Pages.Account
 {
     public class ConfirmEmailModel : PageModel
     {
-        private readonly UserManager<AppGCTUser> _userManager;
+        private readonly UserManager<Utilizador> _userManager;
 
-        public ConfirmEmailModel(UserManager<AppGCTUser> userManager)
+        public ConfirmEmailModel(UserManager<Utilizador> userManager)
         {
             _userManager = userManager;
         }

@@ -17,13 +17,13 @@ namespace AppGCT.Areas.Identity.Pages.Account
 {
     public class LoginWith2faModel : PageModel
     {
-        private readonly SignInManager<AppGCTUser> _signInManager;
-        private readonly UserManager<AppGCTUser> _userManager;
+        private readonly SignInManager<Utilizador> _signInManager;
+        private readonly UserManager<Utilizador> _userManager;
         private readonly ILogger<LoginWith2faModel> _logger;
 
         public LoginWith2faModel(
-            SignInManager<AppGCTUser> signInManager,
-            UserManager<AppGCTUser> userManager,
+            SignInManager<Utilizador> signInManager,
+            UserManager<Utilizador> userManager,
             ILogger<LoginWith2faModel> logger)
         {
             _signInManager = signInManager;

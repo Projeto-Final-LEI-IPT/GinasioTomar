@@ -16,10 +16,10 @@ namespace AppGCT.Areas.Identity.Pages.Account
 {
     public class ConfirmEmailChangeModel : PageModel
     {
-        private readonly UserManager<AppGCTUser> _userManager;
-        private readonly SignInManager<AppGCTUser> _signInManager;
+        private readonly UserManager<Utilizador> _userManager;
+        private readonly SignInManager<Utilizador> _signInManager;
 
-        public ConfirmEmailChangeModel(UserManager<AppGCTUser> userManager, SignInManager<AppGCTUser> signInManager)
+        public ConfirmEmailChangeModel(UserManager<Utilizador> userManager, SignInManager<Utilizador> signInManager)
         {
             _userManager = userManager;
             _signInManager = signInManager;
