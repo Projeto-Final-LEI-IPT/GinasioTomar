@@ -4,6 +4,7 @@ using AppGCT.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AppGCT.Migrations
 {
     [DbContext(typeof(AppGCTContext))]
-    partial class AppGCTContextModelSnapshot : ModelSnapshot
+    [Migration("20230403111338_camposUtilizador")]
+    partial class camposUtilizador
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -55,6 +58,12 @@ namespace AppGCT.Migrations
 
                     b.Property<string>("EstadoUtilizador")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("HtimestCriacao")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("HtimestModificacao")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("IdCriacao")
                         .HasColumnType("nvarchar(max)");

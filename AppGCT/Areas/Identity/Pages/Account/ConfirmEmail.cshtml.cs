@@ -38,6 +38,11 @@ namespace AppGCT.Areas.Identity.Pages.Account
             }
 
             var user = await _userManager.FindByIdAsync(userId);
+            // PASSA UTILIZADOR A 'A-ATIVO' E REGISTA DATA DE APROVAÇÃO
+            user.EstadoUtilizador = "A";
+            user.DataAprovacao = DateTime.Now;
+
+
             if (user == null)
             {
                 return NotFound($"Unable to load user with ID '{userId}'.");
