@@ -80,6 +80,27 @@ namespace AppGCT.Areas.Identity.Pages.Account
             [Display(Name = "Nome")]
             public string Nome { get; set; }
 
+            [RegularExpression(@"^[0-9]*$"), Required, StringLength(9, MinimumLength = 9)]
+            [DataType(DataType.Text)]
+            [Display(Name = "NIF")]
+            public string NIF { get; set; }
+
+            [Required]
+            [DataType(DataType.Date)]
+            [Display(Name = "Dtnascim")]
+            public DateTime Dtnascim { get; set; }
+
+            [Required]
+            [StringLength(50, MinimumLength = 15)]
+            [DataType(DataType.Text)]
+            [Display(Name = "Morada")]
+            public string Morada { get; set; }
+
+            [RegularExpression(@"^[0-9]*$"), Required, StringLength(9, MinimumLength = 9)]
+            [DataType(DataType.Text)]
+            [Display(Name = "Contato")]
+            public string Contato { get; set; }
+
             [Required]
             [EmailAddress]
             [Display(Name = "Email")]
@@ -121,6 +142,19 @@ namespace AppGCT.Areas.Identity.Pages.Account
                 var user = CreateUser();
 
                 user.Nome = Input.Nome;
+                user.NIF = Input.NIF;
+                user.DataNascim = Input.Dtnascim;
+                user.Morada = Input.Morada;
+                user.PhoneNumber = Input.Contato;
+                // REGISTA UTILIZADOR COMO 'P-PRÉ ATIVO'
+                user.EstadoUtilizador = "P";
+                user.UltimoLogin = DateTime.MinValue;
+                user.DataAprovacao = DateTime.MinValue;
+                user.DataCriacao = DateTime.Now;
+                user.IdCriacao = user.Id;
+                user.DataModificacao = DateTime.MinValue;
+                user.IdModificacao = "";
+
 
                 await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);

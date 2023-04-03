@@ -27,11 +27,9 @@ public class Utilizador : IdentityUser
     [PersonalData]
     [DataType(DataType.Date)]
     public DateTime? DataCriacao { get; set; }
-    public DateTime? HtimestCriacao { get; set; }
     public string? IdCriacao { get; set; }
     [DataType(DataType.Date)]
     public DateTime? DataModificacao { get; set; }
-    public DateTime? HtimestModificacao { get; set; }
     public string? IdModificacao { get; set; }
 }
 
