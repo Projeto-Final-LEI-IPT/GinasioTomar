@@ -1,0 +1,46 @@
+﻿@page
+@model AppGCT.Pages.Ginasio.Epocas.CreateModel
+
+@{
+    ViewData["Title"] = "Criar Época Desportiva";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+    
+}
+
+<h1>Criar Época Desportiva</h1>
+
+<hr />
+<div>
+    <a class='btn btn-primary btn-sm' href='/Ginasio/Epocas/Index'>Voltar</a>
+</div>
+<br>
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Epoca.NomeEpoca" class="control-label">Época</label>
+                <input asp-for="Epoca.NomeEpoca" class="form-control" value="@DateTime.Today.Year/@DateTime.Today.AddYears(1).Year"/>
+                <span asp-validation-for="Epoca.NomeEpoca" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Epoca.DataInicio" class="control-label">Data Inicio</label>
+                <input asp-for="Epoca.DataInicio" class="form-control"/>
+                <span asp-validation-for="Epoca.DataInicio" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Epoca.DataFim" class="control-label">Data Fim</label>
+                <input asp-for="Epoca.DataFim" class="form-control" />
+                <span asp-validation-for="Epoca.DataFim" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Criar" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
