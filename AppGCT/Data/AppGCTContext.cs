@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using AppGCT.Areas.Identity.Data;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using AppGCT.Models;
 
 namespace AppGCT.Data
 {
@@ -14,7 +15,7 @@ namespace AppGCT.Data
             : base(options)
         {
         }
+        public DbSet<AppGCT.Models.Epoca> Epoca { get; set; } = default!;
 
-        ///public DbSet<AppGCT.Models.Utilizadores> Utilizadores { get; set; } = default!;
     }
 }

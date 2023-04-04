@@ -55,7 +55,7 @@ namespace AppGCT.Areas.Identity.Pages.Account.Manage
             /// </summary>
             [Required]
             [DataType(DataType.Password)]
-            [Display(Name = "Current password")]
+            [Display(Name = "Password atual")]
             public string OldPassword { get; set; }
 
             /// <summary>
@@ -65,15 +65,16 @@ namespace AppGCT.Areas.Identity.Pages.Account.Manage
             [Required]
             [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
             [DataType(DataType.Password)]
-            [Display(Name = "New password")]
+            [Display(Name = "Nova Password")]
             public string NewPassword { get; set; }
 
             /// <summary>
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
+            [Required]
             [DataType(DataType.Password)]
-            [Display(Name = "Confirm new password")]
+            [Display(Name = "Confirmação Nova Password")]
             [Compare("NewPassword", ErrorMessage = "The new password and confirmation password do not match.")]
             public string ConfirmPassword { get; set; }
         }
@@ -116,11 +117,16 @@ namespace AppGCT.Areas.Identity.Pages.Account.Manage
                     ModelState.AddModelError(string.Empty, error.Description);
                 }
                 return Page();
+            }else
+            {
+                //atualização de password com sucesso e atualização dos campos de histórico
+                user.DataModificacao = DateTime.Now;
+                user.IdModificacao = user.Id;
             }
 
             await _signInManager.RefreshSignInAsync(user);
-            _logger.LogInformation("User changed their password successfully.");
-            StatusMessage = "Your password has been changed.";
+            _logger.LogInformation("Utilizador alterou a password com sucesso");
+            StatusMessage = "Password atualizada com sucesso";
 
             return RedirectToPage();
         }

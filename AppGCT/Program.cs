@@ -11,7 +11,9 @@ builder.Services.AddRazorPages();
 builder.Services.AddDbContext<AppGCTContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("AppGCTContext") ?? throw new InvalidOperationException("Connection string 'AppGCTContext' not found.")));
 
-builder.Services.AddDefaultIdentity<Utilizador>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<AppGCTContext>();
+builder.Services.AddDefaultIdentity<Utilizador>(options => options.SignIn.RequireConfirmedAccount = true)
+                .AddEntityFrameworkStores<AppGCTContext>();
+  //              .AddRoles<IdentityRole>();
 
 var app = builder.Build();
 
