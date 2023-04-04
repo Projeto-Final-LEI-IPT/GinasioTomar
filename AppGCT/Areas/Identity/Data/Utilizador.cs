@@ -12,21 +12,21 @@ public class Utilizador : IdentityUser
 {
 
     [PersonalData]
-    public string? Nome { get; set; }
+    public string Nome { get; set; }
     [PersonalData]
-    public string? NIF { get; set; }
-    public string? EstadoUtilizador { get; set; }
+    public string NIF { get; set; }
+    public string EstadoUtilizador { get; set; }
     [PersonalData]
-    public string? Morada { get; set; }
+    public string Morada { get; set; }
     [PersonalData]
     [DataType(DataType.Date)]
-    public DateTime? DataNascim { get; set; }
+    public DateTime DataNascim { get; set; }
     [DataType(DataType.Date)]
     public DateTime? DataAprovacao { get; set; }
     public DateTime? UltimoLogin { get; set; }
     [PersonalData]
     [DataType(DataType.Date)]
-    public DateTime? DataCriacao { get; set; }
+    public DateTime DataCriacao { get; set; }
     public string? IdCriacao { get; set; }
     [DataType(DataType.Date)]
     public DateTime? DataModificacao { get; set; }

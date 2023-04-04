@@ -10,6 +10,7 @@ using AppGCT.Areas.Identity.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 
 namespace AppGCT.Areas.Identity.Pages.Account.Manage
 {
@@ -30,6 +31,7 @@ namespace AppGCT.Areas.Identity.Pages.Account.Manage
         ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
         ///     directly from your code. This API may change or be removed in future releases.
         /// </summary>
+        [Display(Name = "Email")]
         public string Username { get; set; }
 
         /// <summary>
@@ -57,17 +59,17 @@ namespace AppGCT.Areas.Identity.Pages.Account.Manage
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
    
+            [Required]
+            [StringLength(50, MinimumLength = 15)]
             [DataType(DataType.Text)]
-            [Display(Name = "Full Name")]
-            public string Name { get; set; }
+            [Display(Name = "Morada")]
+            public string Morada { get; set; }
 
-
-            [Display(Name = "NIF")]
-            [DataType(DataType.Text)]
-            public string NIF { get; set; }
 
             [Phone]
-            [Display(Name = "Phone number")]
+            [RegularExpression(@"^[0-9]*$"), Required, StringLength(9, MinimumLength = 9)]
+            [DataType(DataType.Text)]
+            [Display(Name = "Contato")]
             public string PhoneNumber { get; set; }
         }
 
@@ -80,8 +82,7 @@ namespace AppGCT.Areas.Identity.Pages.Account.Manage
 
             Input = new InputModel
             {
-                Name = user.Nome,
-                NIF = user.NIF,
+                Morada = user.Morada,
                 PhoneNumber = phoneNumber
             };
         }
@@ -121,22 +122,33 @@ namespace AppGCT.Areas.Identity.Pages.Account.Manage
                     StatusMessage = "Unexpected error when trying to set phone number.";
                     return RedirectToPage();
                 }
+                else
+                {
+                    //atualização de contato com sucesso e atualização dos campos de histórico
+                    user.DataModificacao = DateTime.Now;
+                    user.IdModificacao = user.Id;
+                }
+
             }
 
-            if (Input.Name != user.Nome)
+            if (Input.Morada != user.Morada)
             {
-                user.Nome = Input.Name;
-            }
-
-            if (Input.NIF != user.NIF)
-            {
-                user.NIF = Input.NIF;
+                user.Morada = Input.Morada;
+                //atualização de morada com sucesso e atualização dos campos de histórico
+                user.DataModificacao = DateTime.Now;
+                user.IdModificacao = user.Id;
             }
 
             await _userManager.UpdateAsync(user);
 
             await _signInManager.RefreshSignInAsync(user);
-            StatusMessage = "Your profile has been updated";
+            if ((Input.PhoneNumber != phoneNumber) || (Input.Morada != user.Morada))
+            {
+                StatusMessage = "Perfil Atualizado";
+            }else
+            {
+                StatusMessage = "Perfil sem atualizações";
+            }
             return RedirectToPage();
         }
     }
