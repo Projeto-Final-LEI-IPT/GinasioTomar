@@ -53,7 +53,7 @@ namespace AppGCT.Pages.Ginasio.Epocas
             }
             _context.Attach(Epoca).State = EntityState.Modified;
             // obtem User ID logado
-            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var userId = User.FindFirstValue(ClaimTypes.Name);
             Epoca.IdModificacao = userId;
             Epoca.DataModificacao = DateTime.Now;
             try

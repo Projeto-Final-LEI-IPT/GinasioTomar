@@ -32,6 +32,9 @@
                 <input asp-for="Epoca.DataFim" class="form-control" />
                 <span asp-validation-for="Epoca.DataFim" class="text-danger"></span>
             </div>
+            <input type="hidden" asp-for="Epoca.EstadoEpoca" />
+            <input type="hidden" asp-for="Epoca.DataCriacao" />
+            <input type="hidden" asp-for="Epoca.IdCriacao" />
             <div class="form-group">
                 <input type="submit" value="Guardar" class="btn btn-primary" />
             </div>

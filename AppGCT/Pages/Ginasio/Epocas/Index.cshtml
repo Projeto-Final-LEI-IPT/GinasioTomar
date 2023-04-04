@@ -15,7 +15,7 @@
     <thead>
         <tr>
             <th>Época</th>
-            <th>Data Inicio</th>
+            <th>Data Início</th>
             <th>Data Fim</th>
             <th>Estado Época</th>
             <th></th>
@@ -33,7 +33,7 @@
             <td>
                 @Html.DisplayFor(modelItem => item.DataFim)
             </td>
-                @{
+                @*@{
                     switch(item.EstadoEpoca)
                     {
                         case "A":
@@ -52,7 +52,10 @@
                             <td>Desconhecido</td>
                             break;
                     }
-                }
+                }*@
+            <td>
+                @Html.DisplayFor(modelItem => item.StatusDescription)
+            </td>
             <td>
                 <a class="btn btn-primary btn-sm" href="/Ginasio/Epocas/Edit?id=@item.IdEpoca">Editar</a>
                 <a class="btn btn-primary btn-sm" href="/Ginasio/Epocas/Details?id=@item.IdEpoca">Detalhes</a>
