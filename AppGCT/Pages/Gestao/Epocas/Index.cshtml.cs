@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace AppGCT.Pages.Ginasio.Epocas
 {
-    [Authorize]
+    [Authorize(Roles = "Administrador")]
     public class IndexModel : PageModel
     {
         private readonly AppGCT.Data.AppGCTContext _context;

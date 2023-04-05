@@ -9,7 +9,7 @@
 <h1>Gestão Épocas Desportivas</h1>
 
 <p>
-    <a class='btn btn-primary btn-sm' href='/Ginasio/Epocas/Create'>Nova Época</a>
+    <a class='btn btn-primary btn-sm' href='/Gestao/Epocas/Create'>Nova Época</a>
 </p>
 <table class="table">
     <thead>
@@ -37,9 +37,9 @@
                 @Html.DisplayFor(modelItem => item.StatusDescription)
             </td>
             <td>
-                <a class="btn btn-primary btn-sm" href="/Ginasio/Epocas/Edit?id=@item.IdEpoca">Editar</a>
-                <a class="btn btn-primary btn-sm" href="/Ginasio/Epocas/Details?id=@item.IdEpoca">Detalhes</a>
-                <a class="btn btn-danger btn-sm" href="/Ginasio/Epocas/Delete?id=@item.IdEpoca">Apagar</a>
+                <a class="btn btn-primary btn-sm" href="/Gestao/Epocas/Edit?id=@item.IdEpoca">Editar</a>
+                <a class="btn btn-primary btn-sm" href="/Gestao/Epocas/Details?id=@item.IdEpoca">Detalhes</a>
+                <a class="btn btn-danger btn-sm" href="/Gestao/Epocas/Delete?id=@item.IdEpoca">Apagar</a>
             </td>
         </tr>
 }

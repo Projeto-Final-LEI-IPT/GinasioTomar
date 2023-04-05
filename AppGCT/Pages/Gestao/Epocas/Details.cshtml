@@ -1,72 +1,70 @@
 ﻿@page
-@model AppGCT.Pages.Ginasio.Epocas.DeleteModel
+@model AppGCT.Pages.Ginasio.Epocas.DetailsModel
 
 @{
-    ViewData["Title"] = "Apagar Época Desportiva";
+    ViewData["Title"] = "Detalhes Época Desportiva";
     Layout = "~/Pages/Shared/_Layout.cshtml";
 }
 
-<h1>Apagar Época Desportiva</h1>
-<h3>Pretende mesmo apagar a época desportiva?</h3>
+<h1>Detalhes Época Desportiva</h1>
+
 <hr />
 <div>
-    <a class='btn btn-primary btn-sm' href='/Ginasio/Epocas/Index'>Voltar</a>
+    <a class='btn btn-primary btn-sm' href='/Gestao/Epocas/Index'>Voltar</a>
 </div>
 <br>
 <div>
     <dl class="row">
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Epoca.NomeEpoca)
+            @Html.LabelFor(model=>model.Epoca.NomeEpoca)
         </dt>
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Epoca.NomeEpoca)
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Epoca.DataInicio)
+            @Html.LabelFor(model=>model.Epoca.DataInicio)
         </dt>
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Epoca.DataInicio)
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Epoca.DataFim)
+            @Html.LabelFor(model=>model.Epoca.DataFim)
         </dt>
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Epoca.DataFim)
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Epoca.EstadoEpoca)
+            @Html.LabelFor(model=>model.Epoca.EstadoEpoca)
         </dt>
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Epoca.StatusDescription)
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Epoca.DataCriacao)
+            @Html.LabelFor(model=>model.Epoca.DataCriacao)
         </dt>
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Epoca.DataCriacao)
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Epoca.IdCriacao)
+            @Html.LabelFor(model=>model.Epoca.IdCriacao)
         </dt>
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Epoca.IdCriacao)
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Epoca.DataModificacao)
+            @Html.LabelFor(model=>model.Epoca.DataModificacao)
         </dt>
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Epoca.DataModificacao)
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Epoca.IdModificacao)
+            @Html.LabelFor(model=>model.Epoca.IdModificacao)
         </dt>
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Epoca.IdModificacao)
         </dd>
     </dl>
-    
-    <form method="post">
-        <input type="hidden" asp-for="Epoca.IdEpoca" />
-        <input type="submit" value="Delete" class="btn btn-danger" />
-    </form>
+</div>
+<div>
+    <a class="btn btn-primary btn-sm" href="/Gestao/Epocas/Edit?id=@Model.Epoca?.IdEpoca">Editar</a>
 </div>

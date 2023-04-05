@@ -14,7 +14,7 @@ using AppGCT.Areas.Identity.Data;
 
 namespace AppGCT.Pages.Ginasio.Epocas
 {
-    [Authorize]
+    [Authorize(Roles = "Administrador")]
     public class CreateModel : PageModel
     {
         private readonly AppGCT.Data.AppGCTContext _context;

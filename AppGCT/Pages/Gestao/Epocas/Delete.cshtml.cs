@@ -11,17 +11,18 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace AppGCT.Pages.Ginasio.Epocas
 {
-    [Authorize]
-    public class DetailsModel : PageModel
+    [Authorize(Roles = "Administrador")]
+    public class DeleteModel : PageModel
     {
         private readonly AppGCT.Data.AppGCTContext _context;
 
-        public DetailsModel(AppGCT.Data.AppGCTContext context)
+        public DeleteModel(AppGCT.Data.AppGCTContext context)
         {
             _context = context;
         }
 
-      public Epoca Epoca { get; set; } = default!; 
+        [BindProperty]
+      public Epoca Epoca { get; set; } = default!;
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -31,6 +32,7 @@ namespace AppGCT.Pages.Ginasio.Epocas
             }
 
             var epoca = await _context.Epoca.FirstOrDefaultAsync(m => m.IdEpoca == id);
+
             if (epoca == null)
             {
                 return NotFound();
@@ -40,6 +42,24 @@ namespace AppGCT.Pages.Ginasio.Epocas
                 Epoca = epoca;
             }
             return Page();
+        }
+
+        public async Task<IActionResult> OnPostAsync(int? id)
+        {
+            if (id == null || _context.Epoca == null)
+            {
+                return NotFound();
+            }
+            var epoca = await _context.Epoca.FindAsync(id);
+
+            if (epoca != null)
+            {
+                Epoca = epoca;
+                _context.Epoca.Remove(Epoca);
+                await _context.SaveChangesAsync();
+            }
+
+            return RedirectToPage("./Index");
         }
     }
 }
