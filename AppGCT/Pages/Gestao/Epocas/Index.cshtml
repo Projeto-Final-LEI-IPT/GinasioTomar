@@ -1,0 +1,47 @@
+﻿@page
+@model AppGCT.Pages.Ginasio.Epocas.IndexModel
+
+@{
+    ViewData["Title"] = "Épocas Desportivas";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<h1>Gestão Épocas Desportivas</h1>
+
+<p>
+    <a class='btn btn-primary btn-sm' href='/Gestao/Epocas/Create'>Nova Época</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Época</th>
+            <th>Data Início</th>
+            <th>Data Fim</th>
+            <th>Estado Época</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Epoca) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.NomeEpoca)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DataInicio)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DataFim)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StatusDescription)
+            </td>
+            <td>
+                <a class="btn btn-primary btn-sm" href="/Gestao/Epocas/Edit?id=@item.IdEpoca">Editar</a>
+                <a class="btn btn-primary btn-sm" href="/Gestao/Epocas/Details?id=@item.IdEpoca">Detalhes</a>
+                <a class="btn btn-danger btn-sm" href="/Gestao/Epocas/Delete?id=@item.IdEpoca">Apagar</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

@@ -8,10 +8,11 @@ using Microsoft.EntityFrameworkCore;
 using AppGCT.Data;
 using AppGCT.Models;
 using Microsoft.AspNetCore.Authorization;
+using System.Data;
 
-namespace AppGCT.Pages.Ginasio.Epocas
+namespace AppGCT.Pages.Gestao.Descontos
 {
-    [Authorize]
+    [Authorize(Roles = "Administrador")]
     public class DetailsModel : PageModel
     {
         private readonly AppGCT.Data.AppGCTContext _context;
@@ -21,23 +22,23 @@ namespace AppGCT.Pages.Ginasio.Epocas
             _context = context;
         }
 
-      public Epoca Epoca { get; set; } = default!; 
+      public Desconto Desconto { get; set; } = default!; 
 
-        public async Task<IActionResult> OnGetAsync(int? id)
+        public async Task<IActionResult> OnGetAsync(string id)
         {
-            if (id == null || _context.Epoca == null)
+            if (id == null || _context.Desconto == null)
             {
                 return NotFound();
             }
 
-            var epoca = await _context.Epoca.FirstOrDefaultAsync(m => m.IdEpoca == id);
-            if (epoca == null)
+            var desconto = await _context.Desconto.FirstOrDefaultAsync(m => m.CodDesconto == id);
+            if (desconto == null)
             {
                 return NotFound();
             }
             else 
             {
-                Epoca = epoca;
+                Desconto = desconto;
             }
             return Page();
         }

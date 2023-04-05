@@ -8,13 +8,12 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using AppGCT.Data;
 using AppGCT.Models;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
+using System.Data;
 using System.Security.Claims;
-using AppGCT.Areas.Identity.Data;
 
-namespace AppGCT.Pages.Ginasio.Epocas
+namespace AppGCT.Pages.Gestao.Descontos
 {
-    [Authorize]
+    [Authorize(Roles = "Administrador")]
     public class CreateModel : PageModel
     {
         private readonly AppGCT.Data.AppGCTContext _context;
@@ -30,24 +29,24 @@ namespace AppGCT.Pages.Ginasio.Epocas
         }
 
         [BindProperty]
-        public Epoca Epoca { get; set; } = default!;
+        public Desconto Desconto { get; set; } = default!;
         
 
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync()
         {
-          if (!ModelState.IsValid || _context.Epoca == null || Epoca == null)
+          if (!ModelState.IsValid || _context.Desconto == null || Desconto == null)
             {
                 return Page();
             }
-            Epoca.EstadoEpoca = "A";
-            Epoca.DataCriacao = DateTime.Now;
+            Desconto.EstadoDesconto = "A";
+            Desconto.DataCriacao = DateTime.Now;
             // obtem User ID logado
             var userId = User.FindFirstValue(ClaimTypes.Name);
-            Epoca.IdCriacao = userId;
-            Epoca.DataModificacao = DateTime.MinValue;
-            Epoca.IdModificacao = "";
-            _context.Epoca.Add(Epoca);
+            Desconto.IdCriacao = userId;
+            Desconto.DataModificacao = DateTime.MinValue;
+            Desconto.IdModificacao = "";
+            _context.Desconto.Add(Desconto);
             await _context.SaveChangesAsync();
 
             return RedirectToPage("./Index");

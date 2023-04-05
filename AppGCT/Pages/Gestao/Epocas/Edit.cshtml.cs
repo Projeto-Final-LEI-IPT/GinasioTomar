@@ -14,7 +14,7 @@ using AppGCT.Migrations;
 
 namespace AppGCT.Pages.Ginasio.Epocas
 {
-    [Authorize]
+    [Authorize(Roles = "Administrador")]
     public class EditModel : PageModel
     {
         private readonly AppGCT.Data.AppGCTContext _context;

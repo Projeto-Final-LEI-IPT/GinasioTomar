@@ -8,10 +8,11 @@ using Microsoft.EntityFrameworkCore;
 using AppGCT.Data;
 using AppGCT.Models;
 using Microsoft.AspNetCore.Authorization;
+using System.Data;
 
-namespace AppGCT.Pages.Ginasio.Epocas
+namespace AppGCT.Pages.Gestao.Descontos
 {
-    [Authorize]
+    [Authorize(Roles = "Administrador")]
     public class IndexModel : PageModel
     {
         private readonly AppGCT.Data.AppGCTContext _context;
@@ -21,13 +22,13 @@ namespace AppGCT.Pages.Ginasio.Epocas
             _context = context;
         }
 
-        public IList<Epoca> Epoca { get;set; } = default!;
+        public IList<Desconto> Desconto { get;set; } = default!;
 
         public async Task OnGetAsync()
         {
-            if (_context.Epoca != null)
+            if (_context.Desconto != null)
             {
-                Epoca = await _context.Epoca.ToListAsync();
+                Desconto = await _context.Desconto.ToListAsync();
             }
         }
     }
