@@ -2,15 +2,18 @@
 @model AppGCT.Pages.Ginasio.Epocas.DetailsModel
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Detalhes Época Desportiva";
     Layout = "~/Pages/Shared/_Layout.cshtml";
 }
 
-<h1>Details</h1>
+<h1>Detalhes Época Desportiva</h1>
 
+<hr />
 <div>
-    <h4>Epoca</h4>
-    <hr />
+    <a class='btn btn-primary btn-sm' href='/Ginasio/Epocas/Index'>Voltar</a>
+</div>
+<br>
+<div>
     <dl class="row">
         <dt class="col-sm-2">
             @Html.LabelFor(model=>model.Epoca.NomeEpoca)
@@ -63,6 +66,5 @@
     </dl>
 </div>
 <div>
-    <a asp-page="./Edit" asp-route-id="@Model.Epoca?.IdEpoca">Edit</a> |
-    <a asp-page="./Index">Back to List</a>
+    <a class="btn btn-primary btn-sm" href="/Ginasio/Epocas/Edit?id=@Model.Epoca?.IdEpoca">Editar</a>
 </div>

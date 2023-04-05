@@ -33,26 +33,6 @@
             <td>
                 @Html.DisplayFor(modelItem => item.DataFim)
             </td>
-                @*@{
-                    switch(item.EstadoEpoca)
-                    {
-                        case "A":
-                            <td>Ativa</td>
-                            ;
-                            break;
-                        case "C":
-                            <td>Cancelada</td>
-                            ;
-                            break;
-                        case "F":
-                            <td>Finalizada</td>
-                            ;
-                            break;
-                        default :
-                            <td>Desconhecido</td>
-                            break;
-                    }
-                }*@
             <td>
                 @Html.DisplayFor(modelItem => item.StatusDescription)
             </td>
