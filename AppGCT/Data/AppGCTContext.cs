@@ -22,5 +22,7 @@ namespace AppGCT.Data
             base.OnModelCreating(builder);
             builder.Seed();
         }
+
+        public DbSet<AppGCT.Models.Desconto> Desconto { get; set; } = default!;
     }
 }
