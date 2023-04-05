@@ -17,5 +17,10 @@ namespace AppGCT.Data
         }
         public DbSet<AppGCT.Models.Epoca> Epoca { get; set; } = default!;
 
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            base.OnModelCreating(builder);
+            builder.Seed();
+        }
     }
 }
