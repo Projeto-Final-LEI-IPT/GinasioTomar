@@ -14,6 +14,7 @@ public class Utilizador : IdentityUser
     [PersonalData]
     public string Nome { get; set; }
     [PersonalData]
+    public string NumSocio { get; set; }
     public string NIF { get; set; }
     public string EstadoUtilizador { get; set; }
     [PersonalData]

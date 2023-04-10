@@ -157,6 +157,8 @@ namespace AppGCT.Areas.Identity.Pages.Account
                 user.IdCriacao = user.Id;
                 user.DataModificacao = DateTime.MinValue;
                 user.IdModificacao = "";
+                user.NumSocio = " ";
+
 
 
                 await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
