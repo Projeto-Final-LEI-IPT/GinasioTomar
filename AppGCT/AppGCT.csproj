@@ -19,7 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Pages\Ginastas\" />
+    <Folder Include="Pages\Inscricoes\Ginastas\" />
   </ItemGroup>
 
 </Project>
