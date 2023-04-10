@@ -1,6 +1,7 @@
 ﻿using AppGCT.Areas.Identity.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 using System.Collections.Generic;
 
 namespace AppGCT.Data
@@ -37,6 +38,7 @@ namespace AppGCT.Data
                 Email = "admin@localhost",
                 EmailConfirmed = true,
                 Nome = "Administrador",
+                NumSocio = " ",
                 Morada = "Ginásio Clube de Tomar",
                 EstadoUtilizador = "A",
                 NIF = "999999999",
@@ -46,7 +48,7 @@ namespace AppGCT.Data
                 DataAprovacao = DateTime.Now,   
                 IdModificacao = " ",
                 DataModificacao = DateTime.MinValue,
-                DataNascim = DateTime.Now
+                DataNascim = DateTime.Now             
             };
 
             adminUser.NormalizedUserName = adminUser.UserName.ToUpper();
