@@ -24,5 +24,7 @@ namespace AppGCT.Data
         }
 
         public DbSet<AppGCT.Models.Desconto> Desconto { get; set; } = default!;
+
+        public DbSet<AppGCT.Models.Ginasta> Ginasta { get; set; } = default!;
     }
 }
