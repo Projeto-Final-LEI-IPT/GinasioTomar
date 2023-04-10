@@ -9,6 +9,7 @@ namespace AppGCT.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int IdGinasta { get; set; }
         [Required]
+        [DataType(DataType.Text)]
         [Display(Name = "Nome Completo")]
         public string? NomeCompleto { get; set; }
         [Required]
