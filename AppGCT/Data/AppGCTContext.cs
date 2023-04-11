@@ -17,14 +17,22 @@ namespace AppGCT.Data
         }
         public DbSet<AppGCT.Models.Epoca> Epoca { get; set; } = default!;
 
-        protected override void OnModelCreating(ModelBuilder builder)
-        {
-            base.OnModelCreating(builder);
-            builder.Seed();
-        }
+
 
         public DbSet<AppGCT.Models.Desconto> Desconto { get; set; } = default!;
 
         public DbSet<AppGCT.Models.Ginasta> Ginasta { get; set; } = default!;
+
+
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            base.OnModelCreating(builder);
+            builder.Seed();
+
+            builder.Entity<Ginasta>()
+                   .HasOne(_ => _.Socio)
+                   .WithMany(a => a.Ginasta)
+                    .HasForeignKey(p => p.UtilizadorId);
+        }
     }
 }
