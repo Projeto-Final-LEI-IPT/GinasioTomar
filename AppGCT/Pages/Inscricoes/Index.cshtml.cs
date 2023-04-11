@@ -28,10 +28,18 @@ namespace AppGCT.Pages.Inscricoes
             if (_context.Ginasta != null)
             {
                 string userId = User.Identity.GetUserId();
-    
-                Ginasta = await _context.Ginasta
-                    .Where(g => g.UtilizadorId.Equals(userId))
-                .Include(g => g.Socio).ToListAsync();
+                if (User.IsInRole("Administrador")){
+                    Ginasta = await _context.Ginasta
+                    .Include(g => g.Socio).ToListAsync();
+                }
+                else
+                {
+                    Ginasta = await _context.Ginasta
+                        .Where(g => g.UtilizadorId.Equals(userId))
+                    .Include(g => g.Socio).ToListAsync();
+                }
+
+
             }
         }
     }
