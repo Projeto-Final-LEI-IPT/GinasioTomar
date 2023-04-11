@@ -21,6 +21,7 @@ namespace AppGCT.Pages.Inscricoes
 
         public IActionResult OnGet()
         {
+        ViewData["UtilizadorId"] = new SelectList(_context.Users, "Id", "Id");
             return Page();
         }
 

@@ -28,7 +28,7 @@ namespace AppGCT.Pages.Inscricoes
                 return NotFound();
             }
 
-            var ginasta = await _context.Ginasta.FirstOrDefaultAsync(m => m.IdGinasta == id);
+            var ginasta = await _context.Ginasta.FirstOrDefaultAsync(m => m.Id == id);
             if (ginasta == null)
             {
                 return NotFound();

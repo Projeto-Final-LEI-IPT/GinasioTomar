@@ -10,7 +10,6 @@ using AppGCT.Data;
 using AppGCT.Models;
 using Microsoft.AspNetCore.Authorization;
 using System.Security.Claims;
-using AppGCT.Migrations;
 
 namespace AppGCT.Pages.Ginasio.Epocas
 {

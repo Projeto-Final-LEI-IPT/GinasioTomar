@@ -30,12 +30,13 @@ namespace AppGCT.Pages.Inscricoes
                 return NotFound();
             }
 
-            var ginasta =  await _context.Ginasta.FirstOrDefaultAsync(m => m.IdGinasta == id);
+            var ginasta =  await _context.Ginasta.FirstOrDefaultAsync(m => m.Id == id);
             if (ginasta == null)
             {
                 return NotFound();
             }
             Ginasta = ginasta;
+           ViewData["UtilizadorId"] = new SelectList(_context.Users, "Id", "Id");
             return Page();
         }
 
@@ -56,7 +57,7 @@ namespace AppGCT.Pages.Inscricoes
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!GinastaExists(Ginasta.IdGinasta))
+                if (!GinastaExists(Ginasta.Id))
                 {
                     return NotFound();
                 }
@@ -69,9 +70,9 @@ namespace AppGCT.Pages.Inscricoes
             return RedirectToPage("./Index");
         }
 
-        private bool GinastaExists(int id)
+        private bool GinastaExists(int? id)
         {
-          return (_context.Ginasta?.Any(e => e.IdGinasta == id)).GetValueOrDefault();
+          return (_context.Ginasta?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }

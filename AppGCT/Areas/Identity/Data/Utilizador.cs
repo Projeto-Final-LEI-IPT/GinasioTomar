@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
+using AppGCT.Models;
 using Microsoft.AspNetCore.Identity;
 
 namespace AppGCT.Areas.Identity.Data;
@@ -10,7 +11,6 @@ namespace AppGCT.Areas.Identity.Data;
 // Add profile data for application users by adding properties to the Utilizador class
 public class Utilizador : IdentityUser
 {
-
     [PersonalData]
     public string Nome { get; set; }
     [PersonalData]
@@ -32,5 +32,6 @@ public class Utilizador : IdentityUser
     [DataType(DataType.Date)]
     public DateTime? DataModificacao { get; set; }
     public string? IdModificacao { get; set; }
+    public List<Ginasta> Ginasta { get; set; }
 }
 
