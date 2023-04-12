@@ -1,5 +1,5 @@
 ﻿@page
-@model AppGCT.Pages.Inscricoes.IndexModel
+@model AppGCT.Pages.Inscricoes.InscricaoGinasta.IndexModel
 
 @{
     ViewData["Title"] = "Index";
@@ -36,7 +36,7 @@
                 @Html.DisplayFor(modelItem => item.ISexo)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Socio.Id)
+                @Html.DisplayFor(modelItem => item.Socio.NumSocio)
             </td>
             <td>
                 <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |

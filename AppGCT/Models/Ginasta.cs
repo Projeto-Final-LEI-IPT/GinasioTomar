@@ -19,5 +19,7 @@ namespace AppGCT.Models
         public string UtilizadorId { get; set; }
 
         public Utilizador? Socio { get; set; }
+
+        public List<Inscricao>? inscricao { get; set; }
     }
 }

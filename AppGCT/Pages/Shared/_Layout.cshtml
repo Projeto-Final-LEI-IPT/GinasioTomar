@@ -34,8 +34,11 @@
                         @if (User.IsInRole("Sócio"))
                         {
                              <li class="nav-item">
-                                  <a class="nav-link text-dark" asp-area="" asp-page="/Inscricoes/Index">Ginastas</a>
+                                  <a class="nav-link text-dark" asp-area="" asp-page="/Inscricoes/InscricaoGinasta/Index">Ginastas</a>
                              </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-page="/Inscricoes/InscricaoEpoca/Index">Inscrições</a>
+                            </li>
                         }
 
                     </ul>

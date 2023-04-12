@@ -7,10 +7,9 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using AppGCT.Data;
 using AppGCT.Models;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNet.Identity;
 
-namespace AppGCT.Pages.Inscricoes
+namespace AppGCT.Pages.Inscricoes.InscricaoGinasta
 {
     public class IndexModel : PageModel
     {
@@ -28,7 +27,8 @@ namespace AppGCT.Pages.Inscricoes
             if (_context.Ginasta != null)
             {
                 string userId = User.Identity.GetUserId();
-                if (User.IsInRole("Administrador")){
+                if (User.IsInRole("Administrador"))
+                {
                     Ginasta = await _context.Ginasta
                     .Include(g => g.Socio).ToListAsync();
                 }
@@ -38,8 +38,6 @@ namespace AppGCT.Pages.Inscricoes
                         .Where(g => g.UtilizadorId.Equals(userId))
                     .Include(g => g.Socio).ToListAsync();
                 }
-
-
             }
         }
     }

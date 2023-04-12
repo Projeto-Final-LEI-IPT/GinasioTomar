@@ -1,0 +1,38 @@
+﻿@page
+@model AppGCT.Pages.Inscricoes.InscricaoEpoca.DetailsModel
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Inscricao</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Inscricao.IdFGP)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Inscricao.IdFGP)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Inscricao.ISocGinasta)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Inscricao.ISocGinasta)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Inscricao.Atleta)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Inscricao.Atleta.ISexo)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-page="./Edit" asp-route-id="@Model.Inscricao?.Id">Edit</a> |
+    <a asp-page="./Index">Back to List</a>
+</div>

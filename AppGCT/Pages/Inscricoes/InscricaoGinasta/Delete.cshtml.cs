@@ -8,18 +8,19 @@ using Microsoft.EntityFrameworkCore;
 using AppGCT.Data;
 using AppGCT.Models;
 
-namespace AppGCT.Pages.Inscricoes
+namespace AppGCT.Pages.Inscricoes.InscricaoGinasta
 {
-    public class DetailsModel : PageModel
+    public class DeleteModel : PageModel
     {
         private readonly AppGCT.Data.AppGCTContext _context;
 
-        public DetailsModel(AppGCT.Data.AppGCTContext context)
+        public DeleteModel(AppGCT.Data.AppGCTContext context)
         {
             _context = context;
         }
 
-      public Ginasta Ginasta { get; set; } = default!; 
+        [BindProperty]
+      public Ginasta Ginasta { get; set; } = default!;
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -29,6 +30,7 @@ namespace AppGCT.Pages.Inscricoes
             }
 
             var ginasta = await _context.Ginasta.FirstOrDefaultAsync(m => m.Id == id);
+
             if (ginasta == null)
             {
                 return NotFound();
@@ -38,6 +40,24 @@ namespace AppGCT.Pages.Inscricoes
                 Ginasta = ginasta;
             }
             return Page();
+        }
+
+        public async Task<IActionResult> OnPostAsync(int? id)
+        {
+            if (id == null || _context.Ginasta == null)
+            {
+                return NotFound();
+            }
+            var ginasta = await _context.Ginasta.FindAsync(id);
+
+            if (ginasta != null)
+            {
+                Ginasta = ginasta;
+                _context.Ginasta.Remove(Ginasta);
+                await _context.SaveChangesAsync();
+            }
+
+            return RedirectToPage("./Index");
         }
     }
 }
