@@ -40,7 +40,7 @@ namespace AppGCT.Pages.Inscricoes.InscricaoEpoca
             _context.Inscricao.Add(Inscricao);
             await _context.SaveChangesAsync();
 
-            return RedirectToPage("./Index");
+            return RedirectToPage("/Inscricoes/InscricaoGinasta/Index");
         }
     }
 }

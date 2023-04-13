@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using AppGCT.Data;
 using AppGCT.Models;
+using Microsoft.AspNet.Identity;
+using Microsoft.EntityFrameworkCore;
 
 namespace AppGCT.Pages.Inscricoes.InscricaoGinasta
 {
@@ -21,7 +23,15 @@ namespace AppGCT.Pages.Inscricoes.InscricaoGinasta
 
         public IActionResult OnGet()
         {
-        ViewData["UtilizadorId"] = new SelectList(_context.Users, "Id", "Id");
+            if (User.IsInRole("Administrador"))
+            {
+                ViewData["UtilizadorId"] = new SelectList(_context.Users, "Id", "NumSocio");
+            }
+            else
+            {
+                /// Utilizamos LINQ para ir buscar apenas o USERID autenticado, quando o ROLE é <> Administrador                
+                ViewData["UtilizadorId"] = new SelectList(_context.Users.Where(x => x.Id == User.Identity.GetUserId()), "Id", "NumSocio");
+            }
             return Page();
         }
 
@@ -32,11 +42,13 @@ namespace AppGCT.Pages.Inscricoes.InscricaoGinasta
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync()
         {
-          if (!ModelState.IsValid || _context.Ginasta == null || Ginasta == null)
+
+            if (!ModelState.IsValid || _context.Ginasta == null || Ginasta == null)
             {
                 return Page();
             }
 
+            Ginasta.UtilizadorId = User.Identity.GetUserId();
             _context.Ginasta.Add(Ginasta);
             await _context.SaveChangesAsync();
 

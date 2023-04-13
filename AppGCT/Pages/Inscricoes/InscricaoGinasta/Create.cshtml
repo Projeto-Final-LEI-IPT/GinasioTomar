@@ -1,5 +1,6 @@
 ﻿@page
 @model AppGCT.Pages.Inscricoes.InscricaoGinasta.CreateModel
+@Html.HiddenFor(m => m.Ginasta.UtilizadorId)
 
 @{
     ViewData["Title"] = "Create";
@@ -26,7 +27,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="Ginasta.UtilizadorId" class="control-label"></label>
-                <select asp-for="Ginasta.UtilizadorId" class ="form-control" asp-items="ViewBag.UtilizadorId"></select>
+                <select asp-for="Ginasta.UtilizadorId" class="form-control" asp-items="ViewBag.UtilizadorId"></select>
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />

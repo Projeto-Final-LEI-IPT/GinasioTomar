@@ -11,6 +11,32 @@
 <p>
     <a asp-page="Create">Create New</a>
 </p>
+<h1>Details</h1>
+
+<div>
+    <h4>Ginasta</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Ginasta.NomeCompleto)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Ginasta.NomeCompleto)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Ginasta.ISexo)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Ginasta.ISexo)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Ginasta.Socio)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Ginasta.Socio.NumSocio)
+        </dd>
+    </dl>
+</div>
 <table class="table">
     <thead>
         <tr>
