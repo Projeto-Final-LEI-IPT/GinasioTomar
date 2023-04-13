@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using AppGCT.Models;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.CodeAnalysis;
 
 namespace AppGCT.Areas.Identity.Data;
 
@@ -32,6 +33,13 @@ public class Utilizador : IdentityUser
     [DataType(DataType.Date)]
     public DateTime? DataModificacao { get; set; }
     public string? IdModificacao { get; set; }
+    public string ID_Description
+    {
+        get
+        {
+            return string.Format("{0} ({1})", Nome, NumSocio);
+        }
+    }
     public List<Ginasta> Ginasta { get; set; }
 }
 

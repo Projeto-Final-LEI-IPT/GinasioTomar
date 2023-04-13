@@ -24,10 +24,22 @@
             @Html.DisplayFor(model => model.Ginasta.NomeCompleto)
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Ginasta.ISexo)
+            @Html.DisplayNameFor(model => model.Ginasta.DtNascim)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Ginasta.ISexo)
+            @Html.DisplayFor(model => model.Ginasta.DtNascim)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Ginasta.EstadoGinasta)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Ginasta.EstadoGinasta)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Ginasta.Email)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Ginasta.Email)
         </dd>
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Ginasta.Socio)
@@ -47,7 +59,16 @@
                 @Html.DisplayNameFor(model => model.Inscricao[0].ISocGinasta)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Inscricao[0].Atleta)
+                @Html.DisplayNameFor(model => model.Inscricao[0].DtInscricao)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Inscricao[0].IExamMed)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Inscricao[0].DtExamMed)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Inscricao[0].IPagamInscricao)
             </th>
             <th></th>
         </tr>
@@ -62,7 +83,16 @@
                 @Html.DisplayFor(modelItem => item.ISocGinasta)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Atleta.ISexo)
+                @Html.DisplayFor(modelItem => item.DtInscricao)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IExamMed)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DtExamMed)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IPagamInscricao)
             </td>
             <td>
                 <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |

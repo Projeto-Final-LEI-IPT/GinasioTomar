@@ -29,7 +29,8 @@ namespace AppGCT.Pages.Inscricoes.InscricaoGinasta
                 return NotFound();
             }
 
-            var ginasta = await _context.Ginasta.FirstOrDefaultAsync(m => m.Id == id);
+            var ginasta = await _context.Ginasta.Include(g => g.Socio)
+                                                .FirstOrDefaultAsync(m => m.Id == id);
 
             if (ginasta == null)
             {
