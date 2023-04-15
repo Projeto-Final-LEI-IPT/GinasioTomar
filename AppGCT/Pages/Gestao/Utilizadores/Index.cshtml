@@ -1,0 +1,68 @@
+﻿@page
+@model AppGCT.Pages.Gestao.Utilizadores.IndexModel
+@{
+
+}
+@{
+    ViewData["Title"] = "Gestão Utilizadores";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+@using Microsoft.AspNetCore.Identity
+@using AppGCT.Areas.Identity.Data
+@inject UserManager<Utilizador> UserManager
+@inject RoleManager<IdentityRole> roleManager
+
+@{
+    var users = UserManager.Users.ToList();
+    var roles = roleManager.Roles.ToList();
+}
+<h1>Gestão Utilizadores</h1>
+
+<p>
+    <a class='btn btn-primary btn-sm' href='/Gestao/Utilizadores/Create'>Novo Utilizador</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Nome Completo</th>
+            <th>Tipo Utilizador</th>
+            <th>Nº Sócio</th>
+            <th>Contacto</th>
+            <th>E-mail</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var user in users)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => user.Nome)
+                </td>
+                <td>
+                    @{
+                        var userRoles = await UserManager.GetRolesAsync(user);
+                    }
+                    @foreach (var roleName in userRoles)
+                    {
+                        <span>@roleName</span>
+                    }
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => user.NumSocio)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => user.PhoneNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => user.Email)
+                </td>
+                <td>
+                    <a class="btn btn-primary btn-sm" href="/Gestao/Utilizadores/Edit?id=@user.Id">Editar</a>
+                    <a class="btn btn-primary btn-sm" href="/Gestao/Utilizadores/Details?id=@user.Id">Detalhes</a>
+                    <a class="btn btn-danger btn-sm" href="/Gestao/Utilizadores/Delete?id=@user.Id">Apagar</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
