@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using AppGCT.Data;
 using AppGCT.Models;
 
-namespace AppGCT.Pages.Inscricoes
+namespace AppGCT.Pages.Inscricoes.InscricaoGinasta
 {
     public class DeleteModel : PageModel
     {
@@ -29,7 +29,8 @@ namespace AppGCT.Pages.Inscricoes
                 return NotFound();
             }
 
-            var ginasta = await _context.Ginasta.FirstOrDefaultAsync(m => m.Id == id);
+            var ginasta = await _context.Ginasta.Include(g => g.Socio)
+                                                .FirstOrDefaultAsync(m => m.Id == id);
 
             if (ginasta == null)
             {

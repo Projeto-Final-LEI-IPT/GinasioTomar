@@ -1,0 +1,152 @@
+﻿@page
+@model AppGCT.Pages.Inscricoes.InscricaoEpoca.DetailsModel
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Inscricao</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Inscricao.IdFGP)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Inscricao.IdFGP)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Inscricao.ISocGinasta)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Inscricao.ISocGinasta)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Inscricao.DtInscricao)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Inscricao.DtInscricao)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Inscricao.IConsentimento)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Inscricao.IConsentimento)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Inscricao.DtConsentimento)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Inscricao.DtConsentimento)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Inscricao.IExamMed)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Inscricao.IExamMed)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Inscricao.DtExamMed)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Inscricao.DtExamMed)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Inscricao.IFicFGP)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Inscricao.IFicFGP)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Inscricao.DtFicFGP)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Inscricao.DtFicFGP)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Inscricao.ISeguro)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Inscricao.ISeguro)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Inscricao.IPagamInscricao)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Inscricao.IPagamInscricao)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Inscricao.ILeituraObrig)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Inscricao.ILeituraObrig)
+        </dd>
+                <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Inscricao.IFotos)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Inscricao.IFotos)
+        </dd>
+                <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Inscricao.IIbuprofeno)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Inscricao.IIbuprofeno)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Inscricao.IParacetamol)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Inscricao.IParacetamol)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Inscricao.IAntiInflam)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Inscricao.IAntiInflam)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Inscricao.DescAlergias)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Inscricao.DescAlergias)
+        </dd>
+                <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Inscricao.DataCriacao)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Inscricao.DataCriacao)
+        </dd>
+                <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Inscricao.IdCriacao)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Inscricao.IdCriacao)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Inscricao.DataModificacao)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Inscricao.DataModificacao)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Inscricao.IdModificacao)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Inscricao.IdModificacao)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Inscricao.Atleta.NomeCompleto)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Inscricao.Atleta.NomeCompleto)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-page="./Edit" asp-route-id="@Model.Inscricao?.Id">Edit</a> |
+    <a asp-page="./Index">Back to List</a>
+</div>

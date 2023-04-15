@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using AppGCT.Data;
 using AppGCT.Models;
 
-namespace AppGCT.Pages.Inscricoes
+namespace AppGCT.Pages.Inscricoes.InscricaoEpoca
 {
     public class CreateModel : PageModel
     {
@@ -21,26 +21,26 @@ namespace AppGCT.Pages.Inscricoes
 
         public IActionResult OnGet()
         {
-        ViewData["UtilizadorId"] = new SelectList(_context.Users, "Id", "Id");
+        ViewData["GinastaId"] = new SelectList(_context.Ginasta, "Id", "ID_DescrGinasta");
             return Page();
         }
 
         [BindProperty]
-        public Ginasta Ginasta { get; set; } = default!;
+        public Inscricao Inscricao { get; set; } = default!;
         
 
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync()
         {
-          if (!ModelState.IsValid || _context.Ginasta == null || Ginasta == null)
+          if (!ModelState.IsValid || _context.Inscricao == null || Inscricao == null)
             {
                 return Page();
             }
 
-            _context.Ginasta.Add(Ginasta);
+            _context.Inscricao.Add(Inscricao);
             await _context.SaveChangesAsync();
 
-            return RedirectToPage("./Index");
+            return RedirectToPage("/Inscricoes/InscricaoGinasta/Index");
         }
     }
 }

@@ -4,6 +4,7 @@ using AppGCT.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AppGCT.Migrations
 {
     [DbContext(typeof(AppGCTContext))]
-    partial class AppGCTContextModelSnapshot : ModelSnapshot
+    [Migration("20230413144930_initialCreate")]
+    partial class initialCreate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -130,13 +133,13 @@ namespace AppGCT.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "ccfa486e-eafa-4fb4-a36c-941d4a28dd5d",
+                            Id = "b5ee057f-3821-481c-924f-6e0a5d6c18ac",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "a8b95c53-d7dd-4a8f-a5cd-16d234e0dcdf",
-                            DataAprovacao = new DateTime(2023, 4, 15, 13, 57, 21, 640, DateTimeKind.Local).AddTicks(1629),
-                            DataCriacao = new DateTime(2023, 4, 15, 13, 57, 21, 640, DateTimeKind.Local).AddTicks(1577),
+                            ConcurrencyStamp = "3f3860d6-0a7c-40fe-9013-4243efdb8c71",
+                            DataAprovacao = new DateTime(2023, 4, 13, 15, 49, 30, 233, DateTimeKind.Local).AddTicks(4006),
+                            DataCriacao = new DateTime(2023, 4, 13, 15, 49, 30, 233, DateTimeKind.Local).AddTicks(3954),
                             DataModificacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DataNascim = new DateTime(2023, 4, 15, 13, 57, 21, 640, DateTimeKind.Local).AddTicks(1635),
+                            DataNascim = new DateTime(2023, 4, 13, 15, 49, 30, 233, DateTimeKind.Local).AddTicks(4010),
                             Email = "admin@localhost",
                             EmailConfirmed = true,
                             EstadoUtilizador = "A",
@@ -149,10 +152,10 @@ namespace AppGCT.Migrations
                             NormalizedEmail = "ADMIN@LOCALHOST",
                             NormalizedUserName = "ADMIN@LOCALHOST",
                             NumSocio = " ",
-                            PasswordHash = "AQAAAAIAAYagAAAAEKze5oU/6GS/y88tdyQmxNmS0Qtgm0U2c8T8JaJmLbtMyD1GvuwlV+vPDIS5Y82IuA==",
+                            PasswordHash = "AQAAAAIAAYagAAAAELXcM9+4Se9szE2OZLjbeGY7FphT00unZ0agq3OHKyKCGseo9QdqbHrkFlhAHfCjcA==",
                             PhoneNumber = "999999999",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "5eb78ff9-4317-42d5-9774-324cf8da452e",
+                            SecurityStamp = "5c4bfa10-e406-4e2c-8ff1-a4b203889c7f",
                             TwoFactorEnabled = false,
                             UserName = "admin@localhost"
                         });
@@ -359,84 +362,15 @@ namespace AppGCT.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int?>("Id"));
 
-                    b.Property<DateTime>("DataCriacao")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("DataModificacao")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("DescAlergias")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("DtConsentimento")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("DtExamMed")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("DtFicFGP")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("DtInscricao")
-                        .HasColumnType("datetime2");
-
                     b.Property<int>("GinastaId")
                         .HasColumnType("int");
-
-                    b.Property<string>("IAntiInflam")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("IConsentimento")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("IExamMed")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("IFicFGP")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("IFotos")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("IIbuprofeno")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ILeituraObrig")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("IPagamInscricao")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("IParacetamol")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ISeguro")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ISocGinasta")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("IdCriacao")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("IdFGP")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("IdModificacao")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -475,25 +409,25 @@ namespace AppGCT.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "1a3d1a77-1942-427d-a5e9-14f83c33f79a",
+                            Id = "a3c57eaa-2938-4f35-b791-eb68db0e7ee7",
                             Name = "Administrador",
                             NormalizedName = "ADMINISTRADOR"
                         },
                         new
                         {
-                            Id = "63e575b7-bb8b-41ad-a1c2-a8847e2e1e53",
+                            Id = "71000b1d-5e61-44d0-8759-dd6a64a64d7b",
                             Name = "Ginásio",
                             NormalizedName = "GINÁSIO"
                         },
                         new
                         {
-                            Id = "ab39ece8-1f6c-457a-96ce-65093c1b464b",
+                            Id = "69d6ac14-3154-4365-a2e1-683e725c3f46",
                             Name = "Sócio",
                             NormalizedName = "SÓCIO"
                         },
                         new
                         {
-                            Id = "0ecd6ab6-f6f4-4b6f-a152-714c14661fd0",
+                            Id = "28a6b357-6d89-4e14-aab9-727af9744fde",
                             Name = "Anónimo",
                             NormalizedName = "ANÓNIMO"
                         });
@@ -590,8 +524,8 @@ namespace AppGCT.Migrations
                     b.HasData(
                         new
                         {
-                            UserId = "ccfa486e-eafa-4fb4-a36c-941d4a28dd5d",
-                            RoleId = "1a3d1a77-1942-427d-a5e9-14f83c33f79a"
+                            UserId = "b5ee057f-3821-481c-924f-6e0a5d6c18ac",
+                            RoleId = "a3c57eaa-2938-4f35-b791-eb68db0e7ee7"
                         });
                 });
 

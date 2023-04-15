@@ -23,6 +23,7 @@ namespace AppGCT.Data
 
         public DbSet<AppGCT.Models.Ginasta> Ginasta { get; set; } = default!;
 
+        public DbSet<AppGCT.Models.Inscricao> Inscricao { get; set; } = default!;
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -30,9 +31,14 @@ namespace AppGCT.Data
             builder.Seed();
 
             builder.Entity<Ginasta>()
-                   .HasOne(_ => _.Socio)
+                   .HasOne(p => p.Socio)
                    .WithMany(a => a.Ginasta)
                     .HasForeignKey(p => p.UtilizadorId);
+
+            builder.Entity<Inscricao>()
+                   .HasOne(p => p.Atleta)
+                   .WithMany(a => a.inscricao)
+                    .HasForeignKey(p => p.GinastaId);
         }
     }
 }

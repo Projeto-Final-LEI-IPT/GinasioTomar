@@ -1,0 +1,125 @@
+﻿@page
+@model AppGCT.Pages.Inscricoes.InscricaoEpoca.EditModel
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<h1>Edit</h1>
+
+<h4>Inscricao</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Inscricao.Id" />
+            <div class="form-group">
+                <label asp-for="Inscricao.IdFGP" class="control-label"></label>
+                <input asp-for="Inscricao.IdFGP" class="form-control" />
+                <span asp-validation-for="Inscricao.IdFGP" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Inscricao.ISocGinasta" class="control-label"></label>
+                <input asp-for="Inscricao.ISocGinasta" class="form-control" />
+                <span asp-validation-for="Inscricao.ISocGinasta" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Inscricao.DtInscricao" class="control-label"></label>
+                <input asp-for="Inscricao.DtInscricao" class="form-control" />
+                <span asp-validation-for="Inscricao.DtInscricao" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Inscricao.IConsentimento" class="control-label"></label>
+                <input asp-for="Inscricao.IConsentimento" class="form-control" />
+                <span asp-validation-for="Inscricao.IConsentimento" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Inscricao.DtConsentimento" class="control-label"></label>
+                <input asp-for="Inscricao.DtConsentimento" class="form-control" />
+                <span asp-validation-for="Inscricao.DtConsentimento" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Inscricao.IExamMed" class="control-label"></label>
+                <input asp-for="Inscricao.IExamMed" class="form-control" />
+                <span asp-validation-for="Inscricao.IExamMed" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Inscricao.DtExamMed" class="control-label"></label>
+                <input asp-for="Inscricao.DtExamMed" class="form-control" />
+                <span asp-validation-for="Inscricao.DtExamMed" class="text-danger"></span>
+            </div>
+                        <div class="form-group">
+                <label asp-for="Inscricao.IFicFGP" class="control-label"></label>
+                <input asp-for="Inscricao.IFicFGP" class="form-control" />
+                <span asp-validation-for="Inscricao.IFicFGP" class="text-danger"></span>
+            </div>
+                        <div class="form-group">
+                <label asp-for="Inscricao.DtFicFGP" class="control-label"></label>
+                <input asp-for="Inscricao.DtFicFGP" class="form-control" />
+                <span asp-validation-for="Inscricao.DtFicFGP" class="text-danger"></span>
+            </div>
+                        <div class="form-group">
+                <label asp-for="Inscricao.ISeguro" class="control-label"></label>
+                <input asp-for="Inscricao.ISeguro" class="form-control" />
+                <span asp-validation-for="Inscricao.ISeguro" class="text-danger"></span>
+            </div>
+                        <div class="form-group">
+                <label asp-for="Inscricao.IPagamInscricao" class="control-label"></label>
+                <input asp-for="Inscricao.IPagamInscricao" class="form-control" />
+                <span asp-validation-for="Inscricao.IPagamInscricao" class="text-danger"></span>
+            </div>
+                        <div class="form-group">
+                <label asp-for="Inscricao.ILeituraObrig" class="control-label"></label>
+                <input asp-for="Inscricao.ILeituraObrig" class="form-control" />
+                <span asp-validation-for="Inscricao.ILeituraObrig" class="text-danger"></span>
+            </div>
+                        <div class="form-group">
+                <label asp-for="Inscricao.IFotos" class="control-label"></label>
+                <input asp-for="Inscricao.IFotos" class="form-control" />
+                <span asp-validation-for="Inscricao.IFotos" class="text-danger"></span>
+            </div>
+                        <div class="form-group">
+                <label asp-for="Inscricao.IIbuprofeno" class="control-label"></label>
+                <input asp-for="Inscricao.IIbuprofeno" class="form-control" />
+                <span asp-validation-for="Inscricao.IIbuprofeno" class="text-danger"></span>
+            </div>
+                        <div class="form-group">
+                <label asp-for="Inscricao.IParacetamol" class="control-label"></label>
+                <input asp-for="Inscricao.IParacetamol" class="form-control" />
+                <span asp-validation-for="Inscricao.IParacetamol" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Inscricao.IAntiInflam" class="control-label"></label>
+                <input asp-for="Inscricao.IAntiInflam" class="form-control" />
+                <span asp-validation-for="Inscricao.IAntiInflam" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Inscricao.DescAlergias" class="control-label"></label>
+                <input asp-for="Inscricao.DescAlergias" class="form-control" />
+                <span asp-validation-for="Inscricao.DescAlergias" class="text-danger"></span>
+            </div>
+            <input type="hidden" asp-for="Inscricao.DataCriacao" />
+            <input type="hidden" asp-for="Inscricao.IdCriacao" />
+            <input type="hidden" asp-for="Inscricao.DataModificacao" />
+            <input type="hidden" asp-for="Inscricao.IdModificacao" />
+            <div class="form-group">
+                <label asp-for="Inscricao.GinastaId" class="control-label"></label>
+                <select asp-for="Inscricao.GinastaId" class="form-control" asp-items="ViewBag.GinastaId"></select>
+                <span asp-validation-for="Inscricao.GinastaId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="./Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

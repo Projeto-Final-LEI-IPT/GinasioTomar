@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using AppGCT.Data;
 using AppGCT.Models;
 
-namespace AppGCT.Pages.Inscricoes
+namespace AppGCT.Pages.Inscricoes.InscricaoEpoca
 {
     public class DetailsModel : PageModel
     {
@@ -19,23 +19,24 @@ namespace AppGCT.Pages.Inscricoes
             _context = context;
         }
 
-      public Ginasta Ginasta { get; set; } = default!; 
+      public Inscricao Inscricao { get; set; } = default!; 
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
-            if (id == null || _context.Ginasta == null)
+            if (id == null || _context.Inscricao == null)
             {
                 return NotFound();
             }
 
-            var ginasta = await _context.Ginasta.FirstOrDefaultAsync(m => m.Id == id);
-            if (ginasta == null)
+            var inscricao = await _context.Inscricao.Include(i => i.Atleta)
+                                                    .FirstOrDefaultAsync(m => m.Id == id);
+            if (inscricao == null)
             {
                 return NotFound();
             }
             else 
             {
-                Ginasta = ginasta;
+                Inscricao = inscricao;
             }
             return Page();
         }
