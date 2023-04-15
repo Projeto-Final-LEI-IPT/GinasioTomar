@@ -30,13 +30,14 @@ namespace AppGCT.Pages.Inscricoes.InscricaoEpoca
                 return NotFound();
             }
 
-            var inscricao =  await _context.Inscricao.FirstOrDefaultAsync(m => m.Id == id);
+            var inscricao =  await _context.Inscricao.Include(i => i.Atleta)
+                                                     .FirstOrDefaultAsync(m => m.Id == id);
             if (inscricao == null)
             {
                 return NotFound();
             }
             Inscricao = inscricao;
-           ViewData["GinastaId"] = new SelectList(_context.Ginasta, "Id", "ISexo");
+           ViewData["GinastaId"] = new SelectList(_context.Ginasta, "Id", "ID_DescrGinasta");
             return Page();
         }
 

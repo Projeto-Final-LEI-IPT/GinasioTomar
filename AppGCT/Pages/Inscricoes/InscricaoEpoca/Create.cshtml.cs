@@ -21,7 +21,7 @@ namespace AppGCT.Pages.Inscricoes.InscricaoEpoca
 
         public IActionResult OnGet()
         {
-        ViewData["GinastaId"] = new SelectList(_context.Ginasta, "Id", "Id");
+        ViewData["GinastaId"] = new SelectList(_context.Ginasta, "Id", "ID_DescrGinasta");
             return Page();
         }
 

@@ -117,6 +117,15 @@ namespace AppGCT.Models
         [Display(Name = "Número de Sócio")]
         public string UtilizadorId { get; set; }
         [Display(Name = "Número de Sócio")]
+
+        public string ID_DescrGinasta
+        {
+            get
+            {
+                return string.Format("{0} ({1})", NomeCompleto, NIF);
+            }
+        }
+
         public Utilizador? Socio { get; set; }
 
         public List<Inscricao>? inscricao { get; set; }

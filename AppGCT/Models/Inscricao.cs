@@ -23,7 +23,7 @@ namespace AppGCT.Models
         [Required]
         [DataType(DataType.Text)]
         [Display(Name = "Consentimento RGPD")]
-        public string IConsentimento { get; set; }
+        public string? IConsentimento { get; set; }
 
         [Required]
         [DataType(DataType.Date)]
@@ -33,7 +33,7 @@ namespace AppGCT.Models
         [Required]
         [DataType(DataType.Text)]
         [Display(Name = "Ex. Médico Efetuado")]
-        public string IExamMed { get; set; }
+        public string? IExamMed { get; set; }
 
         [Required]
         [DataType(DataType.Date)]
@@ -43,7 +43,7 @@ namespace AppGCT.Models
         [Required]
         [DataType(DataType.Text)]
         [Display(Name = "Ficha FGP")]
-        public string IFicFGP { get; set; }
+        public string? IFicFGP { get; set; }
        
         [Required]
         [DataType(DataType.Date)]
@@ -53,42 +53,42 @@ namespace AppGCT.Models
         [Required]
         [DataType(DataType.Text)]
         [Display(Name = "Seguro")]
-        public string ISeguro { get; set; }
+        public string? ISeguro { get; set; }
 
         [Required]
         [DataType(DataType.Text)]
         [Display(Name = "Pagamento Inscrição")]
-        public string IPagamInscricao { get; set; }
+        public string? IPagamInscricao { get; set; }
 
         [Required]
         [DataType(DataType.Text)]
         [Display(Name = "Leitura Obrigatória")]
-        public string ILeituraObrig { get; set; }
+        public string? ILeituraObrig { get; set; }
 
         [Required]
         [DataType(DataType.Text)]
         [Display(Name = "Fotos")]
-        public string IFotos { get; set; }
+        public string? IFotos { get; set; }
 
         [Required]
         [DataType(DataType.Text)]
         [Display(Name = "Ibuprofeno")]
-        public string IIbuprofeno { get; set; }
+        public string? IIbuprofeno { get; set; }
 
         [Required]
         [DataType(DataType.Text)]
         [Display(Name = "Paracetamol")]
-        public string IParacetamol { get; set; }
+        public string? IParacetamol { get; set; }
 
         [Required]
         [DataType(DataType.Text)]
         [Display(Name = "Anti-Inflamatório")]
-        public string IAntiInflam { get; set; }
+        public string? IAntiInflam { get; set; }
 
         [Required]
         [DataType(DataType.Text)]
         [Display(Name = "Alergias")]
-        public string DescAlergias { get; set; }
+        public string? DescAlergias { get; set; }
 
         [Required]
         [DataType((DataType.Date))]
