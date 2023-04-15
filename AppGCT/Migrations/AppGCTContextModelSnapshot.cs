@@ -130,13 +130,13 @@ namespace AppGCT.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "ccfa486e-eafa-4fb4-a36c-941d4a28dd5d",
+                            Id = "8152436d-c438-4583-9557-c2a44336150f",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "a8b95c53-d7dd-4a8f-a5cd-16d234e0dcdf",
-                            DataAprovacao = new DateTime(2023, 4, 15, 13, 57, 21, 640, DateTimeKind.Local).AddTicks(1629),
-                            DataCriacao = new DateTime(2023, 4, 15, 13, 57, 21, 640, DateTimeKind.Local).AddTicks(1577),
+                            ConcurrencyStamp = "d51e3c0b-9053-4d94-94e2-1fb34c2f67de",
+                            DataAprovacao = new DateTime(2023, 4, 15, 15, 56, 32, 910, DateTimeKind.Local).AddTicks(9237),
+                            DataCriacao = new DateTime(2023, 4, 15, 15, 56, 32, 910, DateTimeKind.Local).AddTicks(9170),
                             DataModificacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DataNascim = new DateTime(2023, 4, 15, 13, 57, 21, 640, DateTimeKind.Local).AddTicks(1635),
+                            DataNascim = new DateTime(2023, 4, 15, 15, 56, 32, 910, DateTimeKind.Local).AddTicks(9248),
                             Email = "admin@localhost",
                             EmailConfirmed = true,
                             EstadoUtilizador = "A",
@@ -149,10 +149,10 @@ namespace AppGCT.Migrations
                             NormalizedEmail = "ADMIN@LOCALHOST",
                             NormalizedUserName = "ADMIN@LOCALHOST",
                             NumSocio = " ",
-                            PasswordHash = "AQAAAAIAAYagAAAAEKze5oU/6GS/y88tdyQmxNmS0Qtgm0U2c8T8JaJmLbtMyD1GvuwlV+vPDIS5Y82IuA==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEBkgvxDCTnvMAfdohfxA90x86Kk6Yy8ihZDEH47lHonmcbg2prMqK8vn5qWigt/CBw==",
                             PhoneNumber = "999999999",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "5eb78ff9-4317-42d5-9774-324cf8da452e",
+                            SecurityStamp = "9c1a9856-41b9-4c22-b986-aa4ecf1afef6",
                             TwoFactorEnabled = false,
                             UserName = "admin@localhost"
                         });
@@ -475,25 +475,25 @@ namespace AppGCT.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "1a3d1a77-1942-427d-a5e9-14f83c33f79a",
+                            Id = "a49f15c8-a5c6-4d09-a1d7-a5e1ee44c474",
                             Name = "Administrador",
                             NormalizedName = "ADMINISTRADOR"
                         },
                         new
                         {
-                            Id = "63e575b7-bb8b-41ad-a1c2-a8847e2e1e53",
+                            Id = "350c3214-fe43-4852-a220-7c2fa82d8e93",
                             Name = "Ginásio",
                             NormalizedName = "GINÁSIO"
                         },
                         new
                         {
-                            Id = "ab39ece8-1f6c-457a-96ce-65093c1b464b",
+                            Id = "894d22bf-c07d-4fb7-abd4-36a71b4ed88b",
                             Name = "Sócio",
                             NormalizedName = "SÓCIO"
                         },
                         new
                         {
-                            Id = "0ecd6ab6-f6f4-4b6f-a152-714c14661fd0",
+                            Id = "07836ccf-3a4e-43e7-b5ff-64b721da002b",
                             Name = "Anónimo",
                             NormalizedName = "ANÓNIMO"
                         });
@@ -590,8 +590,8 @@ namespace AppGCT.Migrations
                     b.HasData(
                         new
                         {
-                            UserId = "ccfa486e-eafa-4fb4-a36c-941d4a28dd5d",
-                            RoleId = "1a3d1a77-1942-427d-a5e9-14f83c33f79a"
+                            UserId = "8152436d-c438-4583-9557-c2a44336150f",
+                            RoleId = "a49f15c8-a5c6-4d09-a1d7-a5e1ee44c474"
                         });
                 });
 

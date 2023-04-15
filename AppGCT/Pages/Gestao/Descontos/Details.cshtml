@@ -2,15 +2,19 @@
 @model AppGCT.Pages.Gestao.Descontos.DetailsModel
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Detalhes Desconto";
     Layout = "~/Pages/Shared/_Layout.cshtml";
 }
 
-<h1>Details</h1>
+<h1>Detalhes Desconto</h1>
+
+<hr />
+<div>
+    <a class='btn btn-primary btn-sm' href='/Gestao/Descontos/Index'>Voltar</a>
+</div>
+<br>
 
 <div>
-    <h4>Desconto</h4>
-    <hr />
     <dl class="row">
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Desconto.DescDesconto)
@@ -22,7 +26,7 @@
             @Html.DisplayNameFor(model => model.Desconto.EstadoDesconto)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Desconto.EstadoDesconto)
+            @Html.DisplayFor(model => model.Desconto.StatusDescription)
         </dd>
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Desconto.DataCriacao)
@@ -51,6 +55,5 @@
     </dl>
 </div>
 <div>
-    <a asp-page="./Edit" asp-route-id="@Model.Desconto?.CodDesconto">Edit</a> |
-    <a asp-page="./Index">Back to List</a>
+    <a class="btn btn-primary btn-sm" href="/Gestao/Descontos/Edit?id=@Model.Desconto?.CodDesconto">Editar</a>
 </div>

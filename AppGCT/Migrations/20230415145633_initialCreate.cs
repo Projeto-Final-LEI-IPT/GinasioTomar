@@ -265,6 +265,25 @@ namespace AppGCT.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     IdFGP = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ISocGinasta = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    DtInscricao = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    IConsentimento = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    DtConsentimento = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    IExamMed = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    DtExamMed = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    IFicFGP = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    DtFicFGP = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ISeguro = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    IPagamInscricao = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ILeituraObrig = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    IFotos = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    IIbuprofeno = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    IParacetamol = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    IAntiInflam = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    DescAlergias = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    DataCriacao = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    IdCriacao = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    DataModificacao = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    IdModificacao = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     GinastaId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -283,21 +302,21 @@ namespace AppGCT.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "28a6b357-6d89-4e14-aab9-727af9744fde", null, "Anónimo", "ANÓNIMO" },
-                    { "69d6ac14-3154-4365-a2e1-683e725c3f46", null, "Sócio", "SÓCIO" },
-                    { "71000b1d-5e61-44d0-8759-dd6a64a64d7b", null, "Ginásio", "GINÁSIO" },
-                    { "a3c57eaa-2938-4f35-b791-eb68db0e7ee7", null, "Administrador", "ADMINISTRADOR" }
+                    { "07836ccf-3a4e-43e7-b5ff-64b721da002b", null, "Anónimo", "ANÓNIMO" },
+                    { "350c3214-fe43-4852-a220-7c2fa82d8e93", null, "Ginásio", "GINÁSIO" },
+                    { "894d22bf-c07d-4fb7-abd4-36a71b4ed88b", null, "Sócio", "SÓCIO" },
+                    { "a49f15c8-a5c6-4d09-a1d7-a5e1ee44c474", null, "Administrador", "ADMINISTRADOR" }
                 });
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "DataAprovacao", "DataCriacao", "DataModificacao", "DataNascim", "Email", "EmailConfirmed", "EstadoUtilizador", "IdCriacao", "IdModificacao", "LockoutEnabled", "LockoutEnd", "Morada", "NIF", "Nome", "NormalizedEmail", "NormalizedUserName", "NumSocio", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UltimoLogin", "UserName" },
-                values: new object[] { "b5ee057f-3821-481c-924f-6e0a5d6c18ac", 0, "3f3860d6-0a7c-40fe-9013-4243efdb8c71", new DateTime(2023, 4, 13, 15, 49, 30, 233, DateTimeKind.Local).AddTicks(4006), new DateTime(2023, 4, 13, 15, 49, 30, 233, DateTimeKind.Local).AddTicks(3954), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2023, 4, 13, 15, 49, 30, 233, DateTimeKind.Local).AddTicks(4010), "admin@localhost", true, "A", "SEED", " ", false, null, "Ginásio Clube de Tomar", "999999999", "Administrador", "ADMIN@LOCALHOST", "ADMIN@LOCALHOST", " ", "AQAAAAIAAYagAAAAELXcM9+4Se9szE2OZLjbeGY7FphT00unZ0agq3OHKyKCGseo9QdqbHrkFlhAHfCjcA==", "999999999", false, "5c4bfa10-e406-4e2c-8ff1-a4b203889c7f", false, null, "admin@localhost" });
+                values: new object[] { "8152436d-c438-4583-9557-c2a44336150f", 0, "d51e3c0b-9053-4d94-94e2-1fb34c2f67de", new DateTime(2023, 4, 15, 15, 56, 32, 910, DateTimeKind.Local).AddTicks(9237), new DateTime(2023, 4, 15, 15, 56, 32, 910, DateTimeKind.Local).AddTicks(9170), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2023, 4, 15, 15, 56, 32, 910, DateTimeKind.Local).AddTicks(9248), "admin@localhost", true, "A", "SEED", " ", false, null, "Ginásio Clube de Tomar", "999999999", "Administrador", "ADMIN@LOCALHOST", "ADMIN@LOCALHOST", " ", "AQAAAAIAAYagAAAAEBkgvxDCTnvMAfdohfxA90x86Kk6Yy8ihZDEH47lHonmcbg2prMqK8vn5qWigt/CBw==", "999999999", false, "9c1a9856-41b9-4c22-b986-aa4ecf1afef6", false, null, "admin@localhost" });
 
             migrationBuilder.InsertData(
                 table: "AspNetUserRoles",
                 columns: new[] { "RoleId", "UserId" },
-                values: new object[] { "a3c57eaa-2938-4f35-b791-eb68db0e7ee7", "b5ee057f-3821-481c-924f-6e0a5d6c18ac" });
+                values: new object[] { "a49f15c8-a5c6-4d09-a1d7-a5e1ee44c474", "8152436d-c438-4583-9557-c2a44336150f" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
