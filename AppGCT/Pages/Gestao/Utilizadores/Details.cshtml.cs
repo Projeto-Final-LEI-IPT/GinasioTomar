@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace AppGCT.Pages.Gestao.Utilizadores
 {
-    [Authorize(Roles = "Administrador")]
+    [Authorize(Roles = "Administrador,Ginásio")]
     public class DetailsModel : PageModel
     {
         private readonly UserManager<Utilizador> _userManager;

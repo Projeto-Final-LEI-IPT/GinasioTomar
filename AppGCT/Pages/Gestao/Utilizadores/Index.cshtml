@@ -12,15 +12,33 @@
 @inject UserManager<Utilizador> UserManager
 @inject RoleManager<IdentityRole> roleManager
 
-@{
-    var users = UserManager.Users.ToList();
-    var roles = roleManager.Roles.ToList();
+@functions {
+                private async Task<List<Utilizador>> GetUsersAsync()
+    {
+        if (User.IsInRole("Administrador")) // Mostra todos os utilizadores do sistema
+        {
+            return UserManager.Users.ToList();
+        }
+        else if (User.IsInRole("Ginásio")) // Mostra todos excepto administradores
+        {
+            var role = await roleManager.FindByNameAsync("Administrador");
+        //    var userIdsToExclude = (await UserManager.GetUsersInRoleAsync(role.Name)).Select(id => id.ToString()).ToList();
+            var userIdsToExclude = (await UserManager.GetUsersInRoleAsync(role.Name)).Select(u => u.Id).ToList();
+            var users = UserManager.Users.Where(u => !userIdsToExclude.Contains(u.Id)).ToList();
+            return users;
+        }
+        else
+        {
+            return new List<Utilizador>();
+        }
+    }
 }
 <h1>Gestão Utilizadores</h1>
 
 <p>
     <a class='btn btn-primary btn-sm' href='/Gestao/Utilizadores/Create'>Novo Utilizador</a>
 </p>
+
 <table class="table">
     <thead>
         <tr>
@@ -33,7 +51,7 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var user in users)
+        @foreach (var user in await GetUsersAsync())
         {
             <tr>
                 <td>

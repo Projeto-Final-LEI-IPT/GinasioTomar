@@ -18,7 +18,7 @@ using static System.Runtime.InteropServices.JavaScript.JSType;
 namespace AppGCT.Pages.Gestao.Utilizadores
 {
 
-    [Authorize(Roles = "Administrador")]
+    [Authorize(Roles = "Administrador,Ginásio")]
     public class IndexModel : PageModel
     {
         private readonly AppGCT.Data.AppGCTContext _context;
