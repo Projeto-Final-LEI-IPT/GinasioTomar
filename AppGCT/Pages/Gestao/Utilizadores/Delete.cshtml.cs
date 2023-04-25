@@ -4,6 +4,9 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using AppGCT.Areas.Identity.Data;
 using Microsoft.AspNetCore.Authorization;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
+using System.Threading;
+using Microsoft.EntityFrameworkCore;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace AppGCT.Pages.Gestao.Utilizadores
 {
@@ -40,7 +43,16 @@ namespace AppGCT.Pages.Gestao.Utilizadores
                     var roleId = await _roleManager.FindByNameAsync(roles.First());
                     Role = await _roleManager.FindByIdAsync(roleId.Id);
                 }
-
+                else
+                {
+                    Role = new IdentityRole("N/A");
+                }
+                // Se for o "Administrador" devolve erro
+                if (Utilizador.UserName == "admin@localhost")
+                {
+                    ModelState.AddModelError(string.Empty, "Não pode remover o administrador!!");
+                    return Page();
+                }
             }
             else
             {
@@ -59,43 +71,52 @@ namespace AppGCT.Pages.Gestao.Utilizadores
                 return NotFound();
             }
 
-            // Delete the user from the AspNetUsers table
-            var result = await _userManager.DeleteAsync(user);
+            try
+            {      
+                // OBTÊM ROLES DO UTILIZADOR
+                var roleNames = await _userManager.GetRolesAsync(user);
 
-            if (!result.Succeeded)
-            {
-                throw new InvalidOperationException($"Unexpected error occurred deleting user with ID '{user.Id}'.");
-            }
-
-            // Get the roles to which the user belongs
-            var roleNames = await _userManager.GetRolesAsync(user);
-
-            // Get the role ids
-            var roleIds = roleNames.Select(name => _roleManager.Roles.FirstOrDefault(role => role.Name == name)?.Id)
-                                   .Where(id => id != null)
-                                   .ToList();
-
-            // Remove the user from all roles
-            var result2 = await _userManager.RemoveFromRolesAsync(user, roleNames);
-
-            if (!result2.Succeeded)
-            {
-                throw new InvalidOperationException($"Unexpected error occurred removing user '{user.UserName}' from roles.");
-            }
-
-            // Delete the user from the AspNetUserRoles table
-            foreach (var roleId in roleIds)
-            {
-                result = await _userManager.RemoveFromRoleAsync(user, roleId);
-
-                if (!result.Succeeded)
+                // OBTÊM ID ROLES DO UTILIZADOR
+                var roleIds = roleNames.Select(name => _roleManager.Roles.FirstOrDefault(role => role.Name == name)?.Id)
+                    .Where(id => id != null)
+                    .ToList();
+                // Se for o "Administrador" devolve erro
+                if (user.UserName == "admin@localhost")
                 {
-                    throw new InvalidOperationException($"Unexpected error occurred removing user '{user.UserName}' from role '{roleId}'.");
+                    ModelState.AddModelError(string.Empty, "Não pode remover o administrador!!");
+                    return RedirectToPage("./Index");
                 }
+                else
+                {
+                    // REMOVE UTILIZADOR DOS ROLES ASSOCIADOS (SE EXISTIREM)
+                    if (roleIds.Any())
+                    {
+                        var result = await _userManager.RemoveFromRolesAsync(user, roleNames);
+
+                        if (!result.Succeeded)
+                        {
+                            throw new InvalidOperationException($"Unexpected error occurred removing user '{user.UserName}' from roles.");
+                        }
+                    }
+
+                    // APAGA UTILIZADOR DA TABELA ASPNETUSERS
+                    var result2 = await _userManager.DeleteAsync(user);
+
+                    if (!result2.Succeeded)
+                    {
+                        throw new InvalidOperationException($"Unexpected error occurred deleting user with ID '{user.Id}'.");
+                    }
+
+                    return RedirectToPage("./Index");
+                }
+                
             }
-
-            return RedirectToPage("./Index");
+            catch (DbUpdateConcurrencyException ex)
+            {
+                // ATUALIZA O SECURITY STAMP E VOLTA A TENTAR
+                await _userManager.UpdateSecurityStampAsync(user);
+                return await OnPostAsync();
+            }
         }
-
     }
 }

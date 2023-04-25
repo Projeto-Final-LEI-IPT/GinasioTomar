@@ -18,8 +18,8 @@
         <form method="post">
             <div asp-validation-summary="All" class="text-danger"></div>
             <div class="form-group">
-                <label for="Input_RoleId">Tipo Utilizador</label>
-                <select asp-for="Input.RoleName" asp-items="@(new SelectList(Model.Roles, "Name"))" class="form-control"></select>
+                <label asp-for="Input.RoleName">Tipo Utilizador</label>
+                <input asp-for="Input.RoleName" class="form-control" autocomplete="nome" aria-required="true" disabled="disabled"/>
                 <span asp-validation-for="Input.RoleName" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -53,17 +53,7 @@
                 <span asp-validation-for="Input.Email" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Input.Password">Password</label>
-                <input asp-for="Input.Password" class="form-control" autocomplete="new-password" aria-required="true" />
-                <span asp-validation-for="Input.Password" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Input.ConfirmPassword">Confirme Password</label>
-                <input asp-for="Input.ConfirmPassword" class="form-control" autocomplete="new-password" aria-required="true" />
-                <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Criar" class="btn btn-primary" />
+                <input type="submit" value="Guardar" class="btn btn-primary" />
             </div>
         </form>
     </div>
