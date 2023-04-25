@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 using System.Security.Claims;
+using System.ComponentModel;
 
 namespace AppGCT.Pages.Gestao.Utilizadores
 {
@@ -65,8 +66,14 @@ namespace AppGCT.Pages.Gestao.Utilizadores
             [Display(Name = "Email")]
             public string Email { get; set; }
 
+            [ReadOnly(true)]
             [Display(Name = "Role")]
             public string RoleName { get; set; }
+
+            [Display(Name = "Id")]
+            public string Id { get; set; }
+            [Display(Name = "Número Sócio")]
+            public string NumSocio { get; set; }
         }
 
         public async Task<IActionResult> OnGetAsync(string id)
@@ -92,13 +99,18 @@ namespace AppGCT.Pages.Gestao.Utilizadores
                 Morada = user.Morada,
                 Contato = user.PhoneNumber,
                 Email = user.Email,
+                Id = user.Id,
+                NumSocio = user.NumSocio,
                 RoleName = (await _userManager.GetRolesAsync(user)).FirstOrDefault()
             };
 
             return Page();
         }
+
         public async Task<IActionResult> OnPostAsync()
         {
+            ModelState.Remove("Input.RoleName"); // Remove validação para o campo RoleName que não é editavel
+
             if (!ModelState.IsValid)
             {
                 return Page();
@@ -110,60 +122,39 @@ namespace AppGCT.Pages.Gestao.Utilizadores
                 return NotFound();
             }
 
-            var isAdmin = await _userManager.IsInRoleAsync(user, "Administrador");
-            var isGym = await _userManager.IsInRoleAsync(user, "Ginásio");
-
-            if (!isAdmin && !isGym)
-            {
-                return Forbid();
-            }
-
-            if (isGym && !User.IsInRole("Administrador"))
-            {
-                return Forbid();
-            }
-
             user.Nome = Input.Nome;
             user.NIF = Input.NIF;
             user.DataNascim = Input.Dtnascim;
             user.Morada = Input.Morada;
             user.PhoneNumber = Input.Contato;
-
+            user.DataModificacao = DateTime.Now;
+            user.NumSocio = Input.NumSocio;
+            var userId = _userManager.GetUserId(User);
+            user.IdModificacao = userId;
+           
             var email = user.Email;
             if (email != Input.Email)
             {
                 var setEmailResult = await _userManager.SetEmailAsync(user, Input.Email);
                 if (!setEmailResult.Succeeded)
                 {
-                    throw new InvalidOperationException($"Unexpected error occurred setting email for user with ID '{user.Id}'.");
+                    throw new InvalidOperationException($"Unexpected error occurred setting email for user with ID '{user.Nome}'.");
                 }
-            }
-
-            var role = await _roleManager.FindByIdAsync(Input.RoleId);
-            if (role == null)
-            {
-                throw new InvalidOperationException($"Unexpected error occurred finding role with ID '{Input.RoleId}'.");
-            }
-
-            var removeRolesResult = await _userManager.RemoveFromRolesAsync(user, await _userManager.GetRolesAsync(user));
-            if (!removeRolesResult.Succeeded)
-            {
-                throw new InvalidOperationException($"Unexpected error occurred removing roles for user with ID '{user.Id}'.");
-            }
-
-            var addRolesResult = await _userManager.AddToRoleAsync(user, role.Name);
-            if (!addRolesResult.Succeeded)
-            {
-                throw new InvalidOperationException($"Unexpected error occurred adding role '{role.Name}' to user with ID '{user.Id}'.");
+                else
+                {
+                    user.NormalizedUserName = Input.Email;
+                    user.UserName = Input.Email;
+                    user.EmailConfirmed = true;
+                }
             }
 
             var result = await _userManager.UpdateAsync(user);
             if (!result.Succeeded)
             {
-                throw new InvalidOperationException($"Unexpected error occurred updating user with ID '{user.Id}'.");
+                throw new InvalidOperationException($"Unexpected error occurred updating user with ID '{user.Nome}'.");
             }
 
-            return RedirectToPage("./Index");
+            return RedirectToPage("Index");
         }
     }
 }

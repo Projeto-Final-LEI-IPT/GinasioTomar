@@ -35,6 +35,12 @@
             <dd class="col-sm-10">
                 @Model.User.Nome
             </dd>
+            <dt class="col-sm-2">
+                Estado Utilizador
+            </dt>
+            <dd class="col-sm-10">
+                @Model.User.StatusDescription
+            </dd>
             @if(Model.Role.Name.Equals("Sócio"))
             {
                 <dt class="col-sm-2">

@@ -99,6 +99,7 @@ namespace AppGCT.Pages.Gestao.Utilizadores
         {
             if (ModelState.IsValid)
             {
+                var userId = _userManager.GetUserId(User);
                 var user = new Utilizador {
                     UserName = Input.Email,
                     Email = Input.Email,
@@ -112,7 +113,7 @@ namespace AppGCT.Pages.Gestao.Utilizadores
                     UltimoLogin = DateTime.MinValue,
                     DataAprovacao = DateTime.Now,
                     DataCriacao = DateTime.Now,
-                    IdCriacao = Username,
+                    IdCriacao = userId,
                     DataModificacao = DateTime.MinValue,
                     IdModificacao = " ",
                     NumSocio = " "

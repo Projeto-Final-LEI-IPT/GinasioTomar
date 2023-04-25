@@ -36,22 +36,23 @@ namespace AppGCT.Pages.Gestao.Utilizadores
 
             if (Utilizador != null)
             {
-
-                var roles = await _userManager.GetRolesAsync(Utilizador);
-                if (roles.Any())
-                {
-                    var roleId = await _roleManager.FindByNameAsync(roles.First());
-                    Role = await _roleManager.FindByIdAsync(roleId.Id);
-                }
-                else
-                {
-                    Role = new IdentityRole("N/A");
-                }
                 // Se for o "Administrador" devolve erro
                 if (Utilizador.UserName == "admin@localhost")
                 {
-                    ModelState.AddModelError(string.Empty, "Não pode remover o administrador!!");
-                    return Page();
+                    return RedirectToPage("./Error");
+                }
+                else
+                {
+                    var roles = await _userManager.GetRolesAsync(Utilizador);
+                    if (roles.Any())
+                    {
+                        var roleId = await _roleManager.FindByNameAsync(roles.First());
+                        Role = await _roleManager.FindByIdAsync(roleId.Id);
+                    }
+                    else
+                    {
+                        Role = new IdentityRole("N/A");
+                    }
                 }
             }
             else
@@ -83,8 +84,7 @@ namespace AppGCT.Pages.Gestao.Utilizadores
                 // Se for o "Administrador" devolve erro
                 if (user.UserName == "admin@localhost")
                 {
-                    ModelState.AddModelError(string.Empty, "Não pode remover o administrador!!");
-                    return RedirectToPage("./Index");
+                    return RedirectToPage("./Error");
                 }
                 else
                 {

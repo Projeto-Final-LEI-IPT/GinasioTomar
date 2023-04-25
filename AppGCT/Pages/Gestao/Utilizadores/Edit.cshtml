@@ -12,14 +12,15 @@
 <div>
     <a class='btn btn-primary btn-sm' href='/Gestao/Utilizadores/Index'>Voltar</a>
 </div>
-<br>
+
 <div class="row">
     <div class="col-md-4">
         <form method="post">
             <div asp-validation-summary="All" class="text-danger"></div>
+            <input type="hidden" asp-for="Input.Id" />
             <div class="form-group">
                 <label asp-for="Input.RoleName">Tipo Utilizador</label>
-                <input asp-for="Input.RoleName" class="form-control" autocomplete="nome" aria-required="true" disabled="disabled"/>
+                <input asp-for="Input.RoleName" class="form-control" autocomplete="nome" aria-required="true" disabled="disabled" readonly="readonly"/>
                 <span asp-validation-for="Input.RoleName" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -27,6 +28,17 @@
                 <input asp-for="Input.Nome" class="form-control" autocomplete="nome" aria-required="true" />
                 <span asp-validation-for="Input.Nome" class="text-danger"></span>
             </div>
+            @if (Model.Input.RoleName.Equals("Sócio"))
+            {
+                <div class="form-group">
+                    <label asp-for="Input.NumSocio">Número Sócio</label>
+                    <input asp-for="Input.NumSocio" class="form-control" autocomplete="numsocio" aria-required="true" />
+                    <span asp-validation-for="Input.NumSocio" class="text-danger"></span>
+                </div>
+            }else
+            {
+                <input type="hidden" asp-for="Input.NumSocio" />
+            }
             <div class="form-group">
                 <label asp-for="Input.NIF">Nº Identificação Fiscal(NIF)</label>
                 <input asp-for="Input.NIF" class="form-control" autocomplete="nif" aria-required="true" />
