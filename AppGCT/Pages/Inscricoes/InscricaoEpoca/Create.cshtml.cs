@@ -19,9 +19,10 @@ namespace AppGCT.Pages.Inscricoes.InscricaoEpoca
             _context = context;
         }
 
-        public IActionResult OnGet()
+        public IActionResult OnGet(int? id)
         {
         ViewData["GinastaId"] = new SelectList(_context.Ginasta, "Id", "ID_DescrGinasta");
+        ViewData["BackId"] = id;
             return Page();
         }
 
@@ -40,7 +41,7 @@ namespace AppGCT.Pages.Inscricoes.InscricaoEpoca
             _context.Inscricao.Add(Inscricao);
             await _context.SaveChangesAsync();
 
-            return RedirectToPage("/Inscricoes/InscricaoGinasta/Index");
+            return RedirectToPage("/Inscricoes/Ginastas/Index");
         }
     }
 }

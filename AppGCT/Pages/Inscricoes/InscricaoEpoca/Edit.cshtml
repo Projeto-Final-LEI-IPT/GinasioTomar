@@ -6,10 +6,12 @@
     Layout = "~/Pages/Shared/_Layout.cshtml";
 }
 
-<h1>Edit</h1>
+<h1>Editar Inscrição</h1>
 
-<h4>Inscricao</h4>
 <hr />
+<div>
+    <a class='btn btn-primary btn-sm' href='/Inscricoes/InscricaoEpoca/Index?id=@Model.Inscricao.Atleta.Id'>Voltar</a>
+</div>
 <div class="row">
     <div class="col-md-4">
         <form method="post">
@@ -114,10 +116,6 @@
             </div>
         </form>
     </div>
-</div>
-
-<div>
-    <a asp-page="./Index">Back to List</a>
 </div>
 
 @section Scripts {
