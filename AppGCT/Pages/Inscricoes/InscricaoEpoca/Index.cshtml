@@ -6,15 +6,11 @@
     Layout = "~/Pages/Shared/_Layout.cshtml";
 }
 
-<h1>Index</h1>
-
-<p>
-    <a asp-page="Create">Create New</a>
-</p>
-<h1>Details</h1>
+<h1>Gestão das Inscrições de Ginastas em Épocas Desportivas</h1>
 
 <div>
-    <h4>Ginasta</h4>
+    <hr />
+    <h4>Detalhe do Ginasta</h4>
     <hr />
     <dl class="row">
         <dt class="col-sm-2">
@@ -49,6 +45,11 @@
         </dd>
     </dl>
 </div>
+<div>
+    <a class='btn btn-primary btn-sm' href='/Inscricoes/InscricaoEpoca/Create?id=@Model.Ginasta.Id'>Nova Inscrição</a>
+    <a class='btn btn-primary btn-sm' href='/Inscricoes/Ginastas'>Voltar</a>
+</div>
+<hr />
 <table class="table">
     <thead>
         <tr>
@@ -95,9 +96,9 @@
                 @Html.DisplayFor(modelItem => item.IPagamInscricao)
             </td>
             <td>
-                <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+                <a class="btn btn-primary btn-sm" href="/Inscricoes/InscricaoEpoca/Edit?id=@item.Id">Editar</a>
+                <a class="btn btn-primary btn-sm" href="/Inscricoes/InscricaoEpoca/Details?id=@item.Id">Detalhes</a>
+                <a class="btn btn-danger  btn-sm" href="/Inscricoes/InscricaoEpoca/Delete?id=@item.Id">Apagar</a>
             </td>
         </tr>
 }
