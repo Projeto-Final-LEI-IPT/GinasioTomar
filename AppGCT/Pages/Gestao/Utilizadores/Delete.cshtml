@@ -1,0 +1,88 @@
+﻿@page
+@model AppGCT.Pages.Gestao.Utilizadores.DeleteModel
+
+@{
+    ViewData["Title"] = "Apagar Utilizador";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<h1>Apagar Utilizador</h1>
+<h3>Pretende mesmo apagar o utilizador?</h3>
+<hr />
+<div>
+    <a class='btn btn-primary btn-sm' href='/Gestao/Utilizadores/Index'>Voltar</a>
+</div>
+<div asp-validation-summary="All" class="text-danger"></div>
+<div>
+    @if (Model.User != null)
+    {
+        <dl class="row">
+            <dt class="col-sm-2">
+                Tipo Utilizador
+            </dt>
+            <dd class="col-sm-10">
+                @Model.Role.Name
+            </dd>
+            <dt class="col-sm-2">
+                Nome Completo
+            </dt>
+            <dd class="col-sm-10">
+                @Model.Utilizador.Nome
+            </dd>
+            <dt class="col-sm-2">
+                Estado Utilizador
+            </dt>
+            <dd class="col-sm-10">
+                @Model.Utilizador.StatusDescription
+            </dd>
+            @if (Model.Role.Name.Equals("Sócio"))
+            {
+                <dt class="col-sm-2">
+                    Nº Sócio
+                </dt>
+                <dd class="col-sm-10">
+                    @Model.Utilizador.NumSocio
+                </dd>
+            }
+            <dt class="col-sm-2">
+                Nº Identificação Fiscal (NIF)
+            </dt>
+            <dd class="col-sm-10">
+                @Model.Utilizador.NIF
+            </dd>
+            <dt class="col-sm-2">
+                Data Nascimento
+            </dt>
+            <dd class="col-sm-10">
+                @Model.Utilizador.DataNascim.ToString("yyyy-MM-dd")
+            </dd>
+            <dt class="col-sm-2">
+                Morada
+            </dt>
+            <dd class="col-sm-10">
+                @Model.Utilizador.Morada
+            </dd>
+            <dt class="col-sm-2">
+                Contacto Telefónico
+            </dt>
+            <dd class="col-sm-10">
+                @Model.Utilizador.PhoneNumber
+            </dd>
+            <dt class="col-sm-2">
+                E-mail
+            </dt>
+            <dd class="col-sm-10">
+                @Model.Utilizador.Email
+            </dd>
+        </dl>
+    }
+    else
+    {
+        <p>Utilizador Inexistente</p>
+    }
+   
+    <form method="post">
+        <input type="hidden" asp-for="Utilizador.Id" />
+        <input type="submit" value="Apagar" class="btn btn-danger" />
+    </form>
+</div>

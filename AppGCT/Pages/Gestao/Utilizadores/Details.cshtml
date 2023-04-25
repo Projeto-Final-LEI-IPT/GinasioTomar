@@ -1,0 +1,92 @@
+﻿@page
+@model AppGCT.Pages.Gestao.Utilizadores.DetailsModel
+@{
+}
+@{
+    ViewData["Title"] = "Detalhes Utilizador";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+@using Microsoft.AspNetCore.Identity
+@using AppGCT.Areas.Identity.Data
+@using AppGCT.Pages.Gestao.Utilizadores
+@inject UserManager<Utilizador> UserManager
+@inject RoleManager<IdentityRole> roleManager
+
+<h1>Detalhes Utilizador</h1>
+
+<hr />
+<div>
+    <a class='btn btn-primary btn-sm' href='/Gestao/Utilizadores/Index'>Voltar</a>
+</div>
+<br>
+<div>
+    @if (Model.User != null)
+    {
+        <dl class="row">
+            <dt class="col-sm-2">
+                Tipo Utilizador
+            </dt>
+            <dd class="col-sm-10">
+                @Model.Role.Name
+            </dd>
+            <dt class="col-sm-2">
+                Nome Completo
+            </dt>
+            <dd class="col-sm-10">
+                @Model.User.Nome
+            </dd>
+            <dt class="col-sm-2">
+                Estado Utilizador
+            </dt>
+            <dd class="col-sm-10">
+                @Model.User.StatusDescription
+            </dd>
+            @if(Model.Role.Name.Equals("Sócio"))
+            {
+                <dt class="col-sm-2">
+                    Nº Sócio
+                </dt>
+                <dd class="col-sm-10">
+                    @Model.User.NumSocio
+                </dd>
+            }
+            <dt class="col-sm-2">
+                Nº Identificação Fiscal (NIF)
+            </dt>
+            <dd class="col-sm-10">
+                @Model.User.NIF
+            </dd>
+            <dt class="col-sm-2">
+                Data Nascimento
+            </dt>
+            <dd class="col-sm-10">
+                @Model.User.DataNascim.ToString("yyyy-MM-dd")
+            </dd>
+            <dt class="col-sm-2">
+                Morada
+            </dt>
+            <dd class="col-sm-10">
+                @Model.User.Morada
+            </dd>
+            <dt class="col-sm-2">
+                Contacto Telefónico
+            </dt>
+            <dd class="col-sm-10">
+                @Model.User.PhoneNumber
+            </dd>
+            <dt class="col-sm-2">
+                E-mail
+            </dt>
+            <dd class="col-sm-10">
+                @Model.User.Email
+            </dd>
+        </dl>
+    }
+    else
+    {
+        <p>Utilizador Inexistente</p>
+    }
+</div>
+<div>
+    <a class="btn btn-primary btn-sm" href="/Gestao/Utilizadores/Edit?id=@Model.User?.Id">Editar</a>
+</div>

@@ -22,7 +22,7 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-page="/Index">Página Principal</a>
                         </li>
-                        @if (User.IsInRole("Administrador"))
+                        @if (User.IsInRole("Administrador") || User.IsInRole("Ginásio"))
                         {
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-page="/Gestao/Index">Painel Gestão</a>

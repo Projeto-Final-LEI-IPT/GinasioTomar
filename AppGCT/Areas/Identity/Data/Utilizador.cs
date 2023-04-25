@@ -41,5 +41,23 @@ public class Utilizador : IdentityUser
         }
     }
     public List<Ginasta> Ginasta { get; set; }
+
+    public string StatusDescription
+    {
+        get
+        {
+            switch (this.EstadoUtilizador)
+            {
+                case "A":
+                    return "Ativo";
+                case "P":
+                    return "Pré-Ativo";
+                case "I":
+                    return "Inativo";
+                default:
+                    return "Desconhecido";
+            }
+        }
+    }
 }
 
