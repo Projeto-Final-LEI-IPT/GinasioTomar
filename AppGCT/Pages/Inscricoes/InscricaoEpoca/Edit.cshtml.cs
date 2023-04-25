@@ -68,7 +68,7 @@ namespace AppGCT.Pages.Inscricoes.InscricaoEpoca
                 }
             }
 
-            return RedirectToPage("./Index");
+            return RedirectToPage("./Index", new { id = Inscricao.GinastaId });
         }
 
         private bool InscricaoExists(int? id)

@@ -10,7 +10,7 @@ using AppGCT.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.EntityFrameworkCore;
 
-namespace AppGCT.Pages.Inscricoes.InscricaoGinasta
+namespace AppGCT.Pages.Inscricoes.Ginastas
 {
     public class CreateModel : PageModel
     {

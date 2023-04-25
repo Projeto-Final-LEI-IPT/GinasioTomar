@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using AppGCT.Data;
 using AppGCT.Models;
 
-namespace AppGCT.Pages.Inscricoes.InscricaoGinasta
+namespace AppGCT.Pages.Inscricoes.Ginastas
 {
     public class DetailsModel : PageModel
     {

@@ -6,11 +6,13 @@
     Layout = "~/Pages/Shared/_Layout.cshtml";
 }
 
-<h1>Details</h1>
+<h1>Detalhes da Isnscrição</h1>
 
 <div>
-    <h4>Inscricao</h4>
     <hr />
+    <div>
+        <a class='btn btn-primary btn-sm' href='/Inscricoes/InscricaoEpoca/Index?id=@Model.Inscricao.Atleta.Id'>Voltar</a>
+    </div>
     <dl class="row">
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Inscricao.IdFGP)
@@ -147,6 +149,5 @@
     </dl>
 </div>
 <div>
-    <a asp-page="./Edit" asp-route-id="@Model.Inscricao?.Id">Edit</a> |
-    <a asp-page="./Index">Back to List</a>
+    <a class="btn btn-primary btn-sm" href="/Inscricoes/InscricaoEpoca/Edit?id=@Model.Inscricao.Id">Editar</a>
 </div>

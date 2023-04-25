@@ -9,7 +9,7 @@ using AppGCT.Data;
 using AppGCT.Models;
 using Microsoft.AspNet.Identity;
 
-namespace AppGCT.Pages.Inscricoes.InscricaoGinasta
+namespace AppGCT.Pages.Inscricoes.Ginastas
 {
     public class IndexModel : PageModel
     {
