@@ -117,7 +117,23 @@ namespace AppGCT.Models
         [Display(Name = "Número de Sócio")]
         public string UtilizadorId { get; set; }
         [Display(Name = "Número de Sócio")]
-
+        public string StatusDescription
+        {
+            get
+            {
+                switch (this.EstadoGinasta)
+                {
+                    case "A":
+                        return "Ativo";
+                    case "P":
+                        return "Pré-Ativo";
+                    case "I":
+                        return "Inativo";
+                    default:
+                        return "Desconhecido";
+                }
+            }
+        }
         public string ID_DescrGinasta
         {
             get
