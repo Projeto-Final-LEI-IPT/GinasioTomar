@@ -7,9 +7,11 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using AppGCT.Data;
 using AppGCT.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace AppGCT.Pages.Inscricoes.InscricaoEpoca
 {
+    [Authorize(Roles = "Administrador,Ginásio,Sócio")]
     public class CreateModel : PageModel
     {
         private readonly AppGCT.Data.AppGCTContext _context;
@@ -22,7 +24,6 @@ namespace AppGCT.Pages.Inscricoes.InscricaoEpoca
         public IActionResult OnGet(int? id)
         {
         ViewData["GinastaId"] = new SelectList(_context.Ginasta, "Id", "ID_DescrGinasta");
-        ViewData["BackId"] = id;
             return Page();
         }
 

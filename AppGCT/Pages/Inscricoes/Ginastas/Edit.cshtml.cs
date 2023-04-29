@@ -8,9 +8,13 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using AppGCT.Data;
 using AppGCT.Models;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNetCore.Authorization;
+using System.Data;
 
 namespace AppGCT.Pages.Inscricoes.Ginastas
 {
+    [Authorize(Roles = "Administrador,Ginásio,Sócio")]
     public class EditModel : PageModel
     {
         private readonly AppGCT.Data.AppGCTContext _context;
@@ -36,7 +40,17 @@ namespace AppGCT.Pages.Inscricoes.Ginastas
                 return NotFound();
             }
             Ginasta = ginasta;
-           ViewData["UtilizadorId"] = new SelectList(_context.Users, "Id", "Id");
+
+            if (User.IsInRole("Administrador") || User.IsInRole("Administrador"))
+            {
+                ViewData["UtilizadorId"] = new SelectList(_context.Users, "Id", "ID_Description");
+            }
+            else
+            {
+                /// Utilizamos LINQ para ir buscar apenas o USERID autenticado, quando o ROLE é <> Administrador                
+                ViewData["UtilizadorId"] = new SelectList(_context.Users.Where(x => x.Id == User.Identity.GetUserId()), "Id", "ID_Description");
+            }
+
             return Page();
         }
 
@@ -48,6 +62,8 @@ namespace AppGCT.Pages.Inscricoes.Ginastas
             {
                 return Page();
             }
+            Ginasta.IdModificacao = User.Identity.GetUserId(); ;
+            Ginasta.DataModificacao = DateTime.Now;
 
             _context.Attach(Ginasta).State = EntityState.Modified;
 

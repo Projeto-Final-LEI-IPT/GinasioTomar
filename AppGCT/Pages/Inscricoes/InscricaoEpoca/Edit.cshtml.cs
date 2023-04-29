@@ -8,9 +8,11 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using AppGCT.Data;
 using AppGCT.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace AppGCT.Pages.Inscricoes.InscricaoEpoca
 {
+    [Authorize(Roles = "Administrador,Ginásio,Sócio")]
     public class EditModel : PageModel
     {
         private readonly AppGCT.Data.AppGCTContext _context;
