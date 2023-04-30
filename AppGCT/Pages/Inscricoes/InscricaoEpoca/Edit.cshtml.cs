@@ -9,6 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using AppGCT.Data;
 using AppGCT.Models;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNet.Identity;
 
 namespace AppGCT.Pages.Inscricoes.InscricaoEpoca
 {
@@ -39,7 +40,11 @@ namespace AppGCT.Pages.Inscricoes.InscricaoEpoca
                 return NotFound();
             }
             Inscricao = inscricao;
-           ViewData["GinastaId"] = new SelectList(_context.Ginasta, "Id", "ID_DescrGinasta");
+            /// Gravar IdDoSocio associado ao Ginasta
+            /// TODO
+            /// ...............
+            /// ............... Faz sentido permitir modificar o Ginasta associado a uma inscrição em Epoca ???
+           ViewData["GinastaId"] = new SelectList(_context.Ginasta.Where(i => i.Id == id), "Id", "ID_DescrGinasta");
             return Page();
         }
 
@@ -51,6 +56,9 @@ namespace AppGCT.Pages.Inscricoes.InscricaoEpoca
             {
                 return Page();
             }
+
+            Inscricao.IdModificacao = User.Identity.GetUserId(); ;
+            Inscricao.DataModificacao = DateTime.Now;
 
             _context.Attach(Inscricao).State = EntityState.Modified;
 
