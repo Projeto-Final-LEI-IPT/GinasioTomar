@@ -30,32 +30,26 @@ namespace AppGCT.Models
         [Display(Name = "Data Consentimento")]
         public DateTime DtConsentimento { get; set; }
 
-        [Required]
         [DataType(DataType.Text)]
         [Display(Name = "Ex. Médico Efetuado")]
         public string? IExamMed { get; set; }
 
-        [Required]
         [DataType(DataType.Date)]
         [Display(Name = "Data Ex. Médico")]
         public DateTime DtExamMed { get; set; }
         
-        [Required]
         [DataType(DataType.Text)]
         [Display(Name = "Ficha FGP")]
         public string? IFicFGP { get; set; }
        
-        [Required]
         [DataType(DataType.Date)]
         [Display(Name = "Data ficha FGP")]
         public DateTime DtFicFGP { get; set; }
         
-        [Required]
         [DataType(DataType.Text)]
         [Display(Name = "Seguro")]
         public string? ISeguro { get; set; }
 
-        [Required]
         [DataType(DataType.Text)]
         [Display(Name = "Pagamento Inscrição")]
         public string? IPagamInscricao { get; set; }
@@ -90,19 +84,17 @@ namespace AppGCT.Models
         [Display(Name = "Alergias")]
         public string? DescAlergias { get; set; }
 
-        [Required]
         [DataType((DataType.Date))]
         [Display(Name = "Data de Criação")]
         public DateTime DataCriacao { get; set; }
 
-        [Required]
         [DataType((DataType.Text))]
         [Display(Name = "Criado por")]
         public string? IdCriacao { get; set; }
 
         [DataType((DataType.Date))]
         [Display(Name = "Data de Modificação")]
-        public DateTime? DataModificacao { get; set; }
+        public DateTime DataModificacao { get; set; }
 
         [DataType((DataType.Text))]
         [Display(Name = "Modificado por")]

@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace AppGCT.Pages.Ginasio
 {
-    [Authorize(Roles = "Administrador")]
+    [Authorize(Roles = "Administrador,Ginásio")]
     public class IndexModel : PageModel
     {
         public void OnGet()

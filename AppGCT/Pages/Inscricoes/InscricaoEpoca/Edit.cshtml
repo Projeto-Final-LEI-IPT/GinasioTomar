@@ -42,37 +42,49 @@
                 <input asp-for="Inscricao.DtConsentimento" class="form-control" />
                 <span asp-validation-for="Inscricao.DtConsentimento" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="Inscricao.IExamMed" class="control-label"></label>
-                <input asp-for="Inscricao.IExamMed" class="form-control" />
-                <span asp-validation-for="Inscricao.IExamMed" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Inscricao.DtExamMed" class="control-label"></label>
-                <input asp-for="Inscricao.DtExamMed" class="form-control" />
-                <span asp-validation-for="Inscricao.DtExamMed" class="text-danger"></span>
-            </div>
-                        <div class="form-group">
-                <label asp-for="Inscricao.IFicFGP" class="control-label"></label>
-                <input asp-for="Inscricao.IFicFGP" class="form-control" />
-                <span asp-validation-for="Inscricao.IFicFGP" class="text-danger"></span>
-            </div>
-                        <div class="form-group">
-                <label asp-for="Inscricao.DtFicFGP" class="control-label"></label>
-                <input asp-for="Inscricao.DtFicFGP" class="form-control" />
-                <span asp-validation-for="Inscricao.DtFicFGP" class="text-danger"></span>
-            </div>
-                        <div class="form-group">
-                <label asp-for="Inscricao.ISeguro" class="control-label"></label>
-                <input asp-for="Inscricao.ISeguro" class="form-control" />
-                <span asp-validation-for="Inscricao.ISeguro" class="text-danger"></span>
-            </div>
-                        <div class="form-group">
-                <label asp-for="Inscricao.IPagamInscricao" class="control-label"></label>
+        @if (User.IsInRole("Administrador") || User.IsInRole("Ginásio"))
+            {
+                <div class="form-group">
+                    <label asp-for="Inscricao.IExamMed" class="control-label"></label>
+                    <input asp-for="Inscricao.IExamMed" class="form-control" />
+                    <span asp-validation-for="Inscricao.IExamMed" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Inscricao.DtExamMed" class="control-label"></label>
+                    <input asp-for="Inscricao.DtExamMed" class="form-control" />
+                    <span asp-validation-for="Inscricao.DtExamMed" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Inscricao.IFicFGP" class="control-label"></label>
+                    <input asp-for="Inscricao.IFicFGP" class="form-control" />
+                    <span asp-validation-for="Inscricao.IFicFGP" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Inscricao.DtFicFGP" class="control-label"></label>
+                    <input asp-for="Inscricao.DtFicFGP" class="form-control" />
+                    <span asp-validation-for="Inscricao.DtFicFGP" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Inscricao.ISeguro" class="control-label"></label>
+                    <input asp-for="Inscricao.ISeguro" class="form-control" />
+                    <span asp-validation-for="Inscricao.ISeguro" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Inscricao.IPagamInscricao" class="control-label"></label>
                 <input asp-for="Inscricao.IPagamInscricao" class="form-control" />
                 <span asp-validation-for="Inscricao.IPagamInscricao" class="text-danger"></span>
-            </div>
-                        <div class="form-group">
+                </div>
+            }
+            else
+            {
+                <input type="hidden" asp-for="Inscricao.IExamMed" />
+                <input type="hidden" asp-for="Inscricao.DtExamMed" />
+                <input type="hidden" asp-for="Inscricao.IFicFGP" />
+                <input type="hidden" asp-for="Inscricao.DtFicFGP" />
+                <input type="hidden" asp-for="Inscricao.ISeguro" />
+                <input type="hidden" asp-for="Inscricao.IPagamInscricao" />
+            }
+            <div class="form-group">
                 <label asp-for="Inscricao.ILeituraObrig" class="control-label"></label>
                 <input asp-for="Inscricao.ILeituraObrig" class="form-control" />
                 <span asp-validation-for="Inscricao.ILeituraObrig" class="text-danger"></span>
