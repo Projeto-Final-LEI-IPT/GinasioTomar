@@ -1,6 +1,10 @@
 ﻿@page
 @model AppGCT.Pages.Inscricoes.Ginastas.CreateModel
-@Html.HiddenFor(m => m.Ginasta.UtilizadorId)
+@*@Html.HiddenFor(m => m.Ginasta.UtilizadorId)*@
+@Html.HiddenFor(m => m.Ginasta.IdCriacao)
+@Html.HiddenFor(m => m.Ginasta.DataCriacao)
+@Html.HiddenFor(m => m.Ginasta.IdModificacao)
+@Html.HiddenFor(m => m.Ginasta.DataModificacao)
 
 @{
     ViewData["Title"] = "Create";

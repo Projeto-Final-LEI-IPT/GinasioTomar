@@ -32,11 +32,18 @@
                 <select asp-for="Ginasta.UtilizadorId" class="form-control" asp-items="ViewBag.UtilizadorId"></select>
                 <span asp-validation-for="Ginasta.UtilizadorId" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="Ginasta.DtNascim" class="control-label"></label>
+        @if (User.IsInRole("Administrador") || User.IsInRole("Ginásio"))
+        {
+                <div class="form-group">
+                    <label asp-for="Ginasta.DtNascim" class="control-label"></label>
                 <input asp-for="Ginasta.DtNascim" class="form-control" />
                 <span asp-validation-for="Ginasta.DtNascim" class="text-danger"></span>
-            </div>
+                </div>
+         }
+        else
+        {
+                <input type="hidden" asp-for="Ginasta.DtNascim" />
+        }
             <div class="form-group">
                 <label asp-for="Ginasta.IdadeAgosto" class="control-label"></label>
                 <input asp-for="Ginasta.IdadeAgosto" class="form-control" />
@@ -157,26 +164,10 @@
                 <input asp-for="Ginasta.EmailTlmEmerEE" class="form-control" />
                 <span asp-validation-for="Ginasta.EmailTlmEmerEE" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="Ginasta.DataCriacao" class="control-label"></label>
-                <input asp-for="Ginasta.DataCriacao" class="form-control" />
-                <span asp-validation-for="Ginasta.DataCriacao" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Ginasta.IdCriacao" class="control-label"></label>
-                <input asp-for="Ginasta.IdCriacao" class="form-control" />
-                <span asp-validation-for="Ginasta.IdCriacao" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Ginasta.DataModificacao" class="control-label"></label>
-                <input asp-for="Ginasta.DataModificacao" class="form-control" />
-                <span asp-validation-for="Ginasta.DataModificacao" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Ginasta.IdModificacao" class="control-label"></label>
-                <input asp-for="Ginasta.IdModificacao" class="form-control" />
-                <span asp-validation-for="Ginasta.IdModificacao" class="text-danger"></span>
-            </div>
+            <input type="hidden" asp-for="Ginasta.DataCriacao" />
+            <input type="hidden" asp-for="Ginasta.IdCriacao" />
+            <input type="hidden" asp-for="Ginasta.DataModificacao" />
+            <input type="hidden" asp-for="Ginasta.IdModificacao" />
             <div class="form-group">
                 <input type="submit" value="Salvar" class="btn btn-primary" />
             </div>

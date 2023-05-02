@@ -104,13 +104,12 @@ namespace AppGCT.Models
         [DataType((DataType.Date))]
         [Display(Name = "Data de Criação")]
         public DateTime DataCriacao { get; set; }
-        [Required]
         [DataType((DataType.Text))]
         [Display(Name = "Criado por")]
         public string? IdCriacao { get; set; }
         [DataType((DataType.Date))]
         [Display(Name = "Data de Modificação")]
-        public DateTime? DataModificacao { get; set; }
+        public DateTime DataModificacao { get; set; }
         [DataType((DataType.Text))]
         [Display(Name = "Modificado por")]
         public string? IdModificacao { get; set; }

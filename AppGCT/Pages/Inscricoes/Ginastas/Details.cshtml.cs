@@ -7,9 +7,11 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using AppGCT.Data;
 using AppGCT.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace AppGCT.Pages.Inscricoes.Ginastas
 {
+    [Authorize(Roles = "Administrador,Ginásio,Sócio")]
     public class DetailsModel : PageModel
     {
         private readonly AppGCT.Data.AppGCTContext _context;
