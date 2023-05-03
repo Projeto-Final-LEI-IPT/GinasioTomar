@@ -100,11 +100,9 @@ namespace AppGCT.Models
         [DataType((DataType.Text))]
         [Display(Name = "Email Emerg. Enc. Edu.")]
         public string? EmailTlmEmerEE { get; set; }
-        [Required]
         [DataType((DataType.Date))]
         [Display(Name = "Data de Criação")]
         public DateTime DataCriacao { get; set; }
-        [Required]
         [DataType((DataType.Text))]
         [Display(Name = "Criado por")]
         public string? IdCriacao { get; set; }

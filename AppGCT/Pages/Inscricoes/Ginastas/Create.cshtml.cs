@@ -9,6 +9,8 @@ using AppGCT.Data;
 using AppGCT.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
+using AppGCT.Areas.Identity.Data;
 
 namespace AppGCT.Pages.Inscricoes.Ginastas
 {
@@ -42,12 +44,13 @@ namespace AppGCT.Pages.Inscricoes.Ginastas
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync()
         {
-
+            ModelState.Remove("Ginasta.EstadoGinasta"); // Remove validação para o campo EstadoGinasta que não é usado na criação
             if (!ModelState.IsValid || _context.Ginasta == null || Ginasta == null)
             {
                 return Page();
             }
-
+            Ginasta.EstadoGinasta = "A";
+            Ginasta.IdCriacao = "joni";
             Ginasta.UtilizadorId = User.Identity.GetUserId();
             _context.Ginasta.Add(Ginasta);
             await _context.SaveChangesAsync();
