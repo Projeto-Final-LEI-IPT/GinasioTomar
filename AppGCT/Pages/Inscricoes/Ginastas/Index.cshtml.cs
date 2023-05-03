@@ -8,9 +8,12 @@ using Microsoft.EntityFrameworkCore;
 using AppGCT.Data;
 using AppGCT.Models;
 using Microsoft.AspNet.Identity;
+using Microsoft.AspNetCore.Authorization;
+using System.Data;
 
 namespace AppGCT.Pages.Inscricoes.Ginastas
 {
+    [Authorize(Roles = "Administrador,Ginásio,Sócio")]
     public class IndexModel : PageModel
     {
         private readonly AppGCT.Data.AppGCTContext _context;
@@ -27,7 +30,7 @@ namespace AppGCT.Pages.Inscricoes.Ginastas
             if (_context.Ginasta != null)
             {
                 string userId = User.Identity.GetUserId();
-                if (User.IsInRole("Administrador"))
+                if (User.IsInRole("Administrador") || User.IsInRole("Ginásio"))
                 {
                     Ginasta = await _context.Ginasta
                     .Include(g => g.Socio).ToListAsync();
