@@ -26,7 +26,7 @@ namespace AppGCT.Models
         public string? IdadeAgosto { get; set; }
         [DataType((DataType.ImageUrl))]
         [Display(Name = "Foto")]
-        public string? Foto { get; set; }
+        public byte[]? Foto { get; set; }
         [Required]
         [DataType((DataType.Text))]
         [Display(Name = "Estado Ginasta")]

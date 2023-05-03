@@ -39,7 +39,7 @@ namespace AppGCT.Pages.Inscricoes.Ginastas
                 {
                     Ginasta = await _context.Ginasta
                         .Where(g => g.UtilizadorId.Equals(userId))
-                    .Include(g => g.Socio).ToListAsync();
+                        .Include(g => g.Socio).ToListAsync();
                 }
             }
         }

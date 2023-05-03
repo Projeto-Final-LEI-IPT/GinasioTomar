@@ -19,7 +19,7 @@
 </div>
 <div class="row">
     <div class="col-md-4">
-        <form method="post">
+        <form method="post" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="Ginasta.NomeCompleto" class="control-label"></label>
@@ -55,7 +55,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="Ginasta.Foto" class="control-label">Fotografia</label>
-                <input asp-for="Ginasta.Foto" type="file" class="form-control-file" />
+                <input asp-for="Ginasta.Foto" type="file" name ="imageFile" class="form-control-file" />
                 <span asp-validation-for="Ginasta.Foto" class="text-danger"></span>
             </div>
             <div class="form-group">
