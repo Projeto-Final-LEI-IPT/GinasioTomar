@@ -62,7 +62,7 @@ namespace AppGCT.Models
         [Display(Name = "Irmãos")]
         public string? IIrmaos { get; set; }
         [DataType((DataType.Text))]
-        [Display(Name = "Nome de Irmãos")]
+        [Display(Name = "Nome Irmãos")]
         public string? NomeIrmaos { get; set; }
         [DataType((DataType.Text))]
         [Display(Name = "Email")]

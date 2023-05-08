@@ -5,9 +5,6 @@
     ViewData["Title"] = "Details";
     Layout = "~/Pages/Shared/_Layout.cshtml";
 }
-<head>
-    <link rel="stylesheet" href="Details.css">
-</head>
 
 <h1>Detalhes do Ginasta</h1>
 
@@ -18,7 +15,7 @@
     </div>
     <dl class="row">
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Ginasta.Foto)
+            Fotografia
         </dt>
         <dd class="col-sm-10">
             @if (Model.Ginasta.Foto != null)
@@ -37,10 +34,11 @@
             @Html.DisplayFor(model => model.Ginasta.NomeCompleto)
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Ginasta.ISexo)
+            Género
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Ginasta.ISexo)
+            @Html.RadioButtonFor(model => model.Ginasta.ISexo, "M", new { @disabled = "disabled" }) Masculino
+            @Html.RadioButtonFor(model => model.Ginasta.ISexo, "F", new { @disabled = "disabled" }) Feminino
         </dd>
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Ginasta.DtNascim)
@@ -58,7 +56,7 @@
             @Html.DisplayNameFor(model => model.Ginasta.EstadoGinasta)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Ginasta.EstadoGinasta)
+            @Html.DisplayFor(model => model.Ginasta.StatusDescription)
         </dd>
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Ginasta.NumCC)
@@ -97,16 +95,18 @@
             @Html.DisplayFor(model => model.Ginasta.Localidade)
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Ginasta.IBolsa)
+            Candidata-se a Bolsa Formação Desportiva?
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Ginasta.IBolsa)
+            @Html.RadioButtonFor(model => model.Ginasta.IBolsa, "S", new { @disabled = "disabled" }) Sim
+            @Html.RadioButtonFor(model => model.Ginasta.IBolsa, "N", new { @disabled = "disabled" }) Não
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Ginasta.IIrmaos)
+            Tem irmãos no GCT?
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Ginasta.IIrmaos)
+            @Html.RadioButtonFor(model => model.Ginasta.IIrmaos, "S", new { @disabled = "disabled" }) Sim
+            @Html.RadioButtonFor(model => model.Ginasta.IIrmaos, "N", new { @disabled = "disabled" }) Não
         </dd>
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Ginasta.NomeIrmaos)

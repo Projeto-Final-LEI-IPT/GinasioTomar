@@ -154,7 +154,16 @@
             </div>
             <div class="form-group">
                 <label asp-for="Ginasta.IGrauEE" class="control-label"></label>
-                <input asp-for="Ginasta.IGrauEE" class="form-control" />
+                @Html.DropDownListFor(model => model.Ginasta.IGrauEE, new SelectList(
+                new List<SelectListItem> {
+                new SelectListItem { Text = "Mãe", Value = "Mãe" },
+                new SelectListItem { Text = "Pai", Value = "Pai" },
+                new SelectListItem { Text = "Avó", Value = "Avó" },
+                new SelectListItem { Text = "Avô", Value = "Avô" },
+                new SelectListItem { Text = "Tio(a)", Value = "Tio(a)" },
+                new SelectListItem { Text = "Irmão(a)", Value = "Irmão(a)" },
+                new SelectListItem { Text = "Primo(a)", Value = "Primo(a)" }
+                }, "Value", "Text"), "-- Selec. Grau Parentesco --", new { @class = "form-control" })
                 <span asp-validation-for="Ginasta.IGrauEE" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -169,7 +178,16 @@
             </div>
             <div class="form-group">
                 <label asp-for="Ginasta.GrauEmerEE" class="control-label"></label>
-                <input asp-for="Ginasta.GrauEmerEE" class="form-control" />
+                @Html.DropDownListFor(model => model.Ginasta.GrauEmerEE, new SelectList(
+                new List<SelectListItem> {
+                new SelectListItem { Text = "Mãe", Value = "Mãe" },
+                new SelectListItem { Text = "Pai", Value = "Pai" },
+                new SelectListItem { Text = "Avó", Value = "Avó" },
+                new SelectListItem { Text = "Avô", Value = "Avô" },
+                new SelectListItem { Text = "Tio(a)", Value = "Tio(a)" },
+                new SelectListItem { Text = "Irmão(a)", Value = "Irmão(a)" },
+                new SelectListItem { Text = "Primo(a)", Value = "Primo(a)" }
+                }, "Value", "Text"), "-- Selec. Grau Parentesco --", new { @class = "form-control" })
                 <span asp-validation-for="Ginasta.GrauEmerEE" class="text-danger"></span>
             </div>
             <div class="form-group">
