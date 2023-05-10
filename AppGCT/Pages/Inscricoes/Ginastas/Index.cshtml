@@ -29,6 +29,9 @@
             <th>
                 Nº Sócio
             </th>
+            <th>
+                Nome Sócio
+            </th>
             <th></th>
         </tr>
     </thead>
@@ -49,6 +52,9 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Socio.NumSocio)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Socio.Nome )
             </td>
             <td>
                 <a class="btn btn-primary btn-sm" href="/Inscricoes/Ginastas/Edit?id=@item.Id">Editar</a>

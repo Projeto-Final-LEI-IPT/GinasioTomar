@@ -29,13 +29,15 @@ namespace AppGCT.Pages.Inscricoes.Ginastas
         {
             if (User.IsInRole("Administrador") || User.IsInRole("Gestao"))
             {
-                ViewData["UtilizadorId"] = new SelectList(_context.Users, "Id", "ID_Description");
+                ViewData["UtilizadorId"] = new SelectList(_context.Users.Where(x => x.NumSocio != " "), "Id", "ID_Description");
             }
             else
             {
                 /// Utilizamos LINQ para ir buscar apenas o USERID autenticado, quando o ROLE é <> Administrador                
                 ViewData["UtilizadorId"] = new SelectList(_context.Users.Where(x => x.Id == User.Identity.GetUserId()), "Id", "ID_Description");
             }
+            
+
             return Page();
         }
 
