@@ -37,7 +37,6 @@ namespace AppGCT.Pages.Inscricoes.Ginastas
                 ViewData["UtilizadorId"] = new SelectList(_context.Users.Where(x => x.Id == User.Identity.GetUserId()), "Id", "ID_Description");
             }
             
-
             return Page();
         }
 
