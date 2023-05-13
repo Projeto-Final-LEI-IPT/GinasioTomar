@@ -47,8 +47,9 @@ namespace AppGCT.Pages.Inscricoes.Ginastas
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync(IFormFile imageFile)
         {
-            ModelState.Remove("Ginasta.EstadoGinasta"); // Remove validação para o campo EstadoGinasta que não é editavel
-            ModelState.Remove("Ginasta.Foto"); // Remove validação para o campo EstadoGinasta que não é editavel
+            ModelState.Remove("Ginasta.EstadoGinasta"); // Remove validação para o campo EstadoGinasta que não é visivel
+            ModelState.Remove("Ginasta.Foto"); // Remove validação para o campo Foto (se vazio)
+            ModelState.Remove("imageFile"); // Remove validação para o imageFile (se vazio)
             Ginasta.IdCriacao = User.Identity.GetUserId(); 
             Ginasta.DataCriacao = DateTime.Now;
             Ginasta.IdModificacao = "0";

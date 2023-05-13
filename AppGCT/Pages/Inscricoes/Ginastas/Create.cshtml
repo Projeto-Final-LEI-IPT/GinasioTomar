@@ -207,21 +207,10 @@
                 <input asp-for="Ginasta.EmailTlmEmerEE" class="form-control" />
                 <span asp-validation-for="Ginasta.EmailTlmEmerEE" class="text-danger"></span>
             </div>
-            
-            @if (User.IsInRole("Administrador") || User.IsInRole("Ginásio"))
-            {
-                <div class="form-group">
-                    <label asp-for="Ginasta.UtilizadorId" class="control-label"></label>
-                    <select asp-for="Ginasta.UtilizadorId" class="form-control" asp-items="ViewBag.UtilizadorId"></select>
-                </div>
-            }
-            else
-            {
-                <div class="form-group">
-                    <label asp-for="Ginasta.UtilizadorId" class="control-label"></label>
-                    <select asp-for="Ginasta.UtilizadorId" class="form-control" asp-items="ViewBag.UtilizadorId" disabled="disabled" readonly="readonly"></select>
-                </div>
-            }
+            <div class="form-group">
+                <label asp-for="Ginasta.UtilizadorId" class="control-label"></label>
+                <select asp-for="Ginasta.UtilizadorId" class="form-control" asp-items="ViewBag.UtilizadorId"></select>
+            </div>
             <div class="form-group">
                 <input type="submit" value="Criar" class="btn btn-primary" />
             </div>
