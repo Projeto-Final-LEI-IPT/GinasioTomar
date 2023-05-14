@@ -118,11 +118,7 @@
             <input type="hidden" asp-for="Inscricao.IdCriacao" />
             <input type="hidden" asp-for="Inscricao.DataModificacao" />
             <input type="hidden" asp-for="Inscricao.IdModificacao" />
-            <div class="form-group">
-                <label asp-for="Inscricao.GinastaId" class="control-label"></label>
-                <select asp-for="Inscricao.GinastaId" class="form-control" asp-items="ViewBag.GinastaId"></select>
-                <span asp-validation-for="Inscricao.GinastaId" class="text-danger"></span>
-            </div>
+            <input type="hidden" asp-for="Inscricao.GinastaId" />
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>

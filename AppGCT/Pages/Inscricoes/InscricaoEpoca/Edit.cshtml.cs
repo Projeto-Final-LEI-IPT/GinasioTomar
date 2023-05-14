@@ -40,11 +40,14 @@ namespace AppGCT.Pages.Inscricoes.InscricaoEpoca
                 return NotFound();
             }
             Inscricao = inscricao;
+            ///var UserId = Inscricao.Atleta.UtilizadorId;
             /// Gravar IdDoSocio associado ao Ginasta
             /// TODO
             /// ...............
             /// ............... Faz sentido permitir modificar o Ginasta associado a uma inscrição em Epoca ???
-           ViewData["GinastaId"] = new SelectList(_context.Ginasta.Where(i => i.Id == id), "Id", "ID_DescrGinasta");
+            ///ViewData["GinastaId"] = new SelectList(_context.Ginasta, "Id", "ID_Description");
+        
+        ///ViewData["GinastaId"] = new SelectList(_context.Ginasta.Where(i => i.Id == id), "Id", "ID_DescrGinasta");
             return Page();
         }
 
