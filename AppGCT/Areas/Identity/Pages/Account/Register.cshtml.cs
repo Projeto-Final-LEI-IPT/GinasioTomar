@@ -183,7 +183,7 @@ namespace AppGCT.Areas.Identity.Pages.Account
                         values: new { area = "Identity", userId = userId, code = code, returnUrl = returnUrl },
                         protocol: Request.Scheme);
 
-                    await _emailSender.SendEmailAsync(Input.Email, "Confirmar registo",
+                    await _emailSender.SendEmailAsync(Input.Email, "Confirmação Registo Ginásio Clube de Tomar",
                         $"Por favor, confirme o seu registo <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>carregando aqui</a>.");
 
                     if (_userManager.Options.SignIn.RequireConfirmedAccount)
