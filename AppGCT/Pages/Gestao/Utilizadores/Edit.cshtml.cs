@@ -74,6 +74,8 @@ namespace AppGCT.Pages.Gestao.Utilizadores
             public string Id { get; set; }
             [Display(Name = "Número Sócio")]
             public string NumSocio { get; set; }
+            [Display(Name = "Estado Ginasta")]
+            public string Estado { get; set; }
         }
 
         public async Task<IActionResult> OnGetAsync(string id)
@@ -101,6 +103,7 @@ namespace AppGCT.Pages.Gestao.Utilizadores
                 Email = user.Email,
                 Id = user.Id,
                 NumSocio = user.NumSocio,
+                Estado = user.EstadoUtilizador,
                 RoleName = (await _userManager.GetRolesAsync(user)).FirstOrDefault()
             };
 
@@ -129,6 +132,17 @@ namespace AppGCT.Pages.Gestao.Utilizadores
             user.PhoneNumber = Input.Contato;
             user.DataModificacao = DateTime.Now;
             user.NumSocio = Input.NumSocio;
+            user.EstadoUtilizador = Input.Estado;
+
+            if (Input.Estado == "A")
+            {
+                await _userManager.SetLockoutEnabledAsync(user, false);
+            }
+            else
+            {
+                await _userManager.SetLockoutEnabledAsync(user, true);
+                await _userManager.SetLockoutEndDateAsync(user, DateTimeOffset.UtcNow.AddYears(100));
+            }
             var userId = _userManager.GetUserId(User);
             user.IdModificacao = userId;
            

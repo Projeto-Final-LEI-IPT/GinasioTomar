@@ -65,6 +65,22 @@
                 <span asp-validation-for="Input.Email" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <label asp-for="Input.Estado" class="control-label">Estado Utilizador</label>
+                <div class="form-check">
+                    <label class="form-check-label">
+                        <input type="radio" asp-for="Input.Estado" class="form-check-input" value="A" />
+                        Ativo
+                    </label>
+                </div>
+                <div class="form-check">
+                    <label class="form-check-label">
+                        <input type="radio" asp-for="Input.Estado" class="form-check-input" value="I" />
+                        Inativo
+                    </label>
+                </div>
+                <span asp-validation-for="Input.Estado" class="text-danger"></span>
+            </div>
+            <div class="form-group">
                 <input type="submit" value="Guardar" class="btn btn-primary" />
             </div>
         </form>
