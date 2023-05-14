@@ -139,9 +139,10 @@ namespace AppGCT.Models
                 return string.Format("{0} ({1})", NomeCompleto, NIF);
             }
         }
+        [Display(Name = "Ginasta")]
 
         public Utilizador? Socio { get; set; }
 
-        public List<Inscricao>? inscricao { get; set; }
+        public List<Inscricao>? Inscricoes { get; set; }
     }
 }

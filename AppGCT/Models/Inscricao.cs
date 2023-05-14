@@ -103,5 +103,9 @@ namespace AppGCT.Models
         public int GinastaId { get; set; }
 
         public Ginasta? Atleta { get; set; }
+
+        public int EpocaId { get; set; }
+
+        public Epoca? Periodo { get; set; }
     }
 }
