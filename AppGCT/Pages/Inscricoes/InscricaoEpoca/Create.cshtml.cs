@@ -25,7 +25,7 @@ namespace AppGCT.Pages.Inscricoes.InscricaoEpoca
         public IActionResult OnGet(int? id)
         {
             ViewData["GinastaId"] = new SelectList(_context.Ginasta.Where(i => i.Id == id), "Id", "ID_DescrGinasta");
-            ViewData["EpocaId"] = new SelectList(_context.Epoca, "IdEpoca", "ID_DescrEpoca");
+            ViewData["EpocaId"] = new SelectList(_context.Epoca, "IdEpoca", "NomeEpoca");
             ViewData["BackId"] = id;
             return Page();
         }
@@ -37,17 +37,19 @@ namespace AppGCT.Pages.Inscricoes.InscricaoEpoca
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync()
         {
-
+            Inscricao.IConsentimento = " ";
+            Inscricao.DtExamMed = DateTime.MinValue;
+            Inscricao.ILeituraObrig = " ";
             Inscricao.IExamMed = " ";
-            Inscricao.DtExamMed = (DateTime)System.Data.SqlTypes.SqlDateTime.MinValue;
+            Inscricao.DtExamMed = DateTime.MinValue;
             Inscricao.IFicFGP = " ";
-            Inscricao.DtFicFGP = (DateTime)System.Data.SqlTypes.SqlDateTime.MinValue;
+            Inscricao.DtFicFGP = DateTime.MinValue;
             Inscricao.ISeguro = " ";
             Inscricao.IPagamInscricao = "N";
             Inscricao.IdCriacao = User.Identity.GetUserId();
             Inscricao.DataCriacao = DateTime.Now;
             Inscricao.IdModificacao = "0";
-            Inscricao.DataModificacao = (DateTime)System.Data.SqlTypes.SqlDateTime.MinValue;
+            Inscricao.DataModificacao = DateTime.MinValue;
 
             if (!ModelState.IsValid || _context.Inscricao == null || Inscricao == null)
             {

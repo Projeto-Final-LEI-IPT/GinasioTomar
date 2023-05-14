@@ -20,10 +20,7 @@ namespace AppGCT.Models
         [DataType(DataType.Date)]
         [Display(Name = "Data de Nascimento")]
         public DateTime DtNascim { get; set; }
-        [Required]
-        [DataType((DataType.Text))]
-        [Display(Name = "Idade em Agosto")]
-        public string? IdadeAgosto { get; set; }
+
         [DataType((DataType.ImageUrl))]
         [Display(Name = "Foto")]
         public byte[]? Foto { get; set; }

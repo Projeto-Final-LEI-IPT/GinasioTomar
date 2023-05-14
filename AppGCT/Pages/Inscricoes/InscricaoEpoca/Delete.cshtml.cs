@@ -60,7 +60,7 @@ namespace AppGCT.Pages.Inscricoes.InscricaoEpoca
                 await _context.SaveChangesAsync();
             }
 
-            return RedirectToPage("./Index");
+            return RedirectToPage("./Index", new { id = Inscricao.GinastaId });
         }
     }
 }

@@ -8,11 +8,11 @@ namespace AppGCT.Models
         public int? Id { get; set; }
         [Required]
         [DataType(DataType.Text)]
-        [Display(Name = "Numero FGPo")]
+        [Display(Name = "FGP nº")]
         public string? IdFGP { get; set; }
         [Required]
         [DataType(DataType.Text)]
-        [Display(Name = "Numero Ginasta")]
+        [Display(Name = "Sócio-Ginasta")]
         public string? ISocGinasta { get; set; }
 
         [Required]
@@ -21,67 +21,70 @@ namespace AppGCT.Models
         public DateTime DtInscricao { get; set; }
 
         [Required]
+        [DataType((DataType.Text))]
+        [Display(Name = "Idade a 31 de Agosto")]
+        public string? IdadeAgosto { get; set; }
+
         [DataType(DataType.Text)]
-        [Display(Name = "Consentimento RGPD")]
+        [Display(Name = "Consentimento de Dados")]
         public string? IConsentimento { get; set; }
 
         [Required]
         [DataType(DataType.Date)]
-        [Display(Name = "Data Consentimento")]
+        [Display(Name = "Data Consentimento de dados")]
         public DateTime DtConsentimento { get; set; }
 
         [DataType(DataType.Text)]
-        [Display(Name = "Ex. Médico Efetuado")]
+        [Display(Name = "Exame Médico Desportivo Efetuado")]
         public string? IExamMed { get; set; }
 
         [DataType(DataType.Date)]
-        [Display(Name = "Data Ex. Médico")]
+        [Display(Name = "Data Exame Médico Desportivo")]
         public DateTime DtExamMed { get; set; }
         
         [DataType(DataType.Text)]
-        [Display(Name = "Ficha FGP")]
+        [Display(Name = "Ficha individual FGP")]
         public string? IFicFGP { get; set; }
        
         [DataType(DataType.Date)]
-        [Display(Name = "Data ficha FGP")]
+        [Display(Name = "Data Ficha individual FGP")]
         public DateTime DtFicFGP { get; set; }
         
         [DataType(DataType.Text)]
-        [Display(Name = "Seguro")]
+        [Display(Name = "Pagamento do Seguro")]
         public string? ISeguro { get; set; }
 
         [DataType(DataType.Text)]
-        [Display(Name = "Pagamento Inscrição")]
+        [Display(Name = "Pagamento da Inscrição")]
         public string? IPagamInscricao { get; set; }
 
-        [Required]
         [DataType(DataType.Text)]
-        [Display(Name = "Leitura Obrigatória")]
+        [Display(Name = "Entrega dos documentos de leitura obrigatória")]
         public string? ILeituraObrig { get; set; }
 
         [Required]
         [DataType(DataType.Text)]
-        [Display(Name = "Fotos")]
+        [Display(Name = "Foto")]
         public string? IFotos { get; set; }
 
         [Required]
         [DataType(DataType.Text)]
-        [Display(Name = "Ibuprofeno")]
-        public string? IIbuprofeno { get; set; }
+        [Display(Name = "Alergia a Ibuprofeno")]
+        public bool IIbuprofeno { get; set; }
 
         [Required]
         [DataType(DataType.Text)]
-        [Display(Name = "Paracetamol")]
+        [Display(Name = "Alergia a Paracetamol")]
         public string? IParacetamol { get; set; }
 
         [Required]
         [DataType(DataType.Text)]
-        [Display(Name = "Anti-Inflamatório")]
+        [Display(Name = "Autoriza toma de Analgésico / Anti-Inflamatório")]
         public string? IAntiInflam { get; set; }
 
         [Required]
         [DataType(DataType.Text)]
-        [Display(Name = "Alergias")]
+        [Display(Name = "Outras alergias")]
         public string? DescAlergias { get; set; }
 
         [DataType((DataType.Date))]
