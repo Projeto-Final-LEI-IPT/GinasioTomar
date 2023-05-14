@@ -15,16 +15,30 @@
     </div>
     <dl class="row">
         <dt class="col-sm-2">
+            Fotografia
+        </dt>
+        <dd class="col-sm-10">
+            @if (Model.Ginasta.Foto != null)
+            {
+                <img class="photo" src="data:image/png;base64,@Convert.ToBase64String(Model.Ginasta.Foto)" alt="Ginasta Foto" />
+            }
+            else
+            {
+                <p>Sem Fotografia</p>
+            }
+        </dd>
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Ginasta.NomeCompleto)
         </dt>
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Ginasta.NomeCompleto)
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Ginasta.ISexo)
+            Género
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Ginasta.ISexo)
+            @Html.RadioButtonFor(model => model.Ginasta.ISexo, "M", new { @disabled = "disabled" }) Masculino
+            @Html.RadioButtonFor(model => model.Ginasta.ISexo, "F", new { @disabled = "disabled" }) Feminino
         </dd>
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Ginasta.DtNascim)
@@ -39,16 +53,10 @@
             @Html.DisplayFor(model => model.Ginasta.IdadeAgosto)
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Ginasta.Foto)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Ginasta.Foto)
-        </dd>
-        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Ginasta.EstadoGinasta)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Ginasta.EstadoGinasta)
+            @Html.DisplayFor(model => model.Ginasta.StatusDescription)
         </dd>
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Ginasta.NumCC)
@@ -87,16 +95,18 @@
             @Html.DisplayFor(model => model.Ginasta.Localidade)
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Ginasta.IBolsa)
+            Candidata-se a Bolsa Formação Desportiva?
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Ginasta.IBolsa)
+            @Html.RadioButtonFor(model => model.Ginasta.IBolsa, "S", new { @disabled = "disabled" }) Sim
+            @Html.RadioButtonFor(model => model.Ginasta.IBolsa, "N", new { @disabled = "disabled" }) Não
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Ginasta.IIrmaos)
+            Tem irmãos no GCT?
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Ginasta.IIrmaos)
+            @Html.RadioButtonFor(model => model.Ginasta.IIrmaos, "S", new { @disabled = "disabled" }) Sim
+            @Html.RadioButtonFor(model => model.Ginasta.IIrmaos, "N", new { @disabled = "disabled" }) Não
         </dd>
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Ginasta.NomeIrmaos)

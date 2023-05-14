@@ -27,7 +27,10 @@
                 @Html.DisplayNameFor(model => model.Ginasta[0].Email)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Ginasta[0].Socio)
+                Nº Sócio
+            </th>
+            <th>
+                Nome Sócio
             </th>
             <th></th>
         </tr>
@@ -42,13 +45,16 @@
                 @Html.DisplayFor(modelItem => item.DtNascim)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.EstadoGinasta)
+                @Html.DisplayFor(modelItem => item.StatusDescription)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Email)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Socio.NumSocio)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Socio.Nome )
             </td>
             <td>
                 <a class="btn btn-primary btn-sm" href="/Inscricoes/Ginastas/Edit?id=@item.Id">Editar</a>

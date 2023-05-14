@@ -27,15 +27,16 @@ namespace AppGCT.Pages.Inscricoes.Ginastas
 
         public IActionResult OnGet()
         {
-            if (User.IsInRole("Administrador") || User.IsInRole("Gestao"))
+            if (User.IsInRole("Administrador") || User.IsInRole("Ginásio"))
             {
-                ViewData["UtilizadorId"] = new SelectList(_context.Users, "Id", "ID_Description");
+                ViewData["UtilizadorId"] = new SelectList(_context.Users.Where(x => x.NumSocio != " "), "Id", "ID_Description");
             }
             else
             {
                 /// Utilizamos LINQ para ir buscar apenas o USERID autenticado, quando o ROLE é <> Administrador                
                 ViewData["UtilizadorId"] = new SelectList(_context.Users.Where(x => x.Id == User.Identity.GetUserId()), "Id", "ID_Description");
             }
+            
             return Page();
         }
 
@@ -44,18 +45,33 @@ namespace AppGCT.Pages.Inscricoes.Ginastas
         
 
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
-        public async Task<IActionResult> OnPostAsync()
+        public async Task<IActionResult> OnPostAsync(IFormFile imageFile)
         {
+            ModelState.Remove("Ginasta.EstadoGinasta"); // Remove validação para o campo EstadoGinasta que não é visivel
+            ModelState.Remove("Ginasta.Foto"); // Remove validação para o campo Foto (se vazio)
+            ModelState.Remove("imageFile"); // Remove validação para o imageFile (se vazio)
             Ginasta.IdCriacao = User.Identity.GetUserId(); 
             Ginasta.DataCriacao = DateTime.Now;
             Ginasta.IdModificacao = "0";
-            Ginasta.DataModificacao = (DateTime)System.Data.SqlTypes.SqlDateTime.MinValue;
+            Ginasta.EstadoGinasta = "A";
+            Ginasta.DataModificacao = DateTime.MinValue;
             if (!ModelState.IsValid || _context.Ginasta == null || Ginasta == null)
             {
                 return Page();
             }
 
-            /*           Ginasta.UtilizadorId = User.Identity.GetUserId();*/
+            // Read the uploaded image file from the form
+            //var imageFile = Request.Form.Files.FirstOrDefault();
+
+            if (imageFile != null && imageFile.Length > 0)
+            {
+                // Convert the image to a byte array and store it in the Ginasta model
+                using (var ms = new MemoryStream())
+                {
+                    imageFile.CopyTo(ms);
+                    Ginasta.Foto = ms.ToArray();
+                }
+            }
             _context.Ginasta.Add(Ginasta);
             await _context.SaveChangesAsync();
 

@@ -14,7 +14,7 @@
 </div>
 <div class="row">
     <div class="col-md-4">
-        <form method="post">
+        <form method="post" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Ginasta.Id" />
             <div class="form-group">
@@ -23,14 +23,20 @@
                 <span asp-validation-for="Ginasta.NomeCompleto" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Ginasta.ISexo" class="control-label"></label>
-                <input asp-for="Ginasta.ISexo" class="form-control" />
+                <label asp-for="Ginasta.ISexo" class="control-label">Género</label>
+                <div class="form-check">
+                    <label class="form-check-label">
+                        <input type="radio" asp-for="Ginasta.ISexo" class="form-check-input" value="M" />
+                        Masculino
+                    </label>
+                </div>
+                <div class="form-check">
+                    <label class="form-check-label">
+                        <input type="radio" asp-for="Ginasta.ISexo" class="form-check-input" value="F" />
+                        Feminino
+                    </label>
+                </div>
                 <span asp-validation-for="Ginasta.ISexo" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Ginasta.UtilizadorId" class="control-label"></label>
-                <select asp-for="Ginasta.UtilizadorId" class="form-control" asp-items="ViewBag.UtilizadorId"></select>
-                <span asp-validation-for="Ginasta.UtilizadorId" class="text-danger"></span>
             </div>
         @if (User.IsInRole("Administrador") || User.IsInRole("Ginásio"))
         {
@@ -50,15 +56,34 @@
                 <span asp-validation-for="Ginasta.IdadeAgosto" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Ginasta.Foto" class="control-label"></label>
-                <input asp-for="Ginasta.Foto" class="form-control" />
+                <label asp-for="Ginasta.Foto" class="control-label">Fotografia</label>
+                <input asp-for="Ginasta.Foto" type="file" name="imageFile" class="form-control-file" />
                 <span asp-validation-for="Ginasta.Foto" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="Ginasta.EstadoGinasta" class="control-label"></label>
-                <input asp-for="Ginasta.EstadoGinasta" class="form-control" />
-                <span asp-validation-for="Ginasta.EstadoGinasta" class="text-danger"></span>
-            </div>
+
+            @if (User.IsInRole("Administrador") || User.IsInRole("Ginásio"))
+            {
+                <div class="form-group">
+                    <label asp-for="Ginasta.EstadoGinasta" class="control-label">Estado Ginasta</label>
+                    <div class="form-check">
+                        <label class="form-check-label">
+                            <input type="radio" asp-for="Ginasta.EstadoGinasta" class="form-check-input" value="A" />
+                            Ativo
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <label class="form-check-label">
+                            <input type="radio" asp-for="Ginasta.EstadoGinasta" class="form-check-input" value="I" />
+                            Inativo
+                        </label>
+                    </div>
+                    <span asp-validation-for="Ginasta.EstadoGinasta" class="text-danger"></span>
+                </div>
+            }
+            else
+            {
+                <input type="hidden" asp-for="Ginasta.EstadoGinasta" />
+            }
             <div class="form-group">
                 <label asp-for="Ginasta.NumCC" class="control-label"></label>
                 <input asp-for="Ginasta.NumCC" class="form-control" />
@@ -90,13 +115,35 @@
                 <span asp-validation-for="Ginasta.Localidade" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Ginasta.IBolsa" class="control-label"></label>
-                <input asp-for="Ginasta.IBolsa" class="form-control" />
+                <label asp-for="Ginasta.IBolsa" class="control-label">Candidata-se a Bolsa Formação Desportiva?</label>
+                <div class="form-check">
+                    <label class="form-check-label">
+                        <input type="radio" asp-for="Ginasta.IBolsa" class="form-check-input" value="S" />
+                        Sim
+                    </label>
+                </div>
+                <div class="form-check">
+                    <label class="form-check-label">
+                        <input type="radio" asp-for="Ginasta.IBolsa" class="form-check-input" value="N" />
+                        Não
+                    </label>
+                </div>
                 <span asp-validation-for="Ginasta.IBolsa" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Ginasta.IIrmaos" class="control-label"></label>
-                <input asp-for="Ginasta.IIrmaos" class="form-control" />
+                <label asp-for="Ginasta.IIrmaos" class="control-label">Tem irmãos no GCT?</label>
+                <div class="form-check">
+                    <label class="form-check-label">
+                        <input type="radio" asp-for="Ginasta.IIrmaos" class="form-check-input" value="S" />
+                        Sim
+                    </label>
+                </div>
+                <div class="form-check">
+                    <label class="form-check-label">
+                        <input type="radio" asp-for="Ginasta.IIrmaos" class="form-check-input" value="N" />
+                        Não
+                    </label>
+                </div>
                 <span asp-validation-for="Ginasta.IIrmaos" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -131,7 +178,17 @@
             </div>
             <div class="form-group">
                 <label asp-for="Ginasta.IGrauEE" class="control-label"></label>
-                <input asp-for="Ginasta.IGrauEE" class="form-control" />
+                @Html.DropDownListFor(model => model.Ginasta.IGrauEE, new SelectList(
+                new List<SelectListItem> {
+                new SelectListItem { Text = "Mãe", Value = "Mãe" },
+                new SelectListItem { Text = "Pai", Value = "Pai" },
+                new SelectListItem { Text = "Avó", Value = "Avó" },
+                new SelectListItem { Text = "Avô", Value = "Avô" },
+                new SelectListItem { Text = "Tio(a)", Value = "Tio(a)" },
+                new SelectListItem { Text = "Irmão(a)", Value = "Irmão(a)" },
+                new SelectListItem { Text = "Primo(a)", Value = "Primo(a)" },
+                new SelectListItem { Text = "Outros", Value = "Outros" }
+                }, "Value", "Text"), "-- Selec. Grau Parentesco --", new { @class = "form-control" })
                 <span asp-validation-for="Ginasta.IGrauEE" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -146,7 +203,17 @@
             </div>
             <div class="form-group">
                 <label asp-for="Ginasta.GrauEmerEE" class="control-label"></label>
-                <input asp-for="Ginasta.GrauEmerEE" class="form-control" />
+                @Html.DropDownListFor(model => model.Ginasta.GrauEmerEE, new SelectList(
+                new List<SelectListItem> {
+                new SelectListItem { Text = "Mãe", Value = "Mãe" },
+                new SelectListItem { Text = "Pai", Value = "Pai" },
+                new SelectListItem { Text = "Avó", Value = "Avó" },
+                new SelectListItem { Text = "Avô", Value = "Avô" },
+                new SelectListItem { Text = "Tio(a)", Value = "Tio(a)" },
+                new SelectListItem { Text = "Irmão(a)", Value = "Irmão(a)" },
+                new SelectListItem { Text = "Primo(a)", Value = "Primo(a)" },
+                new SelectListItem { Text = "Outros", Value = "Outros" }
+                }, "Value", "Text"), "-- Selec. Grau Parentesco --", new { @class = "form-control" })
                 <span asp-validation-for="Ginasta.GrauEmerEE" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -168,6 +235,11 @@
             <input type="hidden" asp-for="Ginasta.IdCriacao" />
             <input type="hidden" asp-for="Ginasta.DataModificacao" />
             <input type="hidden" asp-for="Ginasta.IdModificacao" />
+            <div class="form-group">
+                <label asp-for="Ginasta.UtilizadorId" class="control-label"></label>
+                <select asp-for="Ginasta.UtilizadorId" class="form-control" asp-items="ViewBag.UtilizadorId"></select>
+                <span asp-validation-for="Ginasta.UtilizadorId" class="text-danger"></span>
+            </div>
             <div class="form-group">
                 <input type="submit" value="Salvar" class="btn btn-primary" />
             </div>

@@ -43,7 +43,7 @@ namespace AppGCT.Pages.Inscricoes.Ginastas
 
             if (User.IsInRole("Administrador") || User.IsInRole("Ginásio"))
             {
-                ViewData["UtilizadorId"] = new SelectList(_context.Users, "Id", "ID_Description");
+                ViewData["UtilizadorId"] = new SelectList(_context.Users.Where(x => x.NumSocio != " "), "Id", "ID_Description");
             }
             else
             {
@@ -56,7 +56,7 @@ namespace AppGCT.Pages.Inscricoes.Ginastas
 
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see https://aka.ms/RazorPagesCRUD.
-        public async Task<IActionResult> OnPostAsync()
+        public async Task<IActionResult> OnPostAsync(IFormFile imageFile)
         {
             if (!ModelState.IsValid)
             {
@@ -64,6 +64,16 @@ namespace AppGCT.Pages.Inscricoes.Ginastas
             }
             Ginasta.IdModificacao = User.Identity.GetUserId(); ;
             Ginasta.DataModificacao = DateTime.Now;
+        
+            if (imageFile != null && imageFile.Length > 0)
+            {
+                // Convert the image to a byte array and store it in the Ginasta model
+                using (var ms = new MemoryStream())
+                {
+                    imageFile.CopyTo(ms);
+                    Ginasta.Foto = ms.ToArray();
+                }
+            }
 
             _context.Attach(Ginasta).State = EntityState.Modified;
 

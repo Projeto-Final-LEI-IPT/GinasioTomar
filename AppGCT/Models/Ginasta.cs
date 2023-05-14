@@ -26,7 +26,7 @@ namespace AppGCT.Models
         public string? IdadeAgosto { get; set; }
         [DataType((DataType.ImageUrl))]
         [Display(Name = "Foto")]
-        public string? Foto { get; set; }
+        public byte[]? Foto { get; set; }
         [Required]
         [DataType((DataType.Text))]
         [Display(Name = "Estado Ginasta")]
@@ -62,7 +62,7 @@ namespace AppGCT.Models
         [Display(Name = "Irmãos")]
         public string? IIrmaos { get; set; }
         [DataType((DataType.Text))]
-        [Display(Name = "Nome de Irmãos")]
+        [Display(Name = "Nome Irmãos")]
         public string? NomeIrmaos { get; set; }
         [DataType((DataType.Text))]
         [Display(Name = "Email")]
@@ -100,7 +100,6 @@ namespace AppGCT.Models
         [DataType((DataType.Text))]
         [Display(Name = "Email Emerg. Enc. Edu.")]
         public string? EmailTlmEmerEE { get; set; }
-        [Required]
         [DataType((DataType.Date))]
         [Display(Name = "Data de Criação")]
         public DateTime DataCriacao { get; set; }
@@ -116,7 +115,23 @@ namespace AppGCT.Models
         [Display(Name = "Número de Sócio")]
         public string UtilizadorId { get; set; }
         [Display(Name = "Número de Sócio")]
-
+        public string StatusDescription
+        {
+            get
+            {
+                switch (this.EstadoGinasta)
+                {
+                    case "A":
+                        return "Ativo";
+                    case "P":
+                        return "Pré-Ativo";
+                    case "I":
+                        return "Inativo";
+                    default:
+                        return "Desconhecido";
+                }
+            }
+        }
         public string ID_DescrGinasta
         {
             get
