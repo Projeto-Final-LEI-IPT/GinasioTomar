@@ -46,6 +46,8 @@ namespace AppGCT.Models
                 }
             }
         }
+
+        public List<Inscricao>? Inscricoes { get; set; }
     }
 
 

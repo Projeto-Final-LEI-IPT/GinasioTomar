@@ -37,8 +37,13 @@ namespace AppGCT.Data
 
             builder.Entity<Inscricao>()
                    .HasOne(p => p.Atleta)
-                   .WithMany(a => a.inscricao)
+                   .WithMany(a => a.Inscricoes)
                     .HasForeignKey(p => p.GinastaId);
+
+            builder.Entity<Inscricao>()
+                   .HasOne(p => p.Periodo)
+                   .WithMany(a => a.Inscricoes)
+                    .HasForeignKey(p => p.EpocaId);
         }
     }
 }

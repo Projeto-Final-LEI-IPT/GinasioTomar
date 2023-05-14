@@ -25,6 +25,7 @@ namespace AppGCT.Pages.Inscricoes.InscricaoEpoca
         public IActionResult OnGet(int? id)
         {
             ViewData["GinastaId"] = new SelectList(_context.Ginasta.Where(i => i.Id == id), "Id", "ID_DescrGinasta");
+            ViewData["EpocaId"] = new SelectList(_context.Epoca, "IdEpoca", "ID_DescrEpoca");
             ViewData["BackId"] = id;
             return Page();
         }
