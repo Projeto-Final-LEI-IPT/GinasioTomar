@@ -20,7 +20,7 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="Epoca.NomeEpoca" class="control-label">Época</label>
-                <input asp-for="Epoca.NomeEpoca" class="form-control" value="@DateTime.Today.Year/@DateTime.Today.AddYears(1).Year"/>
+                <input asp-for="Epoca.NomeEpoca" class="form-control" />
                 <span asp-validation-for="Epoca.NomeEpoca" class="text-danger"></span>
             </div>
             <div class="form-group">

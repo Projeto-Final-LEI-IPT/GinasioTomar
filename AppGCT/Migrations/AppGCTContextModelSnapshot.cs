@@ -130,23 +130,13 @@ namespace AppGCT.Migrations
                     b.HasData(
                         new
                         {
-<<<<<<< HEAD
-                            Id = "1b405be2-d02d-40eb-9a06-23c67c219af2",
+                            Id = "74e236a2-0567-49d6-acdf-bc6fdf91a6f8",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "1a2adff5-cd6a-488e-87bb-ec389b79e3c0",
-                            DataAprovacao = new DateTime(2023, 5, 3, 22, 43, 28, 561, DateTimeKind.Local).AddTicks(8903),
-                            DataCriacao = new DateTime(2023, 5, 3, 22, 43, 28, 561, DateTimeKind.Local).AddTicks(8823),
+                            ConcurrencyStamp = "fd83c0e6-0b71-41f5-84b6-d88394736707",
+                            DataAprovacao = new DateTime(2023, 5, 14, 17, 0, 29, 637, DateTimeKind.Local).AddTicks(3517),
+                            DataCriacao = new DateTime(2023, 5, 14, 17, 0, 29, 637, DateTimeKind.Local).AddTicks(3466),
                             DataModificacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DataNascim = new DateTime(2023, 5, 3, 22, 43, 28, 561, DateTimeKind.Local).AddTicks(8918),
-=======
-                            Id = "6d19bbbf-9010-44a0-8f98-48fa3517d246",
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "009acecf-1f53-4a6d-a21c-c837b138849d",
-                            DataAprovacao = new DateTime(2023, 5, 14, 15, 17, 17, 418, DateTimeKind.Local).AddTicks(8424),
-                            DataCriacao = new DateTime(2023, 5, 14, 15, 17, 17, 418, DateTimeKind.Local).AddTicks(8360),
-                            DataModificacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DataNascim = new DateTime(2023, 5, 14, 15, 17, 17, 418, DateTimeKind.Local).AddTicks(8435),
->>>>>>> main
+                            DataNascim = new DateTime(2023, 5, 14, 17, 0, 29, 637, DateTimeKind.Local).AddTicks(3523),
                             Email = "admin@localhost",
                             EmailConfirmed = true,
                             EstadoUtilizador = "A",
@@ -159,17 +149,10 @@ namespace AppGCT.Migrations
                             NormalizedEmail = "ADMIN@LOCALHOST",
                             NormalizedUserName = "ADMIN@LOCALHOST",
                             NumSocio = " ",
-<<<<<<< HEAD
-                            PasswordHash = "AQAAAAIAAYagAAAAEB5dZWSWVTPFtrFGROgzIGAOqvhjrhR99WFCdhb4FXsqBgiWu5VaE3acJ+BmRBQx4A==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEJG3qjrbQTk1FdZOcryISYg+hJzsh4OfP+zusiJq35rK0waWrpwrjbyghLDnbBLXSg==",
                             PhoneNumber = "999999999",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "545855de-9a7b-4940-ae4e-6a2b6d40a2c2",
-=======
-                            PasswordHash = "AQAAAAIAAYagAAAAEDA0B6wd3kJJcAso8TJaBudaIBtrFaxJE5Fw1opUe3fJdlzniVo0ik8efoCduSvWag==",
-                            PhoneNumber = "999999999",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "ac0e0849-8c87-484a-816c-9375ad580c78",
->>>>>>> main
+                            SecurityStamp = "481093eb-f28d-4e69-9c1e-9f3e0277501c",
                             TwoFactorEnabled = false,
                             UserName = "admin@localhost"
                         });
@@ -491,41 +474,25 @@ namespace AppGCT.Migrations
                     b.HasData(
                         new
                         {
-<<<<<<< HEAD
-                            Id = "a9be6e31-a756-4334-b937-349f616eaf86",
-=======
-                            Id = "d5fa3149-1001-499a-8fb2-baca9c983997",
->>>>>>> main
+                            Id = "f38084a3-ed4e-42b9-a3e1-4a9a7d948c61",
                             Name = "Administrador",
                             NormalizedName = "ADMINISTRADOR"
                         },
                         new
                         {
-<<<<<<< HEAD
-                            Id = "636951a1-45e6-4789-9df0-e396da56298f",
-=======
-                            Id = "1f67f4b4-e582-4fd5-aa78-7b814912f58e",
->>>>>>> main
+                            Id = "5d832420-5e16-40b6-af1a-20e5a8eb8be4",
                             Name = "Ginásio",
                             NormalizedName = "GINÁSIO"
                         },
                         new
                         {
-<<<<<<< HEAD
-                            Id = "64ae16dd-4544-4642-9f67-ca64eadfb197",
-=======
-                            Id = "1a60b26e-ccb8-4d9b-a1ac-1aadc7444cd7",
->>>>>>> main
+                            Id = "1e011cb4-b2b0-44f6-9147-65041db5afc0",
                             Name = "Sócio",
                             NormalizedName = "SÓCIO"
                         },
                         new
                         {
-<<<<<<< HEAD
-                            Id = "788749d9-c7a6-4fe7-accf-c83ec2770cae",
-=======
-                            Id = "3f0486d1-171d-44c0-b01d-2ec6dbb113fe",
->>>>>>> main
+                            Id = "e8a973ab-3efd-4960-a14c-5bb7a11eba76",
                             Name = "Anónimo",
                             NormalizedName = "ANÓNIMO"
                         });
@@ -622,13 +589,8 @@ namespace AppGCT.Migrations
                     b.HasData(
                         new
                         {
-<<<<<<< HEAD
-                            UserId = "1b405be2-d02d-40eb-9a06-23c67c219af2",
-                            RoleId = "a9be6e31-a756-4334-b937-349f616eaf86"
-=======
-                            UserId = "6d19bbbf-9010-44a0-8f98-48fa3517d246",
-                            RoleId = "d5fa3149-1001-499a-8fb2-baca9c983997"
->>>>>>> main
+                            UserId = "74e236a2-0567-49d6-acdf-bc6fdf91a6f8",
+                            RoleId = "f38084a3-ed4e-42b9-a3e1-4a9a7d948c61"
                         });
                 });
 

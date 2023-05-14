@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -58,16 +57,26 @@ namespace AppGCT.Pages.Inscricoes.Ginastas
         // For more details, see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostAsync(IFormFile imageFile)
         {
+            ModelState.Remove("Ginasta.Foto"); // Remove validação para o campo Foto (se vazio)
+            ModelState.Remove("imageFile"); // Remove validação para o imageFile (se vazio)
             if (!ModelState.IsValid)
             {
                 return Page();
             }
+
             Ginasta.IdModificacao = User.Identity.GetUserId(); ;
             Ginasta.DataModificacao = DateTime.Now;
-        
-            if (imageFile != null && imageFile.Length > 0)
+
+            // Se não é carregada nova imagem mantêm a anterior (se existir)
+            if (imageFile == null || imageFile.Length == 0)
             {
-                // Convert the image to a byte array and store it in the Ginasta model
+                // If no image is uploaded, retrieve the existing photo from the database
+                var existingGinasta = await _context.Ginasta.AsNoTracking().FirstOrDefaultAsync(g => g.Id == Ginasta.Id);
+                Ginasta.Foto = existingGinasta.Foto;
+            }
+            else
+            {
+                // converte a imagem e guarda na base de dados
                 using (var ms = new MemoryStream())
                 {
                     imageFile.CopyTo(ms);
