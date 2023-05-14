@@ -6,7 +6,7 @@
     Layout = "~/Pages/Shared/_Layout.cshtml";
 }
 
-<h1>Detalhes da Isnscrição</h1>
+<h1>Detalhes da Inscrição</h1>
 
 <div>
     <hr />
@@ -144,10 +144,16 @@
         </dd>
         }
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Inscricao.Atleta.NomeCompleto)
+            @Html.DisplayNameFor(model => model.Inscricao.Atleta)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Inscricao.Atleta.NomeCompleto)
+            @Html.DisplayFor(model => model.Inscricao.Atleta.ID_DescrGinasta)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Inscricao.Periodo)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Inscricao.Periodo.NomeEpoca)
         </dd>
     </dl>
 </div>

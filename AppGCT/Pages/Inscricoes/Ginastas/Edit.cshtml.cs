@@ -41,7 +41,7 @@ namespace AppGCT.Pages.Inscricoes.Ginastas
             }
             Ginasta = ginasta;
 
-            if (User.IsInRole("Administrador") || User.IsInRole("Administrador"))
+            if (User.IsInRole("Administrador") || User.IsInRole("Ginásio"))
             {
                 ViewData["UtilizadorId"] = new SelectList(_context.Users, "Id", "ID_Description");
             }

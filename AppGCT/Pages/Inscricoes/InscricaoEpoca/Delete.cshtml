@@ -30,6 +30,12 @@
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Inscricao.Atleta.ID_DescrGinasta)
         </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Inscricao.Periodo)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Inscricao.Periodo.NomeEpoca)
+        </dd>
     </dl>
     
     <form method="post">
