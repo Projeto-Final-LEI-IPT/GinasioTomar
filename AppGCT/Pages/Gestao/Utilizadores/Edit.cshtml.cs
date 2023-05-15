@@ -12,6 +12,7 @@ using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 using System.Security.Claims;
 using System.ComponentModel;
+using Microsoft.IdentityModel.Tokens;
 
 namespace AppGCT.Pages.Gestao.Utilizadores
 {
@@ -113,6 +114,7 @@ namespace AppGCT.Pages.Gestao.Utilizadores
         public async Task<IActionResult> OnPostAsync()
         {
             ModelState.Remove("Input.RoleName"); // Remove validação para o campo RoleName que não é editavel
+            ModelState.Remove("Input.NumSocio"); // Remove validação para o campo RoleName que não é editavel
 
             if (!ModelState.IsValid)
             {
@@ -131,7 +133,15 @@ namespace AppGCT.Pages.Gestao.Utilizadores
             user.Morada = Input.Morada;
             user.PhoneNumber = Input.Contato;
             user.DataModificacao = DateTime.Now;
-            user.NumSocio = Input.NumSocio;
+            if (Input.NumSocio != null)
+            {
+                user.NumSocio = Input.NumSocio;
+            }
+            else
+            {
+                user.NumSocio = "";
+            }
+
             user.EstadoUtilizador = Input.Estado;
 
             if (Input.Estado == "A")

@@ -6,6 +6,7 @@ namespace AppGCT.Models
 {
     public class Ginasta
     {
+        [Display(Name = "Identificação do Ginasta")]
         public int? Id { get; set; }
         [Required]
         [DataType(DataType.Text)]
@@ -20,10 +21,6 @@ namespace AppGCT.Models
         [DataType(DataType.Date)]
         [Display(Name = "Data de Nascimento")]
         public DateTime DtNascim { get; set; }
-        [Required]
-        [DataType((DataType.Text))]
-        [Display(Name = "Idade a 31 de Agosto")]
-        public string? IdadeAgosto { get; set; }
         [DataType((DataType.ImageUrl))]
         [Display(Name = "Foto")]
         public byte[]? Foto { get; set; }

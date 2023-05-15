@@ -29,7 +29,7 @@
             @Html.DisplayNameFor(model => model.Ginasta.EstadoGinasta)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Ginasta.EstadoGinasta)
+            @Html.DisplayFor(model => model.Ginasta.StatusDescription)
         </dd>
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Ginasta.Email)
@@ -71,6 +71,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.Inscricao[0].IPagamInscricao)
             </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Inscricao[0].Periodo.NomeEpoca)
+            </th>
             <th></th>
         </tr>
     </thead>
@@ -95,6 +98,9 @@
             <td>
                 @Html.DisplayFor(modelItem => item.IPagamInscricao)
             </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Periodo.NomeEpoca)
+                </td>
             <td>
                 <a class="btn btn-primary btn-sm" href="/Inscricoes/InscricaoEpoca/Edit?id=@item.Id">Editar</a>
                 <a class="btn btn-primary btn-sm" href="/Inscricoes/InscricaoEpoca/Details?id=@item.Id">Detalhes</a>
