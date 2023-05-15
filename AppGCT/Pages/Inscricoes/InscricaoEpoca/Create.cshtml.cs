@@ -37,14 +37,29 @@ namespace AppGCT.Pages.Inscricoes.InscricaoEpoca
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync()
         {
-            Inscricao.IConsentimento = " ";
+            /// Algoritmo para cálculo de Anos entre duas datas
+            /// https://stackoverflow.com/questions/4127363/date-difference-in-years-using-c-sharp
+            DateTime zeroTime = new DateTime(1, 1, 1);
+
+            DateTime a = _context.Ginasta.Where(i => i.Id == Inscricao.GinastaId).FirstOrDefault().DtNascim;
+            DateTime c = _context.Epoca.Where(i => i.IdEpoca == Inscricao.EpocaId).FirstOrDefault().DataFim;
+            DateTime b = new DateTime(c.Year, 8, 31);
+
+            TimeSpan span = b - a;
+            // Because we start at year 1 for the Gregorian
+            // calendar, we must subtract a year here.
+            int years = (zeroTime + span).Year - 1;
+
+
+            Inscricao.IdadeAgosto = years;
+            Inscricao.IConsentimento = "N";
             Inscricao.DtExamMed = DateTime.MinValue;
-            Inscricao.ILeituraObrig = " ";
-            Inscricao.IExamMed = " ";
+            Inscricao.ILeituraObrig = "N";
+            Inscricao.IExamMed = "N";
             Inscricao.DtExamMed = DateTime.MinValue;
-            Inscricao.IFicFGP = " ";
+            Inscricao.IFicFGP = "N";
             Inscricao.DtFicFGP = DateTime.MinValue;
-            Inscricao.ISeguro = " ";
+            Inscricao.ISeguro = "N";
             Inscricao.IPagamInscricao = "N";
             Inscricao.IdCriacao = User.Identity.GetUserId();
             Inscricao.DataCriacao = DateTime.Now;
