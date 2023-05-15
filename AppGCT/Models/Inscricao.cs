@@ -8,7 +8,7 @@ namespace AppGCT.Models
         public int? Id { get; set; }
         [Required]
         [DataType(DataType.Text)]
-        [Display(Name = "FGP nº")]
+        [Display(Name = "FGP Nº")]
         public string? IdFGP { get; set; }
         [Required]
         [DataType(DataType.Text)]
@@ -35,7 +35,7 @@ namespace AppGCT.Models
         public DateTime DtConsentimento { get; set; }
 
         [DataType(DataType.Text)]
-        [Display(Name = "Exame Médico Desportivo Efetuado")]
+        [Display(Name = "Exame Médico Desportivo")]
         public string? IExamMed { get; set; }
 
         [DataType(DataType.Date)]
@@ -62,24 +62,23 @@ namespace AppGCT.Models
         [Display(Name = "Entrega dos documentos de leitura obrigatória")]
         public string? ILeituraObrig { get; set; }
 
-        [Required]
-        [DataType(DataType.Text)]
+        [DataType((DataType.ImageUrl))]
         [Display(Name = "Foto")]
-        public string? IFotos { get; set; }
+        public byte[]? IFotos { get; set; }
 
         [Required]
         [DataType(DataType.Text)]
-        [Display(Name = "Alergia a Ibuprofeno")]
-        public bool IIbuprofeno { get; set; }
+        [Display(Name = "Ibuprofeno")]
+        public string? IIbuprofeno { get; set; }
 
         [Required]
         [DataType(DataType.Text)]
-        [Display(Name = "Alergia a Paracetamol")]
+        [Display(Name = "Paracetamol")]
         public string? IParacetamol { get; set; }
 
         [Required]
         [DataType(DataType.Text)]
-        [Display(Name = "Autoriza toma de Analgésico / Anti-Inflamatório")]
+        [Display(Name = "Autoriza toma de Analgésico / Anti-Inflamatório ?")]
         public string? IAntiInflam { get; set; }
 
         [Required]
