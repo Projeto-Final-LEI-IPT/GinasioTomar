@@ -61,13 +61,8 @@ namespace AppGCT.Models
         [Display(Name = "Entrega dos documentos de leitura obrigatória")]
         public string? ILeituraObrig { get; set; }
 
-<<<<<<< HEAD
         [DataType(DataType.Text)]
         [Display(Name = "Autoriza fotos/filmagens")]
-=======
-        [DataType((DataType.Text))]
-        [Display(Name = "Foto")]
->>>>>>> 42edb1f43dd1aa572f976734a2fa8f4f9d6ccfde
         public string? IFotos { get; set; }
 
         [Required]

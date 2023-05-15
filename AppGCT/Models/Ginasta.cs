@@ -133,7 +133,7 @@ namespace AppGCT.Models
         {
             get
             {
-                return string.Format("{0} ({1})", NomeCompleto, NIF);
+                return string.Format("{0} (CC: {1})", NomeCompleto, NumCC);
             }
         }
         [Display(Name = "Ginasta")]
