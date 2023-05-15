@@ -130,6 +130,7 @@ namespace AppGCT.Migrations
                     b.HasData(
                         new
                         {
+<<<<<<< HEAD
                             Id = "137a40c4-1e3e-4382-8ce6-039a73d8fa32",
                             AccessFailedCount = 0,
                             ConcurrencyStamp = "b8334300-6722-4b44-ae74-b5e63818d465",
@@ -137,6 +138,15 @@ namespace AppGCT.Migrations
                             DataCriacao = new DateTime(2023, 5, 14, 19, 29, 41, 31, DateTimeKind.Local).AddTicks(9093),
                             DataModificacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DataNascim = new DateTime(2023, 5, 14, 19, 29, 41, 31, DateTimeKind.Local).AddTicks(9168),
+=======
+                            Id = "74e236a2-0567-49d6-acdf-bc6fdf91a6f8",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "fd83c0e6-0b71-41f5-84b6-d88394736707",
+                            DataAprovacao = new DateTime(2023, 5, 14, 17, 0, 29, 637, DateTimeKind.Local).AddTicks(3517),
+                            DataCriacao = new DateTime(2023, 5, 14, 17, 0, 29, 637, DateTimeKind.Local).AddTicks(3466),
+                            DataModificacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DataNascim = new DateTime(2023, 5, 14, 17, 0, 29, 637, DateTimeKind.Local).AddTicks(3523),
+>>>>>>> main
                             Email = "admin@localhost",
                             EmailConfirmed = true,
                             EstadoUtilizador = "A",
@@ -149,10 +159,17 @@ namespace AppGCT.Migrations
                             NormalizedEmail = "ADMIN@LOCALHOST",
                             NormalizedUserName = "ADMIN@LOCALHOST",
                             NumSocio = " ",
+<<<<<<< HEAD
                             PasswordHash = "AQAAAAIAAYagAAAAEAvXrcxbJvE43iEzLddImuEz/PpSUZm+aa8TU4zV/8BDIM3adjfZ4Kvd7mv/h457cw==",
                             PhoneNumber = "999999999",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "0568dab7-7c70-4566-9bb8-1d3a6b721a8e",
+=======
+                            PasswordHash = "AQAAAAIAAYagAAAAEJG3qjrbQTk1FdZOcryISYg+hJzsh4OfP+zusiJq35rK0waWrpwrjbyghLDnbBLXSg==",
+                            PhoneNumber = "999999999",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "481093eb-f28d-4e69-9c1e-9f3e0277501c",
+>>>>>>> main
                             TwoFactorEnabled = false,
                             UserName = "admin@localhost"
                         });
@@ -472,25 +489,41 @@ namespace AppGCT.Migrations
                     b.HasData(
                         new
                         {
+<<<<<<< HEAD
                             Id = "e4c15e13-ba74-42ab-9654-c97b56d1ae49",
+=======
+                            Id = "f38084a3-ed4e-42b9-a3e1-4a9a7d948c61",
+>>>>>>> main
                             Name = "Administrador",
                             NormalizedName = "ADMINISTRADOR"
                         },
                         new
                         {
+<<<<<<< HEAD
                             Id = "f0892b76-dace-4501-a16a-dea1f84d1eaa",
+=======
+                            Id = "5d832420-5e16-40b6-af1a-20e5a8eb8be4",
+>>>>>>> main
                             Name = "Ginásio",
                             NormalizedName = "GINÁSIO"
                         },
                         new
                         {
+<<<<<<< HEAD
                             Id = "2d529219-d574-4fbe-ad3f-df0ae92f59c4",
+=======
+                            Id = "1e011cb4-b2b0-44f6-9147-65041db5afc0",
+>>>>>>> main
                             Name = "Sócio",
                             NormalizedName = "SÓCIO"
                         },
                         new
                         {
+<<<<<<< HEAD
                             Id = "6dd601df-4467-401b-af49-091469baffa1",
+=======
+                            Id = "e8a973ab-3efd-4960-a14c-5bb7a11eba76",
+>>>>>>> main
                             Name = "Anónimo",
                             NormalizedName = "ANÓNIMO"
                         });
@@ -587,8 +620,13 @@ namespace AppGCT.Migrations
                     b.HasData(
                         new
                         {
+<<<<<<< HEAD
                             UserId = "137a40c4-1e3e-4382-8ce6-039a73d8fa32",
                             RoleId = "e4c15e13-ba74-42ab-9654-c97b56d1ae49"
+=======
+                            UserId = "74e236a2-0567-49d6-acdf-bc6fdf91a6f8",
+                            RoleId = "f38084a3-ed4e-42b9-a3e1-4a9a7d948c61"
+>>>>>>> main
                         });
                 });
 

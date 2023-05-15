@@ -20,7 +20,13 @@ namespace AppGCT.Models
         [DataType(DataType.Date)]
         [Display(Name = "Data de Nascimento")]
         public DateTime DtNascim { get; set; }
+<<<<<<< HEAD
 
+=======
+        [DataType((DataType.Text))]
+        [Display(Name = "Idade a 31 de Agosto")]
+        public string? IdadeAgosto { get; set; }
+>>>>>>> main
         [DataType((DataType.ImageUrl))]
         [Display(Name = "Foto")]
         public byte[]? Foto { get; set; }
@@ -38,7 +44,7 @@ namespace AppGCT.Models
         public string? NIF { get; set; }
         [Required]
         [DataType((DataType.Text))]
-        [Display(Name = "NISS")]
+        [Display(Name = "NISS ou ADSE")]
         public string? NISS { get; set; }
         [Required]
         [DataType((DataType.Text))]
@@ -59,16 +65,16 @@ namespace AppGCT.Models
         [Display(Name = "Irmãos")]
         public string? IIrmaos { get; set; }
         [DataType((DataType.Text))]
-        [Display(Name = "Nome Irmãos")]
+        [Display(Name = "Nome(s) Irmão(s)")]
         public string? NomeIrmaos { get; set; }
         [DataType((DataType.Text))]
-        [Display(Name = "Email")]
+        [Display(Name = "Email Ginasta")]
         public string? Email { get; set; }
         [DataType((DataType.Text))]
-        [Display(Name = "Enc. Educação")]
+        [Display(Name = "Nome EE")]
         public string? NomeEE { get; set; }
         [DataType((DataType.Text))]
-        [Display(Name = "NIF Enc. Edu.")]
+        [Display(Name = "NIF EE")]
         public string? NIFEE { get; set; }
         [DataType((DataType.Text))]
         [Display(Name = "Prefixo Tlm. EE")]
@@ -77,25 +83,25 @@ namespace AppGCT.Models
         [Display(Name = "Tlm. EE")]
         public string? numTelemovelEE { get; set; }
         [DataType((DataType.Text))]
-        [Display(Name = "Grau Enc. Edu.")]
+        [Display(Name = "Grau Parentesco (EE)")]
         public string? IGrauEE { get; set; }
         [DataType((DataType.Text))]
-        [Display(Name = "Email Enc. Edu.")]
+        [Display(Name = "Email EE")]
         public string EmailEE { get; set; }
         [DataType((DataType.Text))]
-        [Display(Name = "Nome Emerg. Enc. Edu.")]
+        [Display(Name = "Nome (Emergência)")]
         public string? NomeEmerEE { get; set; }
         [DataType((DataType.Text))]
-        [Display(Name = "Grau Emerg. Enc. Edu.")]
+        [Display(Name = "Grau Parentesco (Emergência)")]
         public string? GrauEmerEE { get; set; }
         [DataType((DataType.Text))]
-        [Display(Name = "Prefixo Tlm. Emerg. Enc. Edu.")]
+        [Display(Name = "Prefixo Tlm. (Emergência)")]
         public string? PrefixoTlmEmerEE { get; set; }
         [DataType((DataType.Text))]
-        [Display(Name = "Tlm. Emerg. Enc. Edu.")]
+        [Display(Name = "Tlm. (Emergência)")]
         public string? NumTlmEmerEE { get; set; }
         [DataType((DataType.Text))]
-        [Display(Name = "Email Emerg. Enc. Edu.")]
+        [Display(Name = "Email (Emergência)")]
         public string? EmailTlmEmerEE { get; set; }
         [DataType((DataType.Date))]
         [Display(Name = "Data de Criação")]

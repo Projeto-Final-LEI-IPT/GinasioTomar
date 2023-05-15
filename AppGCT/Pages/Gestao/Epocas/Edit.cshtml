@@ -32,7 +32,28 @@
                 <input asp-for="Epoca.DataFim" class="form-control" />
                 <span asp-validation-for="Epoca.DataFim" class="text-danger"></span>
             </div>
-            <input type="hidden" asp-for="Epoca.EstadoEpoca" />
+            <div class="form-group">
+                <label asp-for="Epoca.EstadoEpoca" class="control-label">Estado Época</label>
+                <div class="form-check">
+                    <label class="form-check-label">
+                        <input type="radio" asp-for="Epoca.EstadoEpoca" class="form-check-input" value="A" />
+                        Ativa
+                    </label>
+                </div>
+                <div class="form-check">
+                    <label class="form-check-label">
+                        <input type="radio" asp-for="Epoca.EstadoEpoca" class="form-check-input" value="C" />
+                        Cancelada
+                    </label>
+                </div>
+                <div class="form-check">
+                    <label class="form-check-label">
+                        <input type="radio" asp-for="Epoca.EstadoEpoca" class="form-check-input" value="F" />
+                        Finalizada
+                    </label>
+                </div>
+                <span asp-validation-for="Epoca.EstadoEpoca" class="text-danger"></span>
+            </div>
             <input type="hidden" asp-for="Epoca.DataCriacao" />
             <input type="hidden" asp-for="Epoca.IdCriacao" />
             <div class="form-group">
