@@ -55,6 +55,7 @@ namespace AppGCT.Pages.Inscricoes.InscricaoEpoca
         // For more details, see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostAsync()
         {
+ 
             if (!ModelState.IsValid)
             {
                 return Page();
@@ -62,7 +63,7 @@ namespace AppGCT.Pages.Inscricoes.InscricaoEpoca
 
             Inscricao.IdModificacao = User.Identity.GetUserId(); ;
             Inscricao.DataModificacao = DateTime.Now;
-
+                       
             _context.Attach(Inscricao).State = EntityState.Modified;
 
             try

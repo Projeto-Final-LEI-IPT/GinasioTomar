@@ -8,7 +8,7 @@
 
 <h1>Apagar Inscrição</h1>
 
-<h3>Pretende mesmo apagar a Inscrição??</h3>
+<h3>Pretende mesmo apagar a Inscrição?</h3>
 <div>
     <hr />
     <dl class="row">
@@ -19,19 +19,158 @@
             @Html.DisplayFor(model => model.Inscricao.IdFGP)
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Inscricao.ISocGinasta)
+            É Sócio/Ginasta?
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Inscricao.ISocGinasta)
+            @Html.RadioButtonFor(model => model.Inscricao.ISocGinasta, "S", new { @disabled = "disabled" }) Sim
+            @Html.RadioButtonFor(model => model.Inscricao.ISocGinasta, "N", new { @disabled = "disabled" }) Não
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Inscricao.Atleta)
+            @Html.DisplayNameFor(model => model.Inscricao.DtInscricao)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Inscricao.DtInscricao)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Inscricao.IdadeAgosto)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Inscricao.IdadeAgosto)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Inscricao.IConsentimento)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.RadioButtonFor(model => model.Inscricao.IConsentimento, "S", new { @disabled = "disabled" }) Sim
+            @Html.RadioButtonFor(model => model.Inscricao.IConsentimento, "N", new { @disabled = "disabled" }) Não
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Inscricao.DtConsentimento)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Inscricao.DtConsentimento)
+        </dd>
+        <dt class="col-sm-2">
+            Exame Médico Desportivo/Atestado Méd./Termo Responsabilidade
+        </dt>
+        <dd class="col-sm-10">
+            @Html.RadioButtonFor(model => model.Inscricao.IExamMed, "S", new { @disabled = "disabled" }) Sim
+            @Html.RadioButtonFor(model => model.Inscricao.IExamMed, "N", new { @disabled = "disabled" }) Não
+        </dd>
+        <dt class="col-sm-2">
+            Validade Exame Médico Desportivo/Atestado Méd./Termo Responsabilidade
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Inscricao.DtExamMed)
+        </dd>
+        <dt class="col-sm-2">
+            Ficha Individual FGP (mod. 3/2017)-Assinada
+        </dt>
+        <dd class="col-sm-10">
+            @Html.RadioButtonFor(model => model.Inscricao.IFicFGP, "S", new { @disabled = "disabled" }) Sim
+            @Html.RadioButtonFor(model => model.Inscricao.IFicFGP, "N", new { @disabled = "disabled" }) Não
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Inscricao.DtFicFGP)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Inscricao.DtFicFGP)
+        </dd>
+        <dt class="col-sm-2">
+            Pagamento Seguro
+        </dt>
+        <dd class="col-sm-10">
+            @Html.RadioButtonFor(model => model.Inscricao.ISeguro, "S", new { @disabled = "disabled" }) Sim
+            @Html.RadioButtonFor(model => model.Inscricao.ISeguro, "N", new { @disabled = "disabled" }) Não
+        </dd>
+        <dt class="col-sm-2">
+            Pagamento Inscrição
+        </dt>
+        <dd class="col-sm-10">
+            @Html.RadioButtonFor(model => model.Inscricao.IPagamInscricao, "S", new { @disabled = "disabled" }) Sim
+            @Html.RadioButtonFor(model => model.Inscricao.IPagamInscricao, "N", new { @disabled = "disabled" }) Não
+        </dd>
+        <dt class="col-sm-2">
+            Entrega dos documentos de leitura obrigatória
+        </dt>
+        <dd class="col-sm-10">
+            @Html.RadioButtonFor(model => model.Inscricao.ILeituraObrig, "S", new { @disabled = "disabled" }) Sim
+            @Html.RadioButtonFor(model => model.Inscricao.ILeituraObrig, "N", new { @disabled = "disabled" }) Não
+        </dd>
+        <dt class="col-sm-2">
+            Autoriza o seu Ginasta a ser fotografado e filmado em contexto desportivo ou atividades lúdicas, promovidas pelo Ginásio Clube de Tomar. Tomo conhecimento de
+            que a imagem recolhida pode servir para documentação interna do GCT e para divulgação nos jornais, redes socias e
+            outros fins publicitários.
+        </dt>
+        <dd class="col-sm-10">
+            @Html.RadioButtonFor(model => model.Inscricao.IFotos, "S", new { @disabled = "disabled" }) Sim
+            @Html.RadioButtonFor(model => model.Inscricao.IFotos, "N", new { @disabled = "disabled" }) Não
+        </dd>
+        <div>
+            O ginasta tem alguma alergia a:
+        </div>
+        <dt class="col-sm-2">
+            Ibuprofeno
+        </dt>
+        <dd class="col-sm-10">
+            @Html.RadioButtonFor(model => model.Inscricao.IIbuprofeno, "S", new { @disabled = "disabled" }) Sim
+            @Html.RadioButtonFor(model => model.Inscricao.IIbuprofeno, "N", new { @disabled = "disabled" }) Não
+        </dd>
+        <dt class="col-sm-2">
+            Paracetamol
+        </dt>
+        <dd class="col-sm-10">
+            @Html.RadioButtonFor(model => model.Inscricao.IParacetamol, "S", new { @disabled = "disabled" }) Sim
+            @Html.RadioButtonFor(model => model.Inscricao.IParacetamol, "N", new { @disabled = "disabled" }) Não
+        </dd>
+        <dt class="col-sm-2">
+            Autoriza em casos pontuais, a toma de analgésico/anti-inflamatório, em caso de hematoma com dor latente durante treino?
+        </dt>
+        <dd class="col-sm-10">
+            @Html.RadioButtonFor(model => model.Inscricao.IAntiInflam, "S", new { @disabled = "disabled" }) Sim
+            @Html.RadioButtonFor(model => model.Inscricao.IAntiInflam, "N", new { @disabled = "disabled" }) Não
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Inscricao.DescAlergias)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Inscricao.DescAlergias)
+        </dd>
+        @if (User.IsInRole("Administrador") || User.IsInRole("Ginásio"))
+        {
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Inscricao.DataCriacao)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Inscricao.DataCriacao)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Inscricao.IdCriacao)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Inscricao.IdCriacao)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Inscricao.DataModificacao)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Inscricao.DataModificacao)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Inscricao.IdModificacao)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Inscricao.IdModificacao)
+        </dd>
+        }
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Inscricao.Atleta.Id)
         </dt>
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Inscricao.Atleta.ID_DescrGinasta)
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Inscricao.Periodo)
+            Época
         </dt>
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Inscricao.Periodo.NomeEpoca)
@@ -40,7 +179,7 @@
     
     <form method="post">
         <input type="hidden" asp-for="Inscricao.Id" />
-        <input type="submit" value="Apagar" class="btn btn-danger btn-sm" /> |
+        <input type="submit" value="Apagar" class="btn btn-danger btn-sm" />
         <a class='btn btn-primary btn-sm' href='/Inscricoes/InscricaoEpoca/Index?id=@Model.Inscricao.Atleta.Id'>Voltar</a>
     </form>
 </div>

@@ -23,8 +23,19 @@
                 <span asp-validation-for="Inscricao.IdFGP" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Inscricao.ISocGinasta" class="control-label"></label>
-                <input asp-for="Inscricao.ISocGinasta" class="form-control" />
+                <label asp-for="Inscricao.ISocGinasta" class="control-label">É Sócio/Ginasta?</label>
+                <div class="form-check">
+                    <label class="form-check-label">
+                        <input type="radio" asp-for="Inscricao.ISocGinasta" class="form-check-input" value="S" />
+                        Sim
+                    </label>
+                </div>
+                <div class="form-check">
+                    <label class="form-check-label">
+                        <input type="radio" asp-for="Inscricao.ISocGinasta" class="form-check-input" value="N" />
+                        Não
+                    </label>
+                </div>
                 <span asp-validation-for="Inscricao.ISocGinasta" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -39,10 +50,20 @@
             </div>
         @if (User.IsInRole("Administrador") || User.IsInRole("Ginásio"))
             {
-                <label class="control-label">Entregou a documentação ?</label>
                 <div class="form-group">
-                    <label asp-for="Inscricao.IConsentimento" class="control-label"></label>
-                    <input asp-for="Inscricao.IConsentimento" class="form-control" />
+                    <label asp-for="Inscricao.IConsentimento" class="control-label">Consentimento de dados</label>
+                    <div class="form-check">
+                        <label class="form-check-label">
+                            <input type="radio" asp-for="Inscricao.IConsentimento" class="form-check-input" value="S" />
+                            Sim
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <label class="form-check-label">
+                            <input type="radio" asp-for="Inscricao.IConsentimento" class="form-check-input" value="N" />
+                            Não
+                        </label>
+                    </div>
                     <span asp-validation-for="Inscricao.IConsentimento" class="text-danger"></span>
                 </div>
                 <div class="form-group">
@@ -51,18 +72,40 @@
                     <span asp-validation-for="Inscricao.DtConsentimento" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <label asp-for="Inscricao.IExamMed" class="control-label"></label>
-                    <input asp-for="Inscricao.IExamMed" class="form-control" />
+                    <label asp-for="Inscricao.IExamMed" class="control-label">Exame Médico Desportivo/Atestado Méd./Termo Responsabilidade</label>
+                    <div class="form-check">
+                        <label class="form-check-label">
+                            <input type="radio" asp-for="Inscricao.IExamMed" class="form-check-input" value="S" />
+                            Sim
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <label class="form-check-label">
+                            <input type="radio" asp-for="Inscricao.IExamMed" class="form-check-input" value="N" />
+                            Não
+                        </label>
+                    </div>
                     <span asp-validation-for="Inscricao.IExamMed" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <label asp-for="Inscricao.DtExamMed" class="control-label"></label>
+                    <label asp-for="Inscricao.DtExamMed" class="control-label">Validade Exame Médico Desportivo/Atestado Méd./Termo Responsabilidade</label>
                     <input asp-for="Inscricao.DtExamMed" class="form-control" />
                     <span asp-validation-for="Inscricao.DtExamMed" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <label asp-for="Inscricao.IFicFGP" class="control-label"></label>
-                    <input asp-for="Inscricao.IFicFGP" class="form-control" />
+                    <label asp-for="Inscricao.IFicFGP" class="control-label">Ficha Individual FGP (mod. 3/2017)-Assinada</label>
+                    <div class="form-check">
+                        <label class="form-check-label">
+                            <input type="radio" asp-for="Inscricao.IFicFGP" class="form-check-input" value="S" />
+                            Sim
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <label class="form-check-label">
+                            <input type="radio" asp-for="Inscricao.IFicFGP" class="form-check-input" value="N" />
+                            Não
+                        </label>
+                    </div>
                     <span asp-validation-for="Inscricao.IFicFGP" class="text-danger"></span>
                 </div>
                 <div class="form-group">
@@ -71,18 +114,51 @@
                     <span asp-validation-for="Inscricao.DtFicFGP" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <label asp-for="Inscricao.ISeguro" class="control-label"></label>
-                    <input asp-for="Inscricao.ISeguro" class="form-control" />
+                    <label asp-for="Inscricao.ISeguro" class="control-label">Pagamento Seguro</label>
+                    <div class="form-check">
+                        <label class="form-check-label">
+                            <input type="radio" asp-for="Inscricao.ISeguro" class="form-check-input" value="S" />
+                            Sim
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <label class="form-check-label">
+                            <input type="radio" asp-for="Inscricao.ISeguro" class="form-check-input" value="N" />
+                            Não
+                        </label>
+                    </div>
                     <span asp-validation-for="Inscricao.ISeguro" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <label asp-for="Inscricao.IPagamInscricao" class="control-label"></label>
-                <input asp-for="Inscricao.IPagamInscricao" class="form-control" />
-                <span asp-validation-for="Inscricao.IPagamInscricao" class="text-danger"></span>
+                    <label asp-for="Inscricao.IPagamInscricao" class="control-label">Pagamento Inscrição</label>
+                    <div class="form-check">
+                        <label class="form-check-label">
+                            <input type="radio" asp-for="Inscricao.IPagamInscricao" class="form-check-input" value="S" />
+                            Sim
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <label class="form-check-label">
+                            <input type="radio" asp-for="Inscricao.IPagamInscricao" class="form-check-input" value="N" />
+                            Não
+                        </label>
+                    </div>
+                    <span asp-validation-for="Inscricao.IPagamInscricao" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <label asp-for="Inscricao.ILeituraObrig" class="control-label"></label>
-                    <input asp-for="Inscricao.ILeituraObrig" class="form-control" />
+                    <label asp-for="Inscricao.ILeituraObrig" class="control-label">Entrega dos documentos de leitura obrigatória</label>
+                    <div class="form-check">
+                        <label class="form-check-label">
+                            <input type="radio" asp-for="Inscricao.ILeituraObrig" class="form-check-input" value="S" />
+                            Sim
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <label class="form-check-label">
+                            <input type="radio" asp-for="Inscricao.ILeituraObrig" class="form-check-input" value="N" />
+                            Não
+                        </label>
+                    </div>
                     <span asp-validation-for="Inscricao.ILeituraObrig" class="text-danger"></span>
                 </div>
             }
@@ -99,27 +175,77 @@
                 <input type="hidden" asp-for="Inscricao.ILeituraObrig" />
             }
             <div class="form-group">
-                <label asp-for="Inscricao.IFotos" class="control-label"></label>
-                <input asp-for="Inscricao.IFotos" class="form-control" />
+                <label asp-for="Inscricao.IFotos" class="control-label">Autoriza o seu Ginasta a ser fotografado e filmado em contexto desportivo ou atividades lúdicas, promovidas pelo Ginásio Clube de Tomar. Tomo conhecimento de
+                    que a imagem recolhida pode servir para documentação interna do GCT e para divulgação nos jornais, redes socias e
+                    outros fins publicitários.
+                </label>
+                <div class="form-check">
+                    <label class="form-check-label">
+                        <input type="radio" asp-for="Inscricao.IFotos" class="form-check-input" value="S" />
+                        Sim
+                    </label>
+                </div>
+                <div class="form-check">
+                    <label class="form-check-label">
+                        <input type="radio" asp-for="Inscricao.IFotos" class="form-check-input" value="N" />
+                        Não
+                    </label>
+                </div>
                 <span asp-validation-for="Inscricao.IFotos" class="text-danger"></span>
             </div>
-                        <div class="form-group">
-                <label asp-for="Inscricao.IIbuprofeno" class="control-label"></label>
-                <input asp-for="Inscricao.IIbuprofeno" class="form-control" />
+            <div>
+                <label>O ginasta tem alguma alergia a:</label>
+            </div>
+            <div class="form-group">
+                <label asp-for="Inscricao.IIbuprofeno" class="control-label">Ibruprofeno</label>
+                <div class="form-check">
+                    <label class="form-check-label">
+                        <input type="radio" asp-for="Inscricao.IIbuprofeno" class="form-check-input" value="S" />
+                        Sim
+                    </label>
+                </div>
+                <div class="form-check">
+                    <label class="form-check-label">
+                        <input type="radio" asp-for="Inscricao.IIbuprofeno" class="form-check-input" value="N" />
+                        Não
+                    </label>
+                </div>
                 <span asp-validation-for="Inscricao.IIbuprofeno" class="text-danger"></span>
             </div>
-                        <div class="form-group">
-                <label asp-for="Inscricao.IParacetamol" class="control-label"></label>
-                <input asp-for="Inscricao.IParacetamol" class="form-control" />
+            <div class="form-group">
+                <label asp-for="Inscricao.IParacetamol" class="control-label">Paracetamol</label>
+                <div class="form-check">
+                    <label class="form-check-label">
+                        <input type="radio" asp-for="Inscricao.IParacetamol" class="form-check-input" value="S" />
+                        Sim
+                    </label>
+                </div>
+                <div class="form-check">
+                    <label class="form-check-label">
+                        <input type="radio" asp-for="Inscricao.IParacetamol" class="form-check-input" value="N" />
+                        Não
+                    </label>
+                </div>
                 <span asp-validation-for="Inscricao.IParacetamol" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Inscricao.IAntiInflam" class="control-label"></label>
-                <input asp-for="Inscricao.IAntiInflam" class="form-control" />
+                <label asp-for="Inscricao.IAntiInflam" class="control-label">Autoriza em casos pontuais, a toma de analgésico/anti-inflamatório, em caso de hematoma com dor latente durante treino?</label>
+                <div class="form-check">
+                    <label class="form-check-label">
+                        <input type="radio" asp-for="Inscricao.IAntiInflam" class="form-check-input" value="S" />
+                        Sim
+                    </label>
+                </div>
+                <div class="form-check">
+                    <label class="form-check-label">
+                        <input type="radio" asp-for="Inscricao.IAntiInflam" class="form-check-input" value="N" />
+                        Não
+                    </label>
+                </div>
                 <span asp-validation-for="Inscricao.IAntiInflam" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Inscricao.DescAlergias" class="control-label"></label>
+                <label asp-for="Inscricao.DescAlergias" class="control-label">O ginasta tem alguma alergia ou condição de saúde relevante?</label>
                 <input asp-for="Inscricao.DescAlergias" class="form-control" />
                 <span asp-validation-for="Inscricao.DescAlergias" class="text-danger"></span>
             </div>
@@ -130,7 +256,7 @@
             <input type="hidden" asp-for="Inscricao.GinastaId" />
             <input type="hidden" asp-for="Inscricao.EpocaId" />
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <input type="submit" value="Guardar" class="btn btn-primary" />
             </div>
         </form>
     </div>
