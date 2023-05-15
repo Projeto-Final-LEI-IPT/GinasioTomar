@@ -24,7 +24,8 @@
             @Html.DisplayNameFor(model => model.Inscricao.ISocGinasta)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Inscricao.ISocGinasta)
+            @Html.RadioButtonFor(model => model.Inscricao.ISocGinasta, "S", new { @disabled = "disabled" }) Sim
+            @Html.RadioButtonFor(model => model.Inscricao.ISocGinasta, "N", new { @disabled = "disabled" }) Não
         </dd>
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Inscricao.DtInscricao)
@@ -42,7 +43,8 @@
             @Html.DisplayNameFor(model => model.Inscricao.IConsentimento)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Inscricao.IConsentimento)
+            @Html.RadioButtonFor(model => model.Inscricao.IConsentimento, "S", new { @disabled = "disabled" }) Sim
+            @Html.RadioButtonFor(model => model.Inscricao.IConsentimento, "N", new { @disabled = "disabled" }) Não
         </dd>
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Inscricao.DtConsentimento)
@@ -54,7 +56,8 @@
             @Html.DisplayNameFor(model => model.Inscricao.IExamMed)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Inscricao.IExamMed)
+            @Html.RadioButtonFor(model => model.Inscricao.IExamMed, "S", new { @disabled = "disabled" }) Sim
+            @Html.RadioButtonFor(model => model.Inscricao.IExamMed, "N", new { @disabled = "disabled" }) Não
         </dd>
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Inscricao.DtExamMed)
@@ -66,7 +69,8 @@
             @Html.DisplayNameFor(model => model.Inscricao.IFicFGP)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Inscricao.IFicFGP)
+            @Html.RadioButtonFor(model => model.Inscricao.IFicFGP, "S", new { @disabled = "disabled" }) Sim
+            @Html.RadioButtonFor(model => model.Inscricao.IFicFGP, "N", new { @disabled = "disabled" }) Não
         </dd>
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Inscricao.DtFicFGP)
@@ -78,43 +82,49 @@
             @Html.DisplayNameFor(model => model.Inscricao.ISeguro)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Inscricao.ISeguro)
+            @Html.RadioButtonFor(model => model.Inscricao.ISeguro, "S", new { @disabled = "disabled" }) Sim
+            @Html.RadioButtonFor(model => model.Inscricao.ISeguro, "N", new { @disabled = "disabled" }) Não
         </dd>
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Inscricao.IPagamInscricao)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Inscricao.IPagamInscricao)
+            @Html.RadioButtonFor(model => model.Inscricao.IPagamInscricao, "S", new { @disabled = "disabled" }) Sim
+            @Html.RadioButtonFor(model => model.Inscricao.IPagamInscricao, "N", new { @disabled = "disabled" }) Não
         </dd>
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Inscricao.ILeituraObrig)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Inscricao.ILeituraObrig)
+            @Html.RadioButtonFor(model => model.Inscricao.ILeituraObrig, "S", new { @disabled = "disabled" }) Sim
+            @Html.RadioButtonFor(model => model.Inscricao.ILeituraObrig, "N", new { @disabled = "disabled" }) Não
         </dd>
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Inscricao.IFotos)
-        </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Inscricao.IFotos)
+                @Html.RadioButtonFor(model => model.Inscricao.IFotos, "S", new { @disabled = "disabled" }) Autoriza
+                @Html.RadioButtonFor(model => model.Inscricao.IFotos, "N", new { @disabled = "disabled" }) Não Autoriza
         </dd>
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Inscricao.IIbuprofeno)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Inscricao.IIbuprofeno)
+            @Html.RadioButtonFor(model => model.Inscricao.IIbuprofeno, "S", new { @disabled = "disabled" }) Sim
+            @Html.RadioButtonFor(model => model.Inscricao.IIbuprofeno, "N", new { @disabled = "disabled" }) Não
         </dd>
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Inscricao.IParacetamol)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Inscricao.IParacetamol)
+            @Html.RadioButtonFor(model => model.Inscricao.IParacetamol, "S", new { @disabled = "disabled" }) Sim
+            @Html.RadioButtonFor(model => model.Inscricao.IParacetamol, "N", new { @disabled = "disabled" }) Não
         </dd>
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Inscricao.IAntiInflam)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Inscricao.IAntiInflam)
+            @Html.RadioButtonFor(model => model.Inscricao.IAntiInflam, "S", new { @disabled = "disabled" }) Sim
+            @Html.RadioButtonFor(model => model.Inscricao.IAntiInflam, "N", new { @disabled = "disabled" }) Não
         </dd>
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Inscricao.DescAlergias)

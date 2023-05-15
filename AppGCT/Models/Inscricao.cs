@@ -20,10 +20,9 @@ namespace AppGCT.Models
         [Display(Name = "Data Inscrição")]
         public DateTime DtInscricao { get; set; }
 
-        [Required]
         [DataType((DataType.Text))]
         [Display(Name = "Idade a 31 de Agosto")]
-        public string? IdadeAgosto { get; set; }
+        public int? IdadeAgosto { get; set; }
 
         [DataType(DataType.Text)]
         [Display(Name = "Consentimento de Dados")]
@@ -62,9 +61,9 @@ namespace AppGCT.Models
         [Display(Name = "Entrega dos documentos de leitura obrigatória")]
         public string? ILeituraObrig { get; set; }
 
-        [DataType((DataType.ImageUrl))]
+        [DataType((DataType.Text))]
         [Display(Name = "Foto")]
-        public byte[]? IFotos { get; set; }
+        public string? IFotos { get; set; }
 
         [Required]
         [DataType(DataType.Text)]
@@ -109,5 +108,6 @@ namespace AppGCT.Models
         public int EpocaId { get; set; }
 
         public Epoca? Periodo { get; set; }
+
     }
 }
