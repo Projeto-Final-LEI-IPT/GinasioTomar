@@ -72,7 +72,7 @@ namespace AppGCT.Areas.Identity.Pages.Account.Manage
             [Phone]
             [RegularExpression(@"^[0-9]*$"), Required, StringLength(9, MinimumLength = 9)]
             [DataType(DataType.Text)]
-            [Display(Name = "Contato")]
+            [Display(Name = "Contacto")]
             public string PhoneNumber { get; set; }
         }
 
