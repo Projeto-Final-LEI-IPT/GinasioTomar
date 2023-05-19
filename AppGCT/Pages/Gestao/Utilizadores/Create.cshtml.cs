@@ -124,7 +124,7 @@ namespace AppGCT.Pages.Gestao.Utilizadores
             if (result.Succeeded)
             {
                 await _userManager.AddToRoleAsync(user, Input.RoleName);
-                return RedirectToPage("Index");
+                return RedirectToPage("./Index");
             }
 
             foreach (var error in result.Errors)

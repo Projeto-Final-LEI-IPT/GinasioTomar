@@ -46,8 +46,8 @@
     </dl>
 </div>
 <div>
-    <a class='btn btn-primary btn-sm' href='/Inscricoes/InscricaoEpoca/Create?id=@Model.Ginasta.Id'>Nova Inscrição</a>
-    <a class='btn btn-primary btn-sm' href='/Inscricoes/Ginastas'>Voltar</a>
+    <a class='btn btn-primary btn-sm' asp-area='' asp-page='/Inscricoes/InscricaoEpoca/Create' asp-route-id='@Model.Ginasta.Id'>Nova Inscrição</a>
+    <a class='btn btn-primary btn-sm' asp-area='' asp-page='/Inscricoes/Ginastas/Index'>Voltar</a>
 </div>
 <hr />
 <table class="table">
@@ -102,11 +102,11 @@
                     @Html.DisplayFor(modelItem => item.Periodo.NomeEpoca)
                 </td>
             <td>
-                <a class="btn btn-primary btn-sm" href="/Inscricoes/InscricaoEpoca/Edit?id=@item.Id">Editar</a>
-                <a class="btn btn-primary btn-sm" href="/Inscricoes/InscricaoEpoca/Details?id=@item.Id">Detalhes</a>
+                    <a class="btn btn-primary btn-sm" asp-area="" asp-page="/Inscricoes/InscricaoEpoca/Edit' asp-route-id='@item.Id'>Editar</a>
+                <a class="btn btn-primary btn-sm" asp-area="" asp-page="/Inscricoes/InscricaoEpoca/Details?id=@item.Id">Detalhes</a>
             @if (User.IsInRole("Administrador") || User.IsInRole("Ginásio"))
             {
-                <a class="btn btn-danger  btn-sm" href="/Inscricoes/InscricaoEpoca/Delete?id=@item.Id">Apagar</a>
+                <a class="btn btn-danger  btn-sm" asp-area="" asp-page="/Inscricoes/InscricaoEpoca/Delete?id=@item.Id">Apagar</a>
             }
             </td>
         </tr>

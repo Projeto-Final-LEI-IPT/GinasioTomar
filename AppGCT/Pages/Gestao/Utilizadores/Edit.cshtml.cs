@@ -178,7 +178,7 @@ namespace AppGCT.Pages.Gestao.Utilizadores
                 throw new InvalidOperationException($"Unexpected error occurred updating user with ID '{user.Nome}'.");
             }
 
-            return RedirectToPage("Index");
+            return RedirectToPage("./Index");
         }
     }
 }

@@ -36,7 +36,7 @@
 <h1>Gestão Utilizadores</h1>
 
 <p>
-    <a class='btn btn-primary btn-sm' href='/Gestao/Utilizadores/Create'>Novo Utilizador</a>
+    <a class='btn btn-primary btn-sm' asp-area='' asp-page='/Gestao/Utilizadores/Create'>Novo Utilizador</a>
 </p>
 
 <table class="table">
@@ -80,12 +80,12 @@
                     @Html.DisplayFor(modelItem => user.Email)
                 </td>
                 <td>
-                    <a class="btn btn-primary btn-sm" href="/Gestao/Utilizadores/Edit?id=@user.Id">Editar</a>
-                    <a class="btn btn-primary btn-sm" href="/Gestao/Utilizadores/Details?id=@user.Id">Detalhes</a>
+                    <a class='btn btn-primary btn-sm' asp-area='' asp-page='/Gestao/Utilizadores/Edit' asp-route-id='@user.Id'>Editar</a>
+                    <a class='btn btn-primary btn-sm' asp-area='' asp-page='/Gestao/Utilizadores/Details' asp-route-id='@user.Id'>Detalhes</a>
                     @{
                         if (!user.Email.Equals("admin@localhost")) // NÃO MOSTRA BOTÃO APAGAR PARA O USER DE ADMINISTRAÇÃO
                         {
-                            <a class="btn btn-danger btn-sm" href="/Gestao/Utilizadores/Delete?id=@user.Id">Apagar</a>
+                            <a class='btn btn-danger btn-sm' asp-area='' asp-page='/Gestao/Utilizadores/Delete' asp-route-id='@user.Id'>Apagar</a>
                         }
                     }
                     

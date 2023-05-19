@@ -9,7 +9,7 @@
 <h1>Gestão Ginastas</h1>
 <hr />
 <p>
-    <a class='btn btn-primary btn-sm' href='/Inscricoes/Ginastas/Create'>Novo Ginasta</a>
+    <a class='btn btn-primary btn-sm' asp-area='' asp-page='/Inscricoes/Ginastas/Create'>Novo Ginasta</a>
 </p>
 <table class="table">
     <thead>
@@ -57,13 +57,13 @@
                 @Html.DisplayFor(modelItem => item.Socio.Nome )
             </td>
             <td>
-                <a class="btn btn-primary btn-sm" href="/Inscricoes/Ginastas/Edit?id=@item.Id">Editar</a>
-                <a class="btn btn-primary btn-sm" href="/Inscricoes/Ginastas/Details?id=@item.Id">Detalhes</a>
+                    <a class='btn btn-primary btn-sm' asp-area='' asp-page='/Inscricoes/Ginastas/Edit' asp-route-id='@item.Id'>Editar</a>
+                    <a class='btn btn-primary btn-sm' asp-area='' asp-page='/Inscricoes/Ginastas/Details' asp-route-id='@item.Id'>Detalhes</a>
             @if (User.IsInRole("Administrador") || User.IsInRole("Ginásio"))
             {
-                <a class="btn btn-danger  btn-sm" href="/Inscricoes/Ginastas/Delete?id=@item.Id">Apagar</a>
+                    <a class='btn btn-danger  btn-sm' asp-area='' asp-page='/Inscricoes/Ginastas/Delete' asp-route-id='@item.Id'>Apagar</a>
             }
-                <a class="btn btn-primary btn-sm" href="/Inscricoes/InscricaoEpoca/Index?id=@item.Id">Inscrições</a>
+                    <a class='btn btn-primary btn-sm' asp-area='' asp-page='/Inscricoes/InscricaoEpoca/Index' asp-route-id='@item.Id'>Inscrições</a>
             </td>
         </tr>
 }
