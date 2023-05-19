@@ -39,9 +39,9 @@
                 @Html.DisplayFor(modelItem => item.StatusDescription)
             </td>
             <td>
-                    <a class="btn btn-primary btn-sm" asp-area='' asp-page="/Gestao/Descontos/Edit?id=@item.CodDesconto">Editar</a>
-                    <a class="btn btn-primary btn-sm" asp-area='' asp-page="/Gestao/Descontos/Details?id=@item.CodDesconto">Detalhes</a>
-                    <a class="btn btn-danger btn-sm" asp-area='' asp-page="/Gestao/Descontos/Delete?id=@item.CodDesconto">Apagar</a>
+                    <a class='btn btn-primary btn-sm' asp-area='' asp-page='/Gestao/Descontos/Edit' asp-route-id='@item.CodDesconto'>Editar</a>
+                    <a class='btn btn-primary btn-sm' asp-area='' asp-page='/Gestao/Descontos/Details' asp-route-id='@item.CodDesconto'>Detalhes</a>
+                    <a class='btn btn-danger btn-sm' asp-area='' asp-page='/Gestao/Descontos/Delete' asp-route-id='@item.CodDesconto'>Apagar</a>
             </td>
         </tr>
 }

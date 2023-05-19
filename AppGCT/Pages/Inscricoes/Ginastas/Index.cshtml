@@ -57,7 +57,7 @@
                 @Html.DisplayFor(modelItem => item.Socio.Nome )
             </td>
             <td>
-                    <a class='btn btn-primary btn-sm' asp-area='' asp-page='/Inscricoes/Ginastas/Create' asp-route-id='@item.Id'>Editar</a>
+                    <a class='btn btn-primary btn-sm' asp-area='' asp-page='/Inscricoes/Ginastas/Edit' asp-route-id='@item.Id'>Editar</a>
                     <a class='btn btn-primary btn-sm' asp-area='' asp-page='/Inscricoes/Ginastas/Details' asp-route-id='@item.Id'>Detalhes</a>
             @if (User.IsInRole("Administrador") || User.IsInRole("Ginásio"))
             {

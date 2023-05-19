@@ -37,9 +37,9 @@
                 @Html.DisplayFor(modelItem => item.StatusDescription)
             </td>
             <td>
-                <a class="btn btn-primary btn-sm" asp-area='' asp-page="/Gestao/Epocas/Edit?id=@item.IdEpoca">Editar</a>
-                <a class="btn btn-primary btn-sm" asp-area='' asp-page="/Gestao/Epocas/Details?id=@item.IdEpoca">Detalhes</a>
-                <a class="btn btn-danger btn-sm" asp-area='' asp-page="/Gestao/Epocas/Delete?id=@item.IdEpoca">Apagar</a>
+                <a class='btn btn-primary btn-sm' asp-area='' asp-page='/Gestao/Epocas/Edit' asp-route-id='@item.IdEpoca'>Editar</a>
+                <a class='btn btn-primary btn-sm' asp-area='' asp-page='/Gestao/Epocas/Details' asp-route-id='@item.IdEpoca'>Detalhes</a>
+                <a class='btn btn-danger btn-sm' asp-area='' asp-page='/Gestao/Epocas/Delete' asp-route-id='@item.IdEpoca'>Apagar</a>
             </td>
         </tr>
 }
