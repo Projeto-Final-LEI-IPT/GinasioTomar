@@ -102,11 +102,11 @@
                     @Html.DisplayFor(modelItem => item.Periodo.NomeEpoca)
                 </td>
             <td>
-                    <a class="btn btn-primary btn-sm" asp-area="" asp-page="/Inscricoes/InscricaoEpoca/Edit' asp-route-id='@item.Id'>Editar</a>
-                <a class="btn btn-primary btn-sm" asp-area="" asp-page="/Inscricoes/InscricaoEpoca/Details?id=@item.Id">Detalhes</a>
+                    <a class='btn btn-primary btn-sm' asp-area='' asp-page='/Inscricoes/InscricaoEpoca/Edit' asp-route-id='@item.Id'>Editar</a>
+                    <a class='btn btn-primary btn-sm' asp-area='' asp-page='/Inscricoes/InscricaoEpoca/Details' asp-route-id='@item.Id'>Detalhes</a>
             @if (User.IsInRole("Administrador") || User.IsInRole("Ginásio"))
             {
-                <a class="btn btn-danger  btn-sm" asp-area="" asp-page="/Inscricoes/InscricaoEpoca/Delete?id=@item.Id">Apagar</a>
+                    <a class='btn btn-danger  btn-sm' asp-area='' asp-page='/Inscricoes/InscricaoEpoca/Delete' asp-route-id='@item.Id'>Apagar</a>
             }
             </td>
         </tr>
