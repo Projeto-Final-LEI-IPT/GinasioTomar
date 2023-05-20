@@ -130,13 +130,13 @@ namespace AppGCT.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "99895ade-14e0-45b5-a2b7-d8c80a6b4753",
+                            Id = "89eeb420-18c6-48b0-bc7d-aa2fe45ccf22",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "d4c5e526-5f38-4169-b474-75346a55177b",
-                            DataAprovacao = new DateTime(2023, 5, 20, 16, 40, 48, 958, DateTimeKind.Local).AddTicks(3777),
-                            DataCriacao = new DateTime(2023, 5, 20, 16, 40, 48, 958, DateTimeKind.Local).AddTicks(3724),
+                            ConcurrencyStamp = "e4f10626-2efa-43fb-ab4c-693877e30882",
+                            DataAprovacao = new DateTime(2023, 5, 20, 19, 35, 1, 672, DateTimeKind.Local).AddTicks(9136),
+                            DataCriacao = new DateTime(2023, 5, 20, 19, 35, 1, 672, DateTimeKind.Local).AddTicks(9086),
                             DataModificacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DataNascim = new DateTime(2023, 5, 20, 16, 40, 48, 958, DateTimeKind.Local).AddTicks(3783),
+                            DataNascim = new DateTime(2023, 5, 20, 19, 35, 1, 672, DateTimeKind.Local).AddTicks(9142),
                             Email = "admin@localhost",
                             EmailConfirmed = true,
                             EstadoUtilizador = "A",
@@ -149,10 +149,10 @@ namespace AppGCT.Migrations
                             NormalizedEmail = "ADMIN@LOCALHOST",
                             NormalizedUserName = "ADMIN@LOCALHOST",
                             NumSocio = " ",
-                            PasswordHash = "AQAAAAIAAYagAAAAEN0myLNdKvmSLizjTci3pwBXD/Rzc83vHjdwT70KgpaVFeWjAUf0mINJ5SQCTjJK7A==",
+                            PasswordHash = "AQAAAAIAAYagAAAAECSRMmcQ9z7RZodoNXzWcre3BR6zy9uBAk86tXvnYhQEblP+r4ecFa1/FPDKeNf6JA==",
                             PhoneNumber = "999999999",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "054c2641-6caf-46f0-8bcd-7b3f96bf59d6",
+                            SecurityStamp = "ad41ac76-970e-43ff-9980-87bfe6c68cdc",
                             TwoFactorEnabled = false,
                             UserName = "admin@localhost"
                         });
@@ -207,6 +207,7 @@ namespace AppGCT.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("DescDesconto")
+                        .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
@@ -248,17 +249,21 @@ namespace AppGCT.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("EstadoEpoca")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(1)
+                        .HasColumnType("nvarchar(1)");
 
                     b.Property<string>("IdCriacao")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(36)
+                        .HasColumnType("nvarchar(36)");
 
                     b.Property<string>("IdModificacao")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(36)
+                        .HasColumnType("nvarchar(36)");
 
                     b.Property<string>("NomeEpoca")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(9)
+                        .HasColumnType("nvarchar(9)");
 
                     b.HasKey("IdEpoca");
 
@@ -508,19 +513,19 @@ namespace AppGCT.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "5ed067a2-e330-4829-a9ab-263c2cb14df4",
+                            Id = "66fc9c09-8ffc-434a-88bb-d19eb19a0bc5",
                             Name = "Administrador",
                             NormalizedName = "ADMINISTRADOR"
                         },
                         new
                         {
-                            Id = "f1ec3745-dbe1-4d23-969b-d60f523cc3ac",
+                            Id = "3878493b-4864-4cea-b61e-3bd37199172a",
                             Name = "Ginásio",
                             NormalizedName = "GINÁSIO"
                         },
                         new
                         {
-                            Id = "95e4851f-3555-43ea-a792-051b5b61ccc3",
+                            Id = "8f4df9e7-f045-4ba5-b7e0-11634136c40e",
                             Name = "Sócio",
                             NormalizedName = "SÓCIO"
                         });
@@ -617,8 +622,8 @@ namespace AppGCT.Migrations
                     b.HasData(
                         new
                         {
-                            UserId = "99895ade-14e0-45b5-a2b7-d8c80a6b4753",
-                            RoleId = "5ed067a2-e330-4829-a9ab-263c2cb14df4"
+                            UserId = "89eeb420-18c6-48b0-bc7d-aa2fe45ccf22",
+                            RoleId = "66fc9c09-8ffc-434a-88bb-d19eb19a0bc5"
                         });
                 });
 
