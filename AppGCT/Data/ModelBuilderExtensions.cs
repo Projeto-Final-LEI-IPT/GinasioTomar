@@ -23,11 +23,8 @@ namespace AppGCT.Data
             var socioRole = new IdentityRole("Sócio");
             socioRole.NormalizedName = socioRole.Name.ToUpper();
 
-            var anonimoRole = new IdentityRole("Anónimo");
-            anonimoRole.NormalizedName = anonimoRole.Name.ToUpper();
-
             List<IdentityRole> roles = new List<IdentityRole>()
-            { adminRole, ginasioRole, socioRole, anonimoRole
+            { adminRole, ginasioRole, socioRole
             };
             builder.Entity<IdentityRole>().HasData(roles);
 

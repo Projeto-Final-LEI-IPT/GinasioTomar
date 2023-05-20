@@ -1,0 +1,43 @@
+﻿@page
+@model AppGCT.Pages.Gestao.Classes.IndexModel
+
+@{
+    ViewData["Title"] = "Gestão Classes";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<h1>Gestão Classes</h1>
+
+<p>
+    <a class='btn btn-primary btn-sm' asp-area='' asp-page='/Gestao/Classes/Create'>Nova Classe</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Classe[0].NomeClasse)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Classe[0].EstadoClasse)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Classe) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.NomeClasse)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EstadoClasseDescricao)
+            </td>
+            <td>
+                <a class='btn btn-primary btn-sm' asp-area='' asp-page='/Gestao/Classes/Edit' asp-route-id='@item.IdClasse'>Editar</a>
+                <a class='btn btn-primary btn-sm' asp-area='' asp-page='/Gestao/Classes/Details' asp-route-id='@item.IdClasse'>Detalhes</a>
+                <a class='btn btn-danger btn-sm' asp-area='' asp-page='/Gestao/Classes/Delete' asp-route-id='@item.IdClasse'>Apagar</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
