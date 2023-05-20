@@ -29,7 +29,8 @@ namespace AppGCT.Pages.Gestao.Utilizadores
 
         public class CreateUserModel
         {
-            [Required]
+            [Required(ErrorMessage = "Nome é campo obrigatório!")]
+            [StringLength(50, MinimumLength = 5, ErrorMessage = "Nome deve conter no minimo 5 caracteres e máximo 50 caracteres!")]
             [DataType(DataType.Text)]
             [Display(Name = "Nome")]
             public string Nome { get; set; }

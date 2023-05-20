@@ -65,16 +65,34 @@ namespace AppGCT.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Classe",
+                columns: table => new
+                {
+                    IdClasse = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    NomeClasse = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    EstadoClasse = table.Column<string>(type: "nvarchar(1)", maxLength: 1, nullable: true),
+                    DataCriacao = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    IdCriacao = table.Column<string>(type: "nvarchar(36)", maxLength: 36, nullable: true),
+                    DataModificacao = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    IdModificacao = table.Column<string>(type: "nvarchar(36)", maxLength: 36, nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Classe", x => x.IdClasse);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Desconto",
                 columns: table => new
                 {
                     CodDesconto = table.Column<string>(type: "nvarchar(2)", maxLength: 2, nullable: false),
-                    DescDesconto = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
+                    DescDesconto = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     EstadoDesconto = table.Column<string>(type: "nvarchar(1)", maxLength: 1, nullable: true),
                     DataCriacao = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    IdCriacao = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    IdCriacao = table.Column<string>(type: "nvarchar(36)", maxLength: 36, nullable: true),
                     DataModificacao = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    IdModificacao = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    IdModificacao = table.Column<string>(type: "nvarchar(36)", maxLength: 36, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -87,18 +105,36 @@ namespace AppGCT.Migrations
                 {
                     IdEpoca = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    NomeEpoca = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    NomeEpoca = table.Column<string>(type: "nvarchar(9)", maxLength: 9, nullable: false),
                     DataInicio = table.Column<DateTime>(type: "datetime2", nullable: false),
                     DataFim = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    EstadoEpoca = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    EstadoEpoca = table.Column<string>(type: "nvarchar(1)", maxLength: 1, nullable: true),
                     DataCriacao = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    IdCriacao = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    IdCriacao = table.Column<string>(type: "nvarchar(36)", maxLength: 36, nullable: true),
                     DataModificacao = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    IdModificacao = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    IdModificacao = table.Column<string>(type: "nvarchar(36)", maxLength: 36, nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Epoca", x => x.IdEpoca);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "MetodoPagamento",
+                columns: table => new
+                {
+                    CodMetodo = table.Column<string>(type: "nvarchar(2)", maxLength: 2, nullable: false),
+                    DescMetodo = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    ValorDesconto = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
+                    EstadoMetodo = table.Column<string>(type: "nvarchar(1)", maxLength: 1, nullable: true),
+                    DataCriacao = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    IdCriacao = table.Column<string>(type: "nvarchar(36)", maxLength: 36, nullable: true),
+                    DataModificacao = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    IdModificacao = table.Column<string>(type: "nvarchar(36)", maxLength: 36, nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_MetodoPagamento", x => x.CodMetodo);
                 });
 
             migrationBuilder.CreateTable(
@@ -309,21 +345,20 @@ namespace AppGCT.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "14b968ae-5ee7-4521-ab53-09f970490759", null, "Administrador", "ADMINISTRADOR" },
-                    { "5f5d1900-5d32-4cf9-ac0d-3269c4b616bd", null, "Ginásio", "GINÁSIO" },
-                    { "7e24b18d-d8e2-44cf-8b04-170e31b3b29f", null, "Sócio", "SÓCIO" },
-                    { "f987643e-54aa-42a2-8410-2ca1ea181bdf", null, "Anónimo", "ANÓNIMO" }
+                    { "3008da7f-59ba-452d-8bfb-0b1fb95dd9c2", null, "Ginásio", "GINÁSIO" },
+                    { "3eebf472-6f08-43e3-801c-6f49529ac1a9", null, "Sócio", "SÓCIO" },
+                    { "46d80eaf-e478-4535-a6aa-005ec4165a7d", null, "Administrador", "ADMINISTRADOR" }
                 });
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "DataAprovacao", "DataCriacao", "DataModificacao", "DataNascim", "Email", "EmailConfirmed", "EstadoUtilizador", "IdCriacao", "IdModificacao", "LockoutEnabled", "LockoutEnd", "Morada", "NIF", "Nome", "NormalizedEmail", "NormalizedUserName", "NumSocio", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UltimoLogin", "UserName" },
-                values: new object[] { "d01442dc-b631-4bec-b090-e61347dc7941", 0, "bc8eb776-c5c1-41f8-b02c-bd8c41806e39", new DateTime(2023, 5, 19, 19, 34, 22, 340, DateTimeKind.Local).AddTicks(6503), new DateTime(2023, 5, 19, 19, 34, 22, 340, DateTimeKind.Local).AddTicks(6455), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2023, 5, 19, 19, 34, 22, 340, DateTimeKind.Local).AddTicks(6510), "admin@localhost", true, "A", "SEED", " ", false, null, "Ginásio Clube de Tomar", "999999999", "Administrador", "ADMIN@LOCALHOST", "ADMIN@LOCALHOST", " ", "AQAAAAIAAYagAAAAEDakhN7hDlmWoSHKGbMly3fZ5OveR5QxaCXOEtM635uimJTDVoDylKeuSL2j4hEExQ==", "999999999", false, "02a8a817-1306-491e-8187-7a9277aeced2", false, null, "admin@localhost" });
+                values: new object[] { "57f5fcff-28ef-4bb8-8152-00a0c93b3cfe", 0, "f3f4a545-7957-419a-86e3-7378677b153a", new DateTime(2023, 5, 20, 20, 12, 29, 553, DateTimeKind.Local).AddTicks(3766), new DateTime(2023, 5, 20, 20, 12, 29, 553, DateTimeKind.Local).AddTicks(3562), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2023, 5, 20, 20, 12, 29, 553, DateTimeKind.Local).AddTicks(3784), "admin@localhost", true, "A", "SEED", " ", false, null, "Ginásio Clube de Tomar", "999999999", "Administrador", "ADMIN@LOCALHOST", "ADMIN@LOCALHOST", " ", "AQAAAAIAAYagAAAAENLrlMD7D5rvKP83H1P1K7zl++zU8yICymruyy3JEWJSxClltDJ3QkxU/O4QoF0NCQ==", "999999999", false, "ff18b097-3a02-4279-9c6b-40ff2d5f433d", false, null, "admin@localhost" });
 
             migrationBuilder.InsertData(
                 table: "AspNetUserRoles",
                 columns: new[] { "RoleId", "UserId" },
-                values: new object[] { "14b968ae-5ee7-4521-ab53-09f970490759", "d01442dc-b631-4bec-b090-e61347dc7941" });
+                values: new object[] { "46d80eaf-e478-4535-a6aa-005ec4165a7d", "57f5fcff-28ef-4bb8-8152-00a0c93b3cfe" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
@@ -399,10 +434,16 @@ namespace AppGCT.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
+                name: "Classe");
+
+            migrationBuilder.DropTable(
                 name: "Desconto");
 
             migrationBuilder.DropTable(
                 name: "Inscricao");
+
+            migrationBuilder.DropTable(
+                name: "MetodoPagamento");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");

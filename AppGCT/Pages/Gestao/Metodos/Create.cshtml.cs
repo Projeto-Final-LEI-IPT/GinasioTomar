@@ -8,10 +8,9 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using AppGCT.Data;
 using AppGCT.Models;
 using Microsoft.AspNetCore.Authorization;
-using System.Data;
 using System.Security.Claims;
 
-namespace AppGCT.Pages.Gestao.Descontos
+namespace AppGCT.Pages.Gestao.Metodos
 {
     [Authorize(Roles = "Administrador")]
     public class CreateModel : PageModel
@@ -29,23 +28,23 @@ namespace AppGCT.Pages.Gestao.Descontos
         }
 
         [BindProperty]
-        public Desconto Desconto { get; set; } = default!;
+        public MetodoPagamento MetodoPagamento { get; set; } = default!;
         
 
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync()
         {
-          if (!ModelState.IsValid || _context.Desconto == null || Desconto == null)
+          if (!ModelState.IsValid || _context.MetodoPagamento == null || MetodoPagamento == null)
             {
                 return Page();
             }
-            Desconto.DataCriacao = DateTime.Now;
+            MetodoPagamento.DataCriacao = DateTime.Now;
             // obtem User ID logado
             var userId = User.FindFirstValue(ClaimTypes.Name);
-            Desconto.IdCriacao = userId;
-            Desconto.DataModificacao = DateTime.MinValue;
-            Desconto.IdModificacao = "";
-            _context.Desconto.Add(Desconto);
+            MetodoPagamento.IdCriacao = userId;
+            MetodoPagamento.DataModificacao = DateTime.MinValue;
+            MetodoPagamento.IdModificacao = "";
+            _context.MetodoPagamento.Add(MetodoPagamento);
             await _context.SaveChangesAsync();
 
             return RedirectToPage("./Index");

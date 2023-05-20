@@ -17,6 +17,12 @@
 <div>
     <dl class="row">
         <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Desconto.CodDesconto)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Desconto.CodDesconto)
+        </dd>
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Desconto.DescDesconto)
         </dt>
         <dd class="col-sm-10">
@@ -26,7 +32,8 @@
             @Html.DisplayNameFor(model => model.Desconto.EstadoDesconto)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Desconto.StatusDescription)
+            @Html.RadioButtonFor(model => model.Desconto.EstadoDesconto, "A", new { @disabled = "disabled" }) Ativo
+            @Html.RadioButtonFor(model => model.Desconto.EstadoDesconto, "I", new { @disabled = "disabled" }) Inativo
         </dd>
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Desconto.DataCriacao)

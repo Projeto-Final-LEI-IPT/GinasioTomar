@@ -45,5 +45,9 @@ namespace AppGCT.Data
                    .WithMany(a => a.Inscricoes)
                     .HasForeignKey(p => p.EpocaId);
         }
+
+        public DbSet<AppGCT.Models.Classe> Classe { get; set; } = default!;
+
+        public DbSet<AppGCT.Models.MetodoPagamento> MetodoPagamento { get; set; } = default!;
     }
 }

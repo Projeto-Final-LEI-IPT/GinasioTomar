@@ -37,7 +37,9 @@
             @Html.LabelFor(model=>model.Epoca.EstadoEpoca)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Epoca.StatusDescription)
+            @Html.RadioButtonFor(model => model.Epoca.EstadoEpoca, "A", new { @disabled = "disabled" }) Ativa
+            @Html.RadioButtonFor(model => model.Epoca.EstadoEpoca, "C", new { @disabled = "disabled" }) Cancelada
+            @Html.RadioButtonFor(model => model.Epoca.EstadoEpoca, "F", new { @disabled = "disabled" }) Finalizada
         </dd>
         <dt class="col-sm-2">
             @Html.LabelFor(model=>model.Epoca.DataCriacao)

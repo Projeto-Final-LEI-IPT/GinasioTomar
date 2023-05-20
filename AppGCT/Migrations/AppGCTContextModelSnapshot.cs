@@ -17,7 +17,7 @@ namespace AppGCT.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "7.0.4")
+                .HasAnnotation("ProductVersion", "7.0.5")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
@@ -130,13 +130,13 @@ namespace AppGCT.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "d01442dc-b631-4bec-b090-e61347dc7941",
+                            Id = "57f5fcff-28ef-4bb8-8152-00a0c93b3cfe",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "bc8eb776-c5c1-41f8-b02c-bd8c41806e39",
-                            DataAprovacao = new DateTime(2023, 5, 19, 19, 34, 22, 340, DateTimeKind.Local).AddTicks(6503),
-                            DataCriacao = new DateTime(2023, 5, 19, 19, 34, 22, 340, DateTimeKind.Local).AddTicks(6455),
+                            ConcurrencyStamp = "f3f4a545-7957-419a-86e3-7378677b153a",
+                            DataAprovacao = new DateTime(2023, 5, 20, 20, 12, 29, 553, DateTimeKind.Local).AddTicks(3766),
+                            DataCriacao = new DateTime(2023, 5, 20, 20, 12, 29, 553, DateTimeKind.Local).AddTicks(3562),
                             DataModificacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DataNascim = new DateTime(2023, 5, 19, 19, 34, 22, 340, DateTimeKind.Local).AddTicks(6510),
+                            DataNascim = new DateTime(2023, 5, 20, 20, 12, 29, 553, DateTimeKind.Local).AddTicks(3784),
                             Email = "admin@localhost",
                             EmailConfirmed = true,
                             EstadoUtilizador = "A",
@@ -149,13 +149,49 @@ namespace AppGCT.Migrations
                             NormalizedEmail = "ADMIN@LOCALHOST",
                             NormalizedUserName = "ADMIN@LOCALHOST",
                             NumSocio = " ",
-                            PasswordHash = "AQAAAAIAAYagAAAAEDakhN7hDlmWoSHKGbMly3fZ5OveR5QxaCXOEtM635uimJTDVoDylKeuSL2j4hEExQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAENLrlMD7D5rvKP83H1P1K7zl++zU8yICymruyy3JEWJSxClltDJ3QkxU/O4QoF0NCQ==",
                             PhoneNumber = "999999999",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "02a8a817-1306-491e-8187-7a9277aeced2",
+                            SecurityStamp = "ff18b097-3a02-4279-9c6b-40ff2d5f433d",
                             TwoFactorEnabled = false,
                             UserName = "admin@localhost"
                         });
+                });
+
+            modelBuilder.Entity("AppGCT.Models.Classe", b =>
+                {
+                    b.Property<int>("IdClasse")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdClasse"));
+
+                    b.Property<DateTime>("DataCriacao")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DataModificacao")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("EstadoClasse")
+                        .HasMaxLength(1)
+                        .HasColumnType("nvarchar(1)");
+
+                    b.Property<string>("IdCriacao")
+                        .HasMaxLength(36)
+                        .HasColumnType("nvarchar(36)");
+
+                    b.Property<string>("IdModificacao")
+                        .HasMaxLength(36)
+                        .HasColumnType("nvarchar(36)");
+
+                    b.Property<string>("NomeClasse")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.HasKey("IdClasse");
+
+                    b.ToTable("Classe");
                 });
 
             modelBuilder.Entity("AppGCT.Models.Desconto", b =>
@@ -171,6 +207,7 @@ namespace AppGCT.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("DescDesconto")
+                        .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
@@ -179,10 +216,12 @@ namespace AppGCT.Migrations
                         .HasColumnType("nvarchar(1)");
 
                     b.Property<string>("IdCriacao")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(36)
+                        .HasColumnType("nvarchar(36)");
 
                     b.Property<string>("IdModificacao")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(36)
+                        .HasColumnType("nvarchar(36)");
 
                     b.HasKey("CodDesconto");
 
@@ -210,17 +249,21 @@ namespace AppGCT.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("EstadoEpoca")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(1)
+                        .HasColumnType("nvarchar(1)");
 
                     b.Property<string>("IdCriacao")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(36)
+                        .HasColumnType("nvarchar(36)");
 
                     b.Property<string>("IdModificacao")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(36)
+                        .HasColumnType("nvarchar(36)");
 
                     b.Property<string>("NomeEpoca")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(9)
+                        .HasColumnType("nvarchar(9)");
 
                     b.HasKey("IdEpoca");
 
@@ -441,6 +484,43 @@ namespace AppGCT.Migrations
                     b.ToTable("Inscricao");
                 });
 
+            modelBuilder.Entity("AppGCT.Models.MetodoPagamento", b =>
+                {
+                    b.Property<string>("CodMetodo")
+                        .HasMaxLength(2)
+                        .HasColumnType("nvarchar(2)");
+
+                    b.Property<DateTime>("DataCriacao")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DataModificacao")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("DescMetodo")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("EstadoMetodo")
+                        .HasMaxLength(1)
+                        .HasColumnType("nvarchar(1)");
+
+                    b.Property<string>("IdCriacao")
+                        .HasMaxLength(36)
+                        .HasColumnType("nvarchar(36)");
+
+                    b.Property<string>("IdModificacao")
+                        .HasMaxLength(36)
+                        .HasColumnType("nvarchar(36)");
+
+                    b.Property<decimal?>("ValorDesconto")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.HasKey("CodMetodo");
+
+                    b.ToTable("MetodoPagamento");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
                     b.Property<string>("Id")
@@ -470,27 +550,21 @@ namespace AppGCT.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "14b968ae-5ee7-4521-ab53-09f970490759",
+                            Id = "46d80eaf-e478-4535-a6aa-005ec4165a7d",
                             Name = "Administrador",
                             NormalizedName = "ADMINISTRADOR"
                         },
                         new
                         {
-                            Id = "5f5d1900-5d32-4cf9-ac0d-3269c4b616bd",
+                            Id = "3008da7f-59ba-452d-8bfb-0b1fb95dd9c2",
                             Name = "Ginásio",
                             NormalizedName = "GINÁSIO"
                         },
                         new
                         {
-                            Id = "7e24b18d-d8e2-44cf-8b04-170e31b3b29f",
+                            Id = "3eebf472-6f08-43e3-801c-6f49529ac1a9",
                             Name = "Sócio",
                             NormalizedName = "SÓCIO"
-                        },
-                        new
-                        {
-                            Id = "f987643e-54aa-42a2-8410-2ca1ea181bdf",
-                            Name = "Anónimo",
-                            NormalizedName = "ANÓNIMO"
                         });
                 });
 
@@ -585,8 +659,8 @@ namespace AppGCT.Migrations
                     b.HasData(
                         new
                         {
-                            UserId = "d01442dc-b631-4bec-b090-e61347dc7941",
-                            RoleId = "14b968ae-5ee7-4521-ab53-09f970490759"
+                            UserId = "57f5fcff-28ef-4bb8-8152-00a0c93b3cfe",
+                            RoleId = "46d80eaf-e478-4535-a6aa-005ec4165a7d"
                         });
                 });
 

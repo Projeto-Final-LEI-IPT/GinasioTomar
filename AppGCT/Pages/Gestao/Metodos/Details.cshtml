@@ -1,0 +1,71 @@
+﻿@page
+@model AppGCT.Pages.Gestao.Metodos.DetailsModel
+
+@{
+    ViewData["Title"] = "Detalhes Método Pagamento";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<h1>Detalhes Método Pagamento</h1>
+
+<hr />
+<div>
+    <a class='btn btn-primary btn-sm' asp-area='' asp-page='/Gestao/Metodos/Index'>Voltar</a>
+</div>
+<br>
+<div>
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.MetodoPagamento.CodMetodo)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.MetodoPagamento.CodMetodo)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.MetodoPagamento.DescMetodo)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.MetodoPagamento.DescMetodo)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.MetodoPagamento.ValorDesconto)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.MetodoPagamento.ValorDesconto)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.MetodoPagamento.EstadoMetodo)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.RadioButtonFor(model => model.MetodoPagamento.EstadoMetodo, "A", new { @disabled = "disabled" }) Ativo
+            @Html.RadioButtonFor(model => model.MetodoPagamento.EstadoMetodo, "I", new { @disabled = "disabled" }) Inativo
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.MetodoPagamento.DataCriacao)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.MetodoPagamento.DataCriacao)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.MetodoPagamento.IdCriacao)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.MetodoPagamento.IdCriacao)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.MetodoPagamento.DataModificacao)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.MetodoPagamento.DataModificacao)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.MetodoPagamento.IdModificacao)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.MetodoPagamento.IdModificacao)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a class='btn btn-primary btn-sm' asp-area='' asp-page='/Gestao/Metodos/Edit' asp-route-id='@Model.MetodoPagamento?.CodMetodo'>Editar</a>
+</div>
