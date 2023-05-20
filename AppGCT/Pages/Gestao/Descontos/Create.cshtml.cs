@@ -39,7 +39,6 @@ namespace AppGCT.Pages.Gestao.Descontos
             {
                 return Page();
             }
-            Desconto.EstadoDesconto = "A";
             Desconto.DataCriacao = DateTime.Now;
             // obtem User ID logado
             var userId = User.FindFirstValue(ClaimTypes.Name);
