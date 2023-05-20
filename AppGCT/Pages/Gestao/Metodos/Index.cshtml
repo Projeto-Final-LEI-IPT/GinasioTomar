@@ -1,0 +1,55 @@
+﻿@page
+@model AppGCT.Pages.Gestao.Metodos.IndexModel
+
+@{
+    ViewData["Title"] = "Gestão Métodos Pagamento";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<h1>Gestão Métodos Pagamento</h1>
+
+<p>
+    <a class='btn btn-primary btn-sm' asp-area='' asp-page='/Gestao/Metodos/Create'>Novo Método Pagamento</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.MetodoPagamento[0].CodMetodo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MetodoPagamento[0].DescMetodo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MetodoPagamento[0].ValorDesconto)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MetodoPagamento[0].EstadoMetodo)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.MetodoPagamento) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.CodMetodo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DescMetodo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ValorDesconto)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EstadoMetodoDescricao)
+            </td>
+            <td>
+                <a class='btn btn-primary btn-sm' asp-area='' asp-page='/Gestao/Metodos/Edit' asp-route-id='@item.CodMetodo'>Editar</a>
+                <a class='btn btn-primary btn-sm' asp-area='' asp-page='/Gestao/Metodos/Details' asp-route-id='@item.CodMetodo'>Detalhes</a>
+                <a class='btn btn-danger btn-sm' asp-area='' asp-page='/Gestao/Metodos/Delete' asp-route-id='@item.CodMetodo'>Apagar</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

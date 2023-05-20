@@ -120,6 +120,24 @@ namespace AppGCT.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "MetodoPagamento",
+                columns: table => new
+                {
+                    CodMetodo = table.Column<string>(type: "nvarchar(2)", maxLength: 2, nullable: false),
+                    DescMetodo = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    ValorDesconto = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
+                    EstadoMetodo = table.Column<string>(type: "nvarchar(1)", maxLength: 1, nullable: true),
+                    DataCriacao = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    IdCriacao = table.Column<string>(type: "nvarchar(36)", maxLength: 36, nullable: true),
+                    DataModificacao = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    IdModificacao = table.Column<string>(type: "nvarchar(36)", maxLength: 36, nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_MetodoPagamento", x => x.CodMetodo);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "AspNetRoleClaims",
                 columns: table => new
                 {
@@ -327,20 +345,20 @@ namespace AppGCT.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "3878493b-4864-4cea-b61e-3bd37199172a", null, "Ginásio", "GINÁSIO" },
-                    { "66fc9c09-8ffc-434a-88bb-d19eb19a0bc5", null, "Administrador", "ADMINISTRADOR" },
-                    { "8f4df9e7-f045-4ba5-b7e0-11634136c40e", null, "Sócio", "SÓCIO" }
+                    { "3008da7f-59ba-452d-8bfb-0b1fb95dd9c2", null, "Ginásio", "GINÁSIO" },
+                    { "3eebf472-6f08-43e3-801c-6f49529ac1a9", null, "Sócio", "SÓCIO" },
+                    { "46d80eaf-e478-4535-a6aa-005ec4165a7d", null, "Administrador", "ADMINISTRADOR" }
                 });
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "DataAprovacao", "DataCriacao", "DataModificacao", "DataNascim", "Email", "EmailConfirmed", "EstadoUtilizador", "IdCriacao", "IdModificacao", "LockoutEnabled", "LockoutEnd", "Morada", "NIF", "Nome", "NormalizedEmail", "NormalizedUserName", "NumSocio", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UltimoLogin", "UserName" },
-                values: new object[] { "89eeb420-18c6-48b0-bc7d-aa2fe45ccf22", 0, "e4f10626-2efa-43fb-ab4c-693877e30882", new DateTime(2023, 5, 20, 19, 35, 1, 672, DateTimeKind.Local).AddTicks(9136), new DateTime(2023, 5, 20, 19, 35, 1, 672, DateTimeKind.Local).AddTicks(9086), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2023, 5, 20, 19, 35, 1, 672, DateTimeKind.Local).AddTicks(9142), "admin@localhost", true, "A", "SEED", " ", false, null, "Ginásio Clube de Tomar", "999999999", "Administrador", "ADMIN@LOCALHOST", "ADMIN@LOCALHOST", " ", "AQAAAAIAAYagAAAAECSRMmcQ9z7RZodoNXzWcre3BR6zy9uBAk86tXvnYhQEblP+r4ecFa1/FPDKeNf6JA==", "999999999", false, "ad41ac76-970e-43ff-9980-87bfe6c68cdc", false, null, "admin@localhost" });
+                values: new object[] { "57f5fcff-28ef-4bb8-8152-00a0c93b3cfe", 0, "f3f4a545-7957-419a-86e3-7378677b153a", new DateTime(2023, 5, 20, 20, 12, 29, 553, DateTimeKind.Local).AddTicks(3766), new DateTime(2023, 5, 20, 20, 12, 29, 553, DateTimeKind.Local).AddTicks(3562), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2023, 5, 20, 20, 12, 29, 553, DateTimeKind.Local).AddTicks(3784), "admin@localhost", true, "A", "SEED", " ", false, null, "Ginásio Clube de Tomar", "999999999", "Administrador", "ADMIN@LOCALHOST", "ADMIN@LOCALHOST", " ", "AQAAAAIAAYagAAAAENLrlMD7D5rvKP83H1P1K7zl++zU8yICymruyy3JEWJSxClltDJ3QkxU/O4QoF0NCQ==", "999999999", false, "ff18b097-3a02-4279-9c6b-40ff2d5f433d", false, null, "admin@localhost" });
 
             migrationBuilder.InsertData(
                 table: "AspNetUserRoles",
                 columns: new[] { "RoleId", "UserId" },
-                values: new object[] { "66fc9c09-8ffc-434a-88bb-d19eb19a0bc5", "89eeb420-18c6-48b0-bc7d-aa2fe45ccf22" });
+                values: new object[] { "46d80eaf-e478-4535-a6aa-005ec4165a7d", "57f5fcff-28ef-4bb8-8152-00a0c93b3cfe" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
@@ -423,6 +441,9 @@ namespace AppGCT.Migrations
 
             migrationBuilder.DropTable(
                 name: "Inscricao");
+
+            migrationBuilder.DropTable(
+                name: "MetodoPagamento");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");

@@ -1,0 +1,58 @@
+﻿@page
+@model AppGCT.Pages.Gestao.Metodos.CreateModel
+
+@{
+    ViewData["Title"] = "Criar Método Pagamento";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<h1>Criar Método Pagamento</h1>
+<hr />
+<div>
+    <a class='btn btn-primary btn-sm' asp-area='' asp-page='/Gestao/Metodos/Index'>Voltar</a>
+</div>
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="MetodoPagamento.CodMetodo" class="control-label"></label>
+                <input asp-for="MetodoPagamento.CodMetodo" class="form-control" />
+                <span asp-validation-for="MetodoPagamento.CodMetodo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MetodoPagamento.DescMetodo" class="control-label"></label>
+                <input asp-for="MetodoPagamento.DescMetodo" class="form-control" />
+                <span asp-validation-for="MetodoPagamento.DescMetodo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MetodoPagamento.ValorDesconto" class="control-label"></label>
+                <input type="number" asp-for="MetodoPagamento.ValorDesconto" class="form-control" />
+                <span asp-validation-for="MetodoPagamento.ValorDesconto" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MetodoPagamento.EstadoMetodo" class="control-label">Estado Desconto</label>
+                <div class="form-check">
+                    <label class="form-check-label">
+                        <input type="radio" asp-for="MetodoPagamento.EstadoMetodo" class="form-check-input" value="A" checked />
+                        Ativo
+                    </label>
+                </div>
+                <div class="form-check">
+                    <label class="form-check-label">
+                        <input type="radio" asp-for="MetodoPagamento.EstadoMetodo" class="form-check-input" value="I" />
+                        Inativo
+                    </label>
+                </div>
+                <span asp-validation-for="MetodoPagamento.EstadoMetodo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Criar" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

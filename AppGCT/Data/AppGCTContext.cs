@@ -47,5 +47,7 @@ namespace AppGCT.Data
         }
 
         public DbSet<AppGCT.Models.Classe> Classe { get; set; } = default!;
+
+        public DbSet<AppGCT.Models.MetodoPagamento> MetodoPagamento { get; set; } = default!;
     }
 }
