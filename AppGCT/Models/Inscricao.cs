@@ -101,6 +101,54 @@ namespace AppGCT.Models
         [Display(Name = "Modificado por")]
         public string? IdModificacao { get; set; }
 
+        public string DescricaoISocGinasta
+        {
+            get
+            {
+                switch (this.ISocGinasta)
+                {
+                    case "S":
+                        return "Sim";
+                    case "N":
+                        return "Não";
+                    default:
+                        return "Desconhecido";
+                }
+            }
+        }
+
+        public string DescricaoIExamMed
+        {
+            get
+            {
+                switch (this.IExamMed)
+                {
+                    case "S":
+                        return "Sim";
+                    case "N":
+                        return "Não";
+                    default:
+                        return "Desconhecido";
+                }
+            }
+        }
+
+        public string DescricaoIPagamInscricao
+        {
+            get
+            {
+                switch (this.IPagamInscricao)
+                {
+                    case "S":
+                        return "Sim";
+                    case "N":
+                        return "Não";
+                    default:
+                        return "Desconhecido";
+                }
+            }
+        }
+
         public int GinastaId { get; set; }
 
         public Ginasta? Atleta { get; set; }
@@ -108,6 +156,10 @@ namespace AppGCT.Models
         public int EpocaId { get; set; }
 
         public Epoca? Periodo { get; set; }
+
+        public Classe? Class { get; set; }
+
+        public int ClasseId { get; set; }
 
     }
 }

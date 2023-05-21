@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AppGCT.Migrations
 {
     [DbContext(typeof(AppGCTContext))]
-    [Migration("20230520191230_initialCreate")]
+    [Migration("20230521163206_initialCreate")]
     partial class initialCreate
     {
         /// <inheritdoc />
@@ -133,13 +133,13 @@ namespace AppGCT.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "57f5fcff-28ef-4bb8-8152-00a0c93b3cfe",
+                            Id = "4b022b3a-a936-4e46-aba1-ec8ae1455903",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "f3f4a545-7957-419a-86e3-7378677b153a",
-                            DataAprovacao = new DateTime(2023, 5, 20, 20, 12, 29, 553, DateTimeKind.Local).AddTicks(3766),
-                            DataCriacao = new DateTime(2023, 5, 20, 20, 12, 29, 553, DateTimeKind.Local).AddTicks(3562),
+                            ConcurrencyStamp = "5fa1c082-5353-401d-9a4c-18ed8c2661e1",
+                            DataAprovacao = new DateTime(2023, 5, 21, 17, 32, 5, 675, DateTimeKind.Local).AddTicks(5262),
+                            DataCriacao = new DateTime(2023, 5, 21, 17, 32, 5, 675, DateTimeKind.Local).AddTicks(5202),
                             DataModificacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DataNascim = new DateTime(2023, 5, 20, 20, 12, 29, 553, DateTimeKind.Local).AddTicks(3784),
+                            DataNascim = new DateTime(2023, 5, 21, 17, 32, 5, 675, DateTimeKind.Local).AddTicks(5269),
                             Email = "admin@localhost",
                             EmailConfirmed = true,
                             EstadoUtilizador = "A",
@@ -152,10 +152,10 @@ namespace AppGCT.Migrations
                             NormalizedEmail = "ADMIN@LOCALHOST",
                             NormalizedUserName = "ADMIN@LOCALHOST",
                             NumSocio = " ",
-                            PasswordHash = "AQAAAAIAAYagAAAAENLrlMD7D5rvKP83H1P1K7zl++zU8yICymruyy3JEWJSxClltDJ3QkxU/O4QoF0NCQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEKpE6m217uyA03KA7Uz6r/wcZ4Mq4WpA8Fnjzbh9CJV8QofsTh7fnDYeZDD7vraXrg==",
                             PhoneNumber = "999999999",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "ff18b097-3a02-4279-9c6b-40ff2d5f433d",
+                            SecurityStamp = "cea286bf-e544-47f1-b1db-e58359948d81",
                             TwoFactorEnabled = false,
                             UserName = "admin@localhost"
                         });
@@ -400,6 +400,9 @@ namespace AppGCT.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int?>("Id"));
 
+                    b.Property<int>("ClasseId")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("DataCriacao")
                         .HasColumnType("datetime2");
 
@@ -480,6 +483,8 @@ namespace AppGCT.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("ClasseId");
+
                     b.HasIndex("EpocaId");
 
                     b.HasIndex("GinastaId");
@@ -517,6 +522,7 @@ namespace AppGCT.Migrations
                         .HasColumnType("nvarchar(36)");
 
                     b.Property<decimal?>("ValorDesconto")
+                        .HasPrecision(18, 2)
                         .HasColumnType("decimal(18,2)");
 
                     b.HasKey("CodMetodo");
@@ -553,19 +559,19 @@ namespace AppGCT.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "46d80eaf-e478-4535-a6aa-005ec4165a7d",
+                            Id = "df9dcab2-709b-4f90-b381-93cd107c5cfe",
                             Name = "Administrador",
                             NormalizedName = "ADMINISTRADOR"
                         },
                         new
                         {
-                            Id = "3008da7f-59ba-452d-8bfb-0b1fb95dd9c2",
+                            Id = "8379c74e-217c-4001-a588-f39f7e3a318e",
                             Name = "Ginásio",
                             NormalizedName = "GINÁSIO"
                         },
                         new
                         {
-                            Id = "3eebf472-6f08-43e3-801c-6f49529ac1a9",
+                            Id = "d4b4a563-f933-4430-a0e1-92ee32bd5b51",
                             Name = "Sócio",
                             NormalizedName = "SÓCIO"
                         });
@@ -662,8 +668,8 @@ namespace AppGCT.Migrations
                     b.HasData(
                         new
                         {
-                            UserId = "57f5fcff-28ef-4bb8-8152-00a0c93b3cfe",
-                            RoleId = "46d80eaf-e478-4535-a6aa-005ec4165a7d"
+                            UserId = "4b022b3a-a936-4e46-aba1-ec8ae1455903",
+                            RoleId = "df9dcab2-709b-4f90-b381-93cd107c5cfe"
                         });
                 });
 
@@ -701,6 +707,12 @@ namespace AppGCT.Migrations
 
             modelBuilder.Entity("AppGCT.Models.Inscricao", b =>
                 {
+                    b.HasOne("AppGCT.Models.Classe", "Class")
+                        .WithMany("Inscricoes")
+                        .HasForeignKey("ClasseId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("AppGCT.Models.Epoca", "Periodo")
                         .WithMany("Inscricoes")
                         .HasForeignKey("EpocaId")
@@ -714,6 +726,8 @@ namespace AppGCT.Migrations
                         .IsRequired();
 
                     b.Navigation("Atleta");
+
+                    b.Navigation("Class");
 
                     b.Navigation("Periodo");
                 });
@@ -772,6 +786,11 @@ namespace AppGCT.Migrations
             modelBuilder.Entity("AppGCT.Areas.Identity.Data.Utilizador", b =>
                 {
                     b.Navigation("Ginasta");
+                });
+
+            modelBuilder.Entity("AppGCT.Models.Classe", b =>
+                {
+                    b.Navigation("Inscricoes");
                 });
 
             modelBuilder.Entity("AppGCT.Models.Epoca", b =>

@@ -26,6 +26,8 @@ namespace AppGCT.Pages.Inscricoes.InscricaoEpoca
         {
             ViewData["GinastaId"] = new SelectList(_context.Ginasta.Where(i => i.Id == id), "Id", "ID_DescrGinasta");
             ViewData["EpocaId"] = new SelectList(_context.Epoca, "IdEpoca", "NomeEpoca");
+            ViewData["ClasseId"] = new SelectList(_context.Classe.Where(i => i.EstadoClasse == "A"), "IdClasse", "NomeClasse");
+
             ViewData["BackId"] = id;
             return Page();
         }
@@ -49,7 +51,6 @@ namespace AppGCT.Pages.Inscricoes.InscricaoEpoca
             // Because we start at year 1 for the Gregorian
             // calendar, we must subtract a year here.
             int years = (zeroTime + span).Year - 1;
-
 
             Inscricao.IdadeAgosto = years;
             Inscricao.IConsentimento = "N";
