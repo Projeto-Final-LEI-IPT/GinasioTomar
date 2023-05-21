@@ -28,6 +28,7 @@ namespace AppGCT.Pages.Inscricoes.InscricaoEpoca
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
+            ViewData["ClasseId"] = new SelectList(_context.Classe.Where(i => i.EstadoClasse == "A"), "IdClasse", "NomeClasse");
             if (id == null || _context.Inscricao == null)
             {
                 return NotFound();

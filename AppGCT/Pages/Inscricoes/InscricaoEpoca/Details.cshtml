@@ -15,6 +15,24 @@
     </div>
     <dl class="row">
         <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Inscricao.Atleta.Id)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Inscricao.Atleta.ID_DescrGinasta)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Inscricao.Periodo.NomeEpoca)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Inscricao.Periodo.NomeEpoca)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Inscricao.Class.NomeClasse)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Inscricao.Class.NomeClasse)
+        </dd>
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Inscricao.IdFGP)
         </dt>
         <dd class="col-sm-10">
@@ -159,18 +177,7 @@
                 @Html.DisplayFor(model => model.Inscricao.IdModificacao)
         </dd>
         }
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Inscricao.Atleta)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Inscricao.Atleta.ID_DescrGinasta)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Inscricao.Periodo)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Inscricao.Periodo.NomeEpoca)
-        </dd>
+
     </dl>
 </div>
 <div>

@@ -31,6 +31,18 @@
         <form method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
+                <label asp-for="Inscricao.Atleta.Id" class="control-label"></label>
+                <select asp-for="Inscricao.GinastaId" class="form-control" asp-items="ViewBag.GinastaId"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="Inscricao.Periodo.NomeEpoca" class="control-label"></label>
+                <select asp-for="Inscricao.EpocaId" class="form-control" asp-items="ViewBag.EpocaId"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="Inscricao.Class.NomeClasse" class="control-label"></label>
+                <select asp-for="Inscricao.ClasseId" class="form-control" asp-items="ViewBag.ClasseId"></select>
+            </div>
+            <div class="form-group">
                 <label asp-for="Inscricao.IdFGP" class="control-label"></label>
                 <input asp-for="Inscricao.IdFGP" class="form-control" />
                 <span asp-validation-for="Inscricao.IdFGP" class="text-danger"></span>
@@ -127,14 +139,6 @@
                 <label asp-for="Inscricao.DescAlergias" class="control-label"></label>
                 <input asp-for="Inscricao.DescAlergias" class="form-control" />
                 <span asp-validation-for="Inscricao.DescAlergias" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Inscricao.Atleta.Id" class="control-label"></label>
-                <select asp-for="Inscricao.GinastaId" class ="form-control" asp-items="ViewBag.GinastaId"></select>
-            </div>
-            <div class="form-group">
-                <label asp-for="Inscricao.Periodo.NomeEpoca" class="control-label"></label>
-                <select asp-for="Inscricao.EpocaId" class="form-control" asp-items="ViewBag.EpocaId"></select>
             </div>
             <div class="form-group">
                 <input type="submit" value="Criar" class="btn btn-primary" />

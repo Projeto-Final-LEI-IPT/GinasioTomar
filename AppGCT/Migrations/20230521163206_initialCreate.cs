@@ -125,7 +125,7 @@ namespace AppGCT.Migrations
                 {
                     CodMetodo = table.Column<string>(type: "nvarchar(2)", maxLength: 2, nullable: false),
                     DescMetodo = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    ValorDesconto = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
+                    ValorDesconto = table.Column<decimal>(type: "decimal(18,2)", precision: 18, scale: 2, nullable: true),
                     EstadoMetodo = table.Column<string>(type: "nvarchar(1)", maxLength: 1, nullable: true),
                     DataCriacao = table.Column<DateTime>(type: "datetime2", nullable: false),
                     IdCriacao = table.Column<string>(type: "nvarchar(36)", maxLength: 36, nullable: true),
@@ -321,11 +321,18 @@ namespace AppGCT.Migrations
                     DataModificacao = table.Column<DateTime>(type: "datetime2", nullable: false),
                     IdModificacao = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     GinastaId = table.Column<int>(type: "int", nullable: false),
-                    EpocaId = table.Column<int>(type: "int", nullable: false)
+                    EpocaId = table.Column<int>(type: "int", nullable: false),
+                    ClasseId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Inscricao", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Inscricao_Classe_ClasseId",
+                        column: x => x.ClasseId,
+                        principalTable: "Classe",
+                        principalColumn: "IdClasse",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Inscricao_Epoca_EpocaId",
                         column: x => x.EpocaId,
@@ -345,20 +352,20 @@ namespace AppGCT.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "3008da7f-59ba-452d-8bfb-0b1fb95dd9c2", null, "Ginásio", "GINÁSIO" },
-                    { "3eebf472-6f08-43e3-801c-6f49529ac1a9", null, "Sócio", "SÓCIO" },
-                    { "46d80eaf-e478-4535-a6aa-005ec4165a7d", null, "Administrador", "ADMINISTRADOR" }
+                    { "8379c74e-217c-4001-a588-f39f7e3a318e", null, "Ginásio", "GINÁSIO" },
+                    { "d4b4a563-f933-4430-a0e1-92ee32bd5b51", null, "Sócio", "SÓCIO" },
+                    { "df9dcab2-709b-4f90-b381-93cd107c5cfe", null, "Administrador", "ADMINISTRADOR" }
                 });
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "DataAprovacao", "DataCriacao", "DataModificacao", "DataNascim", "Email", "EmailConfirmed", "EstadoUtilizador", "IdCriacao", "IdModificacao", "LockoutEnabled", "LockoutEnd", "Morada", "NIF", "Nome", "NormalizedEmail", "NormalizedUserName", "NumSocio", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UltimoLogin", "UserName" },
-                values: new object[] { "57f5fcff-28ef-4bb8-8152-00a0c93b3cfe", 0, "f3f4a545-7957-419a-86e3-7378677b153a", new DateTime(2023, 5, 20, 20, 12, 29, 553, DateTimeKind.Local).AddTicks(3766), new DateTime(2023, 5, 20, 20, 12, 29, 553, DateTimeKind.Local).AddTicks(3562), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2023, 5, 20, 20, 12, 29, 553, DateTimeKind.Local).AddTicks(3784), "admin@localhost", true, "A", "SEED", " ", false, null, "Ginásio Clube de Tomar", "999999999", "Administrador", "ADMIN@LOCALHOST", "ADMIN@LOCALHOST", " ", "AQAAAAIAAYagAAAAENLrlMD7D5rvKP83H1P1K7zl++zU8yICymruyy3JEWJSxClltDJ3QkxU/O4QoF0NCQ==", "999999999", false, "ff18b097-3a02-4279-9c6b-40ff2d5f433d", false, null, "admin@localhost" });
+                values: new object[] { "4b022b3a-a936-4e46-aba1-ec8ae1455903", 0, "5fa1c082-5353-401d-9a4c-18ed8c2661e1", new DateTime(2023, 5, 21, 17, 32, 5, 675, DateTimeKind.Local).AddTicks(5262), new DateTime(2023, 5, 21, 17, 32, 5, 675, DateTimeKind.Local).AddTicks(5202), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2023, 5, 21, 17, 32, 5, 675, DateTimeKind.Local).AddTicks(5269), "admin@localhost", true, "A", "SEED", " ", false, null, "Ginásio Clube de Tomar", "999999999", "Administrador", "ADMIN@LOCALHOST", "ADMIN@LOCALHOST", " ", "AQAAAAIAAYagAAAAEKpE6m217uyA03KA7Uz6r/wcZ4Mq4WpA8Fnjzbh9CJV8QofsTh7fnDYeZDD7vraXrg==", "999999999", false, "cea286bf-e544-47f1-b1db-e58359948d81", false, null, "admin@localhost" });
 
             migrationBuilder.InsertData(
                 table: "AspNetUserRoles",
                 columns: new[] { "RoleId", "UserId" },
-                values: new object[] { "46d80eaf-e478-4535-a6aa-005ec4165a7d", "57f5fcff-28ef-4bb8-8152-00a0c93b3cfe" });
+                values: new object[] { "df9dcab2-709b-4f90-b381-93cd107c5cfe", "4b022b3a-a936-4e46-aba1-ec8ae1455903" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
@@ -405,6 +412,11 @@ namespace AppGCT.Migrations
                 column: "UtilizadorId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Inscricao_ClasseId",
+                table: "Inscricao",
+                column: "ClasseId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Inscricao_EpocaId",
                 table: "Inscricao",
                 column: "EpocaId");
@@ -434,9 +446,6 @@ namespace AppGCT.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "Classe");
-
-            migrationBuilder.DropTable(
                 name: "Desconto");
 
             migrationBuilder.DropTable(
@@ -447,6 +456,9 @@ namespace AppGCT.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
+
+            migrationBuilder.DropTable(
+                name: "Classe");
 
             migrationBuilder.DropTable(
                 name: "Epoca");

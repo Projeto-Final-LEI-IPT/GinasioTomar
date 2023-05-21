@@ -74,6 +74,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.Inscricao[0].Periodo.NomeEpoca)
             </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Inscricao[0].Class.NomeClasse)
+            </th>
             <th></th>
         </tr>
     </thead>
@@ -84,23 +87,26 @@
                 @Html.DisplayFor(modelItem => item.IdFGP)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.ISocGinasta)
+                @Html.DisplayFor(modelItem => item.DescricaoISocGinasta)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.DtInscricao)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.IExamMed)
+                @Html.DisplayFor(modelItem => item.DescricaoIExamMed)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.DtExamMed)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.IPagamInscricao)
+                @Html.DisplayFor(modelItem => item.DescricaoIPagamInscricao)
             </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Periodo.NomeEpoca)
-                </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Periodo.NomeEpoca)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Class.NomeClasse)
+            </td>
             <td>
                     <a class='btn btn-primary btn-sm' asp-area='' asp-page='/Inscricoes/InscricaoEpoca/Edit' asp-route-id='@item.Id'>Editar</a>
                     <a class='btn btn-primary btn-sm' asp-area='' asp-page='/Inscricoes/InscricaoEpoca/Details' asp-route-id='@item.Id'>Detalhes</a>

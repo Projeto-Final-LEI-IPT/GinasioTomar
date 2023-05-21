@@ -44,6 +44,11 @@ namespace AppGCT.Data
                    .HasOne(p => p.Periodo)
                    .WithMany(a => a.Inscricoes)
                     .HasForeignKey(p => p.EpocaId);
+
+            builder.Entity<Inscricao>()
+                  .HasOne(p => p.Class)
+                  .WithMany(a => a.Inscricoes)
+                   .HasForeignKey(p => p.ClasseId);
         }
 
         public DbSet<AppGCT.Models.Classe> Classe { get; set; } = default!;
