@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AppGCT.Migrations
 {
     [DbContext(typeof(AppGCTContext))]
-    [Migration("20230521163206_initialCreate")]
+    [Migration("20230524193940_initialCreate")]
     partial class initialCreate
     {
         /// <inheritdoc />
@@ -133,13 +133,13 @@ namespace AppGCT.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "4b022b3a-a936-4e46-aba1-ec8ae1455903",
+                            Id = "153be909-1acf-42a2-8220-a07f18b40ea4",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "5fa1c082-5353-401d-9a4c-18ed8c2661e1",
-                            DataAprovacao = new DateTime(2023, 5, 21, 17, 32, 5, 675, DateTimeKind.Local).AddTicks(5262),
-                            DataCriacao = new DateTime(2023, 5, 21, 17, 32, 5, 675, DateTimeKind.Local).AddTicks(5202),
+                            ConcurrencyStamp = "0d255468-6839-48b0-b20e-c2d2e6c63ff9",
+                            DataAprovacao = new DateTime(2023, 5, 24, 20, 39, 39, 401, DateTimeKind.Local).AddTicks(6525),
+                            DataCriacao = new DateTime(2023, 5, 24, 20, 39, 39, 401, DateTimeKind.Local).AddTicks(6450),
                             DataModificacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DataNascim = new DateTime(2023, 5, 21, 17, 32, 5, 675, DateTimeKind.Local).AddTicks(5269),
+                            DataNascim = new DateTime(2023, 5, 24, 20, 39, 39, 401, DateTimeKind.Local).AddTicks(6533),
                             Email = "admin@localhost",
                             EmailConfirmed = true,
                             EstadoUtilizador = "A",
@@ -152,10 +152,10 @@ namespace AppGCT.Migrations
                             NormalizedEmail = "ADMIN@LOCALHOST",
                             NormalizedUserName = "ADMIN@LOCALHOST",
                             NumSocio = " ",
-                            PasswordHash = "AQAAAAIAAYagAAAAEKpE6m217uyA03KA7Uz6r/wcZ4Mq4WpA8Fnjzbh9CJV8QofsTh7fnDYeZDD7vraXrg==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEIm9kSWXDKEZqzFWwiYQkonXiMM5R4C5+t14Li+Cn5BYjI/JRSFTN08aZ0JH2MB5jQ==",
                             PhoneNumber = "999999999",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "cea286bf-e544-47f1-b1db-e58359948d81",
+                            SecurityStamp = "e5528035-4c89-43e0-b371-1401783a8e4b",
                             TwoFactorEnabled = false,
                             UserName = "admin@localhost"
                         });
@@ -530,6 +530,84 @@ namespace AppGCT.Migrations
                     b.ToTable("MetodoPagamento");
                 });
 
+            modelBuilder.Entity("AppGCT.Models.Rubrica", b =>
+                {
+                    b.Property<string>("CodRubrica")
+                        .HasMaxLength(3)
+                        .HasColumnType("nvarchar(3)");
+
+                    b.Property<int?>("ClasseId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("DataCriacao")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DataModificacao")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("DescontoId")
+                        .HasColumnType("nvarchar(2)");
+
+                    b.Property<string>("DescricaoRubrica")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("EstadoRubrica")
+                        .IsRequired()
+                        .HasMaxLength(1)
+                        .HasColumnType("nvarchar(1)");
+
+                    b.Property<string>("Horario")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("HorasSemanais")
+                        .HasMaxLength(6)
+                        .HasColumnType("nvarchar(6)");
+
+                    b.Property<string>("IPrecario")
+                        .IsRequired()
+                        .HasMaxLength(1)
+                        .HasColumnType("nvarchar(1)");
+
+                    b.Property<string>("IVlrUnit")
+                        .IsRequired()
+                        .HasMaxLength(1)
+                        .HasColumnType("nvarchar(1)");
+
+                    b.Property<string>("IdCriacao")
+                        .HasMaxLength(36)
+                        .HasColumnType("nvarchar(36)");
+
+                    b.Property<string>("IdModificacao")
+                        .HasMaxLength(36)
+                        .HasColumnType("nvarchar(36)");
+
+                    b.Property<string>("LocalTreino")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<int?>("OrdemPrecario")
+                        .HasColumnType("int");
+
+                    b.Property<string>("TipoMovimento")
+                        .IsRequired()
+                        .HasMaxLength(1)
+                        .HasColumnType("nvarchar(1)");
+
+                    b.Property<decimal?>("ValorUnitario")
+                        .HasPrecision(18, 2)
+                        .HasColumnType("decimal(18,2)");
+
+                    b.HasKey("CodRubrica");
+
+                    b.HasIndex("ClasseId");
+
+                    b.HasIndex("DescontoId");
+
+                    b.ToTable("Rubrica");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
                     b.Property<string>("Id")
@@ -559,19 +637,19 @@ namespace AppGCT.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "df9dcab2-709b-4f90-b381-93cd107c5cfe",
+                            Id = "43ef5bbf-943e-4102-91d1-119e0a36f2ff",
                             Name = "Administrador",
                             NormalizedName = "ADMINISTRADOR"
                         },
                         new
                         {
-                            Id = "8379c74e-217c-4001-a588-f39f7e3a318e",
+                            Id = "a9032a25-3fe6-4900-ac03-d7d05c4d08ff",
                             Name = "Ginásio",
                             NormalizedName = "GINÁSIO"
                         },
                         new
                         {
-                            Id = "d4b4a563-f933-4430-a0e1-92ee32bd5b51",
+                            Id = "f2cf4a94-82c3-45c2-be8f-d64a6eb6624a",
                             Name = "Sócio",
                             NormalizedName = "SÓCIO"
                         });
@@ -668,8 +746,8 @@ namespace AppGCT.Migrations
                     b.HasData(
                         new
                         {
-                            UserId = "4b022b3a-a936-4e46-aba1-ec8ae1455903",
-                            RoleId = "df9dcab2-709b-4f90-b381-93cd107c5cfe"
+                            UserId = "153be909-1acf-42a2-8220-a07f18b40ea4",
+                            RoleId = "43ef5bbf-943e-4102-91d1-119e0a36f2ff"
                         });
                 });
 
@@ -732,6 +810,21 @@ namespace AppGCT.Migrations
                     b.Navigation("Periodo");
                 });
 
+            modelBuilder.Entity("AppGCT.Models.Rubrica", b =>
+                {
+                    b.HasOne("AppGCT.Models.Classe", "classe")
+                        .WithMany("Rubricas")
+                        .HasForeignKey("ClasseId");
+
+                    b.HasOne("AppGCT.Models.Desconto", "desconto")
+                        .WithMany("Rubricas")
+                        .HasForeignKey("DescontoId");
+
+                    b.Navigation("classe");
+
+                    b.Navigation("desconto");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -791,6 +884,13 @@ namespace AppGCT.Migrations
             modelBuilder.Entity("AppGCT.Models.Classe", b =>
                 {
                     b.Navigation("Inscricoes");
+
+                    b.Navigation("Rubricas");
+                });
+
+            modelBuilder.Entity("AppGCT.Models.Desconto", b =>
+                {
+                    b.Navigation("Rubricas");
                 });
 
             modelBuilder.Entity("AppGCT.Models.Epoca", b =>

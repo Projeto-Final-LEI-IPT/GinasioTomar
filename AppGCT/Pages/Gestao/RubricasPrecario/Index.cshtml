@@ -1,0 +1,127 @@
+﻿@page
+@model AppGCT.Pages.Gestao.RubricasPrecario.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Rubrica[0].DescricaoRubrica)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Rubrica[0].EstadoRubrica)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Rubrica[0].TipoMovimento)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Rubrica[0].IPrecario)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Rubrica[0].OrdemPrecario)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Rubrica[0].IVlrUnit)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Rubrica[0].ValorUnitario)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Rubrica[0].LocalTreino)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Rubrica[0].Horario)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Rubrica[0].HorasSemanais)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Rubrica[0].DataCriacao)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Rubrica[0].IdCriacao)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Rubrica[0].DataModificacao)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Rubrica[0].IdModificacao)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Rubrica[0].desconto)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Rubrica[0].classe)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Rubrica) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.DescricaoRubrica)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EstadoRubrica)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TipoMovimento)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IPrecario)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OrdemPrecario)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IVlrUnit)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ValorUnitario)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LocalTreino)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Horario)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HorasSemanais)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DataCriacao)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdCriacao)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DataModificacao)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdModificacao)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.desconto.CodDesconto)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.classe.NomeClasse)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.CodRubrica">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.CodRubrica">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.CodRubrica">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

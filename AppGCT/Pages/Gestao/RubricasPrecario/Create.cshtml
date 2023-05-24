@@ -1,0 +1,113 @@
+﻿@page
+@model AppGCT.Pages.Gestao.RubricasPrecario.CreateModel
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<h1>Create</h1>
+
+<h4>Rubrica</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Rubrica.CodRubrica" class="control-label"></label>
+                <input asp-for="Rubrica.CodRubrica" class="form-control" />
+                <span asp-validation-for="Rubrica.CodRubrica" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Rubrica.DescricaoRubrica" class="control-label"></label>
+                <input asp-for="Rubrica.DescricaoRubrica" class="form-control" />
+                <span asp-validation-for="Rubrica.DescricaoRubrica" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Rubrica.EstadoRubrica" class="control-label"></label>
+                <input asp-for="Rubrica.EstadoRubrica" class="form-control" />
+                <span asp-validation-for="Rubrica.EstadoRubrica" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Rubrica.TipoMovimento" class="control-label"></label>
+                <input asp-for="Rubrica.TipoMovimento" class="form-control" />
+                <span asp-validation-for="Rubrica.TipoMovimento" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Rubrica.IPrecario" class="control-label"></label>
+                <input asp-for="Rubrica.IPrecario" class="form-control" />
+                <span asp-validation-for="Rubrica.IPrecario" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Rubrica.OrdemPrecario" class="control-label"></label>
+                <input asp-for="Rubrica.OrdemPrecario" class="form-control" />
+                <span asp-validation-for="Rubrica.OrdemPrecario" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Rubrica.IVlrUnit" class="control-label"></label>
+                <input asp-for="Rubrica.IVlrUnit" class="form-control" />
+                <span asp-validation-for="Rubrica.IVlrUnit" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Rubrica.ValorUnitario" class="control-label"></label>
+                <input asp-for="Rubrica.ValorUnitario" class="form-control" />
+                <span asp-validation-for="Rubrica.ValorUnitario" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Rubrica.LocalTreino" class="control-label"></label>
+                <input asp-for="Rubrica.LocalTreino" class="form-control" />
+                <span asp-validation-for="Rubrica.LocalTreino" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Rubrica.Horario" class="control-label"></label>
+                <input asp-for="Rubrica.Horario" class="form-control" />
+                <span asp-validation-for="Rubrica.Horario" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Rubrica.HorasSemanais" class="control-label"></label>
+                <input asp-for="Rubrica.HorasSemanais" class="form-control" />
+                <span asp-validation-for="Rubrica.HorasSemanais" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Rubrica.DataCriacao" class="control-label"></label>
+                <input asp-for="Rubrica.DataCriacao" class="form-control" />
+                <span asp-validation-for="Rubrica.DataCriacao" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Rubrica.IdCriacao" class="control-label"></label>
+                <input asp-for="Rubrica.IdCriacao" class="form-control" />
+                <span asp-validation-for="Rubrica.IdCriacao" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Rubrica.DataModificacao" class="control-label"></label>
+                <input asp-for="Rubrica.DataModificacao" class="form-control" />
+                <span asp-validation-for="Rubrica.DataModificacao" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Rubrica.IdModificacao" class="control-label"></label>
+                <input asp-for="Rubrica.IdModificacao" class="form-control" />
+                <span asp-validation-for="Rubrica.IdModificacao" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Rubrica.DescontoId" class="control-label"></label>
+                <select asp-for="Rubrica.DescontoId" class ="form-control" asp-items="ViewBag.DescontoId"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="Rubrica.ClasseId" class="control-label"></label>
+                <select asp-for="Rubrica.ClasseId" class ="form-control" asp-items="ViewBag.ClasseId"></select>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
