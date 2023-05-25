@@ -43,16 +43,28 @@ namespace AppGCT.Data
             builder.Entity<Inscricao>()
                    .HasOne(p => p.Periodo)
                    .WithMany(a => a.Inscricoes)
-                    .HasForeignKey(p => p.EpocaId);
+                   .HasForeignKey(p => p.EpocaId);
 
             builder.Entity<Inscricao>()
                   .HasOne(p => p.Class)
                   .WithMany(a => a.Inscricoes)
+                  .HasForeignKey(p => p.ClasseId);
+
+            builder.Entity<Rubrica>()
+                  .HasOne(p => p.desconto)
+                  .WithMany(a => a.Rubricas)
+                  .HasForeignKey(p => p.DescontoId);
+
+            builder.Entity<Rubrica>()
+                   .HasOne(p => p.classe)
+                   .WithMany(a => a.Rubricas)
                    .HasForeignKey(p => p.ClasseId);
         }
 
         public DbSet<AppGCT.Models.Classe> Classe { get; set; } = default!;
 
         public DbSet<AppGCT.Models.MetodoPagamento> MetodoPagamento { get; set; } = default!;
+
+        public DbSet<AppGCT.Models.Rubrica> Rubrica { get; set; } = default!;
     }
 }

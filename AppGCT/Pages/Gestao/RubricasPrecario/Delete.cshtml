@@ -1,0 +1,119 @@
+﻿@page
+@model AppGCT.Pages.Gestao.RubricasPrecario.DeleteModel
+
+@{
+    ViewData["Title"] = "Delete";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<h1>Delete</h1>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Rubrica</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Rubrica.DescricaoRubrica)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Rubrica.DescricaoRubrica)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Rubrica.EstadoRubrica)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Rubrica.EstadoRubrica)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Rubrica.TipoMovimento)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Rubrica.TipoMovimento)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Rubrica.IPrecario)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Rubrica.IPrecario)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Rubrica.OrdemPrecario)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Rubrica.OrdemPrecario)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Rubrica.IVlrUnit)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Rubrica.IVlrUnit)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Rubrica.ValorUnitario)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Rubrica.ValorUnitario)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Rubrica.LocalTreino)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Rubrica.LocalTreino)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Rubrica.Horario)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Rubrica.Horario)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Rubrica.HorasSemanais)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Rubrica.HorasSemanais)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Rubrica.DataCriacao)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Rubrica.DataCriacao)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Rubrica.IdCriacao)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Rubrica.IdCriacao)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Rubrica.DataModificacao)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Rubrica.DataModificacao)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Rubrica.IdModificacao)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Rubrica.IdModificacao)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Rubrica.desconto)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Rubrica.desconto.CodDesconto)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Rubrica.classe)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Rubrica.classe.NomeClasse)
+        </dd>
+    </dl>
+    
+    <form method="post">
+        <input type="hidden" asp-for="Rubrica.CodRubrica" />
+        <input type="submit" value="Delete" class="btn btn-danger" /> |
+        <a asp-page="./Index">Back to List</a>
+    </form>
+</div>

@@ -49,5 +49,7 @@ namespace AppGCT.Models
                 }
             }
         }
+
+        public List<Rubrica>? Rubricas { get; set; }
     }
 }
