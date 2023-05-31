@@ -35,12 +35,12 @@ namespace AppGCT.Data
             builder.Entity<Ginasta>()
                    .HasOne(p => p.Socio)
                    .WithMany(a => a.Ginasta)
-                    .HasForeignKey(p => p.UtilizadorId);
+                   .HasForeignKey(p => p.UtilizadorId);
 
             builder.Entity<Inscricao>()
                    .HasOne(p => p.Atleta)
                    .WithMany(a => a.Inscricoes)
-                    .HasForeignKey(p => p.GinastaId);
+                   .HasForeignKey(p => p.GinastaId);
 
             builder.Entity<Inscricao>()
                    .HasOne(p => p.Periodo)
@@ -53,23 +53,16 @@ namespace AppGCT.Data
                   .HasForeignKey(p => p.ClasseId);
 
             builder.Entity<Rubrica>()
-                   .HasOne(p => p.desconto)
+                   .HasOne(p => p.Discount)
                    .WithMany(p => p.Rubricas)
                    .HasForeignKey(p => p.DescontoId)
                    .IsRequired(false);
 
-
-            //builder.Entity<Rubrica>()
-            //     .HasOne(p => p.desconto)
-            //    .WithOne()
-            //  .HasForeignKey<Rubrica>(p => p.DescontoId)
-            // .IsRequired(false);
-
-            //builder.Entity<Rubrica>()
-            //      .HasOne(p => p.classe)
-            //    .WithOne()
-            //  .HasForeignKey<Rubrica>(p => p.ClasseId)
-            // .IsRequired(false);
+            builder.Entity<Rubrica>()
+                   .HasOne(p => p.Modalidade)
+                   .WithMany(p => p.Rubricas)
+                   .HasForeignKey(p => p.ClasseId)
+                   .IsRequired(false);
         }
 
         public DbSet<AppGCT.Models.Classe> Classe { get; set; } = default!;

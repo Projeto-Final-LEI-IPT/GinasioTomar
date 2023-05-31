@@ -26,7 +26,7 @@ namespace AppGCT.Pages.Gestao.RubricasPrecario
             if (_context.Rubrica != null)
             {
                 Rubrica = await _context.Rubrica
-                .Include(r => r.desconto).ToListAsync();
+                .Include(r => r.Discount).ToListAsync();
             }
         }
     }

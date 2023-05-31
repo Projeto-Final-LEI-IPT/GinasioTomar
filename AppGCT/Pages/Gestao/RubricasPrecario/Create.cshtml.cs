@@ -25,11 +25,20 @@ namespace AppGCT.Pages.Gestao.RubricasPrecario
             descontos.Insert(0, new Desconto
             {
                 CodDesconto = "",
-                DescDesconto = ""
+                DescDesconto = "Sem desconto"
 
             });
 
-            ViewData["DescontoId"] = new SelectList(descontos, "CodDesconto", "CodDesconto");
+            ViewData["DescontoId"] = new SelectList(descontos, "CodDesconto", "DescDesconto");
+           
+            var classes = _context.Classe.ToList();
+            classes.Insert(0, new Classe
+            {
+                NomeClasse = "Sem classe"
+
+            });
+
+            ViewData["ClasseId"] = new SelectList(classes, "IdClasse", "NomeClasse");
             return Page();
 
 
