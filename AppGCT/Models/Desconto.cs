@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
+using Microsoft.Extensions.Hosting;
 
 namespace AppGCT.Models
 {
@@ -50,6 +51,6 @@ namespace AppGCT.Models
             }
         }
 
-        public List<Rubrica>? Rubricas { get; set; }
+        public List<Rubrica>? Rubricas { get; set; } = new List<Rubrica>();
     }
 }

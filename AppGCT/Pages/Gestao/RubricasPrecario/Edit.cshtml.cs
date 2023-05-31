@@ -36,7 +36,6 @@ namespace AppGCT.Pages.Gestao.RubricasPrecario
                 return NotFound();
             }
             Rubrica = rubrica;
-           ViewData["ClasseId"] = new SelectList(_context.Classe, "IdClasse", "NomeClasse");
            ViewData["DescontoId"] = new SelectList(_context.Desconto, "CodDesconto", "CodDesconto");
             return Page();
         }

@@ -21,8 +21,14 @@ namespace AppGCT.Pages.Gestao.RubricasPrecario
 
         public IActionResult OnGet()
         {
-        ViewData["ClasseId"] = new SelectList(_context.Classe, "IdClasse", "NomeClasse");
-        ViewData["DescontoId"] = new SelectList(_context.Desconto, "CodDesconto", "CodDesconto");
+            var descontoEmpty = new SelectListItem()
+            {
+                Value = null,
+                Text = "--- select desconto ---"
+            };
+            _context.Desconto.Insert(0, descontoEmpty);
+
+            ViewData["DescontoId"] = new SelectList(_context.Desconto, "CodDesconto", "CodDesconto");
             return Page();
         }
 
