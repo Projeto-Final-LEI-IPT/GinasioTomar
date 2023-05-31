@@ -42,6 +42,6 @@ namespace AppGCT.Models
         }
 
         public List<Inscricao>? Inscricoes { get; set; }
-        public List<Rubrica>? Rubricas { get; set; }
+       // public List<Rubrica>? Rubricas { get; set; }
     }
 }

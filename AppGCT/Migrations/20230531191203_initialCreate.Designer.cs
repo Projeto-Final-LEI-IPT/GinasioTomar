@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AppGCT.Migrations
 {
     [DbContext(typeof(AppGCTContext))]
-    [Migration("20230524193940_initialCreate")]
+    [Migration("20230531191203_initialCreate")]
     partial class initialCreate
     {
         /// <inheritdoc />
@@ -133,13 +133,13 @@ namespace AppGCT.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "153be909-1acf-42a2-8220-a07f18b40ea4",
+                            Id = "f2e19878-2466-4086-a1b6-4e46febd8e36",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "0d255468-6839-48b0-b20e-c2d2e6c63ff9",
-                            DataAprovacao = new DateTime(2023, 5, 24, 20, 39, 39, 401, DateTimeKind.Local).AddTicks(6525),
-                            DataCriacao = new DateTime(2023, 5, 24, 20, 39, 39, 401, DateTimeKind.Local).AddTicks(6450),
+                            ConcurrencyStamp = "9ca2120c-c538-4420-acb5-4e9c93ed05f8",
+                            DataAprovacao = new DateTime(2023, 5, 31, 20, 12, 2, 913, DateTimeKind.Local).AddTicks(4828),
+                            DataCriacao = new DateTime(2023, 5, 31, 20, 12, 2, 913, DateTimeKind.Local).AddTicks(4769),
                             DataModificacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DataNascim = new DateTime(2023, 5, 24, 20, 39, 39, 401, DateTimeKind.Local).AddTicks(6533),
+                            DataNascim = new DateTime(2023, 5, 31, 20, 12, 2, 913, DateTimeKind.Local).AddTicks(4836),
                             Email = "admin@localhost",
                             EmailConfirmed = true,
                             EstadoUtilizador = "A",
@@ -152,10 +152,10 @@ namespace AppGCT.Migrations
                             NormalizedEmail = "ADMIN@LOCALHOST",
                             NormalizedUserName = "ADMIN@LOCALHOST",
                             NumSocio = " ",
-                            PasswordHash = "AQAAAAIAAYagAAAAEIm9kSWXDKEZqzFWwiYQkonXiMM5R4C5+t14Li+Cn5BYjI/JRSFTN08aZ0JH2MB5jQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEHm4Q/JGbfr6ErvkYUG4GBWjeNrjYXaLTs4NOu93g8K78gDujFZ4NcSjCYh7mSl61A==",
                             PhoneNumber = "999999999",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "e5528035-4c89-43e0-b371-1401783a8e4b",
+                            SecurityStamp = "3342f42b-3c7c-4823-84fe-95778b360e0a",
                             TwoFactorEnabled = false,
                             UserName = "admin@localhost"
                         });
@@ -536,9 +536,6 @@ namespace AppGCT.Migrations
                         .HasMaxLength(3)
                         .HasColumnType("nvarchar(3)");
 
-                    b.Property<int?>("ClasseId")
-                        .HasColumnType("int");
-
                     b.Property<DateTime>("DataCriacao")
                         .HasColumnType("datetime2");
 
@@ -601,8 +598,6 @@ namespace AppGCT.Migrations
 
                     b.HasKey("CodRubrica");
 
-                    b.HasIndex("ClasseId");
-
                     b.HasIndex("DescontoId");
 
                     b.ToTable("Rubrica");
@@ -637,19 +632,19 @@ namespace AppGCT.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "43ef5bbf-943e-4102-91d1-119e0a36f2ff",
+                            Id = "0cba3b0f-eaf0-4049-88b5-99b2df186a04",
                             Name = "Administrador",
                             NormalizedName = "ADMINISTRADOR"
                         },
                         new
                         {
-                            Id = "a9032a25-3fe6-4900-ac03-d7d05c4d08ff",
+                            Id = "550c62ad-5685-4506-aa87-d5a424b29de6",
                             Name = "Ginásio",
                             NormalizedName = "GINÁSIO"
                         },
                         new
                         {
-                            Id = "f2cf4a94-82c3-45c2-be8f-d64a6eb6624a",
+                            Id = "2edc2e4f-10ae-4e67-99ca-9bc5e2c0d71a",
                             Name = "Sócio",
                             NormalizedName = "SÓCIO"
                         });
@@ -746,8 +741,8 @@ namespace AppGCT.Migrations
                     b.HasData(
                         new
                         {
-                            UserId = "153be909-1acf-42a2-8220-a07f18b40ea4",
-                            RoleId = "43ef5bbf-943e-4102-91d1-119e0a36f2ff"
+                            UserId = "f2e19878-2466-4086-a1b6-4e46febd8e36",
+                            RoleId = "0cba3b0f-eaf0-4049-88b5-99b2df186a04"
                         });
                 });
 
@@ -812,15 +807,9 @@ namespace AppGCT.Migrations
 
             modelBuilder.Entity("AppGCT.Models.Rubrica", b =>
                 {
-                    b.HasOne("AppGCT.Models.Classe", "classe")
-                        .WithMany("Rubricas")
-                        .HasForeignKey("ClasseId");
-
                     b.HasOne("AppGCT.Models.Desconto", "desconto")
                         .WithMany("Rubricas")
                         .HasForeignKey("DescontoId");
-
-                    b.Navigation("classe");
 
                     b.Navigation("desconto");
                 });
@@ -884,8 +873,6 @@ namespace AppGCT.Migrations
             modelBuilder.Entity("AppGCT.Models.Classe", b =>
                 {
                     b.Navigation("Inscricoes");
-
-                    b.Navigation("Rubricas");
                 });
 
             modelBuilder.Entity("AppGCT.Models.Desconto", b =>

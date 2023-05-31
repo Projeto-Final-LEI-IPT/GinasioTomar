@@ -98,7 +98,7 @@ namespace AppGCT.Models
         public string? DescontoId { get; set; }
         public Desconto? desconto { get; set; }
 
-        public int? ClasseId { get; set; }
-        public Classe? classe { get; set; }
+       // public int? ClasseId { get; set; }
+        //public Classe? classe { get; set; }
     }
 }

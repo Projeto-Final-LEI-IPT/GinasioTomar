@@ -6,6 +6,8 @@ using Microsoft.EntityFrameworkCore;
 using AppGCT.Areas.Identity.Data;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using AppGCT.Models;
+using System.Reflection.Emit;
+using System.Reflection.Metadata;
 
 namespace AppGCT.Data
 {
@@ -51,14 +53,23 @@ namespace AppGCT.Data
                   .HasForeignKey(p => p.ClasseId);
 
             builder.Entity<Rubrica>()
-                  .HasOne(p => p.desconto)
-                  .WithMany(a => a.Rubricas)
-                  .HasForeignKey(p => p.DescontoId);
+                   .HasOne(p => p.desconto)
+                   .WithMany(p => p.Rubricas)
+                   .HasForeignKey(p => p.DescontoId)
+                   .IsRequired(false);
 
-            builder.Entity<Rubrica>()
-                   .HasOne(p => p.classe)
-                   .WithMany(a => a.Rubricas)
-                   .HasForeignKey(p => p.ClasseId);
+
+            //builder.Entity<Rubrica>()
+            //     .HasOne(p => p.desconto)
+            //    .WithOne()
+            //  .HasForeignKey<Rubrica>(p => p.DescontoId)
+            // .IsRequired(false);
+
+            //builder.Entity<Rubrica>()
+            //      .HasOne(p => p.classe)
+            //    .WithOne()
+            //  .HasForeignKey<Rubrica>(p => p.ClasseId)
+            // .IsRequired(false);
         }
 
         public DbSet<AppGCT.Models.Classe> Classe { get; set; } = default!;
