@@ -21,15 +21,21 @@ namespace AppGCT.Pages.Gestao.RubricasPrecario
 
         public IActionResult OnGet()
         {
-            var descontoEmpty = new SelectListItem()
+            var descontos = _context.Desconto.ToList();
+            descontos.Insert(0, new Desconto
             {
-                Value = null,
-                Text = "--- select desconto ---"
-            };
-            _context.Desconto.Insert(0, descontoEmpty);
+                CodDesconto = "",
+                DescDesconto = ""
 
-            ViewData["DescontoId"] = new SelectList(_context.Desconto, "CodDesconto", "CodDesconto");
+            });
+
+            ViewData["DescontoId"] = new SelectList(descontos, "CodDesconto", "CodDesconto");
             return Page();
+
+
+
+            // ViewData["DescontoId"] = new SelectList(_context.Desconto, "CodDesconto", "CodDesconto", null);
+            // return Page();
         }
 
         [BindProperty]
