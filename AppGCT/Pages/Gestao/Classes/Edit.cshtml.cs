@@ -62,7 +62,7 @@ namespace AppGCT.Pages.Gestao.Classes
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!ClasseExists(Classe.IdClasse))
+                if (!ClasseExists((int)Classe.IdClasse))
                 {
                     return NotFound();
                 }

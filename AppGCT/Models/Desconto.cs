@@ -11,7 +11,7 @@ namespace AppGCT.Models
         [DataType(DataType.Text)]
         [Required(ErrorMessage = "Código Desconto é campo obrigatório!")]
         [Display(Name = "Código Desconto")]
-        public String? CodDesconto { get; set; }
+        public String CodDesconto { get; set; }
 
         [Required(ErrorMessage = "Descrição Desconto é campo obrigatório!")]
         [StringLength(50, MinimumLength = 5, ErrorMessage = "Descrição do Desconto tem de ter pelo menos 5 caracteres")]

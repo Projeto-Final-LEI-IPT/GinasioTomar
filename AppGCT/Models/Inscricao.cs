@@ -156,10 +156,9 @@ namespace AppGCT.Models
         public int EpocaId { get; set; }
 
         public Epoca? Periodo { get; set; }
+        public int ClasseId { get; set; }
 
         public Classe? Class { get; set; }
-
-        public int ClasseId { get; set; }
 
     }
 }

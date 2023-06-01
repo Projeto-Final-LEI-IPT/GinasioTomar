@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AppGCT.Migrations
 {
     [DbContext(typeof(AppGCTContext))]
-    [Migration("20230531191203_initialCreate")]
-    partial class initialCreate
+    [Migration("20230531225950_INIS")]
+    partial class INIS
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -133,13 +133,13 @@ namespace AppGCT.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "f2e19878-2466-4086-a1b6-4e46febd8e36",
+                            Id = "88922033-f1bc-4758-bce0-b6112f726f88",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "9ca2120c-c538-4420-acb5-4e9c93ed05f8",
-                            DataAprovacao = new DateTime(2023, 5, 31, 20, 12, 2, 913, DateTimeKind.Local).AddTicks(4828),
-                            DataCriacao = new DateTime(2023, 5, 31, 20, 12, 2, 913, DateTimeKind.Local).AddTicks(4769),
+                            ConcurrencyStamp = "8bb94f11-7561-440c-a2db-0e01055dfb17",
+                            DataAprovacao = new DateTime(2023, 5, 31, 23, 59, 50, 87, DateTimeKind.Local).AddTicks(6034),
+                            DataCriacao = new DateTime(2023, 5, 31, 23, 59, 50, 87, DateTimeKind.Local).AddTicks(5987),
                             DataModificacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DataNascim = new DateTime(2023, 5, 31, 20, 12, 2, 913, DateTimeKind.Local).AddTicks(4836),
+                            DataNascim = new DateTime(2023, 5, 31, 23, 59, 50, 87, DateTimeKind.Local).AddTicks(6039),
                             Email = "admin@localhost",
                             EmailConfirmed = true,
                             EstadoUtilizador = "A",
@@ -152,10 +152,10 @@ namespace AppGCT.Migrations
                             NormalizedEmail = "ADMIN@LOCALHOST",
                             NormalizedUserName = "ADMIN@LOCALHOST",
                             NumSocio = " ",
-                            PasswordHash = "AQAAAAIAAYagAAAAEHm4Q/JGbfr6ErvkYUG4GBWjeNrjYXaLTs4NOu93g8K78gDujFZ4NcSjCYh7mSl61A==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEMvG8jr4ITRSmH/Q7CJpmKKRtuQu25617WSk/F715w6v/yzqXtToJF/TXJ5s3Eb3jA==",
                             PhoneNumber = "999999999",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "3342f42b-3c7c-4823-84fe-95778b360e0a",
+                            SecurityStamp = "c03818ee-f0df-4122-b376-c6f27f244484",
                             TwoFactorEnabled = false,
                             UserName = "admin@localhost"
                         });
@@ -163,11 +163,11 @@ namespace AppGCT.Migrations
 
             modelBuilder.Entity("AppGCT.Models.Classe", b =>
                 {
-                    b.Property<int>("IdClasse")
+                    b.Property<int?>("IdClasse")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdClasse"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int?>("IdClasse"));
 
                     b.Property<DateTime>("DataCriacao")
                         .HasColumnType("datetime2");
@@ -536,6 +536,9 @@ namespace AppGCT.Migrations
                         .HasMaxLength(3)
                         .HasColumnType("nvarchar(3)");
 
+                    b.Property<int?>("ClasseId")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("DataCriacao")
                         .HasColumnType("datetime2");
 
@@ -598,6 +601,8 @@ namespace AppGCT.Migrations
 
                     b.HasKey("CodRubrica");
 
+                    b.HasIndex("ClasseId");
+
                     b.HasIndex("DescontoId");
 
                     b.ToTable("Rubrica");
@@ -632,19 +637,19 @@ namespace AppGCT.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "0cba3b0f-eaf0-4049-88b5-99b2df186a04",
+                            Id = "c5cb88ef-a6b6-4174-bd9c-480d376f8709",
                             Name = "Administrador",
                             NormalizedName = "ADMINISTRADOR"
                         },
                         new
                         {
-                            Id = "550c62ad-5685-4506-aa87-d5a424b29de6",
+                            Id = "4eeb5ab1-3a49-4d27-92c9-aaf7834633bb",
                             Name = "Ginásio",
                             NormalizedName = "GINÁSIO"
                         },
                         new
                         {
-                            Id = "2edc2e4f-10ae-4e67-99ca-9bc5e2c0d71a",
+                            Id = "19042758-e3e9-4707-a1af-85e656435f6c",
                             Name = "Sócio",
                             NormalizedName = "SÓCIO"
                         });
@@ -741,8 +746,8 @@ namespace AppGCT.Migrations
                     b.HasData(
                         new
                         {
-                            UserId = "f2e19878-2466-4086-a1b6-4e46febd8e36",
-                            RoleId = "0cba3b0f-eaf0-4049-88b5-99b2df186a04"
+                            UserId = "88922033-f1bc-4758-bce0-b6112f726f88",
+                            RoleId = "c5cb88ef-a6b6-4174-bd9c-480d376f8709"
                         });
                 });
 
@@ -807,11 +812,17 @@ namespace AppGCT.Migrations
 
             modelBuilder.Entity("AppGCT.Models.Rubrica", b =>
                 {
-                    b.HasOne("AppGCT.Models.Desconto", "desconto")
+                    b.HasOne("AppGCT.Models.Classe", "Modalidade")
+                        .WithMany("Rubricas")
+                        .HasForeignKey("ClasseId");
+
+                    b.HasOne("AppGCT.Models.Desconto", "Discount")
                         .WithMany("Rubricas")
                         .HasForeignKey("DescontoId");
 
-                    b.Navigation("desconto");
+                    b.Navigation("Discount");
+
+                    b.Navigation("Modalidade");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -873,6 +884,8 @@ namespace AppGCT.Migrations
             modelBuilder.Entity("AppGCT.Models.Classe", b =>
                 {
                     b.Navigation("Inscricoes");
+
+                    b.Navigation("Rubricas");
                 });
 
             modelBuilder.Entity("AppGCT.Models.Desconto", b =>

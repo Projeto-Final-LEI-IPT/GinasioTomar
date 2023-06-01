@@ -57,7 +57,10 @@
                 @Html.DisplayNameFor(model => model.Rubrica[0].IdModificacao)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Rubrica[0].desconto)
+                @Html.DisplayNameFor(model => model.Rubrica[0].Discount)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Rubrica[0].Modalidade)
             </th>
             <th></th>
         </tr>
@@ -108,7 +111,10 @@
                 @Html.DisplayFor(modelItem => item.IdModificacao)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.desconto.CodDesconto)
+                @Html.DisplayFor(modelItem => item.Discount.CodDesconto)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Modalidade.NomeClasse)
             </td>
             <td>
                 <a asp-page="./Edit" asp-route-id="@item.CodRubrica">Edit</a> |
