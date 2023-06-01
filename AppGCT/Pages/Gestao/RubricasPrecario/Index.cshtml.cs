@@ -7,9 +7,11 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using AppGCT.Data;
 using AppGCT.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace AppGCT.Pages.Gestao.RubricasPrecario
 {
+    [Authorize(Roles = "Administrador")]
     public class IndexModel : PageModel
     {
         private readonly AppGCT.Data.AppGCTContext _context;
@@ -26,7 +28,8 @@ namespace AppGCT.Pages.Gestao.RubricasPrecario
             if (_context.Rubrica != null)
             {
                 Rubrica = await _context.Rubrica
-                .Include(r => r.Discount).ToListAsync();
+                .Include(r => r.Discount)
+                .Include(r => r.Modalidade).ToListAsync();
             }
         }
     }

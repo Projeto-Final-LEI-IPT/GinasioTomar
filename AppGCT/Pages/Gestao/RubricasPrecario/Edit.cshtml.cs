@@ -8,9 +8,12 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using AppGCT.Data;
 using AppGCT.Models;
+using Microsoft.AspNetCore.Authorization;
+using System.Security.Claims;
 
 namespace AppGCT.Pages.Gestao.RubricasPrecario
 {
+    [Authorize(Roles = "Administrador")]
     public class EditModel : PageModel
     {
         private readonly AppGCT.Data.AppGCTContext _context;
@@ -36,7 +39,8 @@ namespace AppGCT.Pages.Gestao.RubricasPrecario
                 return NotFound();
             }
             Rubrica = rubrica;
-           ViewData["DescontoId"] = new SelectList(_context.Desconto, "CodDesconto", "CodDesconto");
+           ViewData["DescontoId"] = new SelectList(_context.Desconto, "CodDesconto", "DescDesconto");
+           ViewData["ClasseId"] = new SelectList(_context.Classe, "IdClasse", "NomeClasse");
             return Page();
         }
 
@@ -49,6 +53,11 @@ namespace AppGCT.Pages.Gestao.RubricasPrecario
                 return Page();
             }
 
+            // obtem User ID logado
+            var userId = User.FindFirstValue(ClaimTypes.Name);
+            Rubrica.IdModificacao = userId;
+            Rubrica.DataModificacao = DateTime.Now;
+ 
             _context.Attach(Rubrica).State = EntityState.Modified;
 
             try

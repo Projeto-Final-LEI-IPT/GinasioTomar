@@ -10,21 +10,21 @@ namespace AppGCT.Models
         [StringLength(3, MinimumLength = 3, ErrorMessage = "Código Rúbrica tem de ter 3 caracteres")]
         [DataType(DataType.Text)]
         [Required(ErrorMessage = "Código Rúbrica é campo obrigatório!")]
-        [Display(Name = "Código Rúbrica")]
+        [Display(Name = "Código")]
         public string? CodRubrica { get; set; }
 
-        [Display(Name = "Descrição Rúbrica")]
+        [Display(Name = "Descrição")]
         [Required(ErrorMessage = "Descrição Rúbrica é campo obrigatório!")]
         [DataType(DataType.Text)]
         public string? DescricaoRubrica { get; set; }
 
-        [Display(Name = "Estado Rúbrica")]
+        [Display(Name = "Estado")]
         [Required(ErrorMessage = "Estado Rúbrica é campo obrigatório!")]
         [StringLength(1, MinimumLength = 1, ErrorMessage = "Estado da Rúbrica deverá ser (A) Ativo ou (I) Inativo")]
         [DataType(DataType.Text)]
         public string? EstadoRubrica { get; set; }
 
-        [Display(Name = "Tipo Movimento")]
+        [Display(Name = "Movimento")]
         [Required(ErrorMessage = "Tipo Movimento é campo obrigatório!")]
         [StringLength(1, MinimumLength = 1, ErrorMessage = "Tipo Movimento deverá ser (C) Crédito ou (D) Débito")]
         [DataType(DataType.Text)]
@@ -89,6 +89,54 @@ namespace AppGCT.Models
                         return "Ativo";
                     case "I":
                         return "Inativo";
+                    default:
+                        return "Desconhecido";
+                }
+            }
+        }
+
+        public string DescricaoTipoMovimento
+        {
+            get
+            {
+                switch (this.TipoMovimento)
+                {
+                    case "C":
+                        return "Crédito";
+                    case "D":
+                        return "Débito";
+                    default:
+                        return "Desconhecido";
+                }
+            }
+        }
+        
+        public string DescricaoIPrecario
+        {
+            get
+            {
+                switch (this.IPrecario)
+                {
+                    case "S":
+                        return "Sim";
+                    case "N":
+                        return "Não";
+                    default:
+                        return "Desconhecido";
+                }
+            }
+        }
+
+        public string DescricaoIVlrUnit
+        {
+            get
+            {
+                switch (this.IVlrUnit)
+                {
+                    case "S":
+                        return "Sim";
+                    case "N":
+                        return "Não";
                     default:
                         return "Desconhecido";
                 }

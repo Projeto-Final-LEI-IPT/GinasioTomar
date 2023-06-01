@@ -2,20 +2,29 @@
 @model AppGCT.Pages.Gestao.RubricasPrecario.IndexModel
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Gestão Rúbricas Preçário";
     Layout = "~/Pages/Shared/_Layout.cshtml";
 }
 
-<h1>Index</h1>
+<h1>Gestão Rúbricas Preçário</h1>
 
 <p>
-    <a asp-page="Create">Create New</a>
+    <a class='btn btn-primary btn-sm' asp-area='' asp-page='/Gestao/RubricasPrecario/Create'>Nova Rúbrica Preçário</a>
 </p>
 <table class="table">
     <thead>
         <tr>
             <th>
+                @Html.DisplayNameFor(model => model.Rubrica[0].CodRubrica)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.Rubrica[0].DescricaoRubrica)
+            </th>
+            <th>
+                Classe
+            </th>
+            <th>
+                Desconto
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Rubrica[0].EstadoRubrica)
@@ -44,24 +53,6 @@
             <th>
                 @Html.DisplayNameFor(model => model.Rubrica[0].HorasSemanais)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Rubrica[0].DataCriacao)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Rubrica[0].IdCriacao)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Rubrica[0].DataModificacao)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Rubrica[0].IdModificacao)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Rubrica[0].Discount)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Rubrica[0].Modalidade)
-            </th>
             <th></th>
         </tr>
     </thead>
@@ -69,22 +60,32 @@
 @foreach (var item in Model.Rubrica) {
         <tr>
             <td>
+                @Html.DisplayFor(modelItem => item.CodRubrica)
+            </td>
+            <td>
                 @Html.DisplayFor(modelItem => item.DescricaoRubrica)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.EstadoRubrica)
+                @Html.DisplayFor(modelItem => item.Modalidade.NomeClasse)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.TipoMovimento)
+                @Html.DisplayFor(modelItem => item.Discount.DescDesconto)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.DescricaoEstadoRubrica)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.IPrecario)
+                @Html.DisplayFor(modelItem => item.DescricaoTipoMovimento)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DescricaoIPrecario)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.OrdemPrecario)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.IVlrUnit)
+                @Html.DisplayFor(modelItem => item.DescricaoIVlrUnit)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.ValorUnitario)
@@ -99,27 +100,9 @@
                 @Html.DisplayFor(modelItem => item.HorasSemanais)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.DataCriacao)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IdCriacao)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DataModificacao)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IdModificacao)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Discount.CodDesconto)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Modalidade.NomeClasse)
-            </td>
-            <td>
-                <a asp-page="./Edit" asp-route-id="@item.CodRubrica">Edit</a> |
-                <a asp-page="./Details" asp-route-id="@item.CodRubrica">Details</a> |
-                <a asp-page="./Delete" asp-route-id="@item.CodRubrica">Delete</a>
+                <a class='btn btn-primary btn-sm' asp-area='' asp-page='/Gestao/RubricasPrecario/Edit' asp-route-id='@item.CodRubrica'>Editar</a>
+                <a class='btn btn-primary btn-sm' asp-area='' asp-page='/Gestao/RubricasPrecario/Details' asp-route-id='@item.CodRubrica'>Detalhes</a>
+                <a class='btn btn-danger btn-sm' asp-area='' asp-page='/Gestao/RubricasPrecario/Delete' asp-route-id='@item.CodRubrica'>Apagar</a>
             </td>
         </tr>
 }

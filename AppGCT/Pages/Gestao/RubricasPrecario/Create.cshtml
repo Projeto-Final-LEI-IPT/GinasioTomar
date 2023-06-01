@@ -2,14 +2,15 @@
 @model AppGCT.Pages.Gestao.RubricasPrecario.CreateModel
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Criar Rúbrica Preçário";
     Layout = "~/Pages/Shared/_Layout.cshtml";
 }
 
-<h1>Create</h1>
-
-<h4>Rubrica</h4>
+<h1>Criar Rúbrica Preçário</h1>
 <hr />
+<div>
+    <a class='btn btn-primary btn-sm' asp-area='' asp-page='/Gestao/RubricasPrecario/Index'>Voltar</a>
+</div>
 <div class="row">
     <div class="col-md-4">
         <form method="post">
@@ -25,18 +26,59 @@
                 <span asp-validation-for="Rubrica.DescricaoRubrica" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Rubrica.EstadoRubrica" class="control-label"></label>
-                <input asp-for="Rubrica.EstadoRubrica" class="form-control" />
+                <label asp-for="Rubrica.ClasseId" class="control-label">Classe</label>
+                <select asp-for="Rubrica.ClasseId" class="form-control" asp-items="ViewBag.ClasseId"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="Rubrica.DescontoId" class="control-label">Desconto</label>
+                <select asp-for="Rubrica.DescontoId" class="form-control" asp-items="ViewBag.DescontoId"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="Rubrica.EstadoRubrica" class="control-label">Estado</label>
+                <div class="form-check">
+                    <label class="form-check-label">
+                        <input type="radio" asp-for="Rubrica.EstadoRubrica" class="form-check-input" value="A" checked />
+                        Ativo
+                    </label>
+                </div>
+                <div class="form-check">
+                    <label class="form-check-label">
+                        <input type="radio" asp-for="Rubrica.EstadoRubrica" class="form-check-input" value="I" />
+                        Inativo
+                    </label>
+                </div>
                 <span asp-validation-for="Rubrica.EstadoRubrica" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Rubrica.TipoMovimento" class="control-label"></label>
-                <input asp-for="Rubrica.TipoMovimento" class="form-control" />
+                <label asp-for="Rubrica.TipoMovimento" class="control-label">Tipo Movimento</label>
+                <div class="form-check">
+                    <label class="form-check-label">
+                        <input type="radio" asp-for="Rubrica.TipoMovimento" class="form-check-input" value="D" checked />
+                        Débito
+                    </label>
+                </div>
+                <div class="form-check">
+                    <label class="form-check-label">
+                        <input type="radio" asp-for="Rubrica.TipoMovimento" class="form-check-input" value="C" />
+                        Crédito
+                    </label>
+                </div>
                 <span asp-validation-for="Rubrica.TipoMovimento" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Rubrica.IPrecario" class="control-label"></label>
-                <input asp-for="Rubrica.IPrecario" class="form-control" />
+                <div class="form-check">
+                    <label class="form-check-label">
+                        <input type="radio" asp-for="Rubrica.IPrecario" class="form-check-input" value="S" checked />
+                        Sim
+                    </label>
+                </div>
+                <div class="form-check">
+                    <label class="form-check-label">
+                        <input type="radio" asp-for="Rubrica.IPrecario" class="form-check-input" value="N" />
+                        Não
+                    </label>
+                </div>
                 <span asp-validation-for="Rubrica.IPrecario" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -46,12 +88,23 @@
             </div>
             <div class="form-group">
                 <label asp-for="Rubrica.IVlrUnit" class="control-label"></label>
-                <input asp-for="Rubrica.IVlrUnit" class="form-control" />
+                <div class="form-check">
+                    <label class="form-check-label">
+                        <input type="radio" asp-for="Rubrica.IVlrUnit" class="form-check-input" value="S" checked />
+                        Sim
+                    </label>
+                </div>
+                <div class="form-check">
+                    <label class="form-check-label">
+                        <input type="radio" asp-for="Rubrica.IVlrUnit" class="form-check-input" value="N" />
+                        Não
+                    </label>
+                </div>
                 <span asp-validation-for="Rubrica.IVlrUnit" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Rubrica.ValorUnitario" class="control-label"></label>
-                <input asp-for="Rubrica.ValorUnitario" class="form-control" />
+                <input type="number" asp-for="Rubrica.ValorUnitario" class="form-control" />
                 <span asp-validation-for="Rubrica.ValorUnitario" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -70,42 +123,10 @@
                 <span asp-validation-for="Rubrica.HorasSemanais" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Rubrica.DataCriacao" class="control-label"></label>
-                <input asp-for="Rubrica.DataCriacao" class="form-control" />
-                <span asp-validation-for="Rubrica.DataCriacao" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Rubrica.IdCriacao" class="control-label"></label>
-                <input asp-for="Rubrica.IdCriacao" class="form-control" />
-                <span asp-validation-for="Rubrica.IdCriacao" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Rubrica.DataModificacao" class="control-label"></label>
-                <input asp-for="Rubrica.DataModificacao" class="form-control" />
-                <span asp-validation-for="Rubrica.DataModificacao" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Rubrica.IdModificacao" class="control-label"></label>
-                <input asp-for="Rubrica.IdModificacao" class="form-control" />
-                <span asp-validation-for="Rubrica.IdModificacao" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Rubrica.DescontoId" class="control-label"></label>
-                <select asp-for="Rubrica.DescontoId" class ="form-control" asp-items="ViewBag.DescontoId"></select>
-            </div>
-            <div class="form-group">
-                <label asp-for="Rubrica.ClasseId" class="control-label"></label>
-                <select asp-for="Rubrica.ClasseId" class="form-control" asp-items="ViewBag.ClasseId"></select>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Criar" class="btn btn-primary" />
             </div>
         </form>
     </div>
-</div>
-
-<div>
-    <a asp-page="Index">Back to List</a>
 </div>
 
 @section Scripts {

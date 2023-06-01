@@ -7,9 +7,11 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using AppGCT.Data;
 using AppGCT.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace AppGCT.Pages.Gestao.RubricasPrecario
 {
+    [Authorize(Roles = "Administrador")]
     public class DetailsModel : PageModel
     {
         private readonly AppGCT.Data.AppGCTContext _context;
@@ -28,7 +30,8 @@ namespace AppGCT.Pages.Gestao.RubricasPrecario
                 return NotFound();
             }
 
-            var rubrica = await _context.Rubrica.FirstOrDefaultAsync(m => m.CodRubrica == id);
+            var rubrica = await _context.Rubrica.Include(i => i.Discount).Include(i => i.Modalidade)
+                                                .FirstOrDefaultAsync(m => m.CodRubrica == id);
             if (rubrica == null)
             {
                 return NotFound();
