@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace AppGCT.Migrations
 {
     /// <inheritdoc />
-    public partial class INIS : Migration
+    public partial class initialCreate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -389,20 +389,20 @@ namespace AppGCT.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "19042758-e3e9-4707-a1af-85e656435f6c", null, "Sócio", "SÓCIO" },
-                    { "4eeb5ab1-3a49-4d27-92c9-aaf7834633bb", null, "Ginásio", "GINÁSIO" },
-                    { "c5cb88ef-a6b6-4174-bd9c-480d376f8709", null, "Administrador", "ADMINISTRADOR" }
+                    { "2a086450-30dc-4098-a555-fa73362d09fa", null, "Ginásio", "GINÁSIO" },
+                    { "823bd384-ef82-4770-8403-0c1639438fe3", null, "Administrador", "ADMINISTRADOR" },
+                    { "ee9c5be8-4a14-408f-9154-339434fe5101", null, "Sócio", "SÓCIO" }
                 });
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "DataAprovacao", "DataCriacao", "DataModificacao", "DataNascim", "Email", "EmailConfirmed", "EstadoUtilizador", "IdCriacao", "IdModificacao", "LockoutEnabled", "LockoutEnd", "Morada", "NIF", "Nome", "NormalizedEmail", "NormalizedUserName", "NumSocio", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UltimoLogin", "UserName" },
-                values: new object[] { "88922033-f1bc-4758-bce0-b6112f726f88", 0, "8bb94f11-7561-440c-a2db-0e01055dfb17", new DateTime(2023, 5, 31, 23, 59, 50, 87, DateTimeKind.Local).AddTicks(6034), new DateTime(2023, 5, 31, 23, 59, 50, 87, DateTimeKind.Local).AddTicks(5987), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2023, 5, 31, 23, 59, 50, 87, DateTimeKind.Local).AddTicks(6039), "admin@localhost", true, "A", "SEED", " ", false, null, "Ginásio Clube de Tomar", "999999999", "Administrador", "ADMIN@LOCALHOST", "ADMIN@LOCALHOST", " ", "AQAAAAIAAYagAAAAEMvG8jr4ITRSmH/Q7CJpmKKRtuQu25617WSk/F715w6v/yzqXtToJF/TXJ5s3Eb3jA==", "999999999", false, "c03818ee-f0df-4122-b376-c6f27f244484", false, null, "admin@localhost" });
+                values: new object[] { "5a7f9ba9-ce97-4c6e-a7d6-9bc4333b0ca7", 0, "49906231-19c8-443a-9775-87f3ec1b03f2", new DateTime(2023, 6, 1, 21, 36, 30, 120, DateTimeKind.Local).AddTicks(8986), new DateTime(2023, 6, 1, 21, 36, 30, 120, DateTimeKind.Local).AddTicks(8926), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2023, 6, 1, 21, 36, 30, 120, DateTimeKind.Local).AddTicks(8993), "admin@localhost", true, "A", "SEED", " ", false, null, "Ginásio Clube de Tomar", "999999999", "Administrador", "ADMIN@LOCALHOST", "ADMIN@LOCALHOST", " ", "AQAAAAIAAYagAAAAEHF7pZNRmArVybraqBaTMWeDpjjh6oepks7Amccx1NXgSiDNaLjADrFAyppciAWm7A==", "999999999", false, "0bca4e21-d580-436d-ad6c-4c51aec2b0cb", false, null, "admin@localhost" });
 
             migrationBuilder.InsertData(
                 table: "AspNetUserRoles",
                 columns: new[] { "RoleId", "UserId" },
-                values: new object[] { "c5cb88ef-a6b6-4174-bd9c-480d376f8709", "88922033-f1bc-4758-bce0-b6112f726f88" });
+                values: new object[] { "823bd384-ef82-4770-8403-0c1639438fe3", "5a7f9ba9-ce97-4c6e-a7d6-9bc4333b0ca7" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
