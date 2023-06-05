@@ -29,9 +29,45 @@
                 <label asp-for="Rubrica.ClasseId" class="control-label">Classe</label>
                 <select asp-for="Rubrica.ClasseId" class="form-control" asp-items="ViewBag.ClasseId"></select>
             </div>
+
+            <!-- código js para proteger/desproteger campos preenchidos apenas se existir classe preenchida -->
+            <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+            <script>
+                $(document).ready(function() {
+                    // Obter nome campos
+                    var classeIdField = $('#Rubrica_ClasseId');
+                    var descontoIdField = $('#Rubrica_DescontoId');
+                    var localtreinoField = $('#Rubrica_LocalTreino');
+                    var horarioField = $('#Rubrica_Horario');
+                    var horassemanaisdField = $('#Rubrica_HorasSemanais');
+                    
+
+                    // Função para alterações sobre o campo Classe
+                    classeIdField.change(function() {
+                        // Protege ou desprotege campos com base no valor do ClasseId
+                        if ($(this).val() !== '') {
+                         //   descontoIdField.prop('disabled', false);
+                            localtreinoField.prop('disabled', false);
+                            horarioField.prop('disabled', false);
+                            horassemanaisdField.prop('disabled', false);
+                        } else {
+                           // descontoIdField.prop('disabled', true);
+                            localtreinoField.prop('disabled', true);
+                            horarioField.prop('disabled', true);
+                            horassemanaisdField.prop('disabled', true);
+                            // Limpa campos
+                          //  descontoIdField.val(''); 
+                            localtreinoField.val('');
+                            horarioField.val('');
+                            horassemanaisdField.val('');
+                        }
+                    });
+                });
+            </script>
+
             <div class="form-group">
                 <label asp-for="Rubrica.DescontoId" class="control-label">Desconto</label>
-                <select asp-for="Rubrica.DescontoId" class="form-control" asp-items="ViewBag.DescontoId"></select>
+                <select asp-for="Rubrica.DescontoId" class="form-control" asp-items="ViewBag.DescontoId" ></select>
             </div>
             <div class="form-group">
                 <label asp-for="Rubrica.EstadoRubrica" class="control-label">Estado</label>
@@ -109,17 +145,17 @@
             </div>
             <div class="form-group">
                 <label asp-for="Rubrica.LocalTreino" class="control-label"></label>
-                <input asp-for="Rubrica.LocalTreino" class="form-control" />
+                <input asp-for="Rubrica.LocalTreino" class="form-control" disabled/>
                 <span asp-validation-for="Rubrica.LocalTreino" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Rubrica.Horario" class="control-label"></label>
-                <input asp-for="Rubrica.Horario" class="form-control" />
+                <input asp-for="Rubrica.Horario" class="form-control" disabled/>
                 <span asp-validation-for="Rubrica.Horario" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Rubrica.HorasSemanais" class="control-label"></label>
-                <input asp-for="Rubrica.HorasSemanais" class="form-control" />
+                <input asp-for="Rubrica.HorasSemanais" class="form-control" disabled/>
                 <span asp-validation-for="Rubrica.HorasSemanais" class="text-danger"></span>
             </div>
             <div class="form-group">

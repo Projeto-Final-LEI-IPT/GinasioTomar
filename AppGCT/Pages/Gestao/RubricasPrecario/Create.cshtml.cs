@@ -38,11 +38,11 @@ namespace AppGCT.Pages.Gestao.RubricasPrecario
             //falta terminar
             //falta terminar
             // Validações se Classe não estive preenchida
-            if (Rubrica.ClasseId.Equals(0))
+            if (Rubrica.ClasseId.Equals(null))
             {
                 if (Rubrica.DescontoId != null)
                 {
-                    ModelState.AddModelError("Rubrica.DescontoId", "Desconto só pode ser preenchido se Classe preenchido");
+                    ModelState.AddModelError("Rubrica.CodRubrica", "Desconto só pode ser preenchido se Classe preenchido");
                     return false;
                 }
                     
