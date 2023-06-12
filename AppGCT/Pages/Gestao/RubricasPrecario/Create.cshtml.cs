@@ -31,18 +31,13 @@ namespace AppGCT.Pages.Gestao.RubricasPrecario
                 ModelState.AddModelError("Rubrica.CodRubrica", "Já existe uma rúbrica para o código inserido");
                 return false;
             }
-            //falta terminar
-            //falta terminar
-            //falta terminar
-            //falta terminar
-            //falta terminar
-            //falta terminar
+
             // Validações se Classe não estive preenchida
             if (Rubrica.ClasseId.Equals(null))
             {
                 if (Rubrica.DescontoId != null)
                 {
-                    ModelState.AddModelError("Rubrica.CodRubrica", "Desconto só pode ser preenchido se Classe preenchido");
+                    ModelState.AddModelError("Rubrica.DescontoId", "Desconto só pode ser preenchido se Classe preenchido");
                     return false;
                 }
                     
