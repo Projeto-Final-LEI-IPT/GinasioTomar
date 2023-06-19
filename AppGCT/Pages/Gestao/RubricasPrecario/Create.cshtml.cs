@@ -37,7 +37,7 @@ namespace AppGCT.Pages.Gestao.RubricasPrecario
             {
                 if (Rubrica.DescontoId != null)
                 {
-                    ModelState.AddModelError("Rubrica.DescontoId", "Desconto só pode ser preenchido se Classe preenchido");
+                    ModelState.AddModelError("ErroDesconto", "Desconto só pode ser preenchido se Classe preenchido");
                     return false;
                 }
                     
