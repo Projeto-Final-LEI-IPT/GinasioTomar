@@ -384,25 +384,73 @@ namespace AppGCT.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Movimento",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    DesRubrica = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    DtMovimento = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ValorMovimento = table.Column<decimal>(type: "decimal(18,2)", precision: 18, scale: 2, nullable: true),
+                    ValorDesconto = table.Column<decimal>(type: "decimal(18,2)", precision: 18, scale: 2, nullable: true),
+                    NumFatura = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    NumNotaCredito = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    DataCriacao = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    IdCriacao = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    DataModificacao = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    IdModificacao = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    UtilizadorId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    AtletaMovimentoId = table.Column<int>(type: "int", nullable: true),
+                    RubricaId = table.Column<string>(type: "nvarchar(3)", nullable: false),
+                    MetodoPagamentoId = table.Column<string>(type: "nvarchar(2)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Movimento", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Movimento_AspNetUsers_UtilizadorId",
+                        column: x => x.UtilizadorId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Movimento_Ginasta_AtletaMovimentoId",
+                        column: x => x.AtletaMovimentoId,
+                        principalTable: "Ginasta",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_Movimento_MetodoPagamento_MetodoPagamentoId",
+                        column: x => x.MetodoPagamentoId,
+                        principalTable: "MetodoPagamento",
+                        principalColumn: "CodMetodo");
+                    table.ForeignKey(
+                        name: "FK_Movimento_Rubrica_RubricaId",
+                        column: x => x.RubricaId,
+                        principalTable: "Rubrica",
+                        principalColumn: "CodRubrica",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "2a086450-30dc-4098-a555-fa73362d09fa", null, "Ginásio", "GINÁSIO" },
-                    { "823bd384-ef82-4770-8403-0c1639438fe3", null, "Administrador", "ADMINISTRADOR" },
-                    { "ee9c5be8-4a14-408f-9154-339434fe5101", null, "Sócio", "SÓCIO" }
+                    { "13ab1f50-b341-4bb3-b1a3-64b00a03c70e", null, "Administrador", "ADMINISTRADOR" },
+                    { "436b1a3b-a304-4013-aa22-2fde3f1e8bf4", null, "Sócio", "SÓCIO" },
+                    { "7422acaf-769b-479c-b04c-cc7f46a89859", null, "Ginásio", "GINÁSIO" }
                 });
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "DataAprovacao", "DataCriacao", "DataModificacao", "DataNascim", "Email", "EmailConfirmed", "EstadoUtilizador", "IdCriacao", "IdModificacao", "LockoutEnabled", "LockoutEnd", "Morada", "NIF", "Nome", "NormalizedEmail", "NormalizedUserName", "NumSocio", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UltimoLogin", "UserName" },
-                values: new object[] { "5a7f9ba9-ce97-4c6e-a7d6-9bc4333b0ca7", 0, "49906231-19c8-443a-9775-87f3ec1b03f2", new DateTime(2023, 6, 1, 21, 36, 30, 120, DateTimeKind.Local).AddTicks(8986), new DateTime(2023, 6, 1, 21, 36, 30, 120, DateTimeKind.Local).AddTicks(8926), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2023, 6, 1, 21, 36, 30, 120, DateTimeKind.Local).AddTicks(8993), "admin@localhost", true, "A", "SEED", " ", false, null, "Ginásio Clube de Tomar", "999999999", "Administrador", "ADMIN@LOCALHOST", "ADMIN@LOCALHOST", " ", "AQAAAAIAAYagAAAAEHF7pZNRmArVybraqBaTMWeDpjjh6oepks7Amccx1NXgSiDNaLjADrFAyppciAWm7A==", "999999999", false, "0bca4e21-d580-436d-ad6c-4c51aec2b0cb", false, null, "admin@localhost" });
+                values: new object[] { "1ccb93bc-0ff5-4ca6-b989-0623be85d5a3", 0, "86405d77-2664-43ca-9fd1-9db4ce6a9b6b", new DateTime(2023, 6, 19, 23, 12, 10, 950, DateTimeKind.Local).AddTicks(2369), new DateTime(2023, 6, 19, 23, 12, 10, 950, DateTimeKind.Local).AddTicks(2267), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2023, 6, 19, 23, 12, 10, 950, DateTimeKind.Local).AddTicks(2379), "admin@localhost", true, "A", "SEED", " ", false, null, "Ginásio Clube de Tomar", "999999999", "Administrador", "ADMIN@LOCALHOST", "ADMIN@LOCALHOST", " ", "AQAAAAIAAYagAAAAEOgqvXR5Nq8qahu97BzMG5O07L5UIhJSFPGhLvN1zVFmWOY90MN5op0WOEaEWx0zmQ==", "999999999", false, "f14a177a-9133-4bb0-9fea-7c348cb1ff72", false, null, "admin@localhost" });
 
             migrationBuilder.InsertData(
                 table: "AspNetUserRoles",
                 columns: new[] { "RoleId", "UserId" },
-                values: new object[] { "823bd384-ef82-4770-8403-0c1639438fe3", "5a7f9ba9-ce97-4c6e-a7d6-9bc4333b0ca7" });
+                values: new object[] { "13ab1f50-b341-4bb3-b1a3-64b00a03c70e", "1ccb93bc-0ff5-4ca6-b989-0623be85d5a3" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
@@ -464,6 +512,26 @@ namespace AppGCT.Migrations
                 column: "GinastaId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Movimento_AtletaMovimentoId",
+                table: "Movimento",
+                column: "AtletaMovimentoId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Movimento_MetodoPagamentoId",
+                table: "Movimento",
+                column: "MetodoPagamentoId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Movimento_RubricaId",
+                table: "Movimento",
+                column: "RubricaId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Movimento_UtilizadorId",
+                table: "Movimento",
+                column: "UtilizadorId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Rubrica_ClasseId",
                 table: "Rubrica",
                 column: "ClasseId");
@@ -496,10 +564,7 @@ namespace AppGCT.Migrations
                 name: "Inscricao");
 
             migrationBuilder.DropTable(
-                name: "MetodoPagamento");
-
-            migrationBuilder.DropTable(
-                name: "Rubrica");
+                name: "Movimento");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
@@ -511,13 +576,19 @@ namespace AppGCT.Migrations
                 name: "Ginasta");
 
             migrationBuilder.DropTable(
+                name: "MetodoPagamento");
+
+            migrationBuilder.DropTable(
+                name: "Rubrica");
+
+            migrationBuilder.DropTable(
+                name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
                 name: "Classe");
 
             migrationBuilder.DropTable(
                 name: "Desconto");
-
-            migrationBuilder.DropTable(
-                name: "AspNetUsers");
         }
     }
 }

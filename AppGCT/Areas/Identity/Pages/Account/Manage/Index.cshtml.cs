@@ -10,7 +10,6 @@ using AppGCT.Areas.Identity.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 
 namespace AppGCT.Areas.Identity.Pages.Account.Manage
 {

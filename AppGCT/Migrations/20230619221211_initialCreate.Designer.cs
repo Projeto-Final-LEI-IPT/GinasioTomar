@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AppGCT.Migrations
 {
     [DbContext(typeof(AppGCTContext))]
-    [Migration("20230601203630_initialCreate")]
+    [Migration("20230619221211_initialCreate")]
     partial class initialCreate
     {
         /// <inheritdoc />
@@ -20,7 +20,7 @@ namespace AppGCT.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "7.0.5")
+                .HasAnnotation("ProductVersion", "7.0.7")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
@@ -133,13 +133,13 @@ namespace AppGCT.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "5a7f9ba9-ce97-4c6e-a7d6-9bc4333b0ca7",
+                            Id = "1ccb93bc-0ff5-4ca6-b989-0623be85d5a3",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "49906231-19c8-443a-9775-87f3ec1b03f2",
-                            DataAprovacao = new DateTime(2023, 6, 1, 21, 36, 30, 120, DateTimeKind.Local).AddTicks(8986),
-                            DataCriacao = new DateTime(2023, 6, 1, 21, 36, 30, 120, DateTimeKind.Local).AddTicks(8926),
+                            ConcurrencyStamp = "86405d77-2664-43ca-9fd1-9db4ce6a9b6b",
+                            DataAprovacao = new DateTime(2023, 6, 19, 23, 12, 10, 950, DateTimeKind.Local).AddTicks(2369),
+                            DataCriacao = new DateTime(2023, 6, 19, 23, 12, 10, 950, DateTimeKind.Local).AddTicks(2267),
                             DataModificacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DataNascim = new DateTime(2023, 6, 1, 21, 36, 30, 120, DateTimeKind.Local).AddTicks(8993),
+                            DataNascim = new DateTime(2023, 6, 19, 23, 12, 10, 950, DateTimeKind.Local).AddTicks(2379),
                             Email = "admin@localhost",
                             EmailConfirmed = true,
                             EstadoUtilizador = "A",
@@ -152,10 +152,10 @@ namespace AppGCT.Migrations
                             NormalizedEmail = "ADMIN@LOCALHOST",
                             NormalizedUserName = "ADMIN@LOCALHOST",
                             NumSocio = " ",
-                            PasswordHash = "AQAAAAIAAYagAAAAEHF7pZNRmArVybraqBaTMWeDpjjh6oepks7Amccx1NXgSiDNaLjADrFAyppciAWm7A==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEOgqvXR5Nq8qahu97BzMG5O07L5UIhJSFPGhLvN1zVFmWOY90MN5op0WOEaEWx0zmQ==",
                             PhoneNumber = "999999999",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "0bca4e21-d580-436d-ad6c-4c51aec2b0cb",
+                            SecurityStamp = "f14a177a-9133-4bb0-9fea-7c348cb1ff72",
                             TwoFactorEnabled = false,
                             UserName = "admin@localhost"
                         });
@@ -530,6 +530,76 @@ namespace AppGCT.Migrations
                     b.ToTable("MetodoPagamento");
                 });
 
+            modelBuilder.Entity("AppGCT.Models.Movimento", b =>
+                {
+                    b.Property<int?>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int?>("Id"));
+
+                    b.Property<int?>("AtletaMovimentoId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("DataCriacao")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("DataModificacao")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("DesRubrica")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("DtMovimento")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("IdCriacao")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("IdModificacao")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("MetodoPagamentoId")
+                        .HasColumnType("nvarchar(2)");
+
+                    b.Property<string>("NumFatura")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("NumNotaCredito")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("RubricaId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(3)");
+
+                    b.Property<string>("UtilizadorId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<decimal?>("ValorDesconto")
+                        .HasPrecision(18, 2)
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal?>("ValorMovimento")
+                        .HasPrecision(18, 2)
+                        .HasColumnType("decimal(18,2)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AtletaMovimentoId");
+
+                    b.HasIndex("MetodoPagamentoId");
+
+                    b.HasIndex("RubricaId");
+
+                    b.HasIndex("UtilizadorId");
+
+                    b.ToTable("Movimento");
+                });
+
             modelBuilder.Entity("AppGCT.Models.Rubrica", b =>
                 {
                     b.Property<string>("CodRubrica")
@@ -637,19 +707,19 @@ namespace AppGCT.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "823bd384-ef82-4770-8403-0c1639438fe3",
+                            Id = "13ab1f50-b341-4bb3-b1a3-64b00a03c70e",
                             Name = "Administrador",
                             NormalizedName = "ADMINISTRADOR"
                         },
                         new
                         {
-                            Id = "2a086450-30dc-4098-a555-fa73362d09fa",
+                            Id = "7422acaf-769b-479c-b04c-cc7f46a89859",
                             Name = "Ginásio",
                             NormalizedName = "GINÁSIO"
                         },
                         new
                         {
-                            Id = "ee9c5be8-4a14-408f-9154-339434fe5101",
+                            Id = "436b1a3b-a304-4013-aa22-2fde3f1e8bf4",
                             Name = "Sócio",
                             NormalizedName = "SÓCIO"
                         });
@@ -746,8 +816,8 @@ namespace AppGCT.Migrations
                     b.HasData(
                         new
                         {
-                            UserId = "5a7f9ba9-ce97-4c6e-a7d6-9bc4333b0ca7",
-                            RoleId = "823bd384-ef82-4770-8403-0c1639438fe3"
+                            UserId = "1ccb93bc-0ff5-4ca6-b989-0623be85d5a3",
+                            RoleId = "13ab1f50-b341-4bb3-b1a3-64b00a03c70e"
                         });
                 });
 
@@ -808,6 +878,37 @@ namespace AppGCT.Migrations
                     b.Navigation("Class");
 
                     b.Navigation("Periodo");
+                });
+
+            modelBuilder.Entity("AppGCT.Models.Movimento", b =>
+                {
+                    b.HasOne("AppGCT.Models.Ginasta", "Atleta")
+                        .WithMany("Movimentos")
+                        .HasForeignKey("AtletaMovimentoId");
+
+                    b.HasOne("AppGCT.Models.MetodoPagamento", "FormaPagamento")
+                        .WithMany("Movimentos")
+                        .HasForeignKey("MetodoPagamentoId");
+
+                    b.HasOne("AppGCT.Models.Rubrica", "TipoDespesa")
+                        .WithMany("Movimentos")
+                        .HasForeignKey("RubricaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("AppGCT.Areas.Identity.Data.Utilizador", "Socio")
+                        .WithMany("Movimentos")
+                        .HasForeignKey("UtilizadorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Atleta");
+
+                    b.Navigation("FormaPagamento");
+
+                    b.Navigation("Socio");
+
+                    b.Navigation("TipoDespesa");
                 });
 
             modelBuilder.Entity("AppGCT.Models.Rubrica", b =>
@@ -879,6 +980,8 @@ namespace AppGCT.Migrations
             modelBuilder.Entity("AppGCT.Areas.Identity.Data.Utilizador", b =>
                 {
                     b.Navigation("Ginasta");
+
+                    b.Navigation("Movimentos");
                 });
 
             modelBuilder.Entity("AppGCT.Models.Classe", b =>
@@ -901,6 +1004,18 @@ namespace AppGCT.Migrations
             modelBuilder.Entity("AppGCT.Models.Ginasta", b =>
                 {
                     b.Navigation("Inscricoes");
+
+                    b.Navigation("Movimentos");
+                });
+
+            modelBuilder.Entity("AppGCT.Models.MetodoPagamento", b =>
+                {
+                    b.Navigation("Movimentos");
+                });
+
+            modelBuilder.Entity("AppGCT.Models.Rubrica", b =>
+                {
+                    b.Navigation("Movimentos");
                 });
 #pragma warning restore 612, 618
         }

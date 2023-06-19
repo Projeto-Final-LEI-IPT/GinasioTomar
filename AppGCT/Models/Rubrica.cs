@@ -148,5 +148,7 @@ namespace AppGCT.Models
 
         public int? ClasseId { get; set; }
         public Classe? Modalidade { get; set; }
+
+        public List<Movimento>? Movimentos { get; set; }
     }
 }

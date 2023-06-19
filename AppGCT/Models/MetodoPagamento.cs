@@ -57,5 +57,6 @@ namespace AppGCT.Models
                 }
             }
         }
+        public List<Movimento>? Movimentos { get; set; } = new List<Movimento>();
     }
 }
