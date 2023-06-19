@@ -1,0 +1,52 @@
+﻿@page
+@model AppGCT.Pages.Precario.IndexModel
+@{
+    ViewData["Title"] = "Preçário";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<h1>Preçário</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Classe/Outros
+            </th>
+            <th>
+                Valor
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Rubrica[0].LocalTreino)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Rubrica[0].Horario)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Rubrica[0].HorasSemanais)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Rubrica)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DescricaoRubrica)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ValorUnitario)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LocalTreino)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Horario)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.HorasSemanais)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
