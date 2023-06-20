@@ -5,6 +5,11 @@
     ViewData["Title"] = "Criar Rúbrica Preçário";
     Layout = "~/Pages/Shared/_Layout.cshtml";
 }
+<style>
+    .validation-error {
+        color: red;
+    }
+</style>
 
 <h1>Criar Rúbrica Preçário</h1>
 <hr />
@@ -30,44 +35,10 @@
                 <select asp-for="Rubrica.ClasseId" class="form-control" asp-items="ViewBag.ClasseId"></select>
             </div>
 
-            <!-- código js para proteger/desproteger campos preenchidos apenas se existir classe preenchida -->
-            <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-            <script>
-                $(document).ready(function() {
-                    // Obter nome campos
-                    var classeIdField = $('#Rubrica_ClasseId');
-                    var descontoIdField = $('#Rubrica_DescontoId');
-                    var localtreinoField = $('#Rubrica_LocalTreino');
-                    var horarioField = $('#Rubrica_Horario');
-                    var horassemanaisdField = $('#Rubrica_HorasSemanais');
-                    
-
-                    // Função para alterações sobre o campo Classe
-                    classeIdField.change(function() {
-                        // Protege ou desprotege campos com base no valor do ClasseId
-                        if ($(this).val() !== '') {
-                         //   descontoIdField.prop('disabled', false);
-                            localtreinoField.prop('disabled', false);
-                            horarioField.prop('disabled', false);
-                            horassemanaisdField.prop('disabled', false);
-                        } else {
-                           // descontoIdField.prop('disabled', true);
-                            localtreinoField.prop('disabled', true);
-                            horarioField.prop('disabled', true);
-                            horassemanaisdField.prop('disabled', true);
-                            // Limpa campos
-                          //  descontoIdField.val(''); 
-                            localtreinoField.val('');
-                            horarioField.val('');
-                            horassemanaisdField.val('');
-                        }
-                    });
-                });
-            </script>
-
             <div class="form-group">
                 <label asp-for="Rubrica.DescontoId" class="control-label">Desconto</label>
-                <select asp-for="Rubrica.DescontoId" class="form-control" asp-items="ViewBag.DescontoId" ></select>
+                <select asp-for="Rubrica.DescontoId" class="form-control" asp-items="ViewBag.DescontoId" disabled></select>
+                @Html.ValidationMessageFor(model => model.Rubrica.DescontoId, null, new { @class = "validation-error" })
             </div>
             <div class="form-group">
                 <label asp-for="Rubrica.EstadoRubrica" class="control-label">Estado</label>
@@ -105,13 +76,13 @@
                 <label asp-for="Rubrica.IPrecario" class="control-label"></label>
                 <div class="form-check">
                     <label class="form-check-label">
-                        <input type="radio" asp-for="Rubrica.IPrecario" class="form-check-input" value="S" checked />
+                        <input type="radio" asp-for="Rubrica.IPrecario" class="form-check-input" value="S" id="Rubrica_IPrecario_S" />
                         Sim
                     </label>
                 </div>
                 <div class="form-check">
                     <label class="form-check-label">
-                        <input type="radio" asp-for="Rubrica.IPrecario" class="form-check-input" value="N" />
+                        <input type="radio" asp-for="Rubrica.IPrecario" class="form-check-input" value="N" checked id="Rubrica_IPrecario_N" />
                         Não
                     </label>
                 </div>
@@ -119,20 +90,20 @@
             </div>
             <div class="form-group">
                 <label asp-for="Rubrica.OrdemPrecario" class="control-label"></label>
-                <input asp-for="Rubrica.OrdemPrecario" class="form-control" />
+                <input asp-for="Rubrica.OrdemPrecario" class="form-control" disabled/>
                 <span asp-validation-for="Rubrica.OrdemPrecario" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Rubrica.IVlrUnit" class="control-label"></label>
                 <div class="form-check">
                     <label class="form-check-label">
-                        <input type="radio" asp-for="Rubrica.IVlrUnit" class="form-check-input" value="S" checked />
+                        <input type="radio" asp-for="Rubrica.IVlrUnit" class="form-check-input" value="S" id="Rubrica_IVlrUnit_S" />
                         Sim
                     </label>
                 </div>
                 <div class="form-check">
                     <label class="form-check-label">
-                        <input type="radio" asp-for="Rubrica.IVlrUnit" class="form-check-input" value="N" />
+                        <input type="radio" asp-for="Rubrica.IVlrUnit" class="form-check-input" value="N" id="Rubrica_IVlrUnit_N" checked />
                         Não
                     </label>
                 </div>
@@ -140,7 +111,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="Rubrica.ValorUnitario" class="control-label"></label>
-                <input type="number" asp-for="Rubrica.ValorUnitario" class="form-control" />
+                <input type="number" asp-for="Rubrica.ValorUnitario" class="form-control" disabled/>
                 <span asp-validation-for="Rubrica.ValorUnitario" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -164,6 +135,82 @@
         </form>
     </div>
 </div>
+
+<!-- código js para proteger/desproteger campos preenchidos apenas se existir classe preenchida -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function () {
+        // Obter nome campos
+        var classeIdField = $('#Rubrica_ClasseId');
+        var descontoIdField = $('#Rubrica_DescontoId');
+        var localtreinoField = $('#Rubrica_LocalTreino');
+        var horarioField = $('#Rubrica_Horario');
+        var horassemanaisdField = $('#Rubrica_HorasSemanais');
+        var ivalorunitarioNField = $('#Rubrica_IVlrUnit_N');
+        var ivalorunitarioSField = $('#Rubrica_IVlrUnit_S');
+        var iprecarioNField = $('#Rubrica_IPrecario_N');
+        var iprecarioSField = $('#Rubrica_IPrecario_S');
+        var valorunitarioField = $('#Rubrica_ValorUnitario');
+        var ordemprecarioField = $('#Rubrica_OrdemPrecario');
+
+
+        // Função para alterações sobre o campo Classe
+        classeIdField.change(function () {
+            // Protege ou desprotege campos com base no valor do ClasseId
+            if ($(this).val() !== '') {
+                descontoIdField.prop('disabled', false);
+                localtreinoField.prop('disabled', false);
+                horarioField.prop('disabled', false);
+                horassemanaisdField.prop('disabled', false);
+            } else {
+                descontoIdField.prop('disabled', true);
+                localtreinoField.prop('disabled', true);
+                horarioField.prop('disabled', true);
+                horassemanaisdField.prop('disabled', true);
+                // Limpa campos
+                descontoIdField.val('Seleccionar Classe');
+                localtreinoField.val('');
+                horarioField.val('');
+                horassemanaisdField.val('');
+            }
+        });
+        // Função para alterações sobre o campo IPrecario
+        iprecarioNField.change(function () {
+            // Protege ou desprotege campos com base no valor do IPrecario
+            if ($(this).val() === 'N') {
+                ordemprecarioField.prop('disabled', true);
+                // Limpa campos
+                ordemprecarioField.val('');
+            }
+        });
+
+        // Função para alterações sobre o campo IPrecario
+        iprecarioSField.change(function () {
+            // Protege ou desprotege campos com base no valor do IPrecario
+            if ($(this).val() === 'S') {
+                ordemprecarioField.prop('disabled', false);
+            }
+        });
+
+        // Função para alterações sobre o campo IVlrUnit
+        ivalorunitarioNField.change(function () {
+            // Protege ou desprotege campos com base no valor do IVlrUnit
+            if ($(this).val() === 'N') {
+                valorunitarioField.prop('disabled', true);
+                // Limpa campos
+                valorunitarioField.val('');
+            }
+        });
+
+        // Função para alterações sobre o campo IVlrUnit
+        ivalorunitarioSField.change(function () {
+            // Protege ou desprotege campos com base no valor do IVlrUnit
+            if ($(this).val() === 'S') {
+                valorunitarioField.prop('disabled', false);
+            }
+        });
+    });
+</script>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

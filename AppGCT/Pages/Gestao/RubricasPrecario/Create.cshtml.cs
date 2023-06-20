@@ -52,6 +52,7 @@ namespace AppGCT.Pages.Gestao.RubricasPrecario
 
         public IActionResult OnGet()
         {
+
             var descontos = _context.Desconto.ToList();
             descontos.Insert(0, new Desconto
             {
@@ -70,6 +71,7 @@ namespace AppGCT.Pages.Gestao.RubricasPrecario
             });
 
             ViewData["ClasseId"] = new SelectList(classes, "IdClasse", "NomeClasse");
+
             return Page();
 
         }

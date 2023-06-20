@@ -15,15 +15,24 @@ namespace AppGCT.Pages.Precario
         }
 
         public IList<Rubrica> Rubrica { get; set; } = default!;
+        public IList<Rubrica> Rubrica2 { get; set; } = default!;
 
         public async Task OnGetAsync()
         {
             if (_context.Rubrica != null)
             {
-                Rubrica = await _context.Rubrica.Where(i => i.IPrecario == "S")
+                //obtêm apenas rubricas de preçário público associadas a classes
+                Rubrica = await _context.Rubrica.Where(i => i.IPrecario == "S" && i.ClasseId != null)
+                                                .Include(r => r.Modalidade)
+                                                .OrderBy(i => i.OrdemPrecario)
+                                                .ToListAsync();
+                //obtêm outras rubricas de preçário público sem classe associada
+                Rubrica2 = await _context.Rubrica.Where(i => i.IPrecario == "S" && i.ClasseId == null)
+                                                .Include(r => r.Modalidade)
                                                 .OrderBy(i => i.OrdemPrecario)
                                                 .ToListAsync();
             }
+
         }
     }
 }
