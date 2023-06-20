@@ -18,6 +18,26 @@ namespace AppGCT.Pages.Gestao.RubricasPrecario
     {
         private readonly AppGCT.Data.AppGCTContext _context;
 
+        private async Task<bool> ValidaRubrica()
+        {
+            if (_context.Rubrica == null || Rubrica == null)
+            {
+                return false;
+            }
+
+            // Validações se Classe não estive preenchida
+            if (Rubrica.ClasseId.Equals(null))
+            {
+                if (Rubrica.DescontoId != null)
+                {
+                    ModelState.AddModelError("Rubrica.DescontoId", "Desconto só pode ser preenchido se Classe preenchido");
+                    return false;
+                }
+
+            }
+
+            return true;
+        }
         public EditModel(AppGCT.Data.AppGCTContext context)
         {
             _context = context;
@@ -39,8 +59,28 @@ namespace AppGCT.Pages.Gestao.RubricasPrecario
                 return NotFound();
             }
             Rubrica = rubrica;
-           ViewData["DescontoId"] = new SelectList(_context.Desconto, "CodDesconto", "DescDesconto");
-           ViewData["ClasseId"] = new SelectList(_context.Classe, "IdClasse", "NomeClasse");
+
+            //ViewData["DescontoId"] = new SelectList(_context.Desconto, "CodDesconto", "DescDesconto");
+            //ViewData["ClasseId"] = new SelectList(_context.Classe, "IdClasse", "NomeClasse");
+
+            var descontos = _context.Desconto.ToList();
+            descontos.Insert(0, new Desconto
+            {
+                CodDesconto = "",
+                DescDesconto = "Seleccionar Desconto"
+
+            });
+
+            ViewData["DescontoId"] = new SelectList(descontos, "CodDesconto", "DescDesconto");
+
+            var classes = _context.Classe.ToList();
+            classes.Insert(0, new Classe
+            {
+                NomeClasse = "Seleccionar Classe"
+
+            });
+
+            ViewData["ClasseId"] = new SelectList(classes, "IdClasse", "NomeClasse");
             return Page();
         }
 
@@ -49,6 +89,11 @@ namespace AppGCT.Pages.Gestao.RubricasPrecario
         public async Task<IActionResult> OnPostAsync()
         {
             if (!ModelState.IsValid)
+            {
+                return Page();
+            }
+
+            if (!await ValidaRubrica())
             {
                 return Page();
             }

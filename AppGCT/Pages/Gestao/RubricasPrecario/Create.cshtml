@@ -5,6 +5,11 @@
     ViewData["Title"] = "Criar Rúbrica Preçário";
     Layout = "~/Pages/Shared/_Layout.cshtml";
 }
+<style>
+    .validation-error {
+        color: red;
+    }
+</style>
 
 <h1>Criar Rúbrica Preçário</h1>
 <hr />
@@ -32,9 +37,9 @@
 
             <div class="form-group">
                 <label asp-for="Rubrica.DescontoId" class="control-label">Desconto</label>
-                <select asp-for="Rubrica.DescontoId" class="form-control" asp-items="ViewBag.DescontoId" ></select>
+                <select asp-for="Rubrica.DescontoId" class="form-control" asp-items="ViewBag.DescontoId" disabled></select>
+                @Html.ValidationMessageFor(model => model.Rubrica.DescontoId, null, new { @class = "validation-error" })
             </div>
-            @Html.ValidationMessage("ErroDesconto")
             <div class="form-group">
                 <label asp-for="Rubrica.EstadoRubrica" class="control-label">Estado</label>
                 <div class="form-check">
@@ -149,22 +154,21 @@
         var ordemprecarioField = $('#Rubrica_OrdemPrecario');
 
 
-
         // Função para alterações sobre o campo Classe
         classeIdField.change(function () {
             // Protege ou desprotege campos com base no valor do ClasseId
             if ($(this).val() !== '') {
-                //   descontoIdField.prop('disabled', false);
+                descontoIdField.prop('disabled', false);
                 localtreinoField.prop('disabled', false);
                 horarioField.prop('disabled', false);
                 horassemanaisdField.prop('disabled', false);
             } else {
-                // descontoIdField.prop('disabled', true);
+                descontoIdField.prop('disabled', true);
                 localtreinoField.prop('disabled', true);
                 horarioField.prop('disabled', true);
                 horassemanaisdField.prop('disabled', true);
                 // Limpa campos
-                //  descontoIdField.val('');
+                descontoIdField.val('Seleccionar Classe');
                 localtreinoField.val('');
                 horarioField.val('');
                 horassemanaisdField.val('');

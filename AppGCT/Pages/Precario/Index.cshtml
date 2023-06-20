@@ -14,7 +14,7 @@
                 Classe
             </th>
             <th>
-                Valor
+                Valor Mensal
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Rubrica[0].LocalTreino)
@@ -32,7 +32,7 @@
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.DescricaoRubrica)
+                    @Html.DisplayFor(modelItem => item.Modalidade.NomeClasse)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.ValorUnitario)
@@ -58,7 +58,7 @@
                 Outros
             </th>
             <th>
-                Valor
+                Valor Anual
             </th>
         </tr>
     </thead>
