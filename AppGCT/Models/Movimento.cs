@@ -9,12 +9,12 @@ namespace AppGCT.Models
     {
         [Display(Name = "Identificação do Movimento")]
         public int? Id { get; set; }
-        [Required]
+
         [DataType(DataType.Text)]
         [Display(Name = "Descrição da Rúbrica")]
         public string? DesRubrica { get; set; }
         [Required]
-        [DataType(DataType.Text)]
+        [DataType(DataType.Date)]
         [Display(Name = "Data de movimento")]
         public DateTime DtMovimento { get; set; }
 
@@ -30,11 +30,10 @@ namespace AppGCT.Models
         [Display(Name = "Valor Desconto")]
         public Decimal? ValorDesconto { get; set; }
 
-        [Required]
         [DataType((DataType.Text))]
         [Display(Name = "Número de Fatura")]
         public string? NumFatura { get; set; }
-        [Required]
+
         [DataType((DataType.Text))]
         [Display(Name = "Número de Nota de Crédito")]
         public string? NumNotaCredito { get; set; }

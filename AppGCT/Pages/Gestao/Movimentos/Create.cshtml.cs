@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using AppGCT.Data;
 using AppGCT.Models;
+using System.Security.Claims;
 
 namespace AppGCT.Pages.Gestao.Movimentos
 {
@@ -21,10 +22,22 @@ namespace AppGCT.Pages.Gestao.Movimentos
 
         public IActionResult OnGet()
         {
-        ViewData["AtletaMovimentoId"] = new SelectList(_context.Ginasta, "Id", "EstadoGinasta");
-        ViewData["MetodoPagamentoId"] = new SelectList(_context.MetodoPagamento, "CodMetodo", "CodMetodo");
-        ViewData["UtilizadorId"] = new SelectList(_context.Users, "Id", "Id");
-        ViewData["RubricaId"] = new SelectList(_context.Rubrica, "CodRubrica", "CodRubrica");
+        var atletas = _context.Ginasta.ToList();
+            atletas.Insert(0, new Ginasta
+            {
+                NomeCompleto = "Seleccionar Ginasta"
+
+            });
+        ViewData["AtletaMovimentoId"] = new SelectList(atletas, "Id", "NomeCompleto");
+        var metodos = _context.MetodoPagamento.ToList();
+        metodos.Insert(0, new MetodoPagamento
+        {
+            CodMetodo = "Seleccionar Método"
+
+        });
+        ViewData["MetodoPagamentoId"] = new SelectList(metodos, "CodMetodo", "CodMetodo");
+        ViewData["UtilizadorId"] = new SelectList(_context.Users, "Id", "ID_Description");
+        ViewData["RubricaId"] = new SelectList(_context.Rubrica, "CodRubrica", "ID_DescriptionRubrica");
             return Page();
         }
 
@@ -35,10 +48,23 @@ namespace AppGCT.Pages.Gestao.Movimentos
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync()
         {
-          if (!ModelState.IsValid || _context.Movimento == null || Movimento == null)
+// Aceder à descrição da rubrica e gravá-la no movimento que se está a criar.
+//   Isto previne que, se no futuro a descrição da Rubrica for alterado, o Movimento fica com a Desrição da Rubrica que estava na tabela no
+//  momento da criação do Movimento
+            Movimento.DesRubrica = _context.Rubrica.Where(i => i.CodRubrica == Movimento.RubricaId).FirstOrDefault().DescricaoRubrica;
+
+            if (!ModelState.IsValid || _context.Movimento == null || Movimento == null)
             {
                 return Page();
             }
+
+
+            Movimento.DataCriacao = DateTime.Now;
+            // obtem User ID logado
+            var userId = User.FindFirstValue(ClaimTypes.Name);
+            Movimento.IdCriacao = userId;
+            Movimento.DataModificacao = DateTime.MinValue;
+            Movimento.IdModificacao = "";
 
             _context.Movimento.Add(Movimento);
             await _context.SaveChangesAsync();

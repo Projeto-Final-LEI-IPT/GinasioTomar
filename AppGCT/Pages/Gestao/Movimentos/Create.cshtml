@@ -1,5 +1,10 @@
 ﻿@page
 @model AppGCT.Pages.Gestao.Movimentos.CreateModel
+@Html.HiddenFor(m => m.Movimento.DesRubrica)
+@Html.HiddenFor(m => m.Movimento.IdCriacao)
+@Html.HiddenFor(m => m.Movimento.DataCriacao)
+@Html.HiddenFor(m => m.Movimento.IdModificacao)
+@Html.HiddenFor(m => m.Movimento.DataModificacao)
 
 @{
     ViewData["Title"] = "Create";
@@ -14,11 +19,6 @@
     <div class="col-md-4">
         <form method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Movimento.DesRubrica" class="control-label"></label>
-                <input asp-for="Movimento.DesRubrica" class="form-control" />
-                <span asp-validation-for="Movimento.DesRubrica" class="text-danger"></span>
-            </div>
             <div class="form-group">
                 <label asp-for="Movimento.DtMovimento" class="control-label"></label>
                 <input asp-for="Movimento.DtMovimento" class="form-control" />
@@ -43,26 +43,6 @@
                 <label asp-for="Movimento.NumNotaCredito" class="control-label"></label>
                 <input asp-for="Movimento.NumNotaCredito" class="form-control" />
                 <span asp-validation-for="Movimento.NumNotaCredito" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Movimento.DataCriacao" class="control-label"></label>
-                <input asp-for="Movimento.DataCriacao" class="form-control" />
-                <span asp-validation-for="Movimento.DataCriacao" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Movimento.IdCriacao" class="control-label"></label>
-                <input asp-for="Movimento.IdCriacao" class="form-control" />
-                <span asp-validation-for="Movimento.IdCriacao" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Movimento.DataModificacao" class="control-label"></label>
-                <input asp-for="Movimento.DataModificacao" class="form-control" />
-                <span asp-validation-for="Movimento.DataModificacao" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Movimento.IdModificacao" class="control-label"></label>
-                <input asp-for="Movimento.IdModificacao" class="form-control" />
-                <span asp-validation-for="Movimento.IdModificacao" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Movimento.UtilizadorId" class="control-label"></label>

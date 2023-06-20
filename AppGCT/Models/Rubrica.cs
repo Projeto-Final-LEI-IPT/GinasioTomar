@@ -143,6 +143,14 @@ namespace AppGCT.Models
             }
         }
 
+        public string ID_DescriptionRubrica
+        {
+            get
+            {
+                return string.Format("{0} - {1}", CodRubrica, DescricaoRubrica);
+            }
+        }
+
         public string? DescontoId { get; set; }
         public Desconto? Discount { get; set; }
 
