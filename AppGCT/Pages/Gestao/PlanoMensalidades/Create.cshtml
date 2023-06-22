@@ -2,14 +2,15 @@
 @model AppGCT.Pages.Inscricoes.PlanoMensalidades.CreateModel
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Criar Plano";
     Layout = "~/Pages/Shared/_Layout.cshtml";
 }
-
-<h1>Create</h1>
-
-<h4>PlanoMensalidade</h4>
+<h1>Criar Plano</h1>
 <hr />
+<div>
+    <a class='btn btn-primary btn-sm' asp-area='' asp-page='/Gestao/PlanoMensalidades/Index'>Voltar</a>
+</div>
+
 <div class="row">
     <div class="col-md-4">
         <form method="post">
@@ -21,47 +22,24 @@
             </div>
             <div class="form-group">
                 <label asp-for="PlanoMensalidade.ValorMensalidade" class="control-label"></label>
-                <input asp-for="PlanoMensalidade.ValorMensalidade" class="form-control" />
+                <input type="number" asp-for="PlanoMensalidade.ValorMensalidade" class="form-control" />
                 <span asp-validation-for="PlanoMensalidade.ValorMensalidade" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="PlanoMensalidade.DataCriacao" class="control-label"></label>
-                <input asp-for="PlanoMensalidade.DataCriacao" class="form-control" />
-                <span asp-validation-for="PlanoMensalidade.DataCriacao" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="PlanoMensalidade.IdCriacao" class="control-label"></label>
-                <input asp-for="PlanoMensalidade.IdCriacao" class="form-control" />
-                <span asp-validation-for="PlanoMensalidade.IdCriacao" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="PlanoMensalidade.DataModificacao" class="control-label"></label>
-                <input asp-for="PlanoMensalidade.DataModificacao" class="form-control" />
-                <span asp-validation-for="PlanoMensalidade.DataModificacao" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="PlanoMensalidade.IdModificacao" class="control-label"></label>
-                <input asp-for="PlanoMensalidade.IdModificacao" class="form-control" />
-                <span asp-validation-for="PlanoMensalidade.IdModificacao" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="PlanoMensalidade.EpocaId" class="control-label"></label>
+                <label asp-for="PlanoMensalidade.EpocaId" class="control-label">Época</label>
                 <select asp-for="PlanoMensalidade.EpocaId" class ="form-control" asp-items="ViewBag.EpocaId"></select>
             </div>
             <div class="form-group">
-                <label asp-for="PlanoMensalidade.GinastaId" class="control-label"></label>
+                <label asp-for="PlanoMensalidade.GinastaId" class="control-label">Ginasta</label>
                 <select asp-for="PlanoMensalidade.GinastaId" class ="form-control" asp-items="ViewBag.GinastaId"></select>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Criar" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
-<div>
-    <a asp-page="Index">Back to List</a>
-</div>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

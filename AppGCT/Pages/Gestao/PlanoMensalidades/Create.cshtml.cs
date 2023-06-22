@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using AppGCT.Data;
 using AppGCT.Models;
 using Microsoft.AspNetCore.Authorization;
+using System.Security.Claims;
 
 namespace AppGCT.Pages.Inscricoes.PlanoMensalidades
 {
@@ -23,7 +24,7 @@ namespace AppGCT.Pages.Inscricoes.PlanoMensalidades
 
         public IActionResult OnGet()
         {
-        ViewData["GinastaId"] = new SelectList(_context.Ginasta, "Id", "EstadoGinasta");
+        ViewData["GinastaId"] = new SelectList(_context.Ginasta, "Id", "ID_DescrGinasta");
         ViewData["EpocaId"] = new SelectList(_context.Epoca, "IdEpoca", "NomeEpoca");
             return Page();
         }
@@ -39,7 +40,12 @@ namespace AppGCT.Pages.Inscricoes.PlanoMensalidades
             {
                 return Page();
             }
-
+            PlanoMensalidade.DataCriacao = DateTime.Now;
+            // obtem User ID logado
+            var userId = User.FindFirstValue(ClaimTypes.Name);
+            PlanoMensalidade.IdCriacao = userId;
+            PlanoMensalidade.DataModificacao = DateTime.MinValue;
+            PlanoMensalidade.IdModificacao = "";
             _context.PlanoMensalidade.Add(PlanoMensalidade);
             await _context.SaveChangesAsync();
 

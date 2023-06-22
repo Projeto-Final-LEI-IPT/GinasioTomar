@@ -47,9 +47,13 @@
                 @Html.DisplayFor(modelItem => item.Aluno.ID_DescrGinasta)
             </td>
             <td>
-                <a class='btn btn-primary btn-sm' asp-area='' asp-page='/Gestao/PlanoMensalidades/Edit' asp-route-id='@item.IdPlanoM'>Editar</a>
-                <a class='btn btn-primary btn-sm' asp-area='' asp-page='/Gestao/PlanoMensalidades/Details' asp-route-id='@item.IdPlanoM'>Detalhes</a>
-                <a class='btn btn-danger btn-sm' asp-area='' asp-page='/Gestao/PlanoMensalidades/Delete' asp-route-id='@item.IdPlanoM'>Apagar</a>
+                @if (User.IsInRole("Administrador"))
+                {
+                        <a class='btn btn-primary btn-sm' asp-area='' asp-page='/Gestao/PlanoMensalidades/Edit' asp-route-id='@item.IdPlanoM'>Editar</a>
+                        <a class='btn btn-primary btn-sm' asp-area='' asp-page='/Gestao/PlanoMensalidades/Details' asp-route-id='@item.IdPlanoM'>Detalhes</a>
+                        <a class='btn btn-danger btn-sm' asp-area='' asp-page='/Gestao/PlanoMensalidades/Delete' asp-route-id='@item.IdPlanoM'>Apagar</a>
+                }
+                
             </td>
         </tr>
 }

@@ -30,7 +30,9 @@ namespace AppGCT.Pages.Inscricoes.PlanoMensalidades
                 return NotFound();
             }
 
-            var planomensalidade = await _context.PlanoMensalidade.FirstOrDefaultAsync(m => m.IdPlanoM == id);
+            var planomensalidade = await _context.PlanoMensalidade.Include(i => i.Aluno)
+                                                                  .Include(i => i.Epoca)
+                                                                  .FirstOrDefaultAsync(m => m.IdPlanoM == id);
             if (planomensalidade == null)
             {
                 return NotFound();

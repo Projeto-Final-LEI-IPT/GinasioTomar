@@ -9,6 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using AppGCT.Data;
 using AppGCT.Models;
 using Microsoft.AspNetCore.Authorization;
+using System.Security.Claims;
 
 namespace AppGCT.Pages.Inscricoes.PlanoMensalidades
 {
@@ -38,8 +39,8 @@ namespace AppGCT.Pages.Inscricoes.PlanoMensalidades
                 return NotFound();
             }
             PlanoMensalidade = planomensalidade;
-           ViewData["GinastaId"] = new SelectList(_context.Ginasta, "Id", "EstadoGinasta");
-           ViewData["EpocaId"] = new SelectList(_context.Epoca, "IdEpoca", "NomeEpoca");
+            ViewData["GinastaId"] = new SelectList(_context.Ginasta, "Id", "ID_DescrGinasta");
+            ViewData["EpocaId"] = new SelectList(_context.Epoca, "IdEpoca", "NomeEpoca");
             return Page();
         }
 
@@ -51,7 +52,10 @@ namespace AppGCT.Pages.Inscricoes.PlanoMensalidades
             {
                 return Page();
             }
-
+            // obtem User ID logado
+            var userId = User.FindFirstValue(ClaimTypes.Name);
+            PlanoMensalidade.IdModificacao = userId;
+            PlanoMensalidade.DataModificacao = DateTime.Now;
             _context.Attach(PlanoMensalidade).State = EntityState.Modified;
 
             try

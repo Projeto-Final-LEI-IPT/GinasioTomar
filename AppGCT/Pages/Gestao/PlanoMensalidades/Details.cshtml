@@ -2,15 +2,17 @@
 @model AppGCT.Pages.Inscricoes.PlanoMensalidades.DetailsModel
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Detalhes Plano";
     Layout = "~/Pages/Shared/_Layout.cshtml";
 }
 
-<h1>Details</h1>
+<h1>Detalhes Plano</h1>
 
+<hr />
 <div>
-    <h4>PlanoMensalidade</h4>
-    <hr />
+    <a class='btn btn-primary btn-sm' asp-area='' asp-page='/Gestao/PlanoMensalidades/Index'>Voltar</a>
+</div>
+<div>
     <dl class="row">
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.PlanoMensalidade.DataMensalidade)
@@ -23,6 +25,18 @@
         </dt>
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.PlanoMensalidade.ValorMensalidade)
+        </dd>
+        <dt class="col-sm-2">
+            Época
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.PlanoMensalidade.Epoca.NomeEpoca)
+        </dd>
+        <dt class="col-sm-2">
+            Ginasta
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.PlanoMensalidade.Aluno.ID_DescrGinasta)
         </dd>
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.PlanoMensalidade.DataCriacao)
@@ -48,21 +62,9 @@
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.PlanoMensalidade.IdModificacao)
         </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.PlanoMensalidade.Epoca)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.PlanoMensalidade.Epoca.NomeEpoca)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.PlanoMensalidade.Aluno)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.PlanoMensalidade.Aluno.EstadoGinasta)
-        </dd>
     </dl>
 </div>
+
 <div>
-    <a asp-page="./Edit" asp-route-id="@Model.PlanoMensalidade?.IdPlanoM">Edit</a> |
-    <a asp-page="./Index">Back to List</a>
+    <a class='btn btn-primary btn-sm' asp-area='' asp-page='/Gestao/PlanoMensalidades/Edit' asp-route-id='@Model.PlanoMensalidade?.IdPlanoM'>Editar</a>
 </div>
