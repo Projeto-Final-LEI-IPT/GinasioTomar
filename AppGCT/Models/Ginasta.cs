@@ -141,5 +141,7 @@ namespace AppGCT.Models
         public Utilizador? Socio { get; set; }
 
         public List<Inscricao>? Inscricoes { get; set; }
+
+        public List<PlanoMensalidade>? Planos { get; set; }
     }
 }

@@ -1,0 +1,72 @@
+﻿@page
+@model AppGCT.Pages.Inscricoes.PlanoMensalidades.DeleteModel
+
+@{
+    ViewData["Title"] = "Apagar Plano";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<h1>Apagar Plano</h1>
+<h3>Pretende mesmo apagar o Plano?</h3>
+<hr />
+<div>
+    <a class='btn btn-primary btn-sm' asp-area='' asp-page='/Gestao/PlanoMensalidades/Index'>Voltar</a>
+</div>
+
+<div>
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.PlanoMensalidade.DataMensalidade)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.PlanoMensalidade.DataMensalidade)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.PlanoMensalidade.ValorMensalidade)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.PlanoMensalidade.ValorMensalidade)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.PlanoMensalidade.Epoca)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.PlanoMensalidade.Epoca.NomeEpoca)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.PlanoMensalidade.Aluno)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.PlanoMensalidade.Aluno.ID_DescrGinasta)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.PlanoMensalidade.DataCriacao)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.PlanoMensalidade.DataCriacao)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.PlanoMensalidade.IdCriacao)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.PlanoMensalidade.IdCriacao)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.PlanoMensalidade.DataModificacao)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.PlanoMensalidade.DataModificacao)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.PlanoMensalidade.IdModificacao)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.PlanoMensalidade.IdModificacao)
+        </dd>
+    </dl>
+    
+    <form method="post">
+        <input type="hidden" asp-for="PlanoMensalidade.IdPlanoM" />
+        <input type="submit" value="Apagar" class="btn btn-danger" /> 
+    </form>
+</div>
