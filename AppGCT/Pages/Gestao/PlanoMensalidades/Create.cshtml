@@ -5,6 +5,13 @@
     ViewData["Title"] = "Criar Plano";
     Layout = "~/Pages/Shared/_Layout.cshtml";
 }
+
+<style>
+    .validation-error {
+        color: red;
+    }
+</style>
+
 <h1>Criar Plano</h1>
 <hr />
 <div>
@@ -32,6 +39,7 @@
             <div class="form-group">
                 <label asp-for="PlanoMensalidade.GinastaId" class="control-label">Ginasta</label>
                 <select asp-for="PlanoMensalidade.GinastaId" class ="form-control" asp-items="ViewBag.GinastaId"></select>
+                @Html.ValidationMessageFor(model => model.PlanoMensalidade.GinastaId, null, new { @class = "validation-error" })
             </div>
             <div class="form-group">
                 <input type="submit" value="Criar" class="btn btn-primary" />

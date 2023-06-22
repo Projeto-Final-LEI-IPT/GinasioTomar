@@ -52,6 +52,18 @@ namespace AppGCT.Pages.Inscricoes.PlanoMensalidades
             {
                 return Page();
             }
+
+            // Valida se o Ginasta já está inscrito na época, só assim permite criar o plano
+            var inscricao = await _context.Inscricao
+                .FirstOrDefaultAsync(i => i.GinastaId == PlanoMensalidade.GinastaId && i.EpocaId == PlanoMensalidade.EpocaId);
+
+            if (inscricao == null)
+            {
+                ModelState.AddModelError("PlanoMensalidade.GinastaId", "Ginasta não está inscrito na Época");
+                ViewData["GinastaId"] = new SelectList(_context.Ginasta, "Id", "ID_DescrGinasta");
+                ViewData["EpocaId"] = new SelectList(_context.Epoca, "IdEpoca", "NomeEpoca");
+                return Page();
+            }
             // obtem User ID logado
             var userId = User.FindFirstValue(ClaimTypes.Name);
             PlanoMensalidade.IdModificacao = userId;

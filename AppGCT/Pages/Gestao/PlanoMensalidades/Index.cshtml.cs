@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using AppGCT.Data;
 using AppGCT.Models;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNet.Identity;
 
 namespace AppGCT.Pages.Inscricoes.PlanoMensalidades
 {
@@ -23,14 +24,39 @@ namespace AppGCT.Pages.Inscricoes.PlanoMensalidades
 
         public IList<PlanoMensalidade> PlanoMensalidade { get;set; } = default!;
 
-        public async Task OnGetAsync()
+        public async Task<IActionResult> OnGetAsync(int idGinasta, int idEpoca)
         {
             if (_context.PlanoMensalidade != null)
             {
-                PlanoMensalidade = await _context.PlanoMensalidade
-                .Include(p => p.Aluno)
-                .Include(p => p.Epoca).ToListAsync();
+                string userId = User.Identity.GetUserId();
+                if (User.IsInRole("Administrador") || User.IsInRole("Ginásio"))
+                {
+                    PlanoMensalidade = await _context.PlanoMensalidade
+                                       .Include(p => p.Aluno)
+                                       .Include(p => p.Epoca)
+                                       .ToListAsync();
+                }
+                else
+                {
+                    var ginasta = await _context.Ginasta
+                                                .Include(g => g.Socio)
+                                                .FirstOrDefaultAsync(g => g.UtilizadorId == userId && g.Id == idGinasta);
+
+                    if (ginasta != null)
+                    {
+
+                        PlanoMensalidade = await _context.PlanoMensalidade
+                                      .Include(p => p.Aluno)
+                                      .Include(p => p.Epoca)
+                                      .Where(p => p.EpocaId == idEpoca && p.GinastaId == idGinasta)
+                                      .ToListAsync();
+                    }else
+                    {
+                        return RedirectToPage("./AcessDenied");
+                    }
+                }
             }
+            return Page();
         }
     }
 }
