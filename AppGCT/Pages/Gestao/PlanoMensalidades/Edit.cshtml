@@ -1,0 +1,71 @@
+﻿@page
+@model AppGCT.Pages.Inscricoes.PlanoMensalidades.EditModel
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<h1>Edit</h1>
+
+<h4>PlanoMensalidade</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="PlanoMensalidade.IdPlanoM" />
+            <div class="form-group">
+                <label asp-for="PlanoMensalidade.DataMensalidade" class="control-label"></label>
+                <input asp-for="PlanoMensalidade.DataMensalidade" class="form-control" />
+                <span asp-validation-for="PlanoMensalidade.DataMensalidade" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PlanoMensalidade.ValorMensalidade" class="control-label"></label>
+                <input asp-for="PlanoMensalidade.ValorMensalidade" class="form-control" />
+                <span asp-validation-for="PlanoMensalidade.ValorMensalidade" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PlanoMensalidade.DataCriacao" class="control-label"></label>
+                <input asp-for="PlanoMensalidade.DataCriacao" class="form-control" />
+                <span asp-validation-for="PlanoMensalidade.DataCriacao" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PlanoMensalidade.IdCriacao" class="control-label"></label>
+                <input asp-for="PlanoMensalidade.IdCriacao" class="form-control" />
+                <span asp-validation-for="PlanoMensalidade.IdCriacao" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PlanoMensalidade.DataModificacao" class="control-label"></label>
+                <input asp-for="PlanoMensalidade.DataModificacao" class="form-control" />
+                <span asp-validation-for="PlanoMensalidade.DataModificacao" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PlanoMensalidade.IdModificacao" class="control-label"></label>
+                <input asp-for="PlanoMensalidade.IdModificacao" class="form-control" />
+                <span asp-validation-for="PlanoMensalidade.IdModificacao" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PlanoMensalidade.EpocaId" class="control-label"></label>
+                <select asp-for="PlanoMensalidade.EpocaId" class="form-control" asp-items="ViewBag.EpocaId"></select>
+                <span asp-validation-for="PlanoMensalidade.EpocaId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PlanoMensalidade.GinastaId" class="control-label"></label>
+                <select asp-for="PlanoMensalidade.GinastaId" class="form-control" asp-items="ViewBag.GinastaId"></select>
+                <span asp-validation-for="PlanoMensalidade.GinastaId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="./Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

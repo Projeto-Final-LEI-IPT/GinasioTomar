@@ -80,5 +80,7 @@ namespace AppGCT.Data
         public DbSet<AppGCT.Models.MetodoPagamento> MetodoPagamento { get; set; } = default!;
 
         public DbSet<AppGCT.Models.Rubrica> Rubrica { get; set; } = default!;
+
+        public DbSet<AppGCT.Models.PlanoMensalidade> PlanoMensalidade { get; set; } = default!;
     }
 }
