@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace AppGCT.Models
 {
-    public class PlanoMensalidades
+    public class PlanoMensalidade
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -34,6 +34,14 @@ namespace AppGCT.Models
         [Display(Name = "Modificado por")]
         [StringLength(36)]
         public string? IdModificacao { get; set; }
+
+        public int EpocaId { get; set; }
+
+        public Epoca? Epoca { get; set; }
+
+        public int GinastaId { get; set; }
+
+        public Ginasta? Aluno { get; set; }
 
     }
 }

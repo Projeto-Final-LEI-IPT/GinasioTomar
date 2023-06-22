@@ -52,6 +52,8 @@ namespace AppGCT.Models
         }
 
         public List<Inscricao>? Inscricoes { get; set; }
+
+        public List<PlanoMensalidade>? Planos { get; set; }
     }
 
 

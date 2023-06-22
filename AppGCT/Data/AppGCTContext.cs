@@ -63,6 +63,16 @@ namespace AppGCT.Data
                    .WithMany(p => p.Rubricas)
                    .HasForeignKey(p => p.ClasseId)
                    .IsRequired(false);
+
+            builder.Entity<PlanoMensalidade>()
+                   .HasOne(p => p.Epoca)
+                   .WithMany(a => a.Planos)
+                   .HasForeignKey(p => p.EpocaId);
+
+            builder.Entity<PlanoMensalidade>()
+                   .HasOne(p => p.Aluno)
+                   .WithMany(a => a.Planos)
+                   .HasForeignKey(p => p.GinastaId);
         }
 
         public DbSet<AppGCT.Models.Classe> Classe { get; set; } = default!;
