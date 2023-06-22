@@ -7,18 +7,29 @@
 @Html.HiddenFor(m => m.Movimento.DataModificacao)
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Criar Movimento Contabilístico";
     Layout = "~/Pages/Shared/_Layout.cshtml";
 }
 
-<h1>Create</h1>
-
-<h4>Movimento</h4>
+<h1>Criar movimento contabilístico</h1>
 <hr />
+<div>
+    <a class='btn btn-primary btn-sm' asp-area='' asp-page='/Gestao/Movimentos/Index'>Voltar</a>
+</div>
 <div class="row">
     <div class="col-md-4">
         <form method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Movimento.NumFatura" class="control-label"></label>
+                <input asp-for="Movimento.NumFatura" class="form-control" />
+                <span asp-validation-for="Movimento.NumFatura" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Movimento.NumNotaCredito" class="control-label"></label>
+                <input asp-for="Movimento.NumNotaCredito" class="form-control" />
+                <span asp-validation-for="Movimento.NumNotaCredito" class="text-danger"></span>
+            </div>
             <div class="form-group">
                 <label asp-for="Movimento.DtMovimento" class="control-label"></label>
                 <input asp-for="Movimento.DtMovimento" class="form-control" />
@@ -35,40 +46,26 @@
                 <span asp-validation-for="Movimento.ValorDesconto" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Movimento.NumFatura" class="control-label"></label>
-                <input asp-for="Movimento.NumFatura" class="form-control" />
-                <span asp-validation-for="Movimento.NumFatura" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Movimento.NumNotaCredito" class="control-label"></label>
-                <input asp-for="Movimento.NumNotaCredito" class="form-control" />
-                <span asp-validation-for="Movimento.NumNotaCredito" class="text-danger"></span>
-            </div>
-            <div class="form-group">
                 <label asp-for="Movimento.UtilizadorId" class="control-label"></label>
                 <select asp-for="Movimento.UtilizadorId" class ="form-control" asp-items="ViewBag.UtilizadorId"></select>
             </div>
             <div class="form-group">
-                <label asp-for="Movimento.AtletaMovimentoId" class="control-label"></label>
+                <label asp-for="Movimento.AtletaMovimentoId" class="control-label">Ginasta</label>
                 <select asp-for="Movimento.AtletaMovimentoId" class ="form-control" asp-items="ViewBag.AtletaMovimentoId"></select>
             </div>
             <div class="form-group">
-                <label asp-for="Movimento.RubricaId" class="control-label"></label>
+                <label asp-for="Movimento.RubricaId" class="control-label">Rúbrica</label>
                 <select asp-for="Movimento.RubricaId" class ="form-control" asp-items="ViewBag.RubricaId"></select>
             </div>
             <div class="form-group">
-                <label asp-for="Movimento.MetodoPagamentoId" class="control-label"></label>
+                <label asp-for="Movimento.MetodoPagamentoId" class="control-label">Método de Pagamento</label>
                 <select asp-for="Movimento.MetodoPagamentoId" class ="form-control" asp-items="ViewBag.MetodoPagamentoId"></select>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Criar" class="btn btn-primary" />
             </div>
         </form>
     </div>
-</div>
-
-<div>
-    <a asp-page="Index">Back to List</a>
 </div>
 
 @section Scripts {

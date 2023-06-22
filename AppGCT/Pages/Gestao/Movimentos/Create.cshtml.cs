@@ -32,10 +32,11 @@ namespace AppGCT.Pages.Gestao.Movimentos
         var metodos = _context.MetodoPagamento.ToList();
         metodos.Insert(0, new MetodoPagamento
         {
-            CodMetodo = "Seleccionar Método"
+            CodMetodo  = "",
+            DescMetodo = "Seleccionar Método"
 
         });
-        ViewData["MetodoPagamentoId"] = new SelectList(metodos, "CodMetodo", "CodMetodo");
+        ViewData["MetodoPagamentoId"] = new SelectList(metodos, "CodMetodo", "DescMetodo");
         ViewData["UtilizadorId"] = new SelectList(_context.Users, "Id", "ID_Description");
         ViewData["RubricaId"] = new SelectList(_context.Rubrica, "CodRubrica", "ID_DescriptionRubrica");
             return Page();

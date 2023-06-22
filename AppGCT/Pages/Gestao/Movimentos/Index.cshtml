@@ -2,23 +2,29 @@
 @model AppGCT.Pages.Gestao.Movimentos.IndexModel
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Gestão Movimentos Contabilísticos";
     Layout = "~/Pages/Shared/_Layout.cshtml";
 }
 
-<h1>Index</h1>
+<h1>Gestão Movimentos Contabilísticos</h1>
 
-<p>
-    <a asp-page="Create">Create New</a>
-</p>
+<div>
+    <a class='btn btn-primary btn-sm' asp-area='' asp-page='/Gestao/Movimentos/Create'>Novo movimento</a>
+</div>
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Movimento[0].DesRubrica)
+                @Html.DisplayNameFor(model => model.Movimento[0].NumFatura)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Movimento[0].NumNotaCredito)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Movimento[0].DtMovimento)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Movimento[0].DesRubrica)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Movimento[0].ValorMovimento)
@@ -27,31 +33,10 @@
                 @Html.DisplayNameFor(model => model.Movimento[0].ValorDesconto)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Movimento[0].NumFatura)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Movimento[0].NumNotaCredito)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Movimento[0].DataCriacao)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Movimento[0].IdCriacao)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Movimento[0].DataModificacao)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Movimento[0].IdModificacao)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Movimento[0].Socio)
+                Sócio
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Movimento[0].Atleta)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Movimento[0].TipoDespesa)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Movimento[0].FormaPagamento)
@@ -63,10 +48,16 @@
 @foreach (var item in Model.Movimento) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.DesRubrica)
+                @Html.DisplayFor(modelItem => item.NumFatura)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NumNotaCredito)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.DtMovimento)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DesRubrica)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.ValorMovimento)
@@ -75,39 +66,18 @@
                 @Html.DisplayFor(modelItem => item.ValorDesconto)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.NumFatura)
+                @Html.DisplayFor(modelItem => item.Socio.ID_Description )
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.NumNotaCredito)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DataCriacao)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IdCriacao)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DataModificacao)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IdModificacao)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Socio.Id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Atleta.EstadoGinasta)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TipoDespesa.CodRubrica)
+                @Html.DisplayFor(modelItem => item.Atleta.NomeCompleto)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.FormaPagamento.CodMetodo)
             </td>
             <td>
-                <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+                <a class='btn btn-primary btn-sm' asp-area='' asp-page='/Gestao/Movimentos/Edit' asp-route-id='@item.Id'>Editar</a>
+                <a class='btn btn-primary btn-sm' asp-area='' asp-page='/Gestao/Movimentos/Details' asp-route-id='@item.Id'>Detalhes</a>
+                <a class='btn btn-danger btn-sm' asp-area='' asp-page='/Gestao/Movimentos/Delete' asp-route-id='@item.Id'>Apagar</a>
             </td>
         </tr>
 }
