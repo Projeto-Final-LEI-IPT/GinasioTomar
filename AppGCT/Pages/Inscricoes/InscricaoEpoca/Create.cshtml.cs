@@ -55,6 +55,8 @@ namespace AppGCT.Pages.Inscricoes.InscricaoEpoca
 
             // Obtem EpocaId
             int epocaId = Inscricao.EpocaId;
+            //obtem dtinscricao
+            DateTime dtInscricao = Inscricao.DtInscricao;
             //obtem rubrica
             var rubrica = await _context.Rubrica
                                         .FirstOrDefaultAsync(r => r.ClasseId == Inscricao.ClasseId);
@@ -67,6 +69,21 @@ namespace AppGCT.Pages.Inscricoes.InscricaoEpoca
             {
                 return NotFound();
             }
+            DateTime dtIni30 = epoca.DataInicio.AddMonths(-2);
+
+            if (Inscricao.DtInscricao > epoca.DataFim)
+            {
+                ModelState.AddModelError("Inscricao.DtInscricao", "Data Inscrição não pode ser superior à Data Fim da época");
+                OnGet(Inscricao.GinastaId);
+                return Page();
+            }
+
+            if (Inscricao.DtInscricao < dtIni30)
+            {
+                ModelState.AddModelError("Inscricao.DtInscricao", "Data Inscrição não pode ser inferior à Data Inicio da época menos 2 meses");
+                OnGet(Inscricao.GinastaId);
+                return Page();
+            }
 
             // Calcula o número de meses entre a DataInicio e DataFim da época
             int numberOfMonths = (epoca.DataFim.Year - epoca.DataInicio.Year) * 12
@@ -76,19 +93,21 @@ namespace AppGCT.Pages.Inscricoes.InscricaoEpoca
             for (int i = 0; i <= numberOfMonths; i++)
             {
                 DateTime dataMensalidade = epoca.DataInicio.AddMonths(i);
-                var planoMensalidade = new PlanoMensalidade
+                if (dataMensalidade.Month == dtInscricao.Month || dataMensalidade > dtInscricao)
                 {
-                    DataMensalidade = dataMensalidade,
-                    ValorMensalidade = valorMensalidade, 
-                    DataCriacao = DateTime.Now,
-                    IdCriacao = User.Identity.GetUserId(),
-                    DataModificacao = null,
-                    IdModificacao = null,
-                    EpocaId = epocaId,
-                    GinastaId = Inscricao.GinastaId
-                };
-
-                _context.PlanoMensalidade.Add(planoMensalidade);
+                    var planoMensalidade = new PlanoMensalidade
+                    {
+                        DataMensalidade = dataMensalidade,
+                        ValorMensalidade = valorMensalidade,
+                        DataCriacao = DateTime.Now,
+                        IdCriacao = User.Identity.GetUserId(),
+                        DataModificacao = null,
+                        IdModificacao = null,
+                        EpocaId = epocaId,
+                        GinastaId = Inscricao.GinastaId
+                    };
+                    _context.PlanoMensalidade.Add(planoMensalidade);
+                }
             }
 
 
