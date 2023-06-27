@@ -155,6 +155,40 @@ namespace AppGCT.Models
             }
         }
 
+        public string DescricaoIPagInscricao
+        {
+            get
+            {
+                switch (this.IPagInscricao)
+                {
+                    case "S":
+                        return "Sim";
+                    case "N":
+                        return "Não";
+                    default:
+                        return "Desconhecido";
+                }
+            }
+        }
+
+        public string DescricaoTipoRubrica
+        {
+            get
+            {
+                switch (this.TipoRubrica)
+                {
+                    case "P":
+                        return "Pagamentos";
+                    case "D":
+                        return "Devoluções";
+                    case "O":
+                        return "Outros";
+                    default:
+                        return "Desconhecido";
+                }
+            }
+        }
+
         public string? DescontoId { get; set; }
         public Desconto? Discount { get; set; }
 
