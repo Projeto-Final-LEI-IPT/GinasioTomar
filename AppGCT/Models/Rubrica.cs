@@ -52,6 +52,18 @@ namespace AppGCT.Models
         [Display(Name = "Valor Unitário")]
         public Decimal? ValorUnitario { get; set; }
 
+        [Display(Name = "Cobrar na inscrição?")]
+        [Required(ErrorMessage = "Indicador Pagamento na Inscrição é campo obrigatório!")]
+        [StringLength(1, MinimumLength = 1, ErrorMessage = "Indicador valor unitário deverá ser (S) Sim ou (N) Não")]
+        [DataType(DataType.Text)]
+        public string? IPagInscricao { get; set; }
+
+        [Display(Name = "Tipo Rúbrica")]
+        [Required(ErrorMessage = "Tipo Rúbrica é campo obrigatório!")]
+        [StringLength(1, MinimumLength = 1, ErrorMessage = "Tipo Rúbrica deverá ser (P) Pagamento, (D) Devoluções ou (O) Outros")]
+        [DataType(DataType.Text)]
+        public string? TipoRubrica { get; set; }
+
         [Display(Name = "Local de treino - Pavilhão")]
         [StringLength(50, ErrorMessage = "Local de treino não pode exceder 50 caracteres")]
         [DataType(DataType.Text)]
