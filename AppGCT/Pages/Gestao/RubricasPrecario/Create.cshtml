@@ -115,6 +115,44 @@
                 <span asp-validation-for="Rubrica.ValorUnitario" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <label asp-for="Rubrica.IPagInscricao" class="control-label"></label>
+                <div class="form-check">
+                    <label class="form-check-label">
+                        <input type="radio" asp-for="Rubrica.IPagInscricao" class="form-check-input" value="S"/>
+                        Sim
+                    </label>
+                </div>
+                <div class="form-check">
+                    <label class="form-check-label">
+                        <input type="radio" asp-for="Rubrica.IPagInscricao" class="form-check-input" value="N" checked />
+                        Não
+                    </label>
+                </div>
+                <span asp-validation-for="Rubrica.IPagInscricao" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Rubrica.TipoRubrica" class="control-label"></label>
+                <div class="form-check">
+                    <label class="form-check-label">
+                        <input type="radio" asp-for="Rubrica.TipoRubrica" class="form-check-input" value="P" />
+                        Pagamentos
+                    </label>
+                </div>
+                <div class="form-check">
+                    <label class="form-check-label">
+                        <input type="radio" asp-for="Rubrica.TipoRubrica" class="form-check-input" value="D"/>
+                        Devoluções
+                    </label>
+                </div>
+                <div class="form-check">
+                    <label class="form-check-label">
+                        <input type="radio" asp-for="Rubrica.TipoRubrica" class="form-check-input" value="O" checked />
+                        Outros
+                    </label>
+                </div>
+                <span asp-validation-for="Rubrica.TipoRubrica" class="text-danger"></span>
+            </div>
+            <div class="form-group">
                 <label asp-for="Rubrica.LocalTreino" class="control-label"></label>
                 <input asp-for="Rubrica.LocalTreino" class="form-control" disabled/>
                 <span asp-validation-for="Rubrica.LocalTreino" class="text-danger"></span>

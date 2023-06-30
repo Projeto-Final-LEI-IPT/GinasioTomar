@@ -85,11 +85,15 @@ namespace AppGCT.Pages.Gestao.RubricasPrecario
         {
           if (!ModelState.IsValid || _context.Rubrica == null || Rubrica == null)
             {
+                //faz refresh das dropdown's
+                OnGet();
                 return Page();
             }
 
           if (!await ValidaRubrica())
             {
+                //faz refresh das dropdown's
+                OnGet();
                 return Page();
             }
 

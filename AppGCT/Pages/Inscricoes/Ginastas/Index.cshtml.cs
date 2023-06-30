@@ -23,24 +23,96 @@ namespace AppGCT.Pages.Inscricoes.Ginastas
             _context = context;
         }
 
-        public IList<Ginasta> Ginasta { get;set; } = default!;
+        public string NomeSort { get; set; }
+        public string DataNascSort { get; set; }
+        public string EstadoSort { get; set; }
+        public string EmailSort { get; set; }
+        public string NumSocioSort { get; set; }
+        public string NomeSocioSort { get; set; }
+        public string CurrentFilter { get; set; }
+        public string CurrentSort { get; set; }
 
-        public async Task OnGetAsync()
+        public IList<Ginasta> Ginastas { get;set; } = default!;
+
+        public async Task OnGetAsync(string sortOrder, string searchString)
         {
             if (_context.Ginasta != null)
             {
+                NomeSort = String.IsNullOrEmpty(sortOrder) ? "nome_desc" : "";
+                DataNascSort = sortOrder == "DataNasc" ? "datanasc_desc" : "DataNasc";
+                EstadoSort = sortOrder == "Estado" ? "estado_desc" : "Estado";
+                EmailSort = sortOrder == "Email" ? "email_desc" : "Email";
+                NumSocioSort = sortOrder == "NumSocio" ? "numsocio_desc" : "NumSocio";
+                NomeSocioSort = sortOrder == "NomeSocio" ? "nomesocio_desc" : "NomeSocio";
+
+                CurrentFilter = searchString;
+
                 string userId = User.Identity.GetUserId();
+                var GinastaIQ = _context.Ginasta.AsQueryable();
+
                 if (User.IsInRole("Administrador") || User.IsInRole("Ginásio"))
                 {
-                    Ginasta = await _context.Ginasta
-                    .Include(g => g.Socio).ToListAsync();
+                    GinastaIQ = GinastaIQ.Include(r => r.Socio);
+
+                    if (!String.IsNullOrEmpty(searchString))
+                    {
+                        GinastaIQ = GinastaIQ.Include(r => r.Socio).Where(s => s.NomeCompleto.ToUpper().Contains(searchString.ToUpper())
+                                                                    || s.Socio.Nome.ToUpper().Contains(searchString.ToUpper()));
+                    }
                 }
                 else
                 {
-                    Ginasta = await _context.Ginasta
-                        .Where(g => g.UtilizadorId.Equals(userId))
-                        .Include(g => g.Socio).ToListAsync();
+                    GinastaIQ = GinastaIQ.Include(r => r.Socio)
+                                         .Where(s => s.UtilizadorId.Equals(userId));
+
+                    if (!String.IsNullOrEmpty(searchString))
+                    {
+                        GinastaIQ = GinastaIQ.Include(r => r.Socio)
+                                         .Where(s => s.UtilizadorId.Equals(userId) && s.NomeCompleto.ToUpper().Contains(searchString.ToUpper()));
+                    }
                 }
+
+                switch (sortOrder)
+                {
+                    case "nome_desc":
+                        GinastaIQ = GinastaIQ.OrderByDescending(s => s.NomeCompleto);
+                        break;
+                    case "DataNasc":
+                        GinastaIQ = GinastaIQ.OrderBy(s => s.DtNascim);
+                        break;
+                    case "datanasc_desc":
+                        GinastaIQ = GinastaIQ.OrderByDescending(s => s.DtNascim);
+                        break;
+                    case "Estado":
+                        GinastaIQ = GinastaIQ.OrderBy(s => s.EstadoGinasta);
+                        break;
+                    case "estado_desc":
+                        GinastaIQ = GinastaIQ.OrderByDescending(s => s.EstadoGinasta);
+                        break;
+                    case "Email":
+                        GinastaIQ = GinastaIQ.OrderBy(s => s.Email);
+                        break;
+                    case "email_desc":
+                        GinastaIQ = GinastaIQ.OrderByDescending(s => s.Email);
+                        break;
+                    case "NumSocio":
+                        GinastaIQ = GinastaIQ.OrderBy(s => s.Socio.NumSocio);
+                        break;
+                    case "numsocio_desc":
+                        GinastaIQ = GinastaIQ.OrderByDescending(s => s.Socio.NumSocio);
+                        break;
+                    case "NomeSocio":
+                        GinastaIQ = GinastaIQ.OrderBy(s => s.Socio.Nome);
+                        break;
+                    case "nomesocio_desc":
+                        GinastaIQ = GinastaIQ.OrderByDescending(s => s.Socio.Nome);
+                        break;
+                    default:
+                        GinastaIQ = GinastaIQ.OrderBy(s => s.NomeCompleto);
+                        break;
+                }
+
+                Ginastas = await GinastaIQ.AsNoTracking().ToListAsync();
             }
         }
     }
