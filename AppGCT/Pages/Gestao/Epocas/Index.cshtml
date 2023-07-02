@@ -11,13 +11,39 @@
 <p>
     <a class='btn btn-primary btn-sm' asp-area='' asp-page='/Gestao/Epocas/Create'>Nova Época</a>
 </p>
+<form asp-page="./Index" method="get">
+    <div class="form-actions no-color">
+        <p>
+            Época
+            <input type="text" name="SearchString" value="@Model.CurrentFilter" />
+            <input type="submit" value="Procurar" class="btn btn-primary btn-sm" />
+            <a class='btn btn-primary btn-sm' asp-area='' asp-page='/Gestao/Epocas/Index'>Limpar</a>
+        </p>
+    </div>
+</form>
 <table class="table">
     <thead>
         <tr>
-            <th>Época</th>
-            <th>Data Início</th>
-            <th>Data Fim</th>
-            <th>Estado Época</th>
+            <th>
+                <a asp-page="./Index" asp-route-sortOrder="@Model.EpocaSort">
+                    Época
+                </a>
+            </th>
+            <th>
+                <a asp-page="./Index" asp-route-sortOrder="@Model.DataInicioSort">
+                    Data Início
+                </a> 
+            </th>
+            <th>
+                <a asp-page="./Index" asp-route-sortOrder="@Model.DataFimSort">
+                    Data Fim
+                </a>
+            </th>
+            <th>
+                <a asp-page="./Index" asp-route-sortOrder="@Model.EstadoEpocaSort">
+                    Estado Época
+                </a>
+            </th>
             <th></th>
         </tr>
     </thead>
