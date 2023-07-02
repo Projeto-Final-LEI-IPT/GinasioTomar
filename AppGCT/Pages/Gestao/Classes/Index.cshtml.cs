@@ -30,7 +30,6 @@ namespace AppGCT.Pages.Gestao.Classes
         {
             if (_context.Classe != null)
             {
-               // Classe = await _context.Classe.ToListAsync();
                 NomeClasseSort = String.IsNullOrEmpty(sortOrder) ? "nomeclasse_desc" : "";
                 EstadoClasseSort = sortOrder == "EstadoClasse" ? "estadoclasse_desc" : "EstadoClasse";
 
