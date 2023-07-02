@@ -21,14 +21,52 @@ namespace AppGCT.Pages.Gestao.Descontos
         {
             _context = context;
         }
-
+        public string CodDescontoSort { get; set; }
+        public string DescDescontoSort { get; set; }
+        public string EstadoDescontoSort { get; set; }
+        public string CurrentFilter { get; set; }
         public IList<Desconto> Desconto { get;set; } = default!;
 
-        public async Task OnGetAsync()
+        public async Task OnGetAsync(string sortOrder, string searchString)
         {
             if (_context.Desconto != null)
             {
-                Desconto = await _context.Desconto.ToListAsync();
+                CodDescontoSort = String.IsNullOrEmpty(sortOrder) ? "coddesconto_desc" : "";
+                DescDescontoSort = sortOrder == "DescDesconto" ? "descdesconto_desc" : "DescDesconto";
+                EstadoDescontoSort = sortOrder == "EstadoDesconto" ? "estadodesconto_desc" : "EstadoDesconto";
+
+                CurrentFilter = searchString;
+
+                IQueryable<Desconto> DescontoIQ = _context.Desconto.AsQueryable();
+
+                if (!String.IsNullOrEmpty(searchString))
+                {
+                    DescontoIQ = DescontoIQ.Where(s => s.DescDesconto.ToUpper().Contains(searchString.ToUpper()));
+                }
+
+                switch (sortOrder)
+                {
+                    case "coddesconto_desc":
+                        DescontoIQ = DescontoIQ.OrderByDescending(s => s.CodDesconto);
+                        break;
+                    case "DescDesconto":
+                        DescontoIQ = DescontoIQ.OrderBy(s => s.DescDesconto);
+                        break;
+                    case "descdesconto_desc":
+                        DescontoIQ = DescontoIQ.OrderByDescending(s => s.DescDesconto);
+                        break;
+                    case "EstadoDesconto":
+                        DescontoIQ = DescontoIQ.OrderBy(s => s.EstadoDesconto);
+                        break;
+                    case "estadodesconto_desc":
+                        DescontoIQ = DescontoIQ.OrderByDescending(s => s.EstadoDesconto);
+                        break;
+                    default:
+                        DescontoIQ = DescontoIQ.OrderBy(s => s.CodDesconto);
+                        break;
+                }
+
+                Desconto = await DescontoIQ.ToListAsync();
             }
         }
     }

@@ -11,17 +11,33 @@
 <p>
     <a class='btn btn-primary btn-sm' asp-area='' asp-page='/Gestao/Descontos/Create'>Novo Desconto</a>
 </p>
+<form asp-page="./Index" method="get">
+    <div class="form-actions no-color">
+        <p>
+            Descrição Desconto
+            <input type="text" name="SearchString" value="@Model.CurrentFilter" />
+            <input type="submit" value="Procurar" class="btn btn-primary btn-sm" />
+            <a class='btn btn-primary btn-sm' asp-area='' asp-page='/Gestao/Descontos/Index'>Limpar</a>
+        </p>
+    </div>
+</form>
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Desconto[0].CodDesconto)
+                <a asp-page="./Index" asp-route-sortOrder="@Model.CodDescontoSort">
+                    @Html.DisplayNameFor(model => model.Desconto[0].CodDesconto)
+                </a>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Desconto[0].DescDesconto)
+                <a asp-page="./Index" asp-route-sortOrder="@Model.DescDescontoSort">
+                    @Html.DisplayNameFor(model => model.Desconto[0].DescDesconto)
+                </a>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Desconto[0].EstadoDesconto)
+                <a asp-page="./Index" asp-route-sortOrder="@Model.EstadoDescontoSort">
+                    @Html.DisplayNameFor(model => model.Desconto[0].EstadoDesconto)
+                </a>
             </th>
             <th></th>
         </tr>
