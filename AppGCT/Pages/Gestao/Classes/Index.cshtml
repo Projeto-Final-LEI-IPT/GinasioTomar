@@ -11,14 +11,28 @@
 <p>
     <a class='btn btn-primary btn-sm' asp-area='' asp-page='/Gestao/Classes/Create'>Nova Classe</a>
 </p>
+<form asp-page="./Index" method="get">
+    <div class="form-actions no-color">
+        <p>
+            Nome Classe
+            <input type="text" name="SearchString" value="@Model.CurrentFilter" />
+            <input type="submit" value="Procurar" class="btn btn-primary btn-sm" />
+            <a class='btn btn-primary btn-sm' asp-area='' asp-page='/Gestao/Classes/Index'>Limpar</a>
+        </p>
+    </div>
+</form>
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Classe[0].NomeClasse)
+                <a asp-page="./Index" asp-route-sortOrder="@Model.NomeClasseSort">
+                    @Html.DisplayNameFor(model => model.Classe[0].NomeClasse)
+                </a>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Classe[0].EstadoClasse)
+                <a asp-page="./Index" asp-route-sortOrder="@Model.EstadoClasseSort">
+                    @Html.DisplayNameFor(model => model.Classe[0].EstadoClasse)
+                </a>
             </th>
             <th></th>
         </tr>
