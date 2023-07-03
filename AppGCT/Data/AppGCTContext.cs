@@ -64,6 +64,26 @@ namespace AppGCT.Data
                    .HasForeignKey(p => p.ClasseId)
                    .IsRequired(false);
 
+            builder.Entity<Movimento>()
+                   .HasOne(p => p.Socio)
+                   .WithMany(a => a.Movimentos)
+                   .HasForeignKey(p => p.UtilizadorId);
+
+            builder.Entity<Movimento>()
+                  .HasOne(p => p.Atleta)
+                  .WithMany(a => a.Movimentos)
+                  .HasForeignKey(p => p.AtletaMovimentoId)
+                  .IsRequired(false);
+
+            builder.Entity<Movimento>()
+                   .HasOne(p => p.TipoDespesa)
+                   .WithMany(p => p.Movimentos)
+                   .HasForeignKey(p => p.RubricaId);
+
+            builder.Entity<Movimento>()
+                   .HasOne(p => p.FormaPagamento)
+                   .WithMany(p => p.Movimentos)
+                   .HasForeignKey(p => p.MetodoPagamentoId);
             builder.Entity<PlanoMensalidade>()
                    .HasOne(p => p.Epoca)
                    .WithMany(a => a.Planos)
@@ -81,6 +101,7 @@ namespace AppGCT.Data
 
         public DbSet<AppGCT.Models.Rubrica> Rubrica { get; set; } = default!;
 
+        public DbSet<AppGCT.Models.Movimento> Movimento { get; set; } = default!;
         public DbSet<AppGCT.Models.PlanoMensalidade> PlanoMensalidade { get; set; } = default!;
     }
 }

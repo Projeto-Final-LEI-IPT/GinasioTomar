@@ -42,6 +42,8 @@ public class Utilizador : IdentityUser
     }
     public List<Ginasta> Ginasta { get; set; }
 
+    public List<Movimento> Movimentos { get; set; }
+
     public string StatusDescription
     {
         get

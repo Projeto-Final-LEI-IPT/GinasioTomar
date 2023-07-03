@@ -155,6 +155,13 @@ namespace AppGCT.Models
             }
         }
 
+        public string ID_DescriptionRubrica
+        {
+            get
+            {
+                return string.Format("{0} - {1}", CodRubrica, DescricaoRubrica);
+            }
+        }
         public string DescricaoIPagInscricao
         {
             get
@@ -194,5 +201,7 @@ namespace AppGCT.Models
 
         public int? ClasseId { get; set; }
         public Classe? Modalidade { get; set; }
+
+        public List<Movimento>? Movimentos { get; set; }
     }
 }

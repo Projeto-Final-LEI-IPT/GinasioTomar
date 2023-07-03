@@ -141,6 +141,10 @@ namespace AppGCT.Models
         public Utilizador? Socio { get; set; }
 
         public List<Inscricao>? Inscricoes { get; set; }
+        /// <summary>
+        /// Ligação com tabela Movimento --- Não esquecer que o preenchimento do Ginasta é Opcional ---
+        /// </summary>
+        public List<Movimento>? Movimentos { get; set; } = new List<Movimento>();
 
         public List<PlanoMensalidade>? Planos { get; set; }
     }

@@ -1,0 +1,125 @@
+﻿@page
+@model AppGCT.Pages.Gestao.Movimentos.CreateModel
+@Html.HiddenFor(m => m.Movimento.DesRubrica)
+@Html.HiddenFor(m => m.Movimento.IdCriacao)
+@Html.HiddenFor(m => m.Movimento.DataCriacao)
+@Html.HiddenFor(m => m.Movimento.IdModificacao)
+@Html.HiddenFor(m => m.Movimento.DataModificacao)
+
+@{
+    ViewData["Title"] = "Criar Movimento Contabilístico";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<h1>Criar movimento contabilístico</h1>
+<hr />
+<div>
+    <a class='btn btn-primary btn-sm' asp-area='' asp-page='/Gestao/Movimentos/Index'>Voltar</a>
+</div>
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Movimento.NumFatura" class="control-label"></label>
+                <input asp-for="Movimento.NumFatura" class="form-control" />
+                <span asp-validation-for="Movimento.NumFatura" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Movimento.NumNotaCredito" class="control-label"></label>
+                <input asp-for="Movimento.NumNotaCredito" class="form-control" />
+                <span asp-validation-for="Movimento.NumNotaCredito" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Movimento.DtMovimento" class="control-label"></label>
+                <input asp-for="Movimento.DtMovimento" class="form-control" />
+                <span asp-validation-for="Movimento.DtMovimento" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Movimento.ValorMovimento" class="control-label"></label>
+                <input asp-for="Movimento.ValorMovimento" class="form-control" />
+                <span asp-validation-for="Movimento.ValorMovimento" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Movimento.ValorDesconto" class="control-label"></label>
+                <input asp-for="Movimento.ValorDesconto" class="form-control" />
+                <span asp-validation-for="Movimento.ValorDesconto" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Movimento.UtilizadorId" class="control-label"></label>
+                <select asp-for="Movimento.UtilizadorId" class ="form-control" asp-items="ViewBag.UtilizadorId"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="Movimento.AtletaMovimentoId" class="control-label">Ginasta</label>
+                <select asp-for="Movimento.AtletaMovimentoId" class ="form-control" asp-items="ViewBag.AtletaMovimentoId"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="Movimento.RubricaId" class="control-label">Rúbrica</label>
+                <select asp-for="Movimento.RubricaId" class ="form-control" asp-items="ViewBag.RubricaId"></select>
+            </div>
+            <!-- código js para proteger/desproteger campos preenchidos apenas se existir classe preenchida -->
+            <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+            <script>
+                $(document).ready(function () {
+                    // Obter nome campos
+                    var FaturaField = $('#Movimento_NumFatura');
+                    var NotaCreditoField = $('#Movimento_NumNotaCredito');
+                    var TipoDespesaField = $('#Movimento_RubricaId');
+
+
+                    // Função para alterações sobre o campo Classe
+                    TipoDespesaField.on('change', function () {
+                            var selectedValue = $(this).val();
+                            $.ajax({
+                                url: '@Url.Page("/Gestao/Movimentos/Create", "RandomNumber")',
+                                data: { selectedValue: selectedValue },
+                                type: 'GET',
+                                success: function(data){
+                                         console.log("Sucesso");
+                                        $.each(data, function (index, itemData){
+                                          console.log("Cá estou", itemData);
+                                        switch (itemData){
+                                            case 'D':
+                                                FaturaField.prop('disabled', false);
+                                                NotaCreditoField.prop('disabled', true);
+                                                NotaCreditoField.val('');
+                                                break;
+                                            case 'C':
+                                                FaturaField.prop('disabled', true);
+                                                NotaCreditoField.prop('disabled', false);
+                                                FaturaField.val('');
+                                            break;
+                                            case ' ':
+                                                FaturaField.prop('disabled', true);
+                                                NotaCreditoField.prop('disabled', true);
+                                                FaturaField.val('');
+                                                NotaCreditoField.val('');
+                                            break;
+                                            default:
+                                                alert("Pedimos desculpa, mas algo não correu como esperado.");
+                                        }
+                                    });
+                              },
+                              error: function(xhr, status, error){
+                                console.log("Erro");
+
+                              }
+                            });
+                        });
+                    });
+                        // Protege ou desprotege campos com base no valor do ClasseId
+            </script>
+            <div class="form-group">
+                <label asp-for="Movimento.MetodoPagamentoId" class="control-label">Método de Pagamento</label>
+                <select asp-for="Movimento.MetodoPagamentoId" class ="form-control" asp-items="ViewBag.MetodoPagamentoId"></select>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Criar" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
