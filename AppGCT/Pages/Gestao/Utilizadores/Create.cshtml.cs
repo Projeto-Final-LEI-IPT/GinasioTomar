@@ -84,13 +84,13 @@ namespace AppGCT.Pages.Gestao.Utilizadores
             //se é administrador pode gerar todos os tipos de utilizador (Adminitrador,Ginásio e Sócio)
             if (user != null && await _userManager.IsInRoleAsync(user, "Administrador"))
             {
-                Roles = await _roleManager.Roles.Where(r => r.Name != "Anónimo").ToListAsync();
+                Roles = await _roleManager.Roles.ToListAsync();
             }else
             {
                 //se ginásio não pode gerar admin's
                 if (user != null && await _userManager.IsInRoleAsync(user, "Ginásio"))
                 {
-                    Roles = await _roleManager.Roles.Where(r => r.Name != "Anónimo" && r.Name != "Administrador").ToListAsync();
+                    Roles = await _roleManager.Roles.Where(r => r.Name != "Ginásio" && r.Name != "Administrador").ToListAsync();
                 }
             }
             return Page();

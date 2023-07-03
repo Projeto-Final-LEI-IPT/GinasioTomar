@@ -145,5 +145,7 @@ namespace AppGCT.Models
         /// Ligação com tabela Movimento --- Não esquecer que o preenchimento do Ginasta é Opcional ---
         /// </summary>
         public List<Movimento>? Movimentos { get; set; } = new List<Movimento>();
+
+        public List<PlanoMensalidade>? Planos { get; set; }
     }
 }

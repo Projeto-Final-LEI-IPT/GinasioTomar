@@ -11,32 +11,57 @@
 <p>
     <a class='btn btn-primary btn-sm' asp-area='' asp-page='/Inscricoes/Ginastas/Create'>Novo Ginasta</a>
 </p>
+@if (User.IsInRole("Administrador") || User.IsInRole("Ginásio"))
+{
+    <form asp-page="./Index" method="get">
+        <div class="form-actions no-color">
+            <p>
+                Nome Completo/Nome Sócio
+                <input type="text" name="SearchString" value="@Model.CurrentFilter" />
+                <input type="submit" value="Procurar" class="btn btn-primary btn-sm" />
+                <a class='btn btn-primary btn-sm' asp-area='' asp-page='/Inscricoes/Ginastas/Index'>Limpar</a>
+            </p>
+        </div>
+    </form>
+}
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Ginasta[0].NomeCompleto)
+                <a asp-page="./Index" asp-route-sortOrder="@Model.NomeSort">
+                    @Html.DisplayNameFor(model => model.Ginastas[0].NomeCompleto)
+                </a>     
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Ginasta[0].DtNascim)
+                <a asp-page="./Index" asp-route-sortOrder="@Model.DataNascSort">
+                    @Html.DisplayNameFor(model => model.Ginastas[0].DtNascim)
+                </a> 
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Ginasta[0].EstadoGinasta)
+                <a asp-page="./Index" asp-route-sortOrder="@Model.EstadoSort">
+                    @Html.DisplayNameFor(model => model.Ginastas[0].EstadoGinasta)
+                </a>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Ginasta[0].Email)
+                <a asp-page="./Index" asp-route-sortOrder="@Model.EmailSort">
+                    @Html.DisplayNameFor(model => model.Ginastas[0].Email)
+                </a>
             </th>
             <th>
-                Nº Sócio
+                <a asp-page="./Index" asp-route-sortOrder="@Model.NumSocioSort">
+                    Nº Sócio
+                </a>
             </th>
             <th>
-                Nome Sócio
+                <a asp-page="./Index" asp-route-sortOrder="@Model.NomeSocioSort">
+                    Nome Sócio
+                </a>
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.Ginasta) {
+@foreach (var item in Model.Ginastas) {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.NomeCompleto)

@@ -52,6 +52,7 @@ namespace AppGCT.Pages.Gestao.RubricasPrecario
 
         public IActionResult OnGet()
         {
+
             var descontos = _context.Desconto.ToList();
             descontos.Insert(0, new Desconto
             {
@@ -70,6 +71,7 @@ namespace AppGCT.Pages.Gestao.RubricasPrecario
             });
 
             ViewData["ClasseId"] = new SelectList(classes, "IdClasse", "NomeClasse");
+
             return Page();
 
         }
@@ -83,11 +85,15 @@ namespace AppGCT.Pages.Gestao.RubricasPrecario
         {
           if (!ModelState.IsValid || _context.Rubrica == null || Rubrica == null)
             {
+                //faz refresh das dropdown's
+                OnGet();
                 return Page();
             }
 
           if (!await ValidaRubrica())
             {
+                //faz refresh das dropdown's
+                OnGet();
                 return Page();
             }
 

@@ -45,6 +45,12 @@
                 @Html.DisplayNameFor(model => model.Rubrica[0].ValorUnitario)
             </th>
             <th>
+                @Html.DisplayNameFor(model => model.Rubrica[0].IPagInscricao)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Rubrica[0].TipoRubrica)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.Rubrica[0].LocalTreino)
             </th>
             <th>
@@ -89,6 +95,12 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.ValorUnitario)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DescricaoIPagInscricao)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DescricaoTipoRubrica)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.LocalTreino)

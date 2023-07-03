@@ -9,6 +9,7 @@ using AppGCT.Data;
 using AppGCT.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNet.Identity;
+using Microsoft.EntityFrameworkCore;
 
 namespace AppGCT.Pages.Inscricoes.InscricaoEpoca
 {
@@ -51,6 +52,64 @@ namespace AppGCT.Pages.Inscricoes.InscricaoEpoca
             // Because we start at year 1 for the Gregorian
             // calendar, we must subtract a year here.
             int years = (zeroTime + span).Year - 1;
+
+            // Obtem EpocaId
+            int epocaId = Inscricao.EpocaId;
+            //obtem dtinscricao
+            DateTime dtInscricao = Inscricao.DtInscricao;
+            //obtem rubrica
+            var rubrica = await _context.Rubrica
+                                        .FirstOrDefaultAsync(r => r.ClasseId == Inscricao.ClasseId);
+            decimal valorMensalidade = rubrica.ValorUnitario ?? 0m;
+
+            // Valida se a época existe
+            var epoca = await _context.Epoca.FindAsync(epocaId);
+
+            if (epoca == null)
+            {
+                return NotFound();
+            }
+            DateTime dtIni30 = epoca.DataInicio.AddMonths(-2);
+
+            if (Inscricao.DtInscricao > epoca.DataFim)
+            {
+                ModelState.AddModelError("Inscricao.DtInscricao", "Data Inscrição não pode ser superior à Data Fim da época");
+                OnGet(Inscricao.GinastaId);
+                return Page();
+            }
+
+            if (Inscricao.DtInscricao < dtIni30)
+            {
+                ModelState.AddModelError("Inscricao.DtInscricao", "Data Inscrição não pode ser inferior à Data Inicio da época menos 2 meses");
+                OnGet(Inscricao.GinastaId);
+                return Page();
+            }
+
+            // Calcula o número de meses entre a DataInicio e DataFim da época
+            int numberOfMonths = (epoca.DataFim.Year - epoca.DataInicio.Year) * 12
+                + epoca.DataFim.Month - epoca.DataInicio.Month;
+
+            // Cria Plano Mensalidade
+            for (int i = 0; i <= numberOfMonths; i++)
+            {
+                DateTime dataMensalidade = epoca.DataInicio.AddMonths(i);
+                if (dataMensalidade.Month == dtInscricao.Month || dataMensalidade > dtInscricao)
+                {
+                    var planoMensalidade = new PlanoMensalidade
+                    {
+                        DataMensalidade = dataMensalidade,
+                        ValorMensalidade = valorMensalidade,
+                        DataCriacao = DateTime.Now,
+                        IdCriacao = User.Identity.GetUserId(),
+                        DataModificacao = null,
+                        IdModificacao = null,
+                        EpocaId = epocaId,
+                        GinastaId = Inscricao.GinastaId
+                    };
+                    _context.PlanoMensalidade.Add(planoMensalidade);
+                }
+            }
+
 
             Inscricao.IdadeAgosto = years;
             Inscricao.IConsentimento = "N";
