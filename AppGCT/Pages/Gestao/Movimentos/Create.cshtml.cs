@@ -8,9 +8,11 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using AppGCT.Data;
 using AppGCT.Models;
 using System.Security.Claims;
+using System.Collections;
 
 namespace AppGCT.Pages.Gestao.Movimentos
 {
+    [IgnoreAntiforgeryToken]
     public class CreateModel : PageModel
     {
         private readonly AppGCT.Data.AppGCTContext _context;
@@ -20,14 +22,15 @@ namespace AppGCT.Pages.Gestao.Movimentos
             _context = context;
         }
 
-        public IActionResult OnGet()
+
+        public IActionResult OnGet(int selectedValue)
         {
         var atletas = _context.Ginasta.ToList();
-            atletas.Insert(0, new Ginasta
-            {
-                NomeCompleto = "Seleccionar Ginasta"
+        atletas.Insert(0, new Ginasta
+        {
+            NomeCompleto = "Seleccionar Ginasta"
 
-            });
+        });
         ViewData["AtletaMovimentoId"] = new SelectList(atletas, "Id", "NomeCompleto");
         var metodos = _context.MetodoPagamento.ToList();
         metodos.Insert(0, new MetodoPagamento
@@ -71,6 +74,18 @@ namespace AppGCT.Pages.Gestao.Movimentos
             await _context.SaveChangesAsync();
 
             return RedirectToPage("./Index");
+        }
+
+        public JsonResult OnGetRandomNumber(string selectedValue)
+        {
+            var tipoMov = _context.Rubrica.Where(i => i.CodRubrica == selectedValue).FirstOrDefault().TipoMovimento;
+            
+            
+            
+            return new JsonResult(new
+            {
+                valor = tipoMov
+            });
         }
     }
 }
