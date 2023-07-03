@@ -160,6 +160,8 @@ namespace AppGCT.Models
             get
             {
                 return string.Format("{0} - {1}", CodRubrica, DescricaoRubrica);
+            }
+        }
         public string DescricaoIPagInscricao
         {
             get

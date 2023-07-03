@@ -23,7 +23,7 @@ namespace AppGCT.Pages.Gestao.Movimentos
         }
 
 
-        public IActionResult OnGet(int selectedValue)
+        public IActionResult OnGet()
         {
         var atletas = _context.Ginasta.ToList();
         atletas.Insert(0, new Ginasta
