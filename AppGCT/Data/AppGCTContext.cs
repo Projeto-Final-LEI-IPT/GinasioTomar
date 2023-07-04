@@ -17,6 +17,7 @@ namespace AppGCT.Data
             : base(options)
         {
         }
+        public DbSet<Utilizador> Utilizador { get; set; }
         public DbSet<AppGCT.Models.Epoca> Epoca { get; set; } = default!;
 
 

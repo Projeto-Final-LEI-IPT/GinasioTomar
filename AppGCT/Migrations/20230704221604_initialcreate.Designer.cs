@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AppGCT.Migrations
 {
     [DbContext(typeof(AppGCTContext))]
-    [Migration("20230703234457_initialCreate")]
-    partial class initialCreate
+    [Migration("20230704221604_initialcreate")]
+    partial class initialcreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -133,13 +133,13 @@ namespace AppGCT.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "9465b9ec-f73e-4d85-848a-005909987b35",
+                            Id = "3dcd449e-b341-4e2a-abb2-aaa00d3799b3",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "7a8dfa5b-426a-4578-a727-6a25f1e76c3c",
-                            DataAprovacao = new DateTime(2023, 7, 4, 0, 44, 57, 47, DateTimeKind.Local).AddTicks(3599),
-                            DataCriacao = new DateTime(2023, 7, 4, 0, 44, 57, 47, DateTimeKind.Local).AddTicks(3524),
+                            ConcurrencyStamp = "b369f9ba-4e2e-4a10-b762-bc4b00cb53a6",
+                            DataAprovacao = new DateTime(2023, 7, 4, 23, 16, 4, 541, DateTimeKind.Local).AddTicks(7175),
+                            DataCriacao = new DateTime(2023, 7, 4, 23, 16, 4, 541, DateTimeKind.Local).AddTicks(7125),
                             DataModificacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DataNascim = new DateTime(2023, 7, 4, 0, 44, 57, 47, DateTimeKind.Local).AddTicks(3606),
+                            DataNascim = new DateTime(2023, 7, 4, 23, 16, 4, 541, DateTimeKind.Local).AddTicks(7180),
                             Email = "admin@localhost",
                             EmailConfirmed = true,
                             EstadoUtilizador = "A",
@@ -152,10 +152,10 @@ namespace AppGCT.Migrations
                             NormalizedEmail = "ADMIN@LOCALHOST",
                             NormalizedUserName = "ADMIN@LOCALHOST",
                             NumSocio = " ",
-                            PasswordHash = "AQAAAAIAAYagAAAAEEcKuJqQV3iZ87Z789v4Q3UpQdPz0YCVpdV8kDsathPFXntWjc/VwXuYfdfciNDTpw==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEILcTS8AxNa9Uj3XVuVLpcNN1tPcbm0elhGQU9Aw52JZ8qX1EokpP5aN4WbqcI7hGQ==",
                             PhoneNumber = "999999999",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "10d5c81a-098f-4532-9783-904bc5e24e9b",
+                            SecurityStamp = "ddd8cd70-09d8-470f-a70f-c588fda0c6f6",
                             TwoFactorEnabled = false,
                             UserName = "admin@localhost"
                         });
@@ -758,19 +758,19 @@ namespace AppGCT.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "461a569f-77ae-4001-b6d8-e46ec35bd813",
+                            Id = "ada98f35-4339-4bd0-a59d-a247f91d63d1",
                             Name = "Administrador",
                             NormalizedName = "ADMINISTRADOR"
                         },
                         new
                         {
-                            Id = "dc7b25d0-95ae-42cc-83bf-3c67e1591f6f",
+                            Id = "b544fc1d-f886-45d4-86c3-92d45b83c71e",
                             Name = "Ginásio",
                             NormalizedName = "GINÁSIO"
                         },
                         new
                         {
-                            Id = "4c334a4c-176a-4e66-91fb-0caf471e19f7",
+                            Id = "46df7e3c-00d3-4fc4-87b1-7eaea27887ec",
                             Name = "Sócio",
                             NormalizedName = "SÓCIO"
                         });
@@ -867,8 +867,8 @@ namespace AppGCT.Migrations
                     b.HasData(
                         new
                         {
-                            UserId = "9465b9ec-f73e-4d85-848a-005909987b35",
-                            RoleId = "461a569f-77ae-4001-b6d8-e46ec35bd813"
+                            UserId = "3dcd449e-b341-4e2a-abb2-aaa00d3799b3",
+                            RoleId = "ada98f35-4339-4bd0-a59d-a247f91d63d1"
                         });
                 });
 

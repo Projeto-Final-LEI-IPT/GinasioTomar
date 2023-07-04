@@ -11,20 +11,38 @@
 <p>
     <a class='btn btn-primary btn-sm' asp-area='' asp-page='/Gestao/Metodos/Create'>Novo Método Pagamento</a>
 </p>
+<form asp-page="./Index" method="get">
+    <div class="form-actions no-color">
+        <p>
+            Descrição Método Pagamento
+            <input type="text" name="SearchString" value="@Model.CurrentFilter" />
+            <input type="submit" value="Procurar" class="btn btn-primary btn-sm" />
+            <a class='btn btn-primary btn-sm' asp-area='' asp-page='/Gestao/Metodos/Index'>Limpar</a>
+        </p>
+    </div>
+</form>
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.MetodoPagamento[0].CodMetodo)
+                <a asp-page="./Index" asp-route-sortOrder="@Model.CodMetodoSort">
+                    @Html.DisplayNameFor(model => model.MetodoPagamento[0].CodMetodo)
+                </a>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.MetodoPagamento[0].DescMetodo)
+                <a asp-page="./Index" asp-route-sortOrder="@Model.DescMetodoSort">
+                    @Html.DisplayNameFor(model => model.MetodoPagamento[0].DescMetodo)
+                </a>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.MetodoPagamento[0].ValorDesconto)
+                <a asp-page="./Index" asp-route-sortOrder="@Model.ValorDescontoSort">
+                    @Html.DisplayNameFor(model => model.MetodoPagamento[0].ValorDesconto)
+                </a>
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.MetodoPagamento[0].EstadoMetodo)
+            <th>       
+                <a asp-page="./Index" asp-route-sortOrder="@Model.EstadoMetodoSort">
+                    @Html.DisplayNameFor(model => model.MetodoPagamento[0].EstadoMetodo)
+                </a>
             </th>
             <th></th>
         </tr>
