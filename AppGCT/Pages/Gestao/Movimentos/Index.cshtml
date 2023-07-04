@@ -1,0 +1,85 @@
+﻿@page
+@model AppGCT.Pages.Gestao.Movimentos.IndexModel
+
+@{
+    ViewData["Title"] = "Gestão Movimentos Contabilísticos";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<h1>Gestão Movimentos Contabilísticos</h1>
+
+<div>
+    <a class='btn btn-primary btn-sm' asp-area='' asp-page='/Gestao/Movimentos/Create'>Novo movimento</a>
+</div>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Movimento[0].NumFatura)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Movimento[0].NumNotaCredito)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Movimento[0].DtMovimento)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Movimento[0].DesRubrica)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Movimento[0].ValorMovimento)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Movimento[0].ValorDesconto)
+            </th>
+            <th>
+                Sócio
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Movimento[0].Atleta)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Movimento[0].FormaPagamento)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Movimento) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.NumFatura)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NumNotaCredito)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DtMovimento)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DesRubrica)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ValorMovimento)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ValorDesconto)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Socio.ID_Description )
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Atleta.NomeCompleto)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FormaPagamento.CodMetodo)
+            </td>
+            <td>
+                <a class='btn btn-primary btn-sm' asp-area='' asp-page='/Gestao/Movimentos/Edit' asp-route-id='@item.Id'>Editar</a>
+                <a class='btn btn-primary btn-sm' asp-area='' asp-page='/Gestao/Movimentos/Details' asp-route-id='@item.Id'>Detalhes</a>
+                <a class='btn btn-danger btn-sm' asp-area='' asp-page='/Gestao/Movimentos/Delete' asp-route-id='@item.Id'>Apagar</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
