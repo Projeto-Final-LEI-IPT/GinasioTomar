@@ -12,57 +12,62 @@
 @inject UserManager<Utilizador> UserManager
 @inject RoleManager<IdentityRole> roleManager
 
-@functions {
-                private async Task<List<Utilizador>> GetUsersAsync()
-    {
-        if (User.IsInRole("Administrador")) // Mostra todos os utilizadores do sistema
-        {
-            return UserManager.Users.ToList();
-        }
-        else if (User.IsInRole("Ginásio")) // Mostra todos excepto administradores
-        {
-            var role = await roleManager.FindByNameAsync("Administrador");
-        //    var userIdsToExclude = (await UserManager.GetUsersInRoleAsync(role.Name)).Select(id => id.ToString()).ToList();
-            var userIdsToExclude = (await UserManager.GetUsersInRoleAsync(role.Name)).Select(u => u.Id).ToList();
-            var users = UserManager.Users.Where(u => !userIdsToExclude.Contains(u.Id)).ToList();
-            return users;
-        }
-        else
-        {
-            return new List<Utilizador>();
-        }
-    }
-}
 <h1>Gestão Utilizadores</h1>
 
 <p>
     <a class='btn btn-primary btn-sm' asp-area='' asp-page='/Gestao/Utilizadores/Create'>Novo Utilizador</a>
 </p>
-
+<form asp-page="./Index" method="get">
+   Pesquisa
+   <input type="text" name="SearchString" value="@Model.CurrentFilter" />
+   <input type="submit" value="Procurar" class="btn btn-primary btn-sm" />
+   <a class='btn btn-primary btn-sm' asp-area='' asp-page='/Gestao/Utilizadores/Index'>Limpar</a>
+</form>
 <table class="table">
     <thead>
         <tr>
-            <th>Nome Completo</th>
-            <th>Tipo Utilizador</th>
-            <th>Nº Sócio</th>
-            <th>Estado Utilizador</th>
-            <th>Contacto</th>
-            <th>E-mail</th>
+            <th>
+                <a asp-page="./Index" asp-route-sortOrder="@Model.NomeCompletoSort">
+                    Nome Completo
+                </a>
+            </th>
+            <th>
+                <a asp-page="./Index" asp-route-sortOrder="@Model.TipoUtilizadorSort">
+                    Tipo Utilizador
+                </a>
+            </th>
+            <th>
+                <a asp-page="./Index" asp-route-sortOrder="@Model.NumSocioSort">
+                    Nº Sócio
+                </a>
+            </th>
+            <th>
+                <a asp-page="./Index" asp-route-sortOrder="@Model.EstadoUtilizadorSort">
+                    Estado Utilizador
+                </a>
+            </th>
+            <th>
+                <a asp-page="./Index" asp-route-sortOrder="@Model.ContactoSort">
+                    Contacto
+                </a>
+            </th>
+            <th>
+                <a asp-page="./Index" asp-route-sortOrder="@Model.EmailSort">
+                    E-mail
+                </a>
+            </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var user in await GetUsersAsync())
+        @foreach (var user in Model.Users)
         {
             <tr>
                 <td>
                     @Html.DisplayFor(modelItem => user.Nome)
                 </td>
                 <td>
-                    @{
-                        var userRoles = await UserManager.GetRolesAsync(user);
-                    }
-                    @foreach (var roleName in userRoles)
+                    @foreach (var roleName in await UserManager.GetRolesAsync(user))
                     {
                         <span>@roleName</span>
                     }
@@ -88,7 +93,7 @@
                             <a class='btn btn-danger btn-sm' asp-area='' asp-page='/Gestao/Utilizadores/Delete' asp-route-id='@user.Id'>Apagar</a>
                         }
                     }
-                    
+
                 </td>
             </tr>
         }
