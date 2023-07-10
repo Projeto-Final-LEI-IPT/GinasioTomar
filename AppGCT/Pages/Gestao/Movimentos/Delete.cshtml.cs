@@ -29,7 +29,11 @@ namespace AppGCT.Pages.Gestao.Movimentos
                 return NotFound();
             }
 
-            var movimento = await _context.Movimento.FirstOrDefaultAsync(m => m.Id == id);
+            var movimento = await _context.Movimento.Include(g => g.Socio)
+                                                    .Include(g => g.Atleta)
+                                                    .Include(g => g.TipoDespesa)
+                                                    .Include(g => g.FormaPagamento)
+                                          .FirstOrDefaultAsync(m => m.Id == id);
 
             if (movimento == null)
             {

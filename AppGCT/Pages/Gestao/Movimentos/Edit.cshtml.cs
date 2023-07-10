@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using AppGCT.Data;
 using AppGCT.Models;
+using System.Security.Claims;
 
 namespace AppGCT.Pages.Gestao.Movimentos
 {
@@ -51,6 +52,11 @@ namespace AppGCT.Pages.Gestao.Movimentos
             {
                 return Page();
             }
+
+            Movimento.DataModificacao = DateTime.Now;
+            // obtem User ID logado
+            var userId = User.FindFirstValue(ClaimTypes.Name);
+            Movimento.IdModificacao = userId;
 
             _context.Attach(Movimento).State = EntityState.Modified;
 
