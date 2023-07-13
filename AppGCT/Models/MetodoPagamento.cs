@@ -42,6 +42,14 @@ namespace AppGCT.Models
         [Display(Name = "Modificado por")]
         [StringLength(36)]
         public string? IdModificacao { get; set; }
+
+        public string ID_DescrMetodo
+        {
+            get
+            {
+                return string.Format("{0} - {1}", CodMetodo, DescMetodo);
+            }
+        }
         public string EstadoMetodoDescricao
         {
             get

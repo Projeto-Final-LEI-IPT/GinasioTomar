@@ -32,58 +32,77 @@
                     var FaturaField = $('#Movimento_NumFatura');
                     var NotaCreditoField = $('#Movimento_NumNotaCredito');
                     var TipoDespesaField = $('#Movimento_RubricaId');
+                    var MetodoPagamentoField = $('#Movimento_MetodoPagamentoId');
+               //     var lblMetPagField = $('#lblMetPag');
 
 
                     // Função para alterações sobre o campo Classe
                     TipoDespesaField.on('change', function () {
                         var selectedValue = $(this).val();
-                        $.ajax({
-                            url: '@Url.Page("/Gestao/Movimentos/Create", "RandomNumber")',
-                            data: { selectedValue: selectedValue },
-                            type: 'GET',
-                            success: function (data) {
-                                console.log("Sucesso");
-                                $.each(data, function (index, itemData) {
-                                    console.log("Cá estou", itemData);
-                                    switch (itemData) {
-                                        case 'D':
-                                            FaturaField.prop('disabled', false);
-                                            NotaCreditoField.prop('disabled', true);
-                                            NotaCreditoField.val('');
-                                            break;
-                                        case 'C':
-                                            FaturaField.prop('disabled', true);
-                                            NotaCreditoField.prop('disabled', false);
-                                            FaturaField.val('');
-                                            break;
-                                        case ' ':
-                                            FaturaField.prop('disabled', true);
-                                            NotaCreditoField.prop('disabled', true);
-                                            FaturaField.val('');
-                                            NotaCreditoField.val('');
-                                            break;
-                                        default:
-                                            alert("Pedimos desculpa, mas algo não correu como esperado.");
-                                    }
-                                });
-                            },
-                            error: function (xhr, status, error) {
-                                console.log("Erro");
+                        if (selectedValue == "000") {
+                            FaturaField.prop('disabled', true);
+                            NotaCreditoField.prop('disabled', true);
+                            MetodoPagamentoField.prop('disabled', true);
+                            FaturaField.val('');
+                            NotaCreditoField.val('');
+                        }
+                        else {
+                            $.ajax({
+                                url: '@Url.Page("/Gestao/Movimentos/Create", "RandomNumber")',
+                                data: { selectedValue: selectedValue },
+                                type: 'GET',
+                                success: function (data) {
+                                    console.log("Sucesso");
+                                        $.each(data, function (index, itemData) {
+                                            console.log("Cá estou", itemData);
+                                            switch (itemData) {
+                                                case 'P':
+                                                    FaturaField.prop('disabled', false);
+                                                    NotaCreditoField.prop('disabled', true);
+                                                    MetodoPagamentoField.prop('disabled', false);
+                                                    MetodoPagamentoField.prop('hidden', false);
+                                                    NotaCreditoField.val('');
+                                                    break;
+                                                case 'D':
+                                                    FaturaField.prop('disabled', true);
+                                                    NotaCreditoField.prop('disabled', false);
+                                                    MetodoPagamentoField.prop('disabled', true);
+                                                    FaturaField.val('');
+                                                    break;
+                                                case 'O':
+                                                    FaturaField.prop('disabled', true);
+                                                    NotaCreditoField.prop('disabled', true);
+                                                    MetodoPagamentoField.prop('disabled', true);
+                                                    MetodoPagamentoField.prop('hidden', true);
+                                                    //lblMetPagField.prop('hidden', true);
+                                                    FaturaField.val('');
+                                                    NotaCreditoField.val('');
+                                                    MetodoPagamentoField.val(@ViewBag.MetodoPagamentoId);
+                                                    break;
+                                                default:
+                                                    alert("Pedimos desculpa, mas algo não correu como esperado.");
+                                            }
+                                        });
+                                },
+                                error: function (xhr, status, error) {
+                                    console.log("Erro");
 
-                            }
-                        });
+                                }
+                            });
+                    // Fim de ELSE do AJAX
+                    }
                     });
                 });
                                         // Protege ou desprotege campos com base no valor do ClasseId
             </script>
             <div class="form-group">
                 <label asp-for="Movimento.NumFatura" class="control-label"></label>
-                <input asp-for="Movimento.NumFatura" class="form-control" />
+                <input asp-for="Movimento.NumFatura" class="form-control" disabled value = null/>
                 <span asp-validation-for="Movimento.NumFatura" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Movimento.NumNotaCredito" class="control-label"></label>
-                <input asp-for="Movimento.NumNotaCredito" class="form-control" />
+                <input asp-for="Movimento.NumNotaCredito" class="form-control" disabled />
                 <span asp-validation-for="Movimento.NumNotaCredito" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -92,8 +111,8 @@
                 <span asp-validation-for="Movimento.DtMovimento" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Movimento.MetodoPagamentoId" class="control-label">Método de Pagamento</label>
-                <select asp-for="Movimento.MetodoPagamentoId" class="form-control" asp-items="ViewBag.MetodoPagamentoId"></select>
+                <label asp-for="Movimento.MetodoPagamentoId" class="control-label" disabled hidden >Método de Pagamento</label>
+                <select asp-for="Movimento.MetodoPagamentoId" class="form-control" asp-items="ViewBag.MetodoPagamentoId" disabled hidden ></select>
             </div>
             <div class="form-group">
                 <label asp-for="Movimento.ValorMovimento" class="control-label"></label>

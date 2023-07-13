@@ -37,10 +37,10 @@ namespace AppGCT.Pages.Gestao.Movimentos
                 return NotFound();
             }
             Movimento = movimento;
-           ViewData["AtletaMovimentoId"] = new SelectList(_context.Ginasta, "Id", "EstadoGinasta");
-           ViewData["MetodoPagamentoId"] = new SelectList(_context.MetodoPagamento, "CodMetodo", "CodMetodo");
-           ViewData["UtilizadorId"] = new SelectList(_context.Users, "Id", "Id");
-           ViewData["RubricaId"] = new SelectList(_context.Rubrica, "CodRubrica", "CodRubrica");
+           ViewData["AtletaMovimentoId"] = new SelectList(_context.Ginasta, "Id", "ID_DescrGinasta");
+           ViewData["MetodoPagamentoId"] = new SelectList(_context.MetodoPagamento, "CodMetodo", "ID_DescrMetodo");
+           ViewData["UtilizadorId"] = new SelectList(_context.Users, "Id", "ID_Description");
+           ViewData["RubricaId"] = new SelectList(_context.Rubrica, "CodRubrica", "ID_DescriptionRubrica");
             return Page();
         }
 

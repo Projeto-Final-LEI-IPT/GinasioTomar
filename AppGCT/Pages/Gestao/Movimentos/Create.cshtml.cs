@@ -9,6 +9,7 @@ using AppGCT.Data;
 using AppGCT.Models;
 using System.Security.Claims;
 using System.Collections;
+using Microsoft.EntityFrameworkCore;
 
 namespace AppGCT.Pages.Gestao.Movimentos
 {
@@ -22,26 +23,69 @@ namespace AppGCT.Pages.Gestao.Movimentos
             _context = context;
         }
 
+        private async Task<bool> ValidaMovimento()
+        {
+            if (_context.Movimento == null || Movimento == null)
+            {
+                return false;
+            }
+            if(Movimento.NumFatura != null) { 
+            // Valida se o NumFatura já existe na BD
+                if (await _context.Movimento.AnyAsync(e => e.NumFatura == Movimento.NumFatura))
+                {
+                    ModelState.AddModelError("Movimento.NumFatura", "Já existe um movimento com número fatura igual");
+                    return false;
+                }
+            }
+
+            if (Movimento.NumNotaCredito != null)
+            {
+                // Valida se o NumNotaCredito já existe na BD
+                if (await _context.Movimento.AnyAsync(e => e.NumNotaCredito == Movimento.NumNotaCredito))
+                {
+                    ModelState.AddModelError("Movimento.NumNotaCredito", "Já existe um movimento com número nota crédito igual");
+                    return false;
+                }
+            }
+
+            // Validações se Rubrica não estiver preenchida
+            if (Movimento.RubricaId.Equals(null))
+            {
+
+                    ModelState.AddModelError("Movimento.RubricaId", "Rúbrica é um campo obrigatório");
+                    return false;
+            }
+
+            return true;
+        }
 
         public IActionResult OnGet()
         {
-        var atletas = _context.Ginasta.ToList();
-        atletas.Insert(0, new Ginasta
-        {
-            NomeCompleto = "Seleccionar Ginasta"
+            var atletas = _context.Ginasta.ToList();
+            atletas.Insert(0, new Ginasta
+            {
+                NomeCompleto = "Seleccionar Ginasta"
 
-        });
-        ViewData["AtletaMovimentoId"] = new SelectList(atletas, "Id", "NomeCompleto");
-        var metodos = _context.MetodoPagamento.ToList();
-        metodos.Insert(0, new MetodoPagamento
-        {
-            CodMetodo  = "",
-            DescMetodo = "Seleccionar Método"
+            });
+            ViewData["AtletaMovimentoId"] = new SelectList(atletas, "Id", "NomeCompleto");
+            var metodos = _context.MetodoPagamento.ToList();
+            metodos.Insert(0, new MetodoPagamento
+            {
+                CodMetodo  = "",
+                DescMetodo = "Seleccionar Método"
+                
 
-        });
-        ViewData["MetodoPagamentoId"] = new SelectList(metodos, "CodMetodo", "DescMetodo");
-        ViewData["UtilizadorId"] = new SelectList(_context.Users, "Id", "ID_Description");
-        ViewData["RubricaId"] = new SelectList(_context.Rubrica, "CodRubrica", "ID_DescriptionRubrica");
+            });
+            ViewData["MetodoPagamentoId"] = new SelectList(metodos, "CodMetodo", "DescMetodo");
+            ViewData["UtilizadorId"] = new SelectList(_context.Users, "Id", "ID_Description");
+            var rubricas = _context.Rubrica.ToList();
+            rubricas.Insert(0, new Rubrica
+            {
+                CodRubrica = "000",
+                DescricaoRubrica = "Seleccionar Rúbrica"
+
+            });
+            ViewData["RubricaId"] = new SelectList(rubricas, "CodRubrica", "ID_DescriptionRubrica");
             return Page();
         }
 
@@ -62,6 +106,12 @@ namespace AppGCT.Pages.Gestao.Movimentos
                 return Page();
             }
 
+            if (!await ValidaMovimento())
+            {
+                //faz refresh das dropdown's
+                OnGet();
+                return Page();
+            }
 
             Movimento.DataCriacao = DateTime.Now;
             // obtem User ID logado
@@ -78,7 +128,7 @@ namespace AppGCT.Pages.Gestao.Movimentos
 
         public JsonResult OnGetRandomNumber(string selectedValue)
         {
-            var tipoMov = _context.Rubrica.Where(i => i.CodRubrica == selectedValue).FirstOrDefault().TipoMovimento;
+            var tipoMov = _context.Rubrica.Where(i => i.CodRubrica == selectedValue).FirstOrDefault().TipoRubrica;
             
             
             
