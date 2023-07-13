@@ -53,6 +53,12 @@ namespace AppGCT.Data
                   .WithMany(a => a.Inscricoes)
                   .HasForeignKey(p => p.ClasseId);
 
+            builder.Entity<Inscricao>()
+                  .HasOne(p => p.Descont)
+                  .WithMany(a => a.Inscricoes)
+                  .HasForeignKey(p => p.CodDesconto)
+                  .IsRequired(false);
+
             builder.Entity<Rubrica>()
                    .HasOne(p => p.Discount)
                    .WithMany(p => p.Rubricas)

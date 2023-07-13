@@ -160,5 +160,9 @@ namespace AppGCT.Models
 
         public Classe? Class { get; set; }
 
+        public string? CodDesconto { get; set; }
+
+        public Desconto? Descont { get; set; }
+
     }
 }

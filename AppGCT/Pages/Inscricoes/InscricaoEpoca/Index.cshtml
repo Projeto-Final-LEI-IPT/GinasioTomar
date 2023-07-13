@@ -77,6 +77,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.Inscricao[0].Class.NomeClasse)
             </th>
+            <th>
+                Desconto
+            </th>
             <th></th>
         </tr>
     </thead>
@@ -106,6 +109,9 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Class.NomeClasse)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Descont.DescDesconto)
             </td>
             <td>
                     <a class='btn btn-primary btn-sm' asp-area='' asp-page='/Inscricoes/InscricaoEpoca/Edit' asp-route-id='@item.Id'>Editar</a>

@@ -22,6 +22,10 @@
                 <select asp-for="Inscricao.ClasseId" class="form-control" asp-items="ViewBag.ClasseId"></select>
             </div>
             <div class="form-group">
+                <label asp-for="Inscricao.Descont.CodDesconto" class="control-label"></label>
+                <select asp-for="Inscricao.CodDesconto" class="form-control" asp-items="ViewBag.CodDesconto"></select>
+            </div>
+            <div class="form-group">
                 <label asp-for="Inscricao.IdFGP" class="control-label"></label>
                 <input asp-for="Inscricao.IdFGP" class="form-control" />
                 <span asp-validation-for="Inscricao.IdFGP" class="text-danger"></span>

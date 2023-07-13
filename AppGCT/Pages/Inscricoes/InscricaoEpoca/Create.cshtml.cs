@@ -26,7 +26,7 @@ namespace AppGCT.Pages.Inscricoes.InscricaoEpoca
         public IActionResult OnGet(int? id)
         {
             ViewData["GinastaId"] = new SelectList(_context.Ginasta.Where(i => i.Id == id), "Id", "ID_DescrGinasta");
-            ViewData["EpocaId"] = new SelectList(_context.Epoca, "IdEpoca", "NomeEpoca");
+            ViewData["EpocaId"] = new SelectList(_context.Epoca.Where(i => i.EstadoEpoca == "A"), "IdEpoca", "NomeEpoca");
             ViewData["ClasseId"] = new SelectList(_context.Classe.Where(i => i.EstadoClasse == "A"), "IdClasse", "NomeClasse");
 
             ViewData["BackId"] = id;
@@ -60,6 +60,12 @@ namespace AppGCT.Pages.Inscricoes.InscricaoEpoca
             //obtem rubrica
             var rubrica = await _context.Rubrica
                                         .FirstOrDefaultAsync(r => r.ClasseId == Inscricao.ClasseId);
+            if (rubrica == null)
+            {
+                ModelState.AddModelError("Inscricao.GinastaId", "Rúbrica não definida no Preçário");
+                OnGet(Inscricao.GinastaId);
+                return Page();
+            }
             decimal valorMensalidade = rubrica.ValorUnitario ?? 0m;
 
             // Valida se a época existe
@@ -67,7 +73,9 @@ namespace AppGCT.Pages.Inscricoes.InscricaoEpoca
 
             if (epoca == null)
             {
-                return NotFound();
+                ModelState.AddModelError("Inscricao.GinastaId", "Época não está definida");
+                OnGet(Inscricao.GinastaId);
+                return Page();
             }
             DateTime dtIni30 = epoca.DataInicio.AddMonths(-2);
 
@@ -125,6 +133,8 @@ namespace AppGCT.Pages.Inscricoes.InscricaoEpoca
             Inscricao.DataCriacao = DateTime.Now;
             Inscricao.IdModificacao = "0";
             Inscricao.DataModificacao = DateTime.MinValue;
+            Inscricao.CodDesconto = null;
+            ModelState.Remove("Inscricao.CodDesconto"); // Remove validação para o campo CodDesconto que não é visivel
 
             if (!ModelState.IsValid || _context.Inscricao == null || Inscricao == null)
             {
