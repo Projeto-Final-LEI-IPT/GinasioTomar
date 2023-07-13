@@ -29,13 +29,30 @@ namespace AppGCT.Pages.Gestao.Movimentos
             {
                 return false;
             }
-            if(Movimento.NumFatura != null) { 
+
+            // Se tipo de rubrica é pagamento, o numero da fatura tem de estar preenchido (não pode ser null)
+            var tipoRubrica = _context.Rubrica.Where(i => i.CodRubrica == Movimento.RubricaId).FirstOrDefault().TipoRubrica;
+            if (tipoRubrica == "P" && Movimento.NumFatura == null)
+            {
+                ModelState.AddModelError("Movimento.NumFatura", "Número de fatura é obrigatório");
+                return false;
+            }
+
+            if (Movimento.NumFatura != null) { 
             // Valida se o NumFatura já existe na BD
                 if (await _context.Movimento.AnyAsync(e => e.NumFatura == Movimento.NumFatura))
                 {
                     ModelState.AddModelError("Movimento.NumFatura", "Já existe um movimento com número fatura igual");
                     return false;
                 }
+            }
+
+            // Se tipo de rubrica é devolução, o numero de nota de crédito tem de estar preenchido (não pode ser null)
+            tipoRubrica = _context.Rubrica.Where(i => i.CodRubrica == Movimento.RubricaId).FirstOrDefault().TipoRubrica;
+            if(tipoRubrica == "D" && Movimento.NumNotaCredito == null)
+            {
+                ModelState.AddModelError("Movimento.NumNotaCredito", "Número nota crédito é obrigatório");
+                return false;
             }
 
             if (Movimento.NumNotaCredito != null)
@@ -49,7 +66,7 @@ namespace AppGCT.Pages.Gestao.Movimentos
             }
 
             // Validações se Rubrica não estiver preenchida
-            if (Movimento.RubricaId.Equals(null))
+            if (Movimento.RubricaId.Equals(null) || Movimento.RubricaId.Equals("000"))
             {
 
                     ModelState.AddModelError("Movimento.RubricaId", "Rúbrica é um campo obrigatório");
@@ -81,7 +98,7 @@ namespace AppGCT.Pages.Gestao.Movimentos
             var rubricas = _context.Rubrica.ToList();
             rubricas.Insert(0, new Rubrica
             {
-                CodRubrica = "000",
+                CodRubrica = "",
                 DescricaoRubrica = "Seleccionar Rúbrica"
 
             });
@@ -96,10 +113,6 @@ namespace AppGCT.Pages.Gestao.Movimentos
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync()
         {
-// Aceder à descrição da rubrica e gravá-la no movimento que se está a criar.
-//   Isto previne que, se no futuro a descrição da Rubrica for alterado, o Movimento fica com a Desrição da Rubrica que estava na tabela no
-//  momento da criação do Movimento
-            Movimento.DesRubrica = _context.Rubrica.Where(i => i.CodRubrica == Movimento.RubricaId).FirstOrDefault().DescricaoRubrica;
 
             if (!ModelState.IsValid || _context.Movimento == null || Movimento == null)
             {
@@ -112,6 +125,11 @@ namespace AppGCT.Pages.Gestao.Movimentos
                 OnGet();
                 return Page();
             }
+
+            // Aceder à descrição da rubrica e gravá-la no movimento que se está a criar.
+            //   Isto previne que, se no futuro a descrição da Rubrica for alterado, o Movimento fica com a Desrição da Rubrica que estava na tabela no
+            //  momento da criação do Movimento
+            Movimento.DesRubrica = _context.Rubrica.Where(i => i.CodRubrica == Movimento.RubricaId).FirstOrDefault().DescricaoRubrica;
 
             Movimento.DataCriacao = DateTime.Now;
             // obtem User ID logado

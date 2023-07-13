@@ -10,6 +10,11 @@
     ViewData["Title"] = "Criar Movimento Contabilístico";
     Layout = "~/Pages/Shared/_Layout.cshtml";
 }
+<style>
+    .validation-error {
+        color: red;
+    }
+</style>
 
 <h1>Criar movimento contabilístico</h1>
 <hr />
@@ -23,18 +28,21 @@
             <div class="form-group">
                 <label asp-for="Movimento.RubricaId" class="control-label">Rúbrica</label>
                 <select asp-for="Movimento.RubricaId" class="form-control" asp-items="ViewBag.RubricaId"></select>
+                @Html.ValidationMessageFor(model => model.Movimento.RubricaId, null, new { @class = "validation-error" })
             </div>
             <!-- código js para proteger/desproteger campos preenchidos apenas se existir classe preenchida -->
             <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
             <script>
                 $(document).ready(function () {
+                    
                     // Obter nome campos
                     var FaturaField = $('#Movimento_NumFatura');
                     var NotaCreditoField = $('#Movimento_NumNotaCredito');
                     var TipoDespesaField = $('#Movimento_RubricaId');
                     var MetodoPagamentoField = $('#Movimento_MetodoPagamentoId');
-               //     var lblMetPagField = $('#lblMetPag');
+                    var lblMetPagField = $('#lblMetodo');
 
+                    TipoDespesaField.find('option:first').attr('selected', 'selected');
 
                     // Função para alterações sobre o campo Classe
                     TipoDespesaField.on('change', function () {
@@ -43,6 +51,7 @@
                             FaturaField.prop('disabled', true);
                             NotaCreditoField.prop('disabled', true);
                             MetodoPagamentoField.prop('disabled', true);
+                            lblMetPagField.prop('hidden', true);
                             FaturaField.val('');
                             NotaCreditoField.val('');
                         }
@@ -60,24 +69,26 @@
                                                     FaturaField.prop('disabled', false);
                                                     NotaCreditoField.prop('disabled', true);
                                                     MetodoPagamentoField.prop('disabled', false);
-                                                    MetodoPagamentoField.prop('hidden', false);
+                                                   // MetodoPagamentoField.find('option:last').attr('selected', 'selected');
+                                                    lblMetPagField.prop('hidden', false);
                                                     NotaCreditoField.val('');
                                                     break;
                                                 case 'D':
                                                     FaturaField.prop('disabled', true);
                                                     NotaCreditoField.prop('disabled', false);
+                                                    MetodoPagamentoField.selectedIndex = -1;
                                                     MetodoPagamentoField.prop('disabled', true);
+                                                    lblMetPagField.prop('hidden', false);
                                                     FaturaField.val('');
                                                     break;
                                                 case 'O':
                                                     FaturaField.prop('disabled', true);
                                                     NotaCreditoField.prop('disabled', true);
                                                     MetodoPagamentoField.prop('disabled', true);
-                                                    MetodoPagamentoField.prop('hidden', true);
-                                                    //lblMetPagField.prop('hidden', true);
+                                                    MetodoPagamentoField.find('option:first').attr('selected', 'selected');
                                                     FaturaField.val('');
                                                     NotaCreditoField.val('');
-                                                    MetodoPagamentoField.val(@ViewBag.MetodoPagamentoId);
+                                                    lblMetPagField.prop('hidden', false);
                                                     break;
                                                 default:
                                                     alert("Pedimos desculpa, mas algo não correu como esperado.");
@@ -97,7 +108,7 @@
             </script>
             <div class="form-group">
                 <label asp-for="Movimento.NumFatura" class="control-label"></label>
-                <input asp-for="Movimento.NumFatura" class="form-control" disabled value = null/>
+                <input asp-for="Movimento.NumFatura" class="form-control" disabled />
                 <span asp-validation-for="Movimento.NumFatura" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -110,9 +121,9 @@
                 <input asp-for="Movimento.DtMovimento" class="form-control" />
                 <span asp-validation-for="Movimento.DtMovimento" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="Movimento.MetodoPagamentoId" class="control-label" disabled hidden >Método de Pagamento</label>
-                <select asp-for="Movimento.MetodoPagamentoId" class="form-control" asp-items="ViewBag.MetodoPagamentoId" disabled hidden ></select>
+            <div id="lblMetodo" class="form-group" hidden>
+                <label asp-for="Movimento.MetodoPagamentoId" class="control-label" >Método de Pagamento</label>
+                <select asp-for="Movimento.MetodoPagamentoId" class="form-control" asp-items="ViewBag.MetodoPagamentoId" disabled ></select>
             </div>
             <div class="form-group">
                 <label asp-for="Movimento.ValorMovimento" class="control-label"></label>
