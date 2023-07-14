@@ -17,19 +17,29 @@
         <form method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Inscricao.Id" />
-            <div class="form-group">
-                <label asp-for="Inscricao.Class.NomeClasse" class="control-label"></label>
-                <select asp-for="Inscricao.ClasseId" class="form-control" asp-items="ViewBag.ClasseId"></select>
-            </div>
-            <div class="form-group">
-                <label asp-for="Inscricao.Descont.CodDesconto" class="control-label"></label>
-                <select asp-for="Inscricao.CodDesconto" class="form-control" asp-items="ViewBag.CodDesconto"></select>
-            </div>
-            <div class="form-group">
-                <label asp-for="Inscricao.IdFGP" class="control-label"></label>
-                <input asp-for="Inscricao.IdFGP" class="form-control" />
-                <span asp-validation-for="Inscricao.IdFGP" class="text-danger"></span>
-            </div>
+
+            @if (User.IsInRole("Administrador") || User.IsInRole("Ginásio"))
+            {
+                <div class="form-group">
+                    <label asp-for="Inscricao.Class.NomeClasse" class="control-label"></label>
+                    <select asp-for="Inscricao.ClasseId" class="form-control" asp-items="ViewBag.ClasseId"></select>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Inscricao.Descont.CodDesconto" class="control-label"></label>
+                    <select asp-for="Inscricao.CodDesconto" class="form-control" asp-items="ViewBag.CodDesconto"></select>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Inscricao.IdFGP" class="control-label"></label>
+                    <input asp-for="Inscricao.IdFGP" class="form-control" />
+                    <span asp-validation-for="Inscricao.IdFGP" class="text-danger"></span>
+                </div>
+            }
+            else
+            {
+                <input type="hidden" asp-for="Inscricao.ClasseId" />
+                <input type="hidden" asp-for="Inscricao.CodDesconto" />
+                <input type="hidden" asp-for="Inscricao.IdFGP" />
+            }
             <div class="form-group">
                 <label asp-for="Inscricao.ISocGinasta" class="control-label">É Sócio/Ginasta?</label>
                 <div class="form-check">
@@ -51,13 +61,14 @@
                 <input asp-for="Inscricao.DtInscricao" class="form-control" />
                 <span asp-validation-for="Inscricao.DtInscricao" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="Inscricao.IdadeAgosto" class="control-label"></label>
-                <input asp-for="Inscricao.IdadeAgosto" class="form-control" />
-                <span asp-validation-for="Inscricao.IdadeAgosto" class="text-danger"></span>
-            </div>
+
         @if (User.IsInRole("Administrador") || User.IsInRole("Ginásio"))
             {
+                <div class="form-group">
+                    <label asp-for="Inscricao.IdadeAgosto" class="control-label"></label>
+                    <input asp-for="Inscricao.IdadeAgosto" class="form-control" />
+                    <span asp-validation-for="Inscricao.IdadeAgosto" class="text-danger"></span>
+                </div>
                 <div class="form-group">
                     <label asp-for="Inscricao.IConsentimento" class="control-label">Consentimento de dados</label>
                     <div class="form-check">
@@ -172,6 +183,7 @@
             }
             else
             {
+                <input type="hidden" asp-for="Inscricao.IdadeAgosto" />
                 <input type="hidden" asp-for="Inscricao.IConsentimento" />
                 <input type="hidden" asp-for="Inscricao.DtConsentimento" />
                 <input type="hidden" asp-for="Inscricao.IExamMed" />
