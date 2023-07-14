@@ -79,7 +79,6 @@ namespace AppGCT.Models
         [Display(Name = "Autoriza toma de Analgésico / Anti-Inflamatório ?")]
         public string? IAntiInflam { get; set; }
 
-        [Required]
         [DataType(DataType.Text)]
         [Display(Name = "Outras alergias")]
         public string? DescAlergias { get; set; }

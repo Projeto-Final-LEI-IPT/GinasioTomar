@@ -118,7 +118,7 @@ namespace AppGCT.Pages.Inscricoes.InscricaoEpoca
                 }
             }
 
-
+            Inscricao.IdFGP = "";
             Inscricao.IdadeAgosto = years;
             Inscricao.IConsentimento = "N";
             Inscricao.DtExamMed = DateTime.MinValue;
