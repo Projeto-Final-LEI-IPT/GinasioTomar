@@ -111,6 +111,13 @@ namespace AppGCT.Pages.Inscricoes.InscricaoEpoca
                 return Page();
             }
 
+            if (Inscricao.DtInscricao.Date != DateTime.Now.Date)
+            {
+                ModelState.AddModelError("Inscricao.DtInscricao", "Data Inscrição tem de ser a data atual");
+                OnGet(Inscricao.GinastaId);
+                return Page();
+            }
+
             // Calcula o número de meses entre a DataInicio e DataFim da época
             int numberOfMonths = (epoca.DataFim.Year - epoca.DataInicio.Year) * 12
                 + epoca.DataFim.Month - epoca.DataInicio.Month;

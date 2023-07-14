@@ -68,7 +68,66 @@ namespace AppGCT.Pages.Inscricoes.InscricaoEpoca
         // For more details, see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostAsync()
         {
- 
+            // Obtem EpocaId
+            int epocaId = Inscricao.EpocaId;
+            // Obtem CodDesconto
+            string codDesconto = Inscricao.CodDesconto;
+            //obtem dtinscricao
+            DateTime dataDia = DateTime.Now;
+
+             //obtem ginasta em estado ativo
+            var ginasta = await _context.Ginasta
+                                        .FirstOrDefaultAsync(r => r.Id == Inscricao.GinastaId && r.EstadoGinasta == "A");
+            if (ginasta == null)
+            {
+                ModelState.AddModelError("Inscricao.GinastaId", "Ginasta Inativo, deverá ativar para modificar inscrição");
+                await OnGetAsync(Inscricao.GinastaId);
+                return Page();
+            }
+            //obtem rubrica
+            var rubrica = await _context.Rubrica
+                                        .FirstOrDefaultAsync(r => r.ClasseId == Inscricao.ClasseId && r.DescontoId == Inscricao.CodDesconto);
+            if (rubrica == null)
+            {
+                ModelState.AddModelError("Inscricao.GinastaId", "Rúbrica não definida no Preçário");
+                await OnGetAsync(Inscricao.GinastaId);
+                return Page();
+            }
+            decimal valorMensalidade = rubrica.ValorUnitario ?? 0m;
+
+            // Valida se a época existe
+            var epoca = await _context.Epoca.FindAsync(epocaId);
+
+            if (epoca == null)
+            {
+                ModelState.AddModelError("Inscricao.GinastaId", "Época não está definida");
+                await OnGetAsync(Inscricao.GinastaId);
+                return Page();
+            }
+
+                // Calcula o número de meses entre a DataInicio e DataFim da época
+                int numberOfMonths = (epoca.DataFim.Year - epoca.DataInicio.Year) * 12
+                    + epoca.DataFim.Month - epoca.DataInicio.Month;
+
+                //modifica Plano Mensalidade
+                for (int i = 0; i <= numberOfMonths; i++)
+                {
+                    DateTime dataMensalidade = epoca.DataInicio.AddMonths(i);
+                    if (dataMensalidade.Date > dataDia.Date)
+                    {
+                        var planoMensalidade = await _context.PlanoMensalidade
+                            .FirstOrDefaultAsync(p => p.GinastaId == Inscricao.GinastaId && p.EpocaId == epocaId && p.DataMensalidade == dataMensalidade);
+
+                        if (planoMensalidade != null)
+                        {
+                            // Atualiza Plano
+                            planoMensalidade.ValorMensalidade = valorMensalidade;
+                            planoMensalidade.DataModificacao = DateTime.Now;
+                            planoMensalidade.IdModificacao = User.Identity.GetUserId();
+                        }
+                    }
+                }
+
             if (!ModelState.IsValid)
             {
                 return Page();
