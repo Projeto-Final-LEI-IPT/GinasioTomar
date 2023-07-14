@@ -56,6 +56,13 @@ namespace AppGCT.Pages.Inscricoes.InscricaoEpoca
             if (inscricao != null)
             {
                 Inscricao = inscricao;
+                // Obtem planoMensalidade associados
+                var planoMensalidades = await _context.PlanoMensalidade
+                    .Where(p => p.GinastaId == Inscricao.GinastaId && p.EpocaId == Inscricao.EpocaId)
+                    .ToListAsync();
+                //remove planoMensalidades
+                _context.PlanoMensalidade.RemoveRange(planoMensalidades);
+                //remove inscrição
                 _context.Inscricao.Remove(Inscricao);
                 await _context.SaveChangesAsync();
             }

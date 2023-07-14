@@ -35,7 +35,6 @@
     <div class="col-md-4">
         <form method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Inscricao.CodDesconto" />
             <div class="form-group">
                 <label asp-for="Inscricao.Atleta.Id" class="control-label"></label>
                 <select asp-for="Inscricao.GinastaId" class="form-control" asp-items="ViewBag.GinastaId"></select>
@@ -49,6 +48,17 @@
                 <label asp-for="Inscricao.Class.NomeClasse" class="control-label"></label>
                 <select asp-for="Inscricao.ClasseId" class="form-control" asp-items="ViewBag.ClasseId"></select>
             </div>
+            @if (User.IsInRole("Administrador") || User.IsInRole("Ginásio"))
+            {
+                <div class="form-group">
+                    <label asp-for="Inscricao.Descont.CodDesconto" class="control-label"></label>
+                    <select asp-for="Inscricao.CodDesconto" class="form-control" asp-items="ViewBag.CodDesconto"></select>
+                </div>
+            }
+            else
+            {
+                <input type="hidden" asp-for="Inscricao.CodDesconto" />
+            }
             <div class="form-group">
                 <label asp-for="Inscricao.ISocGinasta" class="control-label">Sócio-Ginasta?</label>
                 <div class="form-check">

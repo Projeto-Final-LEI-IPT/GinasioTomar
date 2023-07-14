@@ -29,6 +29,15 @@ namespace AppGCT.Pages.Inscricoes.InscricaoEpoca
             ViewData["EpocaId"] = new SelectList(_context.Epoca.Where(i => i.EstadoEpoca == "A"), "IdEpoca", "NomeEpoca");
             ViewData["ClasseId"] = new SelectList(_context.Classe.Where(i => i.EstadoClasse == "A"), "IdClasse", "NomeClasse");
 
+            var descontos = _context.Desconto.Where(i => i.EstadoDesconto == "A").ToList();
+            descontos.Insert(0, new Desconto
+            {
+                CodDesconto = "",
+                DescDesconto = "Seleccionar Desconto"
+            });
+
+            ViewData["CodDesconto"] = new SelectList(descontos, "CodDesconto", "DescDesconto");
+
             ViewData["BackId"] = id;
             return Page();
         }
@@ -68,7 +77,7 @@ namespace AppGCT.Pages.Inscricoes.InscricaoEpoca
             }
             //obtem rubrica
             var rubrica = await _context.Rubrica
-                                        .FirstOrDefaultAsync(r => r.ClasseId == Inscricao.ClasseId);
+                                        .FirstOrDefaultAsync(r => r.ClasseId == Inscricao.ClasseId && r.DescontoId == Inscricao.CodDesconto);
             if (rubrica == null)
             {
                 ModelState.AddModelError("Inscricao.GinastaId", "Rúbrica não definida no Preçário");
