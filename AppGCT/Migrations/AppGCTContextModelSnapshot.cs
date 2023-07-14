@@ -130,13 +130,13 @@ namespace AppGCT.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "3dcd449e-b341-4e2a-abb2-aaa00d3799b3",
+                            Id = "6d171807-015f-4068-824d-26b2f1e1c7e1",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "b369f9ba-4e2e-4a10-b762-bc4b00cb53a6",
-                            DataAprovacao = new DateTime(2023, 7, 4, 23, 16, 4, 541, DateTimeKind.Local).AddTicks(7175),
-                            DataCriacao = new DateTime(2023, 7, 4, 23, 16, 4, 541, DateTimeKind.Local).AddTicks(7125),
+                            ConcurrencyStamp = "b85d0fdb-630e-4b00-9321-f5a3a0f6402e",
+                            DataAprovacao = new DateTime(2023, 7, 14, 18, 24, 31, 756, DateTimeKind.Local).AddTicks(6546),
+                            DataCriacao = new DateTime(2023, 7, 14, 18, 24, 31, 756, DateTimeKind.Local).AddTicks(6484),
                             DataModificacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DataNascim = new DateTime(2023, 7, 4, 23, 16, 4, 541, DateTimeKind.Local).AddTicks(7180),
+                            DataNascim = new DateTime(2023, 7, 14, 18, 24, 31, 756, DateTimeKind.Local).AddTicks(6553),
                             Email = "admin@localhost",
                             EmailConfirmed = true,
                             EstadoUtilizador = "A",
@@ -149,10 +149,10 @@ namespace AppGCT.Migrations
                             NormalizedEmail = "ADMIN@LOCALHOST",
                             NormalizedUserName = "ADMIN@LOCALHOST",
                             NumSocio = " ",
-                            PasswordHash = "AQAAAAIAAYagAAAAEILcTS8AxNa9Uj3XVuVLpcNN1tPcbm0elhGQU9Aw52JZ8qX1EokpP5aN4WbqcI7hGQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEN4DFkz2JblXHIo3q2mnjY8DlddaDZOAw2sLJVSH9cG4A29k3ya1jIlUkFWa2Dj3eA==",
                             PhoneNumber = "999999999",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "ddd8cd70-09d8-470f-a70f-c588fda0c6f6",
+                            SecurityStamp = "039afa84-cc34-43e3-8890-73c14cc26ce9",
                             TwoFactorEnabled = false,
                             UserName = "admin@localhost"
                         });
@@ -400,6 +400,9 @@ namespace AppGCT.Migrations
                     b.Property<int>("ClasseId")
                         .HasColumnType("int");
 
+                    b.Property<string>("CodDesconto")
+                        .HasColumnType("nvarchar(2)");
+
                     b.Property<DateTime>("DataCriacao")
                         .HasColumnType("datetime2");
 
@@ -407,7 +410,6 @@ namespace AppGCT.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("DescAlergias")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("DtConsentimento")
@@ -469,7 +471,6 @@ namespace AppGCT.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("IdFGP")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("IdModificacao")
@@ -481,6 +482,8 @@ namespace AppGCT.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("ClasseId");
+
+                    b.HasIndex("CodDesconto");
 
                     b.HasIndex("EpocaId");
 
@@ -755,19 +758,19 @@ namespace AppGCT.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "ada98f35-4339-4bd0-a59d-a247f91d63d1",
+                            Id = "ce7ec2bf-8cdc-4349-9a12-166eaffd1609",
                             Name = "Administrador",
                             NormalizedName = "ADMINISTRADOR"
                         },
                         new
                         {
-                            Id = "b544fc1d-f886-45d4-86c3-92d45b83c71e",
+                            Id = "15b02091-887c-4f83-be93-31db64bbd287",
                             Name = "Ginásio",
                             NormalizedName = "GINÁSIO"
                         },
                         new
                         {
-                            Id = "46df7e3c-00d3-4fc4-87b1-7eaea27887ec",
+                            Id = "61917c13-206f-4515-9072-d8fe37212df1",
                             Name = "Sócio",
                             NormalizedName = "SÓCIO"
                         });
@@ -864,8 +867,8 @@ namespace AppGCT.Migrations
                     b.HasData(
                         new
                         {
-                            UserId = "3dcd449e-b341-4e2a-abb2-aaa00d3799b3",
-                            RoleId = "ada98f35-4339-4bd0-a59d-a247f91d63d1"
+                            UserId = "6d171807-015f-4068-824d-26b2f1e1c7e1",
+                            RoleId = "ce7ec2bf-8cdc-4349-9a12-166eaffd1609"
                         });
                 });
 
@@ -909,6 +912,10 @@ namespace AppGCT.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("AppGCT.Models.Desconto", "Descont")
+                        .WithMany("Inscricoes")
+                        .HasForeignKey("CodDesconto");
+
                     b.HasOne("AppGCT.Models.Epoca", "Periodo")
                         .WithMany("Inscricoes")
                         .HasForeignKey("EpocaId")
@@ -924,6 +931,8 @@ namespace AppGCT.Migrations
                     b.Navigation("Atleta");
 
                     b.Navigation("Class");
+
+                    b.Navigation("Descont");
 
                     b.Navigation("Periodo");
                 });
@@ -1060,6 +1069,8 @@ namespace AppGCT.Migrations
 
             modelBuilder.Entity("AppGCT.Models.Desconto", b =>
                 {
+                    b.Navigation("Inscricoes");
+
                     b.Navigation("Rubricas");
                 });
 

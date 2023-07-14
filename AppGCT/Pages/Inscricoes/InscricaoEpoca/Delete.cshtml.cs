@@ -31,7 +31,7 @@ namespace AppGCT.Pages.Inscricoes.InscricaoEpoca
                 return NotFound();
             }
 
-            var inscricao = await _context.Inscricao.Include(i => i.Atleta).Include(i => i.Periodo).Include(i => i.Class)
+            var inscricao = await _context.Inscricao.Include(i => i.Atleta).Include(i => i.Periodo).Include(i => i.Class).Include(i => i.Descont)
                                                     .FirstOrDefaultAsync(m => m.Id == id);
 
             if (inscricao == null)
@@ -56,6 +56,13 @@ namespace AppGCT.Pages.Inscricoes.InscricaoEpoca
             if (inscricao != null)
             {
                 Inscricao = inscricao;
+                // Obtem planoMensalidade associados
+                var planoMensalidades = await _context.PlanoMensalidade
+                    .Where(p => p.GinastaId == Inscricao.GinastaId && p.EpocaId == Inscricao.EpocaId)
+                    .ToListAsync();
+                //remove planoMensalidades
+                _context.PlanoMensalidade.RemoveRange(planoMensalidades);
+                //remove inscrição
                 _context.Inscricao.Remove(Inscricao);
                 await _context.SaveChangesAsync();
             }

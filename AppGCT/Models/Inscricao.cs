@@ -6,7 +6,6 @@ namespace AppGCT.Models
     public class Inscricao
     {
         public int? Id { get; set; }
-        [Required]
         [DataType(DataType.Text)]
         [Display(Name = "FGP Nº")]
         public string? IdFGP { get; set; }
@@ -80,7 +79,6 @@ namespace AppGCT.Models
         [Display(Name = "Autoriza toma de Analgésico / Anti-Inflamatório ?")]
         public string? IAntiInflam { get; set; }
 
-        [Required]
         [DataType(DataType.Text)]
         [Display(Name = "Outras alergias")]
         public string? DescAlergias { get; set; }
@@ -159,6 +157,10 @@ namespace AppGCT.Models
         public int ClasseId { get; set; }
 
         public Classe? Class { get; set; }
+
+        public string? CodDesconto { get; set; }
+
+        public Desconto? Descont { get; set; }
 
     }
 }

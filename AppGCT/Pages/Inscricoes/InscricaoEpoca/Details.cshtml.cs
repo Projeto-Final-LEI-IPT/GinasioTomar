@@ -30,7 +30,7 @@ namespace AppGCT.Pages.Inscricoes.InscricaoEpoca
                 return NotFound();
             }
 
-            var inscricao = await _context.Inscricao.Include(i => i.Atleta).Include(i => i.Periodo).Include(i => i.Class)
+            var inscricao = await _context.Inscricao.Include(i => i.Atleta).Include(i => i.Periodo).Include(i => i.Class).Include(i => i.Descont)
                                                     .FirstOrDefaultAsync(m => m.Id == id);
             if (inscricao == null)
             {

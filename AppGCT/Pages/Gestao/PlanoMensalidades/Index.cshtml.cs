@@ -24,17 +24,31 @@ namespace AppGCT.Pages.Inscricoes.PlanoMensalidades
 
         public IList<PlanoMensalidade> PlanoMensalidade { get;set; } = default!;
 
-        public async Task<IActionResult> OnGetAsync(int idGinasta, int idEpoca)
+        public async Task<IActionResult> OnGetAsync(int idGinasta, int idEpoca, string IInscricao)
         {
             if (_context.PlanoMensalidade != null)
             {
                 string userId = User.Identity.GetUserId();
                 if (User.IsInRole("Administrador") || User.IsInRole("Ginásio"))
                 {
-                    PlanoMensalidade = await _context.PlanoMensalidade
-                                       .Include(p => p.Aluno)
-                                       .Include(p => p.Epoca)
-                                       .ToListAsync();
+                    //Se veio direto de uma inscrição
+                    if (IInscricao == "S")
+                    {
+                        PlanoMensalidade = await _context.PlanoMensalidade
+                                          .Include(p => p.Aluno)
+                                          .Include(p => p.Epoca)
+                                          .Where(p => p.EpocaId == idEpoca && p.GinastaId == idGinasta)
+                                          .ToListAsync();
+                    }
+                    else
+                    //Se acedeu diretamente à area de Planos
+                    {
+                        PlanoMensalidade = await _context.PlanoMensalidade
+                                           .Include(p => p.Aluno)
+                                           .Include(p => p.Epoca)
+                                           .ToListAsync();
+                    }
+
                 }
                 else
                 {

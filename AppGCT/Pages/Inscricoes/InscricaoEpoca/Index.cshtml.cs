@@ -46,7 +46,7 @@ namespace AppGCT.Pages.Inscricoes.InscricaoEpoca
             {
                 Inscricao = await _context.Inscricao
                     .Where(i => i.GinastaId == id)
-                .Include(i => i.Atleta).Include(m => m.Periodo).Include(m => m.Class).ToListAsync();
+                .Include(i => i.Atleta).Include(m => m.Periodo).Include(m => m.Class).Include(m => m.Descont).ToListAsync();
             }
             return Page();
         }

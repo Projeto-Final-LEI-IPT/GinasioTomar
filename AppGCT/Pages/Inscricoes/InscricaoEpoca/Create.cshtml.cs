@@ -26,8 +26,17 @@ namespace AppGCT.Pages.Inscricoes.InscricaoEpoca
         public IActionResult OnGet(int? id)
         {
             ViewData["GinastaId"] = new SelectList(_context.Ginasta.Where(i => i.Id == id), "Id", "ID_DescrGinasta");
-            ViewData["EpocaId"] = new SelectList(_context.Epoca, "IdEpoca", "NomeEpoca");
+            ViewData["EpocaId"] = new SelectList(_context.Epoca.Where(i => i.EstadoEpoca == "A"), "IdEpoca", "NomeEpoca");
             ViewData["ClasseId"] = new SelectList(_context.Classe.Where(i => i.EstadoClasse == "A"), "IdClasse", "NomeClasse");
+
+            var descontos = _context.Desconto.Where(i => i.EstadoDesconto == "A").ToList();
+            descontos.Insert(0, new Desconto
+            {
+                CodDesconto = "",
+                DescDesconto = "Seleccionar Desconto"
+            });
+
+            ViewData["CodDesconto"] = new SelectList(descontos, "CodDesconto", "DescDesconto");
 
             ViewData["BackId"] = id;
             return Page();
@@ -57,9 +66,24 @@ namespace AppGCT.Pages.Inscricoes.InscricaoEpoca
             int epocaId = Inscricao.EpocaId;
             //obtem dtinscricao
             DateTime dtInscricao = Inscricao.DtInscricao;
+            //obtem ginasta em estado ativo
+            var ginasta = await _context.Ginasta
+                                        .FirstOrDefaultAsync(r => r.Id == Inscricao.GinastaId && r.EstadoGinasta =="A");
+            if (ginasta == null)
+            {
+                ModelState.AddModelError("Inscricao.GinastaId", "Ginasta Inativo, deverá ativar para efetuar inscrição");
+                OnGet(Inscricao.GinastaId);
+                return Page();
+            }
             //obtem rubrica
             var rubrica = await _context.Rubrica
-                                        .FirstOrDefaultAsync(r => r.ClasseId == Inscricao.ClasseId);
+                                        .FirstOrDefaultAsync(r => r.ClasseId == Inscricao.ClasseId && r.DescontoId == Inscricao.CodDesconto);
+            if (rubrica == null)
+            {
+                ModelState.AddModelError("Inscricao.GinastaId", "Rúbrica não definida no Preçário");
+                OnGet(Inscricao.GinastaId);
+                return Page();
+            }
             decimal valorMensalidade = rubrica.ValorUnitario ?? 0m;
 
             // Valida se a época existe
@@ -67,7 +91,9 @@ namespace AppGCT.Pages.Inscricoes.InscricaoEpoca
 
             if (epoca == null)
             {
-                return NotFound();
+                ModelState.AddModelError("Inscricao.GinastaId", "Época não está definida");
+                OnGet(Inscricao.GinastaId);
+                return Page();
             }
             DateTime dtIni30 = epoca.DataInicio.AddMonths(-2);
 
@@ -81,6 +107,13 @@ namespace AppGCT.Pages.Inscricoes.InscricaoEpoca
             if (Inscricao.DtInscricao < dtIni30)
             {
                 ModelState.AddModelError("Inscricao.DtInscricao", "Data Inscrição não pode ser inferior à Data Inicio da época menos 2 meses");
+                OnGet(Inscricao.GinastaId);
+                return Page();
+            }
+
+            if (Inscricao.DtInscricao.Date != DateTime.Now.Date)
+            {
+                ModelState.AddModelError("Inscricao.DtInscricao", "Data Inscrição tem de ser a data atual");
                 OnGet(Inscricao.GinastaId);
                 return Page();
             }
@@ -110,7 +143,7 @@ namespace AppGCT.Pages.Inscricoes.InscricaoEpoca
                 }
             }
 
-
+            Inscricao.IdFGP = "";
             Inscricao.IdadeAgosto = years;
             Inscricao.IConsentimento = "N";
             Inscricao.DtExamMed = DateTime.MinValue;
@@ -125,6 +158,12 @@ namespace AppGCT.Pages.Inscricoes.InscricaoEpoca
             Inscricao.DataCriacao = DateTime.Now;
             Inscricao.IdModificacao = "0";
             Inscricao.DataModificacao = DateTime.MinValue;
+
+            if (Inscricao.CodDesconto == null)
+            {
+                Inscricao.CodDesconto = null;
+                ModelState.Remove("Inscricao.CodDesconto"); // Remove validação para o campo CodDesconto que não é visivel
+            }
 
             if (!ModelState.IsValid || _context.Inscricao == null || Inscricao == null)
             {
