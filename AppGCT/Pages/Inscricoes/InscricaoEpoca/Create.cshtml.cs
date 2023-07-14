@@ -151,8 +151,12 @@ namespace AppGCT.Pages.Inscricoes.InscricaoEpoca
             Inscricao.DataCriacao = DateTime.Now;
             Inscricao.IdModificacao = "0";
             Inscricao.DataModificacao = DateTime.MinValue;
-            Inscricao.CodDesconto = null;
-            ModelState.Remove("Inscricao.CodDesconto"); // Remove validação para o campo CodDesconto que não é visivel
+
+            if (Inscricao.CodDesconto == null)
+            {
+                Inscricao.CodDesconto = null;
+                ModelState.Remove("Inscricao.CodDesconto"); // Remove validação para o campo CodDesconto que não é visivel
+            }
 
             if (!ModelState.IsValid || _context.Inscricao == null || Inscricao == null)
             {
