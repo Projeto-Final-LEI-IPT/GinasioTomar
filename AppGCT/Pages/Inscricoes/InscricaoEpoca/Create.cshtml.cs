@@ -57,6 +57,15 @@ namespace AppGCT.Pages.Inscricoes.InscricaoEpoca
             int epocaId = Inscricao.EpocaId;
             //obtem dtinscricao
             DateTime dtInscricao = Inscricao.DtInscricao;
+            //obtem ginasta em estado ativo
+            var ginasta = await _context.Ginasta
+                                        .FirstOrDefaultAsync(r => r.Id == Inscricao.GinastaId && r.EstadoGinasta =="A");
+            if (ginasta == null)
+            {
+                ModelState.AddModelError("Inscricao.GinastaId", "Ginasta Inativo, deverá ativar para efetuar inscrição");
+                OnGet(Inscricao.GinastaId);
+                return Page();
+            }
             //obtem rubrica
             var rubrica = await _context.Rubrica
                                         .FirstOrDefaultAsync(r => r.ClasseId == Inscricao.ClasseId);

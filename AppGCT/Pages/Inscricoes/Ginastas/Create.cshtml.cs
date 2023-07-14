@@ -29,7 +29,7 @@ namespace AppGCT.Pages.Inscricoes.Ginastas
         {
             if (User.IsInRole("Administrador") || User.IsInRole("Ginásio"))
             {
-                ViewData["UtilizadorId"] = new SelectList(_context.Users.Where(x => x.NumSocio != " "), "Id", "ID_Description");
+                ViewData["UtilizadorId"] = new SelectList(_context.Users.Where(x => x.NumSocio != " " && x.EstadoUtilizador == "A"), "Id", "ID_Description");
             }
             else
             {
