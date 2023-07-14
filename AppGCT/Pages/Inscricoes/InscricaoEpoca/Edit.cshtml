@@ -56,14 +56,15 @@
                 </div>
                 <span asp-validation-for="Inscricao.ISocGinasta" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="Inscricao.DtInscricao" class="control-label"></label>
-                <input asp-for="Inscricao.DtInscricao" class="form-control" />
-                <span asp-validation-for="Inscricao.DtInscricao" class="text-danger"></span>
-            </div>
+
 
         @if (User.IsInRole("Administrador") || User.IsInRole("Ginásio"))
             {
+                <div class="form-group">
+                    <label asp-for="Inscricao.DtInscricao" class="control-label"></label>
+                    <input asp-for="Inscricao.DtInscricao" class="form-control" />
+                    <span asp-validation-for="Inscricao.DtInscricao" class="text-danger"></span>
+                </div>
                 <div class="form-group">
                     <label asp-for="Inscricao.IdadeAgosto" class="control-label"></label>
                     <input asp-for="Inscricao.IdadeAgosto" class="form-control" />
@@ -183,6 +184,7 @@
             }
             else
             {
+                <input type="hidden" asp-for="Inscricao.DtInscricao" />
                 <input type="hidden" asp-for="Inscricao.IdadeAgosto" />
                 <input type="hidden" asp-for="Inscricao.IConsentimento" />
                 <input type="hidden" asp-for="Inscricao.DtConsentimento" />

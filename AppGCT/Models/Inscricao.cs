@@ -6,7 +6,6 @@ namespace AppGCT.Models
     public class Inscricao
     {
         public int? Id { get; set; }
-        [Required]
         [DataType(DataType.Text)]
         [Display(Name = "FGP Nº")]
         public string? IdFGP { get; set; }
