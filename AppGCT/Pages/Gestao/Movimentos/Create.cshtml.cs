@@ -114,6 +114,14 @@ namespace AppGCT.Pages.Gestao.Movimentos
         public async Task<IActionResult> OnPostAsync()
         {
 
+            var tipoMov = _context.Rubrica.Where(i => i.CodRubrica == Movimento.RubricaId).FirstOrDefault().TipoRubrica;
+            switch (tipoMov)
+            {
+                case "O":
+                    Movimento.ValorMovimento = _context.Rubrica.Where(i => i.CodRubrica == Movimento.RubricaId).FirstOrDefault().ValorUnitario;
+                    break;
+            }
+
             if (!ModelState.IsValid || _context.Movimento == null || Movimento == null)
             {
                 return Page();
@@ -147,13 +155,19 @@ namespace AppGCT.Pages.Gestao.Movimentos
         public JsonResult OnGetRandomNumber(string selectedValue)
         {
             var tipoMov = _context.Rubrica.Where(i => i.CodRubrica == selectedValue).FirstOrDefault().TipoRubrica;
-            
-            
-            
+            var montante = _context.Rubrica.Where(i => i.CodRubrica == selectedValue).FirstOrDefault().ValorUnitario;
             return new JsonResult(new
             {
-                valor = tipoMov
+                items = new[] {
+                    new {name = tipoMov , index = montante}
+                    }
             });
+
+            //return new JsonResult(new
+            //{
+            //    valor = tipoMov,
+            //    valorUnitario = montante
+            //});
         }
     }
 }
