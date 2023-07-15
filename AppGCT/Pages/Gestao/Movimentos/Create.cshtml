@@ -45,6 +45,7 @@
                     var lblMetPagField = $('#lblMetodo');
                     var lblFaturaField = $('#lblFatura');
                     var lblNotCredField = $('#lblNotaCred');
+                    var lblvalDescontoField = $('#lblvalDesconto');
 
                     TipoDespesaField.find('option:first').attr('selected', 'selected');
                     MetodoPagamentoField.find('option:first').attr('selected', 'selected');
@@ -61,8 +62,11 @@
                             lblMetPagField.prop('hidden', true);
                             lblNotCredField.prop('hidden', false);
                             lblFaturaField.prop('hidden', false);
+                            lblvalDescontoField.prop('hidden', false);
                             FaturaField.val('');
                             NotaCreditoField.val('');
+                            ValorMovimentoField.val(0);
+                            ValorDescontoField.val(0);
                         }
                         else {
                             $.ajax({
@@ -73,7 +77,7 @@
                                     //console.log("Sucesso" data.valor);
                                         $.each(data, function (index, itemData) {
                                             console.log("Cá estou", itemData[0]);
-                                            switch (itemData[0].name) {
+                                        switch (itemData[0].tipoRubrica) {
                                                 case 'P':
                                                     FaturaField.prop('disabled', false);
                                                     lblFaturaField.prop('hidden', false);
@@ -85,12 +89,14 @@
                                                     // Mostrar DIV do Metodo de Pagamento
                                                     lblMetPagField.prop('hidden', false);
                                                     MetodoPagamentoField.prop('disabled', false);
+                                                    MetodoPagamentoField.find('option:first').attr('selected', 'selected');
                                                     // habilitar Valor Movimento
                                                     ValorMovimentoField.prop('disabled', false);
                                                     ValorMovimentoField.val(0);
                                                     // habilitar Valor Desconto
-                                                    ValorDescontoField.prop('disabled', false);
+                                                    ValorDescontoField.prop('disabled', true);
                                                     ValorDescontoField.val(0);
+                                                    lblvalDescontoField.prop('hidden', false);
                                                     break;
                                                 case 'D':
                                                     FaturaField.prop('disabled', true);
@@ -103,12 +109,19 @@
 
                                                     MetodoPagamentoField.prop('disabled', true);
                                                     lblMetPagField.prop('hidden', true);
+                                                    
                                                     // habilitar Valor Movimento
                                                     ValorMovimentoField.prop('disabled', false);
                                                     ValorMovimentoField.val(0);
                                                     // habilitar Valor Desconto
                                                     ValorDescontoField.prop('disabled', true);
                                                     ValorDescontoField.val(0);
+
+                                                    // preencher valor do desconto com zeros ( não era necessário, mas faz-se por uma questão de coerência a ler o código
+                                                    //     e esconder campo
+                                                    ValorDescontoField.val(0);
+                                                    ValorDescontoField.prop('disabled', true);
+                                                    lblvalDescontoField.prop('hidden', true);
                                                     break;
                                                 case 'O':
                                                     
@@ -121,12 +134,19 @@
                                                     lblNotCredField.prop('hidden', true);
                                                     NotaCreditoField.val('');
 
+                                                    //Esconder e desativar método de pagamento quando Rubrica é uma intenção de cobrança
                                                     MetodoPagamentoField.prop('disabled', true);
                                                     lblMetPagField.prop('hidden', true);
 
-                                                    // preencher valor do movimento
-                                                    ValorMovimentoField.val(itemData[0].index);
+                                                    // preencher valor do movimento com valor unitário que provém do preçário
+                                                    ValorMovimentoField.val(itemData[0].valor);
                                                     ValorMovimentoField.prop('disabled', true);
+
+                                                    // preencher valor do desconto com zeros ( não era necessário, mas faz-se por uma questão de coerência a ler o código
+                                                    //     e esconder campo
+                                                    ValorDescontoField.val(0);
+                                                    ValorDescontoField.prop('disabled', true);
+                                                    lblvalDescontoField.prop('hidden', true);
                                                     break;
                                                 default:
                                                     alert("Pedimos desculpa, mas algo não correu como esperado.");
@@ -141,6 +161,20 @@
                     // Fim de ELSE do AJAX
                     }
                     });
+
+                    // Função para alterações sobre o campo Classe
+                    MetodoPagamentoField.on('change', function () {
+                        var selectedValue = $(this).val();
+                        if (selectedValue == "TB") {
+                            ValorDescontoField.prop('disabled', false);
+                            ValorDescontoField.val(0);
+                            
+                        }            
+                        else{
+                            ValorDescontoField.prop('disabled', true);
+                            ValorDescontoField.val(0);
+                        }
+                });
                 });
                                         // Protege ou desprotege campos com base no valor do ClasseId
             </script>
@@ -165,12 +199,12 @@
             </div>
             <div class="form-group">
                 <label asp-for="Movimento.ValorMovimento" class="control-label"></label>
-                <input asp-for="Movimento.ValorMovimento" class="form-control" disabled />
+                <input asp-for="Movimento.ValorMovimento" class="form-control" value=0 disabled />
                 <span asp-validation-for="Movimento.ValorMovimento" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div id="lblvalDesconto" class="form-group">
                 <label asp-for="Movimento.ValorDesconto" class="control-label"></label>
-                <input asp-for="Movimento.ValorDesconto" class="form-control" disabled />
+                <input asp-for="Movimento.ValorDesconto" class="form-control" value=0 disabled />
                 <span asp-validation-for="Movimento.ValorDesconto" class="text-danger"></span>
             </div>
             <div class="form-group">

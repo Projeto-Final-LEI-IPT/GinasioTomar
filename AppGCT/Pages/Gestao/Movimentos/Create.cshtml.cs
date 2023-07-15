@@ -119,6 +119,13 @@ namespace AppGCT.Pages.Gestao.Movimentos
             {
                 case "O":
                     Movimento.ValorMovimento = _context.Rubrica.Where(i => i.CodRubrica == Movimento.RubricaId).FirstOrDefault().ValorUnitario;
+                    Movimento.ValorDesconto = 0;
+                    break;
+                case "P":
+                    Movimento.ValorDesconto = 0;
+                    break;
+                case "D":
+                    Movimento.ValorDesconto = 0;
                     break;
             }
 
@@ -156,10 +163,12 @@ namespace AppGCT.Pages.Gestao.Movimentos
         {
             var tipoMov = _context.Rubrica.Where(i => i.CodRubrica == selectedValue).FirstOrDefault().TipoRubrica;
             var montante = _context.Rubrica.Where(i => i.CodRubrica == selectedValue).FirstOrDefault().ValorUnitario;
+            
+
             return new JsonResult(new
             {
                 items = new[] {
-                    new {name = tipoMov , index = montante}
+                    new {tipoRubrica = tipoMov , valor = montante}
                     }
             });
 

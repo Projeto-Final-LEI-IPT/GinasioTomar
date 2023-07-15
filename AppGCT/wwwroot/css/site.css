@@ -27,3 +27,17 @@ div:not(:first-child):not(:last-child) {
     /*margin-top: 20px;*/
     margin-bottom: 20px;
 }
+
+.wrapper {
+    display: grid;
+    grid-template-columns: 200px 200px 200px;
+}
+
+.btn-xl {
+    border: 1px solid gray;
+    border-radius: 7%;
+    font-size: 0.875;
+    word-wrap: break-word;
+    width: 100px;
+    /* only for IE8 max-width: 100%;*/
+}
