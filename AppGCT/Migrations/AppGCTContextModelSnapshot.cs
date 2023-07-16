@@ -130,6 +130,7 @@ namespace AppGCT.Migrations
                     b.HasData(
                         new
                         {
+<<<<<<< HEAD
                             Id = "a0a5ee19-079b-4b8f-bf27-3efee2c208a0",
                             AccessFailedCount = 0,
                             ConcurrencyStamp = "fd34942e-c081-4885-ac7a-a699c358c98b",
@@ -137,6 +138,15 @@ namespace AppGCT.Migrations
                             DataCriacao = new DateTime(2023, 7, 10, 22, 19, 22, 883, DateTimeKind.Local).AddTicks(1979),
                             DataModificacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DataNascim = new DateTime(2023, 7, 10, 22, 19, 22, 883, DateTimeKind.Local).AddTicks(2174),
+=======
+                            Id = "6d171807-015f-4068-824d-26b2f1e1c7e1",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "b85d0fdb-630e-4b00-9321-f5a3a0f6402e",
+                            DataAprovacao = new DateTime(2023, 7, 14, 18, 24, 31, 756, DateTimeKind.Local).AddTicks(6546),
+                            DataCriacao = new DateTime(2023, 7, 14, 18, 24, 31, 756, DateTimeKind.Local).AddTicks(6484),
+                            DataModificacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DataNascim = new DateTime(2023, 7, 14, 18, 24, 31, 756, DateTimeKind.Local).AddTicks(6553),
+>>>>>>> main
                             Email = "admin@localhost",
                             EmailConfirmed = true,
                             EstadoUtilizador = "A",
@@ -149,10 +159,17 @@ namespace AppGCT.Migrations
                             NormalizedEmail = "ADMIN@LOCALHOST",
                             NormalizedUserName = "ADMIN@LOCALHOST",
                             NumSocio = " ",
+<<<<<<< HEAD
                             PasswordHash = "AQAAAAIAAYagAAAAEFrnkxjFwFaGzeAmVjcTX317mXAXlRCcixwdltYVinUyIm8FDstL5nnQdGs2swRnQQ==",
                             PhoneNumber = "999999999",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "341169d9-3979-478c-a393-bf1535d9f06c",
+=======
+                            PasswordHash = "AQAAAAIAAYagAAAAEN4DFkz2JblXHIo3q2mnjY8DlddaDZOAw2sLJVSH9cG4A29k3ya1jIlUkFWa2Dj3eA==",
+                            PhoneNumber = "999999999",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "039afa84-cc34-43e3-8890-73c14cc26ce9",
+>>>>>>> main
                             TwoFactorEnabled = false,
                             UserName = "admin@localhost"
                         });
@@ -400,6 +417,9 @@ namespace AppGCT.Migrations
                     b.Property<int>("ClasseId")
                         .HasColumnType("int");
 
+                    b.Property<string>("CodDesconto")
+                        .HasColumnType("nvarchar(2)");
+
                     b.Property<DateTime>("DataCriacao")
                         .HasColumnType("datetime2");
 
@@ -407,7 +427,6 @@ namespace AppGCT.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("DescAlergias")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("DtConsentimento")
@@ -469,7 +488,6 @@ namespace AppGCT.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("IdFGP")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("IdModificacao")
@@ -481,6 +499,8 @@ namespace AppGCT.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("ClasseId");
+
+                    b.HasIndex("CodDesconto");
 
                     b.HasIndex("EpocaId");
 
@@ -755,19 +775,31 @@ namespace AppGCT.Migrations
                     b.HasData(
                         new
                         {
+<<<<<<< HEAD
                             Id = "c06094f0-2a35-4477-a00b-94d4a241480b",
+=======
+                            Id = "ce7ec2bf-8cdc-4349-9a12-166eaffd1609",
+>>>>>>> main
                             Name = "Administrador",
                             NormalizedName = "ADMINISTRADOR"
                         },
                         new
                         {
+<<<<<<< HEAD
                             Id = "780fdb96-694f-43ec-8ffb-20f566d8f0d8",
+=======
+                            Id = "15b02091-887c-4f83-be93-31db64bbd287",
+>>>>>>> main
                             Name = "Ginásio",
                             NormalizedName = "GINÁSIO"
                         },
                         new
                         {
+<<<<<<< HEAD
                             Id = "3fd12b7b-3e35-445b-b437-c08820caa457",
+=======
+                            Id = "61917c13-206f-4515-9072-d8fe37212df1",
+>>>>>>> main
                             Name = "Sócio",
                             NormalizedName = "SÓCIO"
                         });
@@ -864,8 +896,13 @@ namespace AppGCT.Migrations
                     b.HasData(
                         new
                         {
+<<<<<<< HEAD
                             UserId = "a0a5ee19-079b-4b8f-bf27-3efee2c208a0",
                             RoleId = "c06094f0-2a35-4477-a00b-94d4a241480b"
+=======
+                            UserId = "6d171807-015f-4068-824d-26b2f1e1c7e1",
+                            RoleId = "ce7ec2bf-8cdc-4349-9a12-166eaffd1609"
+>>>>>>> main
                         });
                 });
 
@@ -909,6 +946,10 @@ namespace AppGCT.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("AppGCT.Models.Desconto", "Descont")
+                        .WithMany("Inscricoes")
+                        .HasForeignKey("CodDesconto");
+
                     b.HasOne("AppGCT.Models.Epoca", "Periodo")
                         .WithMany("Inscricoes")
                         .HasForeignKey("EpocaId")
@@ -924,6 +965,8 @@ namespace AppGCT.Migrations
                     b.Navigation("Atleta");
 
                     b.Navigation("Class");
+
+                    b.Navigation("Descont");
 
                     b.Navigation("Periodo");
                 });
@@ -1060,6 +1103,8 @@ namespace AppGCT.Migrations
 
             modelBuilder.Entity("AppGCT.Models.Desconto", b =>
                 {
+                    b.Navigation("Inscricoes");
+
                     b.Navigation("Rubricas");
                 });
 

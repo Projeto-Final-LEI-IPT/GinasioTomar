@@ -52,5 +52,7 @@ namespace AppGCT.Models
         }
 
         public List<Rubrica>? Rubricas { get; set; } = new List<Rubrica>();
+
+        public List<Inscricao>? Inscricoes { get; set; }
     }
 }

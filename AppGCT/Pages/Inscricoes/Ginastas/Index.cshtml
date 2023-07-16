@@ -84,7 +84,7 @@
             <td>
                     <a class='btn btn-primary btn-sm' asp-area='' asp-page='/Inscricoes/Ginastas/Edit' asp-route-id='@item.Id'>Editar</a>
                     <a class='btn btn-primary btn-sm' asp-area='' asp-page='/Inscricoes/Ginastas/Details' asp-route-id='@item.Id'>Detalhes</a>
-            @if (User.IsInRole("Administrador") || User.IsInRole("Ginásio"))
+            @if (User.IsInRole("Administrador"))
             {
                     <a class='btn btn-danger  btn-sm' asp-area='' asp-page='/Inscricoes/Ginastas/Delete' asp-route-id='@item.Id'>Apagar</a>
             }

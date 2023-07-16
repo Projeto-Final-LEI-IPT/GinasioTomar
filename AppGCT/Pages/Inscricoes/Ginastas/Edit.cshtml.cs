@@ -28,21 +28,36 @@ namespace AppGCT.Pages.Inscricoes.Ginastas
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
+            string userId = User.Identity.GetUserId();
+
             if (id == null || _context.Ginasta == null)
             {
-                return NotFound();
+                return RedirectToPage("./AcessDenied");
             }
-
-            var ginasta =  await _context.Ginasta.FirstOrDefaultAsync(m => m.Id == id);
-            if (ginasta == null)
-            {
-                return NotFound();
-            }
-            Ginasta = ginasta;
 
             if (User.IsInRole("Administrador") || User.IsInRole("Ginásio"))
             {
-                ViewData["UtilizadorId"] = new SelectList(_context.Users.Where(x => x.NumSocio != " "), "Id", "ID_Description");
+                var ginasta = await _context.Ginasta.FirstOrDefaultAsync(m => m.Id == id);
+                if (ginasta == null)
+                {
+                    return RedirectToPage("./AcessDenied");
+                }
+                Ginasta = ginasta;
+            }
+            else
+            {
+                var ginasta = await _context.Ginasta.FirstOrDefaultAsync(m => m.Id == id && m.UtilizadorId == userId);
+                if (ginasta == null)
+                {
+                    return RedirectToPage("./AcessDenied");
+                }
+                Ginasta = ginasta;
+            }
+
+
+            if (User.IsInRole("Administrador") || User.IsInRole("Ginásio"))
+            {
+                ViewData["UtilizadorId"] = new SelectList(_context.Users.Where(x => x.NumSocio != " " && x.EstadoUtilizador == "A"), "Id", "ID_Description");
             }
             else
             {

@@ -19,6 +19,11 @@
     ViewData["Title"] = "Criar Inscrição";
     Layout = "~/Pages/Shared/_Layout.cshtml";
 }
+<style>
+    .validation-error {
+        color: red;
+    }
+</style>
 
 <h1>Criar Inscrição</h1>
 
@@ -33,6 +38,7 @@
             <div class="form-group">
                 <label asp-for="Inscricao.Atleta.Id" class="control-label"></label>
                 <select asp-for="Inscricao.GinastaId" class="form-control" asp-items="ViewBag.GinastaId"></select>
+                @Html.ValidationMessageFor(model => model.Inscricao.GinastaId, null, new { @class = "validation-error" })
             </div>
             <div class="form-group">
                 <label asp-for="Inscricao.Periodo.NomeEpoca" class="control-label"></label>
@@ -42,11 +48,17 @@
                 <label asp-for="Inscricao.Class.NomeClasse" class="control-label"></label>
                 <select asp-for="Inscricao.ClasseId" class="form-control" asp-items="ViewBag.ClasseId"></select>
             </div>
-            <div class="form-group">
-                <label asp-for="Inscricao.IdFGP" class="control-label"></label>
-                <input asp-for="Inscricao.IdFGP" class="form-control" />
-                <span asp-validation-for="Inscricao.IdFGP" class="text-danger"></span>
-            </div>
+            @if (User.IsInRole("Administrador") || User.IsInRole("Ginásio"))
+            {
+                <div class="form-group">
+                    <label asp-for="Inscricao.Descont.CodDesconto" class="control-label"></label>
+                    <select asp-for="Inscricao.CodDesconto" class="form-control" asp-items="ViewBag.CodDesconto"></select>
+                </div>
+            }
+            else
+            {
+                <input type="hidden" asp-for="Inscricao.CodDesconto" />
+            }
             <div class="form-group">
                 <label asp-for="Inscricao.ISocGinasta" class="control-label">Sócio-Ginasta?</label>
                 <div class="form-check">
