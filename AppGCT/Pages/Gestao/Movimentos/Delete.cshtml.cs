@@ -7,9 +7,11 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using AppGCT.Data;
 using AppGCT.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace AppGCT.Pages.Gestao.Movimentos
 {
+    [Authorize(Roles = "Administrador")]
     public class DeleteModel : PageModel
     {
         private readonly AppGCT.Data.AppGCTContext _context;
@@ -29,7 +31,11 @@ namespace AppGCT.Pages.Gestao.Movimentos
                 return NotFound();
             }
 
-            var movimento = await _context.Movimento.FirstOrDefaultAsync(m => m.Id == id);
+            var movimento = await _context.Movimento.Include(g => g.Socio)
+                                                    .Include(g => g.Atleta)
+                                                    .Include(g => g.TipoDespesa)
+                                                    .Include(g => g.FormaPagamento)
+                                          .FirstOrDefaultAsync(m => m.Id == id);
 
             if (movimento == null)
             {

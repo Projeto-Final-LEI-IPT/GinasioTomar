@@ -10,6 +10,11 @@
     ViewData["Title"] = "Criar Movimento Contabilístico";
     Layout = "~/Pages/Shared/_Layout.cshtml";
 }
+<style>
+    .validation-error {
+        color: red;
+    }
+</style>
 
 <h1>Criar movimento contabilístico</h1>
 <hr />
@@ -21,13 +26,166 @@
         <form method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
+                <label asp-for="Movimento.RubricaId" class="control-label">Rúbrica</label>
+                <select asp-for="Movimento.RubricaId" class="form-control" asp-items="ViewBag.RubricaId"></select>
+                @Html.ValidationMessageFor(model => model.Movimento.RubricaId, null, new { @class = "validation-error" })
+            </div>
+            <!-- código js para proteger/desproteger campos preenchidos apenas se existir classe preenchida -->
+            <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+            <script>
+                $(document).ready(function () {
+                    
+                    // Obter nome campos
+                    var FaturaField = $('#Movimento_NumFatura');
+                    var NotaCreditoField = $('#Movimento_NumNotaCredito');
+                    var TipoDespesaField = $('#Movimento_RubricaId');
+                    var MetodoPagamentoField = $('#Movimento_MetodoPagamentoId');
+                    var ValorMovimentoField = $('#Movimento_ValorMovimento');
+                    var ValorDescontoField = $('#Movimento_ValorDesconto');
+                    var lblMetPagField = $('#lblMetodo');
+                    var lblFaturaField = $('#lblFatura');
+                    var lblNotCredField = $('#lblNotaCred');
+                    var lblvalDescontoField = $('#lblvalDesconto');
+
+                    TipoDespesaField.find('option:first').attr('selected', 'selected');
+                    MetodoPagamentoField.find('option:first').attr('selected', 'selected');
+
+                    // Função para alterações sobre o campo Classe
+                    TipoDespesaField.on('change', function () {
+                        var selectedValue = $(this).val();
+                        if (selectedValue == "") {
+                            FaturaField.prop('disabled', true);
+                            NotaCreditoField.prop('disabled', true);
+                            MetodoPagamentoField.prop('disabled', true);
+                            ValorMovimentoField.prop('disabled', true);
+                            ValorDescontoField.prop('disabled', true);
+                            lblMetPagField.prop('hidden', true);
+                            lblNotCredField.prop('hidden', false);
+                            lblFaturaField.prop('hidden', false);
+                            lblvalDescontoField.prop('hidden', false);
+                            FaturaField.val('');
+                            NotaCreditoField.val('');
+                            ValorMovimentoField.val(0);
+                            ValorDescontoField.val(0);
+                        }
+                        else {
+                            $.ajax({
+                                url: '@Url.Page("/Gestao/Movimentos/Create", "RandomNumber")',
+                                data: { selectedValue: selectedValue },
+                                type: 'GET',
+                                success: function (data) {
+                                    //console.log("Sucesso" data.valor);
+                                        $.each(data, function (index, itemData) {
+                                            console.log("Cá estou", itemData[0]);
+                                        switch (itemData[0].tipoRubrica) {
+                                                case 'P':
+                                                    FaturaField.prop('disabled', false);
+                                                    lblFaturaField.prop('hidden', false);
+                                                    FaturaField.val('');
+                                                    //Esconder e desativar campo Nota de Crédito
+                                                    NotaCreditoField.prop('disabled', true);
+                                                    lblNotCredField.prop('hidden', true);
+                                                    NotaCreditoField.val('');
+                                                    // Mostrar DIV do Metodo de Pagamento
+                                                    lblMetPagField.prop('hidden', false);
+                                                    MetodoPagamentoField.prop('disabled', false);
+                                                    MetodoPagamentoField.find('option:first').attr('selected', 'selected');
+                                                    // habilitar Valor Movimento
+                                                    ValorMovimentoField.prop('disabled', false);
+                                                    ValorMovimentoField.val(0);
+                                                    // habilitar Valor Desconto
+                                                    ValorDescontoField.prop('disabled', true);
+                                                    ValorDescontoField.val(0);
+                                                    lblvalDescontoField.prop('hidden', false);
+                                                    break;
+                                                case 'D':
+                                                    FaturaField.prop('disabled', true);
+                                                    lblFaturaField.prop('hidden', true);
+                                                    FaturaField.val('');
+                                                    //Mostrar e ativar campo Nota de Crédito
+                                                    NotaCreditoField.prop('disabled', false);
+                                                    lblNotCredField.prop('hidden', false);
+                                                    NotaCreditoField.val('');
+
+                                                    MetodoPagamentoField.prop('disabled', true);
+                                                    lblMetPagField.prop('hidden', true);
+                                                    
+                                                    // habilitar Valor Movimento
+                                                    ValorMovimentoField.prop('disabled', false);
+                                                    ValorMovimentoField.val(0);
+                                                    // habilitar Valor Desconto
+                                                    ValorDescontoField.prop('disabled', true);
+                                                    ValorDescontoField.val(0);
+
+                                                    // preencher valor do desconto com zeros ( não era necessário, mas faz-se por uma questão de coerência a ler o código
+                                                    //     e esconder campo
+                                                    ValorDescontoField.val(0);
+                                                    ValorDescontoField.prop('disabled', true);
+                                                    lblvalDescontoField.prop('hidden', true);
+                                                    break;
+                                                case 'O':
+                                                    
+                                                   //Esconder e desativar campo Fatura
+                                                    FaturaField.prop('disabled', true);
+                                                    lblFaturaField.prop('hidden', true);
+                                                    FaturaField.val('');
+                                                    //Esconder e desativar campo Nota de Crédito
+                                                    NotaCreditoField.prop('disabled', true);
+                                                    lblNotCredField.prop('hidden', true);
+                                                    NotaCreditoField.val('');
+
+                                                    //Esconder e desativar método de pagamento quando Rubrica é uma intenção de cobrança
+                                                    MetodoPagamentoField.prop('disabled', true);
+                                                    lblMetPagField.prop('hidden', true);
+
+                                                    // preencher valor do movimento com valor unitário que provém do preçário
+                                                    ValorMovimentoField.val(itemData[0].valor);
+                                                    ValorMovimentoField.prop('disabled', true);
+
+                                                    // preencher valor do desconto com zeros ( não era necessário, mas faz-se por uma questão de coerência a ler o código
+                                                    //     e esconder campo
+                                                    ValorDescontoField.val(0);
+                                                    ValorDescontoField.prop('disabled', true);
+                                                    lblvalDescontoField.prop('hidden', true);
+                                                    break;
+                                                default:
+                                                    alert("Pedimos desculpa, mas algo não correu como esperado.");
+                                            }
+                                        });
+                                },
+                                error: function (xhr, status, error) {
+                                    console.log("Erro");
+
+                                }
+                            });
+                    // Fim de ELSE do AJAX
+                    }
+                    });
+
+                    // Função para alterações sobre o campo Classe
+                    MetodoPagamentoField.on('change', function () {
+                        var selectedValue = $(this).val();
+                        if (selectedValue == "TB") {
+                            ValorDescontoField.prop('disabled', false);
+                            ValorDescontoField.val(0);
+                            
+                        }            
+                        else{
+                            ValorDescontoField.prop('disabled', true);
+                            ValorDescontoField.val(0);
+                        }
+                });
+                });
+                                        // Protege ou desprotege campos com base no valor do ClasseId
+            </script>
+            <div id="lblFatura" class="form-group">
                 <label asp-for="Movimento.NumFatura" class="control-label"></label>
-                <input asp-for="Movimento.NumFatura" class="form-control" />
+                <input asp-for="Movimento.NumFatura" class="form-control" disabled />
                 <span asp-validation-for="Movimento.NumFatura" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div id="lblNotaCred" class="form-group">
                 <label asp-for="Movimento.NumNotaCredito" class="control-label"></label>
-                <input asp-for="Movimento.NumNotaCredito" class="form-control" />
+                <input asp-for="Movimento.NumNotaCredito" class="form-control" disabled />
                 <span asp-validation-for="Movimento.NumNotaCredito" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -35,14 +193,18 @@
                 <input asp-for="Movimento.DtMovimento" class="form-control" />
                 <span asp-validation-for="Movimento.DtMovimento" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="Movimento.ValorMovimento" class="control-label"></label>
-                <input asp-for="Movimento.ValorMovimento" class="form-control" />
-                <span asp-validation-for="Movimento.ValorMovimento" class="text-danger"></span>
+            <div id="lblMetodo" class="form-group" hidden>
+                <label asp-for="Movimento.MetodoPagamentoId" class="control-label" >Método de Pagamento</label>
+                <select asp-for="Movimento.MetodoPagamentoId" class="form-control" asp-items="ViewBag.MetodoPagamentoId" disabled ></select>
             </div>
             <div class="form-group">
+                <label asp-for="Movimento.ValorMovimento" class="control-label"></label>
+                <input asp-for="Movimento.ValorMovimento" class="form-control" value=0 disabled />
+                <span asp-validation-for="Movimento.ValorMovimento" class="text-danger"></span>
+            </div>
+            <div id="lblvalDesconto" class="form-group">
                 <label asp-for="Movimento.ValorDesconto" class="control-label"></label>
-                <input asp-for="Movimento.ValorDesconto" class="form-control" />
+                <input asp-for="Movimento.ValorDesconto" class="form-control" value=0 disabled />
                 <span asp-validation-for="Movimento.ValorDesconto" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -52,66 +214,6 @@
             <div class="form-group">
                 <label asp-for="Movimento.AtletaMovimentoId" class="control-label">Ginasta</label>
                 <select asp-for="Movimento.AtletaMovimentoId" class ="form-control" asp-items="ViewBag.AtletaMovimentoId"></select>
-            </div>
-            <div class="form-group">
-                <label asp-for="Movimento.RubricaId" class="control-label">Rúbrica</label>
-                <select asp-for="Movimento.RubricaId" class ="form-control" asp-items="ViewBag.RubricaId"></select>
-            </div>
-            <!-- código js para proteger/desproteger campos preenchidos apenas se existir classe preenchida -->
-            <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-            <script>
-                $(document).ready(function () {
-                    // Obter nome campos
-                    var FaturaField = $('#Movimento_NumFatura');
-                    var NotaCreditoField = $('#Movimento_NumNotaCredito');
-                    var TipoDespesaField = $('#Movimento_RubricaId');
-
-
-                    // Função para alterações sobre o campo Classe
-                    TipoDespesaField.on('change', function () {
-                            var selectedValue = $(this).val();
-                            $.ajax({
-                                url: '@Url.Page("/Gestao/Movimentos/Create", "RandomNumber")',
-                                data: { selectedValue: selectedValue },
-                                type: 'GET',
-                                success: function(data){
-                                         console.log("Sucesso");
-                                        $.each(data, function (index, itemData){
-                                          console.log("Cá estou", itemData);
-                                        switch (itemData){
-                                            case 'D':
-                                                FaturaField.prop('disabled', false);
-                                                NotaCreditoField.prop('disabled', true);
-                                                NotaCreditoField.val('');
-                                                break;
-                                            case 'C':
-                                                FaturaField.prop('disabled', true);
-                                                NotaCreditoField.prop('disabled', false);
-                                                FaturaField.val('');
-                                            break;
-                                            case ' ':
-                                                FaturaField.prop('disabled', true);
-                                                NotaCreditoField.prop('disabled', true);
-                                                FaturaField.val('');
-                                                NotaCreditoField.val('');
-                                            break;
-                                            default:
-                                                alert("Pedimos desculpa, mas algo não correu como esperado.");
-                                        }
-                                    });
-                              },
-                              error: function(xhr, status, error){
-                                console.log("Erro");
-
-                              }
-                            });
-                        });
-                    });
-                        // Protege ou desprotege campos com base no valor do ClasseId
-            </script>
-            <div class="form-group">
-                <label asp-for="Movimento.MetodoPagamentoId" class="control-label">Método de Pagamento</label>
-                <select asp-for="Movimento.MetodoPagamentoId" class ="form-control" asp-items="ViewBag.MetodoPagamentoId"></select>
             </div>
             <div class="form-group">
                 <input type="submit" value="Criar" class="btn btn-primary" />

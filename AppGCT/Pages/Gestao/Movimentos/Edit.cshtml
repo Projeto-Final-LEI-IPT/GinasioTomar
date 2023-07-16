@@ -2,14 +2,17 @@
 @model AppGCT.Pages.Gestao.Movimentos.EditModel
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Editar Movimento";
     Layout = "~/Pages/Shared/_Layout.cshtml";
 }
 
-<h1>Edit</h1>
+<h1>Editar Movimento</h1>
 
-<h4>Movimento</h4>
 <hr />
+<div>
+    <a class='btn btn-primary btn-sm' asp-area='' asp-page='/Gestao/Movimentos/Index'>Voltar</a>
+</div>
+<br>
 <div class="row">
     <div class="col-md-4">
         <form method="post">
@@ -45,26 +48,8 @@
                 <input asp-for="Movimento.NumNotaCredito" class="form-control" />
                 <span asp-validation-for="Movimento.NumNotaCredito" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="Movimento.DataCriacao" class="control-label"></label>
-                <input asp-for="Movimento.DataCriacao" class="form-control" />
-                <span asp-validation-for="Movimento.DataCriacao" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Movimento.IdCriacao" class="control-label"></label>
-                <input asp-for="Movimento.IdCriacao" class="form-control" />
-                <span asp-validation-for="Movimento.IdCriacao" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Movimento.DataModificacao" class="control-label"></label>
-                <input asp-for="Movimento.DataModificacao" class="form-control" />
-                <span asp-validation-for="Movimento.DataModificacao" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Movimento.IdModificacao" class="control-label"></label>
-                <input asp-for="Movimento.IdModificacao" class="form-control" />
-                <span asp-validation-for="Movimento.IdModificacao" class="text-danger"></span>
-            </div>
+            <input type="hidden" asp-for="Movimento.DataCriacao" />
+            <input type="hidden" asp-for="Movimento.IdCriacao" />
             <div class="form-group">
                 <label asp-for="Movimento.UtilizadorId" class="control-label"></label>
                 <select asp-for="Movimento.UtilizadorId" class="form-control" asp-items="ViewBag.UtilizadorId"></select>
@@ -86,14 +71,10 @@
                 <span asp-validation-for="Movimento.MetodoPagamentoId" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <input type="submit" value="Salvar" class="btn btn-primary" />
             </div>
         </form>
     </div>
-</div>
-
-<div>
-    <a asp-page="./Index">Back to List</a>
 </div>
 
 @section Scripts {
