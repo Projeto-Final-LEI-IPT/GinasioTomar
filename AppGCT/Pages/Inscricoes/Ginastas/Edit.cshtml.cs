@@ -28,17 +28,32 @@ namespace AppGCT.Pages.Inscricoes.Ginastas
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
+            string userId = User.Identity.GetUserId();
+
             if (id == null || _context.Ginasta == null)
             {
-                return NotFound();
+                return RedirectToPage("./AcessDenied");
             }
 
-            var ginasta =  await _context.Ginasta.FirstOrDefaultAsync(m => m.Id == id);
-            if (ginasta == null)
+            if (User.IsInRole("Administrador") || User.IsInRole("Ginásio"))
             {
-                return NotFound();
+                var ginasta = await _context.Ginasta.FirstOrDefaultAsync(m => m.Id == id);
+                if (ginasta == null)
+                {
+                    return RedirectToPage("./AcessDenied");
+                }
+                Ginasta = ginasta;
             }
-            Ginasta = ginasta;
+            else
+            {
+                var ginasta = await _context.Ginasta.FirstOrDefaultAsync(m => m.Id == id && m.UtilizadorId == userId);
+                if (ginasta == null)
+                {
+                    return RedirectToPage("./AcessDenied");
+                }
+                Ginasta = ginasta;
+            }
+
 
             if (User.IsInRole("Administrador") || User.IsInRole("Ginásio"))
             {

@@ -28,6 +28,7 @@ namespace AppGCT.Pages.Inscricoes.InscricaoEpoca
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
+            string userId = User.Identity.GetUserId();
             ViewData["ClasseId"] = new SelectList(_context.Classe.Where(i => i.EstadoClasse == "A"), "IdClasse", "NomeClasse");
 
             var descontos = _context.Desconto.Where(i => i.EstadoDesconto == "A").ToList();
@@ -43,24 +44,32 @@ namespace AppGCT.Pages.Inscricoes.InscricaoEpoca
 
             if (id == null || _context.Inscricao == null)
             {
-                return NotFound();
+                return RedirectToPage("./AcessDenied");
             }
 
-            var inscricao =  await _context.Inscricao.Include(i => i.Atleta)
-                                                     .FirstOrDefaultAsync(m => m.Id == id);
-            if (inscricao == null)
+            if (User.IsInRole("Administrador") || User.IsInRole("Ginásio"))
             {
-                return NotFound();
+                var inscricao = await _context.Inscricao.Include(i => i.Atleta)
+                                                     .FirstOrDefaultAsync(m => m.Id == id);
+                if (inscricao == null)
+                {
+                    return RedirectToPage("./AcessDenied");
+                }
+                Inscricao = inscricao;
             }
-            Inscricao = inscricao;
-            ///var UserId = Inscricao.Atleta.UtilizadorId;
-            /// Gravar IdDoSocio associado ao Ginasta
-            /// TODO
-            /// ...............
-            /// ............... Faz sentido permitir modificar o Ginasta associado a uma inscrição em Epoca ???
-            ///ViewData["GinastaId"] = new SelectList(_context.Ginasta, "Id", "ID_Description");
-        
-        ///ViewData["GinastaId"] = new SelectList(_context.Ginasta.Where(i => i.Id == id), "Id", "ID_DescrGinasta");
+            else
+            {
+                var inscricao = await _context.Inscricao.Include(i => i.Atleta)
+                                     .FirstOrDefaultAsync(m => m.Id == id && m.Atleta.UtilizadorId == userId);
+
+                if (inscricao == null)
+                {
+                    return RedirectToPage("./AcessDenied");
+                }
+
+                Inscricao = inscricao;
+            }
+            
             return Page();
         }
 

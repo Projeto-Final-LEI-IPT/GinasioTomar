@@ -25,19 +25,41 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-page="/Precario/Index">Preçário</a>
                         </li>
-                        @if (User.IsInRole("Administrador") || User.IsInRole("Ginásio"))
-                        {
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-page="/Gestao/Index">Painel Gestão</a>
-                            </li>
-                        }
                         @if (User.IsInRole("Sócio"))
                         {
-                             <li class="nav-item">
+                            <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-page="/Inscricoes/Ginastas/Index">Ginastas</a>
-                             </li>
+                            </li>
                         }
-
+                        @if (User.IsInRole("Administrador") || User.IsInRole("Ginásio"))
+                        {
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle text-dark" href="#" id="gestaoDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Painel Gestão</a>
+                                <div class="dropdown-menu" aria-labelledby="gestaoDropdown">
+                                    @if (User.IsInRole("Administrador"))
+                                    {
+                                        <a class="dropdown-item" asp-area="" asp-page="/Gestao/Epocas/Index">Épocas Desportivas</a>
+                                        <a class="dropdown-item" asp-area="" asp-page="/Gestao/Classes/Index">Classes</a>
+                                        <a class="dropdown-item" asp-area="" asp-page="/Gestao/Metodos/Index">Métodos de Pagamento</a>
+                                        <a class="dropdown-item" asp-area="" asp-page="/Gestao/Descontos/Index">Descontos</a>
+                                        <a class="dropdown-item" asp-area="" asp-page="/Gestao/RubricasPrecario/Index">Rúbricas Preçário</a>
+                                        <a class="dropdown-item" asp-area="" asp-page="/Gestao/Movimentos/Index">Movimentos</a>
+                                        <a class="dropdown-item" asp-area="" asp-page="/Inscricoes/Ginastas/Index">Ginastas</a>
+                                        <a class="dropdown-item" asp-area="" asp-page="/Gestao/Utilizadores/Index">Utilizadores</a>
+                                        <a class="dropdown-item" asp-area="" asp-page="/Gestao/PlanoMensalidades/Index">Plano Mensalidades</a>
+                                    }
+                                    else 
+                                      if (User.IsInRole("Ginásio"))
+                                        {
+                                            <a class="dropdown-item" asp-area="" asp-page="/Gestao/Movimentos/Index">Movimentos</a>
+                                            <a class="dropdown-item" asp-area="" asp-page="/Inscricoes/Ginastas/Index">Ginastas</a>
+                                            <a class="dropdown-item" asp-area="" asp-page="/Gestao/Utilizadores/Index">Utilizadores</a>
+                                            <a class="dropdown-item" asp-area="" asp-page="/Gestao/PlanoMensalidades/Index">Plano Mensalidades</a>
+                                        }
+    
+                                </div>
+                            </li>
+                        }
                     </ul>
                     <partial name="_LoginPartial" />
                 </div>

@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using AppGCT.Data;
 using AppGCT.Models;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNet.Identity;
 
 namespace AppGCT.Pages.Inscricoes.Ginastas
 {
@@ -25,21 +26,32 @@ namespace AppGCT.Pages.Inscricoes.Ginastas
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
+            string userId = User.Identity.GetUserId();
+
             if (id == null || _context.Ginasta == null)
             {
-                return NotFound();
+                return RedirectToPage("./AcessDenied");
             }
 
-            var ginasta = await _context.Ginasta.Include(g => g.Socio)
-                                                .FirstOrDefaultAsync(m => m.Id == id);
-            if (ginasta == null)
+            if (User.IsInRole("Administrador") || User.IsInRole("Ginásio"))
             {
-                return NotFound();
-            }
-            else 
-            {
+                var ginasta = await _context.Ginasta.Include(g => g.Socio).FirstOrDefaultAsync(m => m.Id == id);
+                if (ginasta == null)
+                {
+                    return RedirectToPage("./AcessDenied");
+                }
                 Ginasta = ginasta;
             }
+            else
+            {
+                var ginasta = await _context.Ginasta.Include(g => g.Socio).FirstOrDefaultAsync(m => m.Id == id && m.UtilizadorId == userId);
+                if (ginasta == null)
+                {
+                    return RedirectToPage("./AcessDenied");
+                }
+                Ginasta = ginasta;
+            }
+
             return Page();
         }
     }

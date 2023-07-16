@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace AppGCT.Pages.Inscricoes.InscricaoEpoca
 {
-    [Authorize(Roles = "Administrador,Ginásio")]
+    [Authorize(Roles = "Administrador")]
     public class DeleteModel : PageModel
     {
         private readonly AppGCT.Data.AppGCTContext _context;
