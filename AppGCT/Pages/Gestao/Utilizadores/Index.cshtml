@@ -88,9 +88,12 @@
                     <a class='btn btn-primary btn-sm' asp-area='' asp-page='/Gestao/Utilizadores/Edit' asp-route-id='@user.Id'>Editar</a>
                     <a class='btn btn-primary btn-sm' asp-area='' asp-page='/Gestao/Utilizadores/Details' asp-route-id='@user.Id'>Detalhes</a>
                     @{
-                        if (!user.Email.Equals("admin@localhost")) // NÃO MOSTRA BOTÃO APAGAR PARA O USER DE ADMINISTRAÇÃO
+                        @if (User.IsInRole("Administrador"))
                         {
-                            <a class='btn btn-danger btn-sm' asp-area='' asp-page='/Gestao/Utilizadores/Delete' asp-route-id='@user.Id'>Apagar</a>
+                            if (!user.Email.Equals("admin@localhost")) // NÃO MOSTRA BOTÃO APAGAR PARA O USER DE ADMINISTRAÇÃO
+                            {
+                                <a class='btn btn-danger btn-sm' asp-area='' asp-page='/Gestao/Utilizadores/Delete' asp-route-id='@user.Id'>Apagar</a>
+                            }
                         }
                     }
 

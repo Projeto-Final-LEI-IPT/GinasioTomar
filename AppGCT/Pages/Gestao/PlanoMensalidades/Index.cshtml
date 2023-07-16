@@ -7,11 +7,29 @@
 }
 
 <h1>Plano Mensalidades</h1>
+@if (User.IsInRole("Administrador") || User.IsInRole("Ginásio"))
+{
+    <form asp-page="./Index" method="get">
+        <div class="form-actions no-color">
+            <p>
+                <div class="form-group d-inline-block">
+                    <select asp-for="IdEpoca" class="form-control" asp-items="@Model.EpocaList"></select>
+
+                </div>
+                <div class="form-group d-inline-block">
+                    <select asp-for="IdGinasta" class="form-control" asp-items="@Model.GinastaList"></select>
+                </div>
+                <input type="submit" value="Procurar" class="btn btn-primary btn-sm" />
+                <a class="btn btn-primary btn-sm" asp-area="" asp-page="/Gestao/PlanoMensalidades/Index">Limpar</a>
+            </p>
+        </div>
+    </form>
+}
 @if (User.IsInRole("Administrador"))
 {
-<p>
-    <a class='btn btn-primary btn-sm' asp-area='' asp-page='/Gestao/PlanoMensalidades/Create'>Criar Plano</a>
-</p>
+    <p>
+        <a class='btn btn-primary btn-sm' asp-area='' asp-page='/Gestao/PlanoMensalidades/Create'>Criar Plano</a>
+    </p>
 }
 <table class="table">
     <thead>
@@ -32,30 +50,31 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.PlanoMensalidade) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.DataMensalidade)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ValorMensalidade)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Epoca.NomeEpoca)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Aluno.ID_DescrGinasta)
-            </td>
-            <td>
-                @if (User.IsInRole("Administrador"))
-                {
+        @foreach (var item in Model.PlanoMensalidade)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DataMensalidade)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ValorMensalidade)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Epoca.NomeEpoca)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Aluno.ID_DescrGinasta)
+                </td>
+                <td>
+                    @if (User.IsInRole("Administrador"))
+                    {
                         <a class='btn btn-primary btn-sm' asp-area='' asp-page='/Gestao/PlanoMensalidades/Edit' asp-route-id='@item.IdPlanoM'>Editar</a>
                         <a class='btn btn-primary btn-sm' asp-area='' asp-page='/Gestao/PlanoMensalidades/Details' asp-route-id='@item.IdPlanoM'>Detalhes</a>
                         <a class='btn btn-danger btn-sm' asp-area='' asp-page='/Gestao/PlanoMensalidades/Delete' asp-route-id='@item.IdPlanoM'>Apagar</a>
-                }
-                
-            </td>
-        </tr>
-}
+                    }
+
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
