@@ -7,10 +7,13 @@
 }
 
 <h1>Gestão Movimentos Contabilísticos</h1>
-
+@if (User.IsInRole("Administrador") || User.IsInRole("Ginásio"))
+{
 <div>
+
     <a class='btn btn-primary btn-sm' asp-area='' asp-page='/Gestao/Movimentos/Create'>Novo movimento</a>
 </div>
+}
 <table class="table">
     <thead>
         <tr>
@@ -75,9 +78,15 @@
                 @Html.DisplayFor(modelItem => item.FormaPagamento.CodMetodo)
             </td>
             <td>
-                <a class='btn btn-primary btn-sm' asp-area='' asp-page='/Gestao/Movimentos/Edit' asp-route-id='@item.Id'>Editar</a>
+                @if (User.IsInRole("Administrador"))
+                {
+                    <a class='btn btn-primary btn-sm' asp-area='' asp-page='/Gestao/Movimentos/Edit' asp-route-id='@item.Id'>Editar</a>
+                }
                 <a class='btn btn-primary btn-sm' asp-area='' asp-page='/Gestao/Movimentos/Details' asp-route-id='@item.Id'>Detalhes</a>
-                <a class='btn btn-danger btn-sm' asp-area='' asp-page='/Gestao/Movimentos/Delete' asp-route-id='@item.Id'>Apagar</a>
+                @if (User.IsInRole("Administrador"))
+                {
+                    <a class='btn btn-danger btn-sm' asp-area='' asp-page='/Gestao/Movimentos/Delete' asp-route-id='@item.Id'>Apagar</a>
+                }
             </td>
         </tr>
 }

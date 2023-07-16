@@ -7,9 +7,11 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using AppGCT.Data;
 using AppGCT.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace AppGCT.Pages.Gestao.Movimentos
 {
+    [Authorize(Roles = "Administrador")]
     public class DeleteModel : PageModel
     {
         private readonly AppGCT.Data.AppGCTContext _context;

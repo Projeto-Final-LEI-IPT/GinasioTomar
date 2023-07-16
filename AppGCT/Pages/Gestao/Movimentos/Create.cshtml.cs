@@ -10,10 +10,12 @@ using AppGCT.Models;
 using System.Security.Claims;
 using System.Collections;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
 
 namespace AppGCT.Pages.Gestao.Movimentos
 {
     [IgnoreAntiforgeryToken]
+    [Authorize(Roles = "Administrador,Ginásio")]
     public class CreateModel : PageModel
     {
         private readonly AppGCT.Data.AppGCTContext _context;

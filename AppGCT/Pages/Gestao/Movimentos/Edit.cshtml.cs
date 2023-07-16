@@ -9,9 +9,11 @@ using Microsoft.EntityFrameworkCore;
 using AppGCT.Data;
 using AppGCT.Models;
 using System.Security.Claims;
+using Microsoft.AspNetCore.Authorization;
 
 namespace AppGCT.Pages.Gestao.Movimentos
 {
+    [Authorize(Roles = "Administrador")]
     public class EditModel : PageModel
     {
         private readonly AppGCT.Data.AppGCTContext _context;
