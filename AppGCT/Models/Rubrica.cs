@@ -188,8 +188,10 @@ namespace AppGCT.Models
                         return "Pagamentos";
                     case "D":
                         return "Devoluções";
-                    case "O":
-                        return "Outros";
+                    case "G":
+                        return "Lançamentos Ginasta";
+                    case "S":
+                        return "Lançamentos Sócio";
                     default:
                         return "Desconhecido";
                 }
