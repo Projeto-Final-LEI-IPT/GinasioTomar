@@ -68,7 +68,7 @@ namespace AppGCT.Pages.Gestao.Movimentos
             }
 
             // Validações se Rubrica não estiver preenchida
-            if (Movimento.RubricaId.Equals(null) || Movimento.RubricaId.Equals("000"))
+            if (Movimento.RubricaId.Equals(null))
             {
 
                     ModelState.AddModelError("Movimento.RubricaId", "Rúbrica é um campo obrigatório");
@@ -119,7 +119,8 @@ namespace AppGCT.Pages.Gestao.Movimentos
             var tipoMov = _context.Rubrica.Where(i => i.CodRubrica == Movimento.RubricaId).FirstOrDefault().TipoRubrica;
             switch (tipoMov)
             {
-                case "O":
+                case "G":
+                case "S":
                     Movimento.ValorMovimento = _context.Rubrica.Where(i => i.CodRubrica == Movimento.RubricaId).FirstOrDefault().ValorUnitario;
                     Movimento.ValorDesconto = 0;
                     break;

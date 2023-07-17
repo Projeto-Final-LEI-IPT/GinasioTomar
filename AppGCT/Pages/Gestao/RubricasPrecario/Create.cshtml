@@ -146,8 +146,14 @@
                 </div>
                 <div class="form-check">
                     <label class="form-check-label">
-                        <input type="radio" asp-for="Rubrica.TipoRubrica" class="form-check-input" value="O" checked />
-                        Outros
+                        <input type="radio" asp-for="Rubrica.TipoRubrica" class="form-check-input" value="G" checked />
+                        Lançamentos Ginasta (Mensalidades, inscrições e seguros)
+                    </label>
+                </div>
+                <div class="form-check">
+                    <label class="form-check-label">
+                        <input type="radio" asp-for="Rubrica.TipoRubrica" class="form-check-input" value="S"  />
+                        Lançamentos Sócio (Quotas)
                     </label>
                 </div>
                 <span asp-validation-for="Rubrica.TipoRubrica" class="text-danger"></span>

@@ -92,7 +92,8 @@
         <dd class="col-sm-10">
             @Html.RadioButtonFor(model => model.Rubrica.TipoRubrica, "P", new { @disabled = "disabled" }) Pagamentos
             @Html.RadioButtonFor(model => model.Rubrica.TipoRubrica, "D", new { @disabled = "disabled" }) Devoluções
-            @Html.RadioButtonFor(model => model.Rubrica.TipoRubrica, "O", new { @disabled = "disabled" }) Outros
+            @Html.RadioButtonFor(model => model.Rubrica.TipoRubrica, "G", new { @disabled = "disabled" }) Lançamentos Ginasta (Mensalidades, inscrições e seguros)
+            @Html.RadioButtonFor(model => model.Rubrica.TipoRubrica, "S", new { @disabled = "disabled" }) Lançamentos Sócio (Quotas)
         </dd>
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Rubrica.LocalTreino)

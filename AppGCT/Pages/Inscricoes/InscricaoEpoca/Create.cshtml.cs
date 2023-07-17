@@ -170,7 +170,6 @@ namespace AppGCT.Pages.Inscricoes.InscricaoEpoca
                 return Page();
             }
 
-
             _context.Inscricao.Add(Inscricao);
             await _context.SaveChangesAsync();
 
