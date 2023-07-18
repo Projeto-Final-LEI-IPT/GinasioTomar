@@ -195,11 +195,13 @@
         var valorunitarioField = $('#Rubrica_ValorUnitario');
         var ordemprecarioField = $('#Rubrica_OrdemPrecario');
 
+        var iprecarioValue = $('input[name="Rubrica.IPrecario"]:checked').val();
+        var ivalorunitarioValue = $('input[name="Rubrica.IVlrUnit"]:checked').val();
+
+        // Debug statements
         console.log('classeIdField value:', classeIdField.val());
-        console.log('iprecarioNField value:', iprecarioNField.val());
-        console.log('iprecarioSField value:', iprecarioSField.val());
-        console.log('ivalorunitarioNField value:', ivalorunitarioNField.val());
-        console.log('ivalorunitarioSField value:', ivalorunitarioSField.val());
+        console.log('iprecarioValue:', iprecarioValue);
+        console.log('ivalorunitarioValue:', ivalorunitarioValue);
 
         // Função para alterações sobre o campo Classe
         // Protege ou desprotege campos com base no valor do ClasseId
@@ -222,19 +224,19 @@
 
         // Função para alterações sobre o campo IPrecario
         // Protege ou desprotege campos com base no valor do IPrecario
-        if (iprecarioNField.val() === 'N') {
+        if (iprecarioNField.is(':checked')) {
             ordemprecarioField.prop('disabled', true);
             ordemprecarioField.val('');
-        } else if (iprecarioSField.val() === 'S') {
+        } else if (iprecarioSField.is(':checked')) {
             ordemprecarioField.prop('disabled', false);
-        };
+        }
 
         // Função para alterações sobre o campo IVlrUnit
         // Protege ou desprotege campos com base no valor do IVlrUnit
-        if (ivalorunitarioNField.val() === 'N') {
+        if (ivalorunitarioNField.is(':checked')) {
             valorunitarioField.prop('disabled', true);
             valorunitarioField.val('');
-        } else if (ivalorunitarioSField.val() === 'S') {
+        } else if (ivalorunitarioSField.is(':checked')) {
             valorunitarioField.prop('disabled', false);
         };
 
