@@ -3,9 +3,8 @@ using Microsoft.Extensions.DependencyInjection;
 using AppGCT.Data;
 using Microsoft.AspNetCore.Identity;
 using AppGCT.Areas.Identity.Data;
-using AppGCT;
 using System.Runtime.InteropServices;
-using Microsoft.AspNetCore.Identity.UI.Services;
+using AppGCT.Outros;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,7 +16,13 @@ builder.Services.AddDbContext<AppGCTContext>(options =>
 builder.Services.AddDefaultIdentity<Utilizador>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<AppGCTContext>();
-builder.Services.AddTransient<IEmailSender, SendGridEmailSender>();
+builder.Services.AddTransient<IEmailSender>(sp =>
+{
+    var passApp = builder.Configuration["passApp:GmailService"];
+    var mailApp = builder.Configuration["mailApp:GmailService"];
+    return new EmailSender(mailApp, passApp);
+});
+
 var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
