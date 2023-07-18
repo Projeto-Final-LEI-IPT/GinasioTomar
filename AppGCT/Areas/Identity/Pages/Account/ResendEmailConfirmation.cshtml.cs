@@ -69,6 +69,12 @@ namespace AppGCT.Areas.Identity.Pages.Account
                 return Page();
             }
 
+            if (await _userManager.IsEmailConfirmedAsync(user))
+            {
+                ModelState.AddModelError(string.Empty, "A sua conta já foi ativada. Faça login para continuar.");
+                return Page();
+            }
+
             var userId = await _userManager.GetUserIdAsync(user);
             var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
             code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));

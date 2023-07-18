@@ -182,8 +182,7 @@
 <!-- código js para proteger/desproteger campos preenchidos apenas se existir classe preenchida -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
-    $(document).ready(function () {
-        // Obter nome campos
+    function validateFields() {
         var classeIdField = $('#Rubrica_ClasseId');
         var descontoIdField = $('#Rubrica_DescontoId');
         var localtreinoField = $('#Rubrica_LocalTreino');
@@ -196,62 +195,67 @@
         var valorunitarioField = $('#Rubrica_ValorUnitario');
         var ordemprecarioField = $('#Rubrica_OrdemPrecario');
 
+        console.log('classeIdField value:', classeIdField.val());
+        console.log('iprecarioNField value:', iprecarioNField.val());
+        console.log('iprecarioSField value:', iprecarioSField.val());
+        console.log('ivalorunitarioNField value:', ivalorunitarioNField.val());
+        console.log('ivalorunitarioSField value:', ivalorunitarioSField.val());
 
         // Função para alterações sobre o campo Classe
-        classeIdField.change(function () {
-            // Protege ou desprotege campos com base no valor do ClasseId
-            if ($(this).val() !== '') {
-                descontoIdField.prop('disabled', false);
-                localtreinoField.prop('disabled', false);
-                horarioField.prop('disabled', false);
-                horassemanaisdField.prop('disabled', false);
-            } else {
-                descontoIdField.prop('disabled', true);
-                localtreinoField.prop('disabled', true);
-                horarioField.prop('disabled', true);
-                horassemanaisdField.prop('disabled', true);
-                // Limpa campos
-                descontoIdField.val('Seleccionar Classe');
-                localtreinoField.val('');
-                horarioField.val('');
-                horassemanaisdField.val('');
-            }
-        });
-        // Função para alterações sobre o campo IPrecario
-        iprecarioNField.change(function () {
-            // Protege ou desprotege campos com base no valor do IPrecario
-            if ($(this).val() === 'N') {
-                ordemprecarioField.prop('disabled', true);
-                // Limpa campos
-                ordemprecarioField.val('');
-            }
-        });
+        // Protege ou desprotege campos com base no valor do ClasseId
+        if (classeIdField.val() !== '') {
+            descontoIdField.prop('disabled', false);
+            localtreinoField.prop('disabled', false);
+            horarioField.prop('disabled', false);
+            horassemanaisdField.prop('disabled', false);
+        } else {
+            descontoIdField.prop('disabled', true);
+            localtreinoField.prop('disabled', true);
+            horarioField.prop('disabled', true);
+            horassemanaisdField.prop('disabled', true);
+            // Limpa campos
+            descontoIdField.val('Seleccionar Classe');
+            localtreinoField.val('');
+            horarioField.val('');
+            horassemanaisdField.val('');
+        };
 
         // Função para alterações sobre o campo IPrecario
-        iprecarioSField.change(function () {
-            // Protege ou desprotege campos com base no valor do IPrecario
-            if ($(this).val() === 'S') {
-                ordemprecarioField.prop('disabled', false);
-            }
-        });
+        // Protege ou desprotege campos com base no valor do IPrecario
+        if (iprecarioNField.val() === 'N') {
+            ordemprecarioField.prop('disabled', true);
+            ordemprecarioField.val('');
+        } else if (iprecarioSField.val() === 'S') {
+            ordemprecarioField.prop('disabled', false);
+        };
 
         // Função para alterações sobre o campo IVlrUnit
-        ivalorunitarioNField.change(function () {
-            // Protege ou desprotege campos com base no valor do IVlrUnit
-            if ($(this).val() === 'N') {
-                valorunitarioField.prop('disabled', true);
-                // Limpa campos
-                valorunitarioField.val('');
-            }
-        });
+        // Protege ou desprotege campos com base no valor do IVlrUnit
+        if (ivalorunitarioNField.val() === 'N') {
+            valorunitarioField.prop('disabled', true);
+            valorunitarioField.val('');
+        } else if (ivalorunitarioSField.val() === 'S') {
+            valorunitarioField.prop('disabled', false);
+        };
 
-        // Função para alterações sobre o campo IVlrUnit
-        ivalorunitarioSField.change(function () {
-            // Protege ou desprotege campos com base no valor do IVlrUnit
-            if ($(this).val() === 'S') {
-                valorunitarioField.prop('disabled', false);
-            }
-        });
+        console.log('descontoIdField disabled:', descontoIdField.prop('disabled'));
+        console.log('localtreinoField disabled:', localtreinoField.prop('disabled'));
+        console.log('horarioField disabled:', horarioField.prop('disabled'));
+        console.log('horassemanaisdField disabled:', horassemanaisdField.prop('disabled'));
+        console.log('ordemprecarioField disabled:', ordemprecarioField.prop('disabled'));
+        console.log('valorunitarioField disabled:', valorunitarioField.prop('disabled'));
+
+    }
+
+    $(document).ready(function () {
+        validateFields(); 
+
+        // Invoca validação sempre que há alteração dos campos abaixo
+        $('#Rubrica_ClasseId').on('change', validateFields);
+        $('#Rubrica_IPrecario_N').on('change', validateFields);
+        $('#Rubrica_IPrecario_S').on('change', validateFields);
+        $('#Rubrica_IVlrUnit_N').on('change', validateFields);
+        $('#Rubrica_IVlrUnit_S').on('change', validateFields);
     });
 </script>
 
