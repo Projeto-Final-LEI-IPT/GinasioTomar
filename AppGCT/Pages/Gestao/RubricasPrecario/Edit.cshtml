@@ -195,14 +195,6 @@
         var valorunitarioField = $('#Rubrica_ValorUnitario');
         var ordemprecarioField = $('#Rubrica_OrdemPrecario');
 
-        var iprecarioValue = $('input[name="Rubrica.IPrecario"]:checked').val();
-        var ivalorunitarioValue = $('input[name="Rubrica.IVlrUnit"]:checked').val();
-
-        // Debug statements
-        console.log('classeIdField value:', classeIdField.val());
-        console.log('iprecarioValue:', iprecarioValue);
-        console.log('ivalorunitarioValue:', ivalorunitarioValue);
-
         // Função para alterações sobre o campo Classe
         // Protege ou desprotege campos com base no valor do ClasseId
         if (classeIdField.val() !== '') {
@@ -239,13 +231,6 @@
         } else if (ivalorunitarioSField.is(':checked')) {
             valorunitarioField.prop('disabled', false);
         };
-
-        console.log('descontoIdField disabled:', descontoIdField.prop('disabled'));
-        console.log('localtreinoField disabled:', localtreinoField.prop('disabled'));
-        console.log('horarioField disabled:', horarioField.prop('disabled'));
-        console.log('horassemanaisdField disabled:', horassemanaisdField.prop('disabled'));
-        console.log('ordemprecarioField disabled:', ordemprecarioField.prop('disabled'));
-        console.log('valorunitarioField disabled:', valorunitarioField.prop('disabled'));
 
     }
 
