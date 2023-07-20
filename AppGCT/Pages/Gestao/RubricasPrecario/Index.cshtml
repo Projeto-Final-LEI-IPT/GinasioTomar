@@ -7,10 +7,44 @@
 }
 
 <h1>Gestão Rúbricas Preçário</h1>
-
 <p>
     <a class='btn btn-primary btn-sm' asp-area='' asp-page='/Gestao/RubricasPrecario/Create'>Nova Rúbrica Preçário</a>
 </p>
+<form asp-page="./Index" method="get">
+    <div class="form-actions no-color">
+        <p>
+            <div class="form-group d-inline-block">
+                <input type="text" class="form-control" name="SearchString" value="@Model.CurrentFilter"   />
+            </div>
+            <div class="form-group d-inline-block">
+                <select asp-for="IdClasse" class="form-control" asp-items="@Model.ClasseList"></select>
+
+            </div>
+            <div class="form-group d-inline-block">
+                <select asp-for="CodDesconto" class="form-control" asp-items="@Model.DescontoList"></select>
+
+            </div>
+            <div class="form-group d-inline-block">
+                <select asp-for="Estado" class="form-control" asp-items="@Model.EstadoList"></select>
+            </div>
+            <div class="form-group d-inline-block">
+                <select asp-for="TipoMov" class="form-control" asp-items="@Model.TipoMovList"></select>
+            </div>
+            <div class="form-group d-inline-block">
+                <select asp-for="IPrecario" class="form-control" asp-items="@Model.IPrecarioList"></select>
+            </div>
+            <div class="form-group d-inline-block">
+                <select asp-for="IVlrunit" class="form-control" asp-items="@Model.IVlrunitList"></select>
+            </div>
+            <div class="form-group d-inline-block">
+                <select asp-for="ICobInsc" class="form-control" asp-items="@Model.ICobInscList"></select>
+            </div>
+            <input type="submit" value="Procurar" class="btn btn-primary btn-sm" />
+            <a class="btn btn-primary btn-sm" asp-area="" asp-page="/Gestao/RubricasPrecario/Index">Limpar</a>
+        </p>
+    </div>
+</form>
+
 <table class="table">
     <thead>
         <tr>
