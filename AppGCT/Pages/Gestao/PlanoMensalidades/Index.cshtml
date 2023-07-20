@@ -7,6 +7,12 @@
 }
 
 <h1>Plano Mensalidades</h1>
+@if (User.IsInRole("Administrador"))
+{
+    <p>
+        <a class='btn btn-primary btn-sm' asp-area='' asp-page='/Gestao/PlanoMensalidades/Create'>Criar Plano</a>
+    </p>
+}
 @if (User.IsInRole("Administrador") || User.IsInRole("Ginásio"))
 {
     <form asp-page="./Index" method="get">
@@ -25,12 +31,7 @@
         </div>
     </form>
 }
-@if (User.IsInRole("Administrador"))
-{
-    <p>
-        <a class='btn btn-primary btn-sm' asp-area='' asp-page='/Gestao/PlanoMensalidades/Create'>Criar Plano</a>
-    </p>
-}
+
 <table class="table">
     <thead>
         <tr>
