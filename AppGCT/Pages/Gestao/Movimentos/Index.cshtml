@@ -14,6 +14,23 @@
     <a class='btn btn-primary btn-sm' asp-area='' asp-page='/Gestao/Movimentos/Create'>Novo movimento</a>
 </div>
 }
+<form asp-page="./Index" method="get">
+    <div class="form-actions no-color">
+        <p>
+            @if (User.IsInRole("Administrador") || User.IsInRole("Ginásio"))
+            {
+                <div class="form-group d-inline-block">
+                    <select asp-for="IdSocio" class="form-control" asp-items="@Model.SociosList"></select>
+                </div>
+            }
+            <div class="form-group d-inline-block">
+                <select asp-for="IdGinasta" class="form-control" asp-items="@Model.GinastasList"></select>
+            </div>
+            <input type="submit" value="Procurar" class="btn btn-primary btn-sm" />
+            <a class="btn btn-primary btn-sm" asp-area="" asp-page="/Gestao/Movimentos/Index">Limpar</a>
+        </p>
+    </div>
+</form>
 <table class="table">
     <thead>
         <tr>

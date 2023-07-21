@@ -30,6 +30,9 @@
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-page="/Inscricoes/Ginastas/Index">Ginastas</a>
                             </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-page="/Gestao/Movimentos/Index">Conta Corrente</a>
+                            </li>
                         }
                         @if (User.IsInRole("Administrador") || User.IsInRole("Ginásio"))
                         {
