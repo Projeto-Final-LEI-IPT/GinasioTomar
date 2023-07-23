@@ -96,7 +96,7 @@ namespace AppGCT.Pages.Gestao.Movimentos
 
             });
             ViewData["MetodoPagamentoId"] = new SelectList(metodos, "CodMetodo", "DescMetodo");
-            ViewData["UtilizadorId"] = new SelectList(_context.Users, "Id", "ID_Description");
+            ViewData["UtilizadorId"] = new SelectList(_context.Users.Where(x => x.NumSocio != " " && x.EstadoUtilizador == "A"), "Id", "ID_Description");
             var rubricas = _context.Rubrica.ToList();
             rubricas.Insert(0, new Rubrica
             {

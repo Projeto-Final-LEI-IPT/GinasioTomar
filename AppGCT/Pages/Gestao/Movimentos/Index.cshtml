@@ -100,7 +100,7 @@
                     <a class='btn btn-primary btn-sm' asp-area='' asp-page='/Gestao/Movimentos/Edit' asp-route-id='@item.Id'>Editar</a>
                 }
                 <a class='btn btn-primary btn-sm' asp-area='' asp-page='/Gestao/Movimentos/Details' asp-route-id='@item.Id'>Detalhes</a>
-                @if (User.IsInRole("Administrador"))
+                @if (User.IsInRole("SuperAdmin"))
                 {
                     <a class='btn btn-danger btn-sm' asp-area='' asp-page='/Gestao/Movimentos/Delete' asp-route-id='@item.Id'>Apagar</a>
                 }
