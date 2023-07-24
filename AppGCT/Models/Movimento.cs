@@ -11,32 +11,45 @@ namespace AppGCT.Models
         public int? Id { get; set; }
 
         [DataType(DataType.Text)]
+        [StringLength(30, MinimumLength = 5, ErrorMessage = "Descrição da Rúbrica tem de ter entre 5 e 30 caracteres")]
         [Display(Name = "Descrição da Rúbrica")]
         public string? DesRubrica { get; set; }
-        [Required]
+
+        [Required(ErrorMessage = "Data de Movimento é campo obrigatório!")]
         [DataType(DataType.Date)]
         [Display(Name = "Data de movimento")]
         public DateTime DtMovimento { get; set; }
 
         [DataType(DataType.Currency)]
-        [Range(0, 999.00, ErrorMessage = "Valores entre 0,00€ e 999,00€")]
+        [Range(0, 300.00, ErrorMessage = "Valores entre 0,00€ e 300,00€")]
         [Precision(18, 2)]
         [Display(Name = "Valor Movimento")]
         public Decimal? ValorMovimento { get; set; }
 
         [DataType(DataType.Currency)]
-        [Range(0, 20.00, ErrorMessage = "Valores entre 0,00€ e 20,00€")]
+        [Range(0, 150.00, ErrorMessage = "Valores entre 0,00€ e 150,00€")]
         [Precision(18, 2)]
         [Display(Name = "Valor Desconto")]
         public Decimal? ValorDesconto { get; set; }
 
         [DataType((DataType.Text))]
+        [StringLength(50, MinimumLength = 5, ErrorMessage = "Número de Fatura tem de ter pelo menos 5 caracteres")]
         [Display(Name = "Número de Fatura")]
         public string? NumFatura { get; set; }
 
         [DataType((DataType.Text))]
+        [StringLength(50, MinimumLength = 5, ErrorMessage = "Número de Nota de Crédito tem de ter pelo menos 5 caracteres")]
         [Display(Name = "Número de Nota de Crédito")]
         public string? NumNotaCredito { get; set; }
+
+        [DataType(DataType.Currency)]
+        [Precision(18, 2)]
+        [Display(Name = "Saldo")]
+        public Decimal? MSaldo { get; set; }
+
+        [DataType((DataType.Text))]
+        [Display(Name = "Observações")]
+        public string? Observacoes { get; set; }
 
         [DataType((DataType.Date))]
         [Display(Name = "Data de Criação")]

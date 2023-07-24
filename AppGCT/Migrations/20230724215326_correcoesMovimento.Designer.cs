@@ -4,6 +4,7 @@ using AppGCT.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AppGCT.Migrations
 {
     [DbContext(typeof(AppGCTContext))]
-    partial class AppGCTContextModelSnapshot : ModelSnapshot
+    [Migration("20230724215326_correcoesMovimento")]
+    partial class correcoesMovimento
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -130,13 +133,13 @@ namespace AppGCT.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "0deb8a93-a871-4567-982b-ace99378c8f2",
+                            Id = "9f66fcdd-4b5e-4d90-b073-341819c90ace",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "b1365f90-fe04-4a2f-af59-5ef3e7c1f6c9",
-                            DataAprovacao = new DateTime(2023, 7, 24, 23, 35, 32, 34, DateTimeKind.Local).AddTicks(9182),
-                            DataCriacao = new DateTime(2023, 7, 24, 23, 35, 32, 34, DateTimeKind.Local).AddTicks(9081),
+                            ConcurrencyStamp = "13669fee-09a9-4c95-8276-29ca4a6132ff",
+                            DataAprovacao = new DateTime(2023, 7, 24, 22, 53, 25, 697, DateTimeKind.Local).AddTicks(2430),
+                            DataCriacao = new DateTime(2023, 7, 24, 22, 53, 25, 697, DateTimeKind.Local).AddTicks(2352),
                             DataModificacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DataNascim = new DateTime(2023, 7, 24, 23, 35, 32, 34, DateTimeKind.Local).AddTicks(9194),
+                            DataNascim = new DateTime(2023, 7, 24, 22, 53, 25, 697, DateTimeKind.Local).AddTicks(2436),
                             Email = "admin@localhost",
                             EmailConfirmed = true,
                             EstadoUtilizador = "A",
@@ -149,10 +152,10 @@ namespace AppGCT.Migrations
                             NormalizedEmail = "ADMIN@LOCALHOST",
                             NormalizedUserName = "ADMIN@LOCALHOST",
                             NumSocio = " ",
-                            PasswordHash = "AQAAAAIAAYagAAAAEAiOGgmp2Wr1sB+2BHgS7grPcjV7qY3XXohe5KNg+HoHCMkSFfzhr0acJ+YQXlS7Cg==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEBNRXo/9cZOxr7HNapA0MVv36jn2O/VkpXsAZ53Cfyh8iGdbZdoJDJB7CgF29u7nPg==",
                             PhoneNumber = "999999999",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "14179428-8916-4946-b8fa-cfb4cfee840a",
+                            SecurityStamp = "1e5dffd6-db14-4b55-ac19-cec40ea91ecf",
                             TwoFactorEnabled = false,
                             UserName = "admin@localhost"
                         });
@@ -561,6 +564,7 @@ namespace AppGCT.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal?>("MSaldo")
+                        .IsRequired()
                         .HasPrecision(18, 2)
                         .HasColumnType("decimal(18,2)");
 
@@ -740,21 +744,6 @@ namespace AppGCT.Migrations
                     b.ToTable("Rubrica");
                 });
 
-            modelBuilder.Entity("AppGCT.Models.Saldo", b =>
-                {
-                    b.Property<string>("IdSocio")
-                        .HasMaxLength(36)
-                        .HasColumnType("nvarchar(36)");
-
-                    b.Property<decimal?>("MSaldo")
-                        .HasPrecision(18, 2)
-                        .HasColumnType("decimal(18,2)");
-
-                    b.HasKey("IdSocio");
-
-                    b.ToTable("Saldo");
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
                     b.Property<string>("Id")
@@ -784,19 +773,19 @@ namespace AppGCT.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "a8577095-5826-406f-aabe-3e2799a3305e",
+                            Id = "664bac2b-a11e-4628-b6b9-34852b004119",
                             Name = "Administrador",
                             NormalizedName = "ADMINISTRADOR"
                         },
                         new
                         {
-                            Id = "ae3d5c46-22a3-452d-9242-81ccd8b0a369",
+                            Id = "d202fabb-4afe-40e3-9582-f6d7ce95f23a",
                             Name = "Ginásio",
                             NormalizedName = "GINÁSIO"
                         },
                         new
                         {
-                            Id = "c4edae97-be85-4cb4-b54e-6b75c2908d59",
+                            Id = "324a48cc-7fef-4c27-bdb6-08d870b96333",
                             Name = "Sócio",
                             NormalizedName = "SÓCIO"
                         });
@@ -893,8 +882,8 @@ namespace AppGCT.Migrations
                     b.HasData(
                         new
                         {
-                            UserId = "0deb8a93-a871-4567-982b-ace99378c8f2",
-                            RoleId = "a8577095-5826-406f-aabe-3e2799a3305e"
+                            UserId = "9f66fcdd-4b5e-4d90-b073-341819c90ace",
+                            RoleId = "664bac2b-a11e-4628-b6b9-34852b004119"
                         });
                 });
 

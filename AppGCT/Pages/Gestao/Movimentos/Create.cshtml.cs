@@ -11,6 +11,8 @@ using System.Security.Claims;
 using System.Collections;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authorization;
+using AppGCT.Areas.Identity.Data;
+using Microsoft.AspNetCore.Identity;
 
 namespace AppGCT.Pages.Gestao.Movimentos
 {
@@ -19,10 +21,12 @@ namespace AppGCT.Pages.Gestao.Movimentos
     public class CreateModel : PageModel
     {
         private readonly AppGCT.Data.AppGCTContext _context;
+        private readonly UserManager<Utilizador> _userManager;
 
-        public CreateModel(AppGCT.Data.AppGCTContext context)
+        public CreateModel(AppGCT.Data.AppGCTContext context, UserManager<Utilizador> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
 
         private async Task<bool> ValidaMovimento()
@@ -78,7 +82,7 @@ namespace AppGCT.Pages.Gestao.Movimentos
             return true;
         }
 
-        public IActionResult OnGet()
+        public async Task OnGetAsync()
         {
             var atletas = _context.Ginasta.ToList();
             atletas.Insert(0, new Ginasta
@@ -96,7 +100,18 @@ namespace AppGCT.Pages.Gestao.Movimentos
 
             });
             ViewData["MetodoPagamentoId"] = new SelectList(metodos, "CodMetodo", "DescMetodo");
-            ViewData["UtilizadorId"] = new SelectList(_context.Users.Where(x => x.NumSocio != " " && x.EstadoUtilizador == "A"), "Id", "ID_Description");
+
+            List<string> userIdsInRole;
+            //obtem lista de utilizadores associados ao role se role != null
+            userIdsInRole = (await _userManager.GetUsersInRoleAsync("Sócio"))
+                                               .Select(u => u.Id)
+                                               .ToList();
+            // preenche dropdown Sócios para filtro
+            var socios = _context.Utilizador.Where(i => i.EstadoUtilizador == "A" &&
+                                                   userIdsInRole.Contains(i.Id) && i.NumSocio != null && i.NumSocio != "")
+                                                    .ToList();
+
+            ViewData["UtilizadorId"] = new SelectList(socios, "Id", "ID_Description");
             var rubricas = _context.Rubrica.ToList();
             rubricas.Insert(0, new Rubrica
             {
@@ -105,7 +120,7 @@ namespace AppGCT.Pages.Gestao.Movimentos
 
             });
             ViewData["RubricaId"] = new SelectList(rubricas, "CodRubrica", "ID_DescriptionRubrica");
-            return Page();
+            //return Page();
         }
 
         [BindProperty]
@@ -115,7 +130,7 @@ namespace AppGCT.Pages.Gestao.Movimentos
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync()
         {
-
+            var saldoAux = 0;
             var tipoMov = _context.Rubrica.Where(i => i.CodRubrica == Movimento.RubricaId).FirstOrDefault().TipoRubrica;
             switch (tipoMov)
             {
@@ -123,12 +138,15 @@ namespace AppGCT.Pages.Gestao.Movimentos
                 case "S":
                     Movimento.ValorMovimento = _context.Rubrica.Where(i => i.CodRubrica == Movimento.RubricaId).FirstOrDefault().ValorUnitario;
                     Movimento.ValorDesconto = 0;
+                    saldoAux = (int)(Movimento.ValorMovimento * -1) + (int)Movimento.ValorDesconto;
                     break;
                 case "P":
                     Movimento.ValorDesconto = 0;
+                    saldoAux = (int)(Movimento.ValorMovimento * 1);
                     break;
                 case "D":
                     Movimento.ValorDesconto = 0;
+                    saldoAux = (int)(Movimento.ValorMovimento * 1);
                     break;
             }
 
@@ -140,7 +158,7 @@ namespace AppGCT.Pages.Gestao.Movimentos
             if (!await ValidaMovimento())
             {
                 //faz refresh das dropdown's
-                OnGet();
+                OnGetAsync();
                 return Page();
             }
 
@@ -155,6 +173,11 @@ namespace AppGCT.Pages.Gestao.Movimentos
             Movimento.IdCriacao = userId;
             Movimento.DataModificacao = DateTime.MinValue;
             Movimento.IdModificacao = "";
+            var idSoc = Movimento.UtilizadorId;
+            var saldoAnt = _context.Saldo.Where(i => i.IdSocio == idSoc).FirstOrDefault().MSaldo;
+            Movimento.MSaldo = saldoAux + saldoAux;
+
+            Movimento.Observacoes = "";
 
             _context.Movimento.Add(Movimento);
             await _context.SaveChangesAsync();
