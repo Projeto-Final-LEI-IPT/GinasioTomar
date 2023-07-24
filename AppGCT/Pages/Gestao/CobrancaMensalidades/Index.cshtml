@@ -1,0 +1,33 @@
+﻿@page
+@model AppGCT.Pages.Gestao.CobrancaMensalidades.IndexModel
+
+@{
+    ViewData["Title"] = "Cobrança Mensalidades";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<h1>Cobrança Mensalidades</h1>
+
+<p>
+    <a class='btn btn-primary btn-sm' asp-area='' asp-page='/Gestao/CobrancaMensalidades/Create'>Lançar Cobranças(mensalidades)</a>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Epoca[0].NomeEpoca)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Epoca)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NomeEpoca)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

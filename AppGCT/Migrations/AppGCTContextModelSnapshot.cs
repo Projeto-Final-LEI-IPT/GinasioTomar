@@ -130,13 +130,13 @@ namespace AppGCT.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "620a3166-0ee8-4092-8ae4-cfcc91b8e72e",
+                            Id = "b5bd6de6-0bb1-4350-b3f6-dc1ba3a633af",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "64cc0dcc-51b9-4722-857e-5b4f9f484a81",
-                            DataAprovacao = new DateTime(2023, 7, 17, 18, 15, 11, 53, DateTimeKind.Local).AddTicks(9952),
-                            DataCriacao = new DateTime(2023, 7, 17, 18, 15, 11, 53, DateTimeKind.Local).AddTicks(9903),
+                            ConcurrencyStamp = "17fdde02-5c5d-4762-aa45-2c8a82b96290",
+                            DataAprovacao = new DateTime(2023, 7, 24, 20, 54, 38, 967, DateTimeKind.Local).AddTicks(824),
+                            DataCriacao = new DateTime(2023, 7, 24, 20, 54, 38, 967, DateTimeKind.Local).AddTicks(775),
                             DataModificacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DataNascim = new DateTime(2023, 7, 17, 18, 15, 11, 53, DateTimeKind.Local).AddTicks(9958),
+                            DataNascim = new DateTime(2023, 7, 24, 20, 54, 38, 967, DateTimeKind.Local).AddTicks(830),
                             Email = "admin@localhost",
                             EmailConfirmed = true,
                             EstadoUtilizador = "A",
@@ -149,10 +149,10 @@ namespace AppGCT.Migrations
                             NormalizedEmail = "ADMIN@LOCALHOST",
                             NormalizedUserName = "ADMIN@LOCALHOST",
                             NumSocio = " ",
-                            PasswordHash = "AQAAAAIAAYagAAAAEJChplORgOeW4hpQqlZoXKSCSba/oF+53ygmrABcxmYiCtWC7gwwyXU+l0ExmcXMew==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEHcYxDzV0sdm77bje2CiJyMExBwQ4TUntx0f4uFwlLOT1LKB2pB5UA5aC23Xcz2uxQ==",
                             PhoneNumber = "999999999",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "89674d5f-7bed-4589-aebf-d2683ff309e4",
+                            SecurityStamp = "48c0e654-5d40-4b5f-8115-59e2c3550bdf",
                             TwoFactorEnabled = false,
                             UserName = "admin@localhost"
                         });
@@ -729,6 +729,21 @@ namespace AppGCT.Migrations
                     b.ToTable("Rubrica");
                 });
 
+            modelBuilder.Entity("AppGCT.Models.Saldo", b =>
+                {
+                    b.Property<string>("IdSocio")
+                        .HasMaxLength(36)
+                        .HasColumnType("nvarchar(36)");
+
+                    b.Property<decimal?>("MSaldo")
+                        .HasPrecision(18, 2)
+                        .HasColumnType("decimal(18,2)");
+
+                    b.HasKey("IdSocio");
+
+                    b.ToTable("Saldo");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
                     b.Property<string>("Id")
@@ -758,19 +773,19 @@ namespace AppGCT.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "64e813e8-bb96-4676-9924-278d3cb2eb6b",
+                            Id = "db5357e8-797f-4fb8-8239-c012c0eff06d",
                             Name = "Administrador",
                             NormalizedName = "ADMINISTRADOR"
                         },
                         new
                         {
-                            Id = "79fa3570-35d4-4d2d-aee6-ec41ce182263",
+                            Id = "26df024b-ad29-46b4-b3e7-035471e2bba6",
                             Name = "Ginásio",
                             NormalizedName = "GINÁSIO"
                         },
                         new
                         {
-                            Id = "edbccb67-086e-49be-b401-24ad2835f6b0",
+                            Id = "bd276378-4cb4-4569-8817-d7cf3d816ac5",
                             Name = "Sócio",
                             NormalizedName = "SÓCIO"
                         });
@@ -867,8 +882,8 @@ namespace AppGCT.Migrations
                     b.HasData(
                         new
                         {
-                            UserId = "620a3166-0ee8-4092-8ae4-cfcc91b8e72e",
-                            RoleId = "64e813e8-bb96-4676-9924-278d3cb2eb6b"
+                            UserId = "b5bd6de6-0bb1-4350-b3f6-dc1ba3a633af",
+                            RoleId = "db5357e8-797f-4fb8-8239-c012c0eff06d"
                         });
                 });
 

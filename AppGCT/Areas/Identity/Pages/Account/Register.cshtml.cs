@@ -19,6 +19,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
 using AppGCT.Outros;
+using AppGCT.Models;
 
 namespace AppGCT.Areas.Identity.Pages.Account
 {
@@ -31,6 +32,7 @@ namespace AppGCT.Areas.Identity.Pages.Account
         private readonly ILogger<RegisterModel> _logger;
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly IEmailSender _emailSender;
+        private readonly AppGCT.Data.AppGCTContext _context;
 
         public RegisterModel(
             UserManager<Utilizador> userManager,
@@ -38,7 +40,8 @@ namespace AppGCT.Areas.Identity.Pages.Account
             SignInManager<Utilizador> signInManager,
             ILogger<RegisterModel> logger,
             RoleManager<IdentityRole> roleManager,
-            IEmailSender emailSender)
+            IEmailSender emailSender,
+            AppGCT.Data.AppGCTContext context)
         {
             _userManager = userManager;
             _userStore = userStore;
@@ -47,6 +50,7 @@ namespace AppGCT.Areas.Identity.Pages.Account
             _logger = logger;
             _roleManager = roleManager;
             _emailSender = emailSender;
+            _context = context;
         }
 
         /// <summary>
@@ -175,6 +179,13 @@ namespace AppGCT.Areas.Identity.Pages.Account
                         IdentityResult roleresult = await _userManager.AddToRoleAsync(user, defaultrole.Name);
                     }
                     var userId = await _userManager.GetUserIdAsync(user);
+                    //cria registo na tabela de saldos
+                    var saldo = new Saldo
+                    {
+                        IdSocio = userId,
+                        MSaldo = 0
+                    };
+                    _context.Saldo.Add(saldo);
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
                     code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
                     var callbackUrl = Url.Page(
@@ -185,6 +196,8 @@ namespace AppGCT.Areas.Identity.Pages.Account
 
                     await _emailSender.SendEmailAsync(Input.Email, "Confirmação Registo Ginásio Clube de Tomar",
                         $"Por favor, confirme o seu registo <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>carregando aqui</a>.");
+
+                    await _context.SaveChangesAsync();
 
                     if (_userManager.Options.SignIn.RequireConfirmedAccount)
                     {
