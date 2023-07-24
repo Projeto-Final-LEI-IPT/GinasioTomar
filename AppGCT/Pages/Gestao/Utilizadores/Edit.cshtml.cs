@@ -135,7 +135,29 @@ namespace AppGCT.Pages.Gestao.Utilizadores
             user.DataModificacao = DateTime.Now;
             if (Input.NumSocio != null)
             {
-                user.NumSocio = Input.NumSocio;
+                // valida se tem letras no número sócio
+                bool temLetras = Input.NumSocio.Any(char.IsLetter);
+
+                if (temLetras)
+                {
+                    user.NumSocio = "";
+                }
+                else
+                {
+                    //valida se o Número de Sócio já está atribuido
+                    var existeNumSocio = _userManager.Users.Any(u => u.NumSocio == Input.NumSocio && u.Id != Input.Id);
+
+                    if (existeNumSocio)
+                    {
+                        ModelState.AddModelError("Input.NumSocio", "Número de Sócio já registado");
+                        return Page();
+                    }
+                    else
+                    {
+                        //retira os espaços da string
+                        user.NumSocio = Input.NumSocio.TrimStart();
+                    }  
+                }   
             }
             else
             {
