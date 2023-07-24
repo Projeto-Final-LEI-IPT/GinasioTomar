@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using SendGrid.Helpers.Mail;
 using System.ComponentModel.DataAnnotations;
 using System.Security.Claims;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace AppGCT.Pages.Gestao.Utilizadores
 {
@@ -102,6 +103,14 @@ namespace AppGCT.Pages.Gestao.Utilizadores
 
         public async Task<IActionResult> OnPostAsync()
         {
+            Roles = await _roleManager.Roles.ToListAsync();
+
+            var dataDia = DateTime.Now;
+            if (Input.Dtnascim >= dataDia)
+            {
+                ModelState.AddModelError("Input.DtNascim", "Data de Nascimento inválida");
+                return Page();
+            }
             if (ModelState.IsValid)
             {
                 var userId = _userManager.GetUserId(User);
@@ -148,8 +157,6 @@ namespace AppGCT.Pages.Gestao.Utilizadores
                     ModelState.AddModelError(string.Empty, error.Description);
             }
             }
-
-            Roles = await _roleManager.Roles.ToListAsync();
             return Page();
         }
     }

@@ -116,6 +116,13 @@ namespace AppGCT.Pages.Gestao.Utilizadores
             ModelState.Remove("Input.RoleName"); // Remove validação para o campo RoleName que não é editavel
             ModelState.Remove("Input.NumSocio"); // Remove validação para o campo RoleName que não é editavel
 
+            var dataDia = DateTime.Now;
+            if (Input.Dtnascim >= dataDia)
+            {
+                ModelState.AddModelError("Input.DtNascim", "Data de Nascimento inválida");
+                return Page();
+            }
+
             if (!ModelState.IsValid)
             {
                 return Page();

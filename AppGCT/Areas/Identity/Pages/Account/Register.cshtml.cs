@@ -142,6 +142,12 @@ namespace AppGCT.Areas.Identity.Pages.Account
 
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
+            var dataDia = DateTime.Now;
+            if (Input.Dtnascim >= dataDia)
+            {
+                ModelState.AddModelError("Input.DtNascim", "Data de Nascimento inválida");
+                return Page();
+            }
             returnUrl ??= Url.Content("~/");
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)
