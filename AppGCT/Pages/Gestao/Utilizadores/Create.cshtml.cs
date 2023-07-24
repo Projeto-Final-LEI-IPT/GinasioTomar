@@ -1,9 +1,11 @@
 using AppGCT.Areas.Identity.Data;
+using AppGCT.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
+using SendGrid.Helpers.Mail;
 using System.ComponentModel.DataAnnotations;
 using System.Security.Claims;
 
@@ -14,11 +16,13 @@ namespace AppGCT.Pages.Gestao.Utilizadores
     {
         private readonly UserManager<Utilizador> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
+        private readonly AppGCT.Data.AppGCTContext _context;
 
-        public CreateModel(UserManager<Utilizador> userManager, RoleManager<IdentityRole> roleManager)
+        public CreateModel(UserManager<Utilizador> userManager, RoleManager<IdentityRole> roleManager, AppGCT.Data.AppGCTContext context)
         {
             _userManager = userManager;
             _roleManager = roleManager;
+            _context = context; 
         }
 
         public string Username { get; set; }
@@ -84,10 +88,10 @@ namespace AppGCT.Pages.Gestao.Utilizadores
             //se é administrador pode gerar todos os tipos de utilizador (Adminitrador,Ginásio e Sócio)
             if (user != null && await _userManager.IsInRoleAsync(user, "Administrador"))
             {
-                Roles = await _roleManager.Roles.ToListAsync();
+                Roles = await _roleManager.Roles.OrderBy(m => m.Name).ToListAsync();
             }else
             {
-                //se ginásio não pode gerar admin's
+                //se ginásio não pode gerar admin's nem Ginásio (apenas Sócio)
                 if (user != null && await _userManager.IsInRoleAsync(user, "Ginásio"))
                 {
                     Roles = await _roleManager.Roles.Where(r => r.Name != "Ginásio" && r.Name != "Administrador").ToListAsync();
@@ -125,6 +129,17 @@ namespace AppGCT.Pages.Gestao.Utilizadores
             if (result.Succeeded)
             {
                 await _userManager.AddToRoleAsync(user, Input.RoleName);
+                if (Input.RoleName == "Sócio")
+                {
+                    //cria registo na tabela de saldos
+                    var saldo = new Saldo
+                    {
+                        IdSocio = user.Id,
+                        MSaldo = 0
+                    };
+                    _context.Saldo.Add(saldo);
+                    await _context.SaveChangesAsync();
+                }
                 return RedirectToPage("./Index");
             }
 

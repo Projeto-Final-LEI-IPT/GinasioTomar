@@ -110,5 +110,7 @@ namespace AppGCT.Data
 
         public DbSet<AppGCT.Models.Movimento> Movimento { get; set; } = default!;
         public DbSet<AppGCT.Models.PlanoMensalidade> PlanoMensalidade { get; set; } = default!;
+
+        public DbSet<AppGCT.Models.Saldo> Saldo { get; set; } = default!;
     }
 }

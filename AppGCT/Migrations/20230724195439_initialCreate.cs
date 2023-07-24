@@ -138,6 +138,18 @@ namespace AppGCT.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Saldo",
+                columns: table => new
+                {
+                    IdSocio = table.Column<string>(type: "nvarchar(36)", maxLength: 36, nullable: false),
+                    MSaldo = table.Column<decimal>(type: "decimal(18,2)", precision: 18, scale: 2, nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Saldo", x => x.IdSocio);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "AspNetRoleClaims",
                 columns: table => new
                 {
@@ -477,20 +489,20 @@ namespace AppGCT.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "64e813e8-bb96-4676-9924-278d3cb2eb6b", null, "Administrador", "ADMINISTRADOR" },
-                    { "79fa3570-35d4-4d2d-aee6-ec41ce182263", null, "Ginásio", "GINÁSIO" },
-                    { "edbccb67-086e-49be-b401-24ad2835f6b0", null, "Sócio", "SÓCIO" }
+                    { "26df024b-ad29-46b4-b3e7-035471e2bba6", null, "Ginásio", "GINÁSIO" },
+                    { "bd276378-4cb4-4569-8817-d7cf3d816ac5", null, "Sócio", "SÓCIO" },
+                    { "db5357e8-797f-4fb8-8239-c012c0eff06d", null, "Administrador", "ADMINISTRADOR" }
                 });
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "DataAprovacao", "DataCriacao", "DataModificacao", "DataNascim", "Email", "EmailConfirmed", "EstadoUtilizador", "IdCriacao", "IdModificacao", "LockoutEnabled", "LockoutEnd", "Morada", "NIF", "Nome", "NormalizedEmail", "NormalizedUserName", "NumSocio", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UltimoLogin", "UserName" },
-                values: new object[] { "620a3166-0ee8-4092-8ae4-cfcc91b8e72e", 0, "64cc0dcc-51b9-4722-857e-5b4f9f484a81", new DateTime(2023, 7, 17, 18, 15, 11, 53, DateTimeKind.Local).AddTicks(9952), new DateTime(2023, 7, 17, 18, 15, 11, 53, DateTimeKind.Local).AddTicks(9903), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2023, 7, 17, 18, 15, 11, 53, DateTimeKind.Local).AddTicks(9958), "admin@localhost", true, "A", "SEED", " ", false, null, "Ginásio Clube de Tomar", "999999999", "Administrador", "ADMIN@LOCALHOST", "ADMIN@LOCALHOST", " ", "AQAAAAIAAYagAAAAEJChplORgOeW4hpQqlZoXKSCSba/oF+53ygmrABcxmYiCtWC7gwwyXU+l0ExmcXMew==", "999999999", false, "89674d5f-7bed-4589-aebf-d2683ff309e4", false, null, "admin@localhost" });
+                values: new object[] { "b5bd6de6-0bb1-4350-b3f6-dc1ba3a633af", 0, "17fdde02-5c5d-4762-aa45-2c8a82b96290", new DateTime(2023, 7, 24, 20, 54, 38, 967, DateTimeKind.Local).AddTicks(824), new DateTime(2023, 7, 24, 20, 54, 38, 967, DateTimeKind.Local).AddTicks(775), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2023, 7, 24, 20, 54, 38, 967, DateTimeKind.Local).AddTicks(830), "admin@localhost", true, "A", "SEED", " ", false, null, "Ginásio Clube de Tomar", "999999999", "Administrador", "ADMIN@LOCALHOST", "ADMIN@LOCALHOST", " ", "AQAAAAIAAYagAAAAEHcYxDzV0sdm77bje2CiJyMExBwQ4TUntx0f4uFwlLOT1LKB2pB5UA5aC23Xcz2uxQ==", "999999999", false, "48c0e654-5d40-4b5f-8115-59e2c3550bdf", false, null, "admin@localhost" });
 
             migrationBuilder.InsertData(
                 table: "AspNetUserRoles",
                 columns: new[] { "RoleId", "UserId" },
-                values: new object[] { "64e813e8-bb96-4676-9924-278d3cb2eb6b", "620a3166-0ee8-4092-8ae4-cfcc91b8e72e" });
+                values: new object[] { "db5357e8-797f-4fb8-8239-c012c0eff06d", "b5bd6de6-0bb1-4350-b3f6-dc1ba3a633af" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
@@ -623,6 +635,9 @@ namespace AppGCT.Migrations
 
             migrationBuilder.DropTable(
                 name: "PlanoMensalidade");
+
+            migrationBuilder.DropTable(
+                name: "Saldo");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");

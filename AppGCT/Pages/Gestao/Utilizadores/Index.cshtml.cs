@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using AppGCT.Areas.Identity.Data;
 using AppGCT.Models;
 using Humanizer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
@@ -11,6 +12,7 @@ using SendGrid.Helpers.Mail;
 
 namespace AppGCT.Pages.Gestao.Utilizadores
 {
+    [Authorize(Roles = "Administrador,Ginásio")]
     public class IndexModel : PageModel
     {
         private readonly AppGCT.Data.AppGCTContext _context;
