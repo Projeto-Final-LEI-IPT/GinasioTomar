@@ -12,7 +12,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorPages();
 builder.Services.AddDbContext<AppGCTContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("AppGCTContext") ?? throw new InvalidOperationException("Connection string 'AppGCTContext' not found.")));
-
+builder.Services.AddTransient<AppGCTContext>();
 builder.Services.AddDefaultIdentity<Utilizador>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<AppGCTContext>();

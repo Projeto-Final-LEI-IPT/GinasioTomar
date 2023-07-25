@@ -44,6 +44,7 @@
                     var MetodoPagamentoField = $('#Movimento_MetodoPagamentoId');
                     var ValorMovimentoField = $('#Movimento_ValorMovimento');
                     var ValorDescontoField = $('#Movimento_ValorDesconto');
+                    var AtletaField = $('#Movimento_AtletaMovimentoId');
                     var lblMetPagField = $('#lblMetodo');
                     var lblFaturaField = $('#lblFatura');
                     var lblNotCredField = $('#lblNotaCred');
@@ -61,10 +62,12 @@
                             MetodoPagamentoField.prop('disabled', true);
                             ValorMovimentoField.prop('disabled', true);
                             ValorDescontoField.prop('disabled', true);
+                            AtletaField.prop('disabled', true);
                             lblMetPagField.prop('hidden', true);
                             lblNotCredField.prop('hidden', false);
                             lblFaturaField.prop('hidden', false);
                             lblvalDescontoField.prop('hidden', false);
+                            lblAtletaField.prop('hidden', false);
                             FaturaField.val('');
                             NotaCreditoField.val('');
                             ValorMovimentoField.val(0);
@@ -214,7 +217,7 @@
                 <label asp-for="Movimento.UtilizadorId" class="control-label"></label>
                 <select asp-for="Movimento.UtilizadorId" class ="form-control" asp-items="ViewBag.UtilizadorId"></select>
             </div>
-            <div class="form-group">
+            <div id="lblAtletaField" class="form-group">
                 <label asp-for="Movimento.AtletaMovimentoId" class="control-label">Ginasta</label>
                 <select asp-for="Movimento.AtletaMovimentoId" class ="form-control" asp-items="ViewBag.AtletaMovimentoId"></select>
             </div>

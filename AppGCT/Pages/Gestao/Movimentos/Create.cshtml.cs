@@ -13,6 +13,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authorization;
 using AppGCT.Areas.Identity.Data;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNet.Identity;
 
 namespace AppGCT.Pages.Gestao.Movimentos
 {
@@ -21,9 +22,9 @@ namespace AppGCT.Pages.Gestao.Movimentos
     public class CreateModel : PageModel
     {
         private readonly AppGCT.Data.AppGCTContext _context;
-        private readonly UserManager<Utilizador> _userManager;
+        private readonly Microsoft.AspNetCore.Identity.UserManager<Utilizador> _userManager;
 
-        public CreateModel(AppGCT.Data.AppGCTContext context, UserManager<Utilizador> userManager)
+        public CreateModel(AppGCT.Data.AppGCTContext context, Microsoft.AspNetCore.Identity.UserManager<Utilizador> userManager)
         {
             _context = context;
             _userManager = userManager;
@@ -77,6 +78,15 @@ namespace AppGCT.Pages.Gestao.Movimentos
 
                     ModelState.AddModelError("Movimento.RubricaId", "Rúbrica é um campo obrigatório");
                     return false;
+            }
+
+            // Validações se Valor Movimento é superior a zero
+            if (Movimento.ValorMovimento <= 0)
+            {
+ 
+                    ModelState.AddModelError("Movimento.ValorMovimento", "Valor movimento tem de ser superior a 0,00€");
+                    return false;
+                
             }
 
             return true;
@@ -142,6 +152,7 @@ namespace AppGCT.Pages.Gestao.Movimentos
                     break;
                 case "P":
                     Movimento.ValorDesconto = 0;
+                    Movimento.Atleta = null;
                     saldoAux = (int)(Movimento.ValorMovimento * 1);
                     break;
                 case "D":
@@ -158,7 +169,7 @@ namespace AppGCT.Pages.Gestao.Movimentos
             if (!await ValidaMovimento())
             {
                 //faz refresh das dropdown's
-                OnGetAsync();
+                _ = OnGetAsync();
                 return Page();
             }
 
@@ -175,9 +186,23 @@ namespace AppGCT.Pages.Gestao.Movimentos
             Movimento.IdModificacao = "";
             var idSoc = Movimento.UtilizadorId;
             var saldoAnt = _context.Saldo.Where(i => i.IdSocio == idSoc).FirstOrDefault().MSaldo;
-            Movimento.MSaldo = saldoAux + saldoAux;
+            Movimento.MSaldo = saldoAnt + saldoAux;
 
             Movimento.Observacoes = "";
+
+            // Atualiza Saldo do Sócio na tabela Saldos
+            var saldoObj = _context.Saldo.FirstOrDefault(s => s.IdSocio == idSoc);
+
+            if (saldoObj != null)
+            {
+                // Step 3: Modify the properties you want to update
+                saldoObj.MSaldo = Movimento.MSaldo;
+
+                // Step 4: Save the changes back to the database
+                _context.Saldo.Update(saldoObj);
+                
+            }
+
 
             _context.Movimento.Add(Movimento);
             await _context.SaveChangesAsync();

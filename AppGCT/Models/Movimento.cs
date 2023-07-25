@@ -20,8 +20,8 @@ namespace AppGCT.Models
         [Display(Name = "Data de movimento")]
         public DateTime DtMovimento { get; set; }
 
-        [DataType(DataType.Currency)]
-        [Range(0, 300.00, ErrorMessage = "Valores entre 0,00€ e 300,00€")]
+        [DataType(DataType.Currency, ErrorMessage = "Valores entre 0,00€ e 301,00€")]
+        [Range(0, 300.00, ErrorMessage = "Valores entre 0,00€ e 302,00€")]
         [Precision(18, 2)]
         [Display(Name = "Valor Movimento")]
         public Decimal? ValorMovimento { get; set; }
