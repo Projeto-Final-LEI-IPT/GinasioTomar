@@ -40,7 +40,13 @@ namespace AppGCT.Pages.Gestao.RubricasPrecario
                     ModelState.AddModelError("Rubrica.DescontoId", "Desconto só pode ser preenchido se Classe preenchido");
                     return false;
                 }
-                    
+            }
+
+            // Validações se rubrica com valor unitário(IVlrUnit = S) e valor inferior ou igual a 0
+            if (Rubrica.IVlrUnit == "S" && Rubrica.ValorUnitario <= 0)
+            {
+                ModelState.AddModelError("Rubrica.ValorUnitario", "Valor unitário tem de ser superior a 0,00€");
+                return false;
             }
 
             return true;
