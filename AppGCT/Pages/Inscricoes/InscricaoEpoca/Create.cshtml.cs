@@ -134,8 +134,8 @@ namespace AppGCT.Pages.Inscricoes.InscricaoEpoca
                         ValorMensalidade = valorMensalidade,
                         DataCriacao = DateTime.Now,
                         IdCriacao = User.Identity.GetUserId(),
-                        DataModificacao = null,
-                        IdModificacao = null,
+                        DataModificacao = DateTime.MinValue,
+                        IdModificacao = "",
                         EpocaId = epocaId,
                         GinastaId = Inscricao.GinastaId
                     };
@@ -156,7 +156,7 @@ namespace AppGCT.Pages.Inscricoes.InscricaoEpoca
             Inscricao.IPagamInscricao = "N";
             Inscricao.IdCriacao = User.Identity.GetUserId();
             Inscricao.DataCriacao = DateTime.Now;
-            Inscricao.IdModificacao = "0";
+            Inscricao.IdModificacao = "";
             Inscricao.DataModificacao = DateTime.MinValue;
 
             if (Inscricao.CodDesconto == null)

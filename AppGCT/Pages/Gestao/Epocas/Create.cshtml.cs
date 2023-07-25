@@ -98,7 +98,7 @@ namespace AppGCT.Pages.Ginasio.Epocas
             Epoca.EstadoEpoca = "A";
             Epoca.DataCriacao = DateTime.Now;
             // obtem User ID logado
-            var userId = User.FindFirstValue(ClaimTypes.Name);
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             Epoca.IdCriacao = userId;
             Epoca.DataModificacao = DateTime.MinValue;
             Epoca.IdModificacao = "";

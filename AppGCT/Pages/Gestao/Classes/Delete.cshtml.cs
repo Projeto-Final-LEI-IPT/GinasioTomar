@@ -8,6 +8,8 @@ using Microsoft.EntityFrameworkCore;
 using AppGCT.Data;
 using AppGCT.Models;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using AppGCT.Areas.Identity.Data;
 
 namespace AppGCT.Pages.Gestao.Classes
 {
@@ -15,14 +17,18 @@ namespace AppGCT.Pages.Gestao.Classes
     public class DeleteModel : PageModel
     {
         private readonly AppGCT.Data.AppGCTContext _context;
+        private readonly UserManager<Utilizador> _userManager;
 
-        public DeleteModel(AppGCT.Data.AppGCTContext context)
+        public DeleteModel(AppGCT.Data.AppGCTContext context, UserManager<Utilizador> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
 
         [BindProperty]
-      public Classe Classe { get; set; } = default!;
+        public Classe Classe { get; set; } = default!;
+        public string IdCriacaoName { get; set; }
+        public string IdModificacaoName { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -40,6 +46,10 @@ namespace AppGCT.Pages.Gestao.Classes
             else 
             {
                 Classe = classe;
+                var user = await _userManager.FindByIdAsync(Classe.IdCriacao);
+                IdCriacaoName = user?.Nome;
+                var user2 = await _userManager.FindByIdAsync(Classe.IdModificacao);
+                IdModificacaoName = user2?.Nome;
             }
             return Page();
         }

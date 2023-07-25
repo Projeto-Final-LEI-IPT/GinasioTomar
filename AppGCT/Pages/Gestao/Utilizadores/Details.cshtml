@@ -80,6 +80,33 @@
             <dd class="col-sm-10">
                 @Model.User.Email
             </dd>
+            @if (User.IsInRole("Administrador") || User.IsInRole("Ginásio"))
+            {
+                <dt class="col-sm-2">
+                    Data de Criação
+                </dt>
+                <dd class="col-sm-10">
+                    @Model.User.DataCriacao
+                </dd>
+                <dt class="col-sm-2">
+                    Criado por
+                </dt>
+                <dd class="col-sm-10">
+                    @Model.IdCriacaoName
+                </dd>
+                <dt class="col-sm-2">
+                    Data de Modificação
+                </dt>
+                <dd class="col-sm-10">
+                    @Model.User.DataModificacao
+                </dd>
+                <dt class="col-sm-2">
+                    Modificado por
+                </dt>
+                <dd class="col-sm-10">
+                    @Model.IdModificacaoName
+                </dd>
+            }
         </dl>
     }
     else

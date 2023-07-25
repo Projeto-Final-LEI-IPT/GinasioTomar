@@ -56,7 +56,7 @@ namespace AppGCT.Pages.Inscricoes.PlanoMensalidades
 
             PlanoMensalidade.DataCriacao = DateTime.Now;
             // obtem User ID logado
-            var userId = User.FindFirstValue(ClaimTypes.Name);
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             PlanoMensalidade.IdCriacao = userId;
             PlanoMensalidade.DataModificacao = DateTime.MinValue;
             PlanoMensalidade.IdModificacao = "";

@@ -51,7 +51,7 @@ namespace AppGCT.Pages.Gestao.Metodos
                 return Page();
             }
             // obtem User ID logado
-            var userId = User.FindFirstValue(ClaimTypes.Name);
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             MetodoPagamento.IdModificacao = userId;
             MetodoPagamento.DataModificacao = DateTime.Now;
             _context.Attach(MetodoPagamento).State = EntityState.Modified;

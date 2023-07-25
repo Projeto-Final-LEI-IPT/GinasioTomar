@@ -8,6 +8,8 @@ using Microsoft.EntityFrameworkCore;
 using AppGCT.Data;
 using AppGCT.Models;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using AppGCT.Areas.Identity.Data;
 
 namespace AppGCT.Pages.Gestao.RubricasPrecario
 {
@@ -15,13 +17,17 @@ namespace AppGCT.Pages.Gestao.RubricasPrecario
     public class DetailsModel : PageModel
     {
         private readonly AppGCT.Data.AppGCTContext _context;
+        private readonly UserManager<Utilizador> _userManager;
 
-        public DetailsModel(AppGCT.Data.AppGCTContext context)
+        public DetailsModel(AppGCT.Data.AppGCTContext context, UserManager<Utilizador> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
 
-      public Rubrica Rubrica { get; set; } = default!; 
+        public Rubrica Rubrica { get; set; } = default!;
+        public string IdCriacaoName { get; set; }
+        public string IdModificacaoName { get; set; }
 
         public async Task<IActionResult> OnGetAsync(string id)
         {
@@ -39,6 +45,10 @@ namespace AppGCT.Pages.Gestao.RubricasPrecario
             else 
             {
                 Rubrica = rubrica;
+                var user = await _userManager.FindByIdAsync(Rubrica.IdCriacao);
+                IdCriacaoName = user?.Nome;
+                var user2 = await _userManager.FindByIdAsync(Rubrica.IdModificacao);
+                IdModificacaoName = user2?.Nome;
             }
             return Page();
         }

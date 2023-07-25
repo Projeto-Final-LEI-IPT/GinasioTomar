@@ -40,7 +40,7 @@ namespace AppGCT.Pages.Gestao.Metodos
             }
             MetodoPagamento.DataCriacao = DateTime.Now;
             // obtem User ID logado
-            var userId = User.FindFirstValue(ClaimTypes.Name);
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             MetodoPagamento.IdCriacao = userId;
             MetodoPagamento.DataModificacao = DateTime.MinValue;
             MetodoPagamento.IdModificacao = "";

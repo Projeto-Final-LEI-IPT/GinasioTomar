@@ -41,7 +41,7 @@ namespace AppGCT.Pages.Gestao.Descontos
             }
             Desconto.DataCriacao = DateTime.Now;
             // obtem User ID logado
-            var userId = User.FindFirstValue(ClaimTypes.Name);
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             Desconto.IdCriacao = userId;
             Desconto.DataModificacao = DateTime.MinValue;
             Desconto.IdModificacao = "";

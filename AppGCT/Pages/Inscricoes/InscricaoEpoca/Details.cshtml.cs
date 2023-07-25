@@ -8,7 +8,9 @@ using Microsoft.EntityFrameworkCore;
 using AppGCT.Data;
 using AppGCT.Models;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNet.Identity;
+using Microsoft.AspNetCore.Identity;
+using AppGCT.Areas.Identity.Data;
+using System.Security.Claims;
 
 namespace AppGCT.Pages.Inscricoes.InscricaoEpoca
 {
@@ -16,17 +18,21 @@ namespace AppGCT.Pages.Inscricoes.InscricaoEpoca
     public class DetailsModel : PageModel
     {
         private readonly AppGCT.Data.AppGCTContext _context;
+        private readonly UserManager<Utilizador> _userManager;
 
-        public DetailsModel(AppGCT.Data.AppGCTContext context)
+        public DetailsModel(AppGCT.Data.AppGCTContext context, UserManager<Utilizador> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
 
-      public Inscricao Inscricao { get; set; } = default!; 
+        public Inscricao Inscricao { get; set; } = default!;
+        public string IdCriacaoName { get; set; }
+        public string IdModificacaoName { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
-            string userId = User.Identity.GetUserId();
+            string userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
             if (id == null || _context.Inscricao == null)
             {
@@ -42,6 +48,10 @@ namespace AppGCT.Pages.Inscricoes.InscricaoEpoca
                     return RedirectToPage("./AcessDenied");
                 }
                 Inscricao = inscricao;
+                var user = await _userManager.FindByIdAsync(Inscricao.IdCriacao);
+                IdCriacaoName = user?.Nome;
+                var user2 = await _userManager.FindByIdAsync(Inscricao.IdModificacao);
+                IdModificacaoName = user2?.Nome;
             }
             else
             {
@@ -54,6 +64,10 @@ namespace AppGCT.Pages.Inscricoes.InscricaoEpoca
                 }
 
                 Inscricao = inscricao;
+                var user = await _userManager.FindByIdAsync(Inscricao.IdCriacao);
+                IdCriacaoName = user?.Nome;
+                var user2 = await _userManager.FindByIdAsync(Inscricao.IdModificacao);
+                IdModificacaoName = user2?.Nome;
             }
 
             return Page();

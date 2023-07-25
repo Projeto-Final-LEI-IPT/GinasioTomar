@@ -116,6 +116,13 @@ namespace AppGCT.Pages.Gestao.Utilizadores
             ModelState.Remove("Input.RoleName"); // Remove validação para o campo RoleName que não é editavel
             ModelState.Remove("Input.NumSocio"); // Remove validação para o campo RoleName que não é editavel
 
+            var dataDia = DateTime.Now;
+            if (Input.Dtnascim >= dataDia)
+            {
+                ModelState.AddModelError("Input.DtNascim", "Data de Nascimento inválida");
+                return Page();
+            }
+
             if (!ModelState.IsValid)
             {
                 return Page();
@@ -135,7 +142,29 @@ namespace AppGCT.Pages.Gestao.Utilizadores
             user.DataModificacao = DateTime.Now;
             if (Input.NumSocio != null)
             {
-                user.NumSocio = Input.NumSocio;
+                // valida se tem letras no número sócio
+                bool temLetras = Input.NumSocio.Any(char.IsLetter);
+
+                if (temLetras)
+                {
+                    user.NumSocio = "";
+                }
+                else
+                {
+                    //valida se o Número de Sócio já está atribuido
+                    var existeNumSocio = _userManager.Users.Any(u => u.NumSocio == Input.NumSocio && u.Id != Input.Id);
+
+                    if (existeNumSocio)
+                    {
+                        ModelState.AddModelError("Input.NumSocio", "Número de Sócio já registado");
+                        return Page();
+                    }
+                    else
+                    {
+                        //retira os espaços da string
+                        user.NumSocio = Input.NumSocio.TrimStart();
+                    }  
+                }   
             }
             else
             {

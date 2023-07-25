@@ -51,7 +51,7 @@ namespace AppGCT.Pages.Gestao.Classes
                 return Page();
             }
             // obtem User ID logado
-            var userId = User.FindFirstValue(ClaimTypes.Name);
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             Classe.IdModificacao = userId;
             Classe.DataModificacao = DateTime.Now;
             _context.Attach(Classe).State = EntityState.Modified;

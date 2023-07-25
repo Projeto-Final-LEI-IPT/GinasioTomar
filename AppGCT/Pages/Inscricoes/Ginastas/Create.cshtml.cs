@@ -52,7 +52,7 @@ namespace AppGCT.Pages.Inscricoes.Ginastas
             ModelState.Remove("imageFile"); // Remove validação para o imageFile (se vazio)
             Ginasta.IdCriacao = User.Identity.GetUserId(); 
             Ginasta.DataCriacao = DateTime.Now;
-            Ginasta.IdModificacao = "0";
+            Ginasta.IdModificacao = "";
             Ginasta.EstadoGinasta = "A";
             Ginasta.DataModificacao = DateTime.MinValue;
             if (!ModelState.IsValid || _context.Ginasta == null || Ginasta == null)

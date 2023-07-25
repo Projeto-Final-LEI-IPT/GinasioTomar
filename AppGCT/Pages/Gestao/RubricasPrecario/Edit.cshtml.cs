@@ -18,6 +18,25 @@ namespace AppGCT.Pages.Gestao.RubricasPrecario
     {
         private readonly AppGCT.Data.AppGCTContext _context;
 
+        private async Task PopulaDropdownLists()
+        {
+            var descontos = _context.Desconto.ToList();
+            descontos.Insert(0, new Desconto
+            {
+                CodDesconto = "",
+                DescDesconto = "Seleccionar Desconto"
+            });
+
+            ViewData["DescontoId"] = new SelectList(descontos, "CodDesconto", "DescDesconto");
+
+            var classes = _context.Classe.ToList();
+            classes.Insert(0, new Classe
+            {
+                NomeClasse = "Seleccionar Classe"
+            });
+
+            ViewData["ClasseId"] = new SelectList(classes, "IdClasse", "NomeClasse");
+        }
         private async Task<bool> ValidaRubrica()
         {
             if (_context.Rubrica == null || Rubrica == null)
@@ -33,9 +52,14 @@ namespace AppGCT.Pages.Gestao.RubricasPrecario
                     ModelState.AddModelError("Rubrica.DescontoId", "Desconto só pode ser preenchido se Classe preenchido");
                     return false;
                 }
-
             }
 
+            // Validações se rubrica com valor unitário(IVlrUnit = S) e valor inferior ou igual a 0
+            if (Rubrica.IVlrUnit == "S" && Rubrica.ValorUnitario <= 0)
+            {
+                ModelState.AddModelError("Rubrica.ValorUnitario", "Valor unitário tem de ser superior a 0,00€");
+                return false;
+            }
             return true;
         }
         public EditModel(AppGCT.Data.AppGCTContext context)
@@ -59,28 +83,8 @@ namespace AppGCT.Pages.Gestao.RubricasPrecario
                 return NotFound();
             }
             Rubrica = rubrica;
-
-            //ViewData["DescontoId"] = new SelectList(_context.Desconto, "CodDesconto", "DescDesconto");
-            //ViewData["ClasseId"] = new SelectList(_context.Classe, "IdClasse", "NomeClasse");
-
-            var descontos = _context.Desconto.ToList();
-            descontos.Insert(0, new Desconto
-            {
-                CodDesconto = "",
-                DescDesconto = "Seleccionar Desconto"
-
-            });
-
-            ViewData["DescontoId"] = new SelectList(descontos, "CodDesconto", "DescDesconto");
-
-            var classes = _context.Classe.ToList();
-            classes.Insert(0, new Classe
-            {
-                NomeClasse = "Seleccionar Classe"
-
-            });
-
-            ViewData["ClasseId"] = new SelectList(classes, "IdClasse", "NomeClasse");
+            //popula drop down's
+            await PopulaDropdownLists();
             return Page();
         }
 
@@ -90,16 +94,20 @@ namespace AppGCT.Pages.Gestao.RubricasPrecario
         {
             if (!ModelState.IsValid)
             {
+                //popula drop down's
+                await PopulaDropdownLists();
                 return Page();
             }
 
             if (!await ValidaRubrica())
             {
+                //popula drop down's
+                await PopulaDropdownLists();
                 return Page();
             }
 
             // obtem User ID logado
-            var userId = User.FindFirstValue(ClaimTypes.Name);
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             Rubrica.IdModificacao = userId;
             Rubrica.DataModificacao = DateTime.Now;
  

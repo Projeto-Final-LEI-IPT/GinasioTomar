@@ -8,6 +8,8 @@ using Microsoft.EntityFrameworkCore;
 using AppGCT.Data;
 using AppGCT.Models;
 using Microsoft.AspNetCore.Authorization;
+using AppGCT.Areas.Identity.Data;
+using Microsoft.AspNetCore.Identity;
 
 namespace AppGCT.Pages.Ginasio.Epocas
 {
@@ -15,14 +17,18 @@ namespace AppGCT.Pages.Ginasio.Epocas
     public class DeleteModel : PageModel
     {
         private readonly AppGCT.Data.AppGCTContext _context;
+        private readonly UserManager<Utilizador> _userManager;
 
-        public DeleteModel(AppGCT.Data.AppGCTContext context)
+        public DeleteModel(AppGCT.Data.AppGCTContext context, UserManager<Utilizador> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
 
         [BindProperty]
-      public Epoca Epoca { get; set; } = default!;
+        public Epoca Epoca { get; set; } = default!;
+        public string IdCriacaoName { get; set; }
+        public string IdModificacaoName { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -40,6 +46,10 @@ namespace AppGCT.Pages.Ginasio.Epocas
             else 
             {
                 Epoca = epoca;
+                var user = await _userManager.FindByIdAsync(Epoca.IdCriacao);
+                IdCriacaoName = user?.Nome;
+                var user2 = await _userManager.FindByIdAsync(Epoca.IdModificacao);
+                IdModificacaoName = user2?.Nome;
             }
             return Page();
         }
