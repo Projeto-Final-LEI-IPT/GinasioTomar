@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using AppGCT.Areas.Identity.Data;
 using Microsoft.AspNetCore.Authorization;
+using AppGCT.Models;
 
 namespace AppGCT.Pages.Gestao.Utilizadores
 {
@@ -22,6 +23,8 @@ namespace AppGCT.Pages.Gestao.Utilizadores
 
         public Utilizador User { get; set; }
         public IdentityRole Role { get; set; }
+        public string IdCriacaoName { get; set; }
+        public string IdModificacaoName { get; set; }
 
         public async Task<IActionResult> OnGetAsync()
         {
@@ -32,6 +35,10 @@ namespace AppGCT.Pages.Gestao.Utilizadores
                 var roles = await _userManager.GetRolesAsync(User);
                 var roleId = await _roleManager.FindByNameAsync(roles.First());
                 Role = await _roleManager.FindByIdAsync(roleId.Id);
+                var user = await _userManager.FindByIdAsync(User.IdCriacao);
+                IdCriacaoName = user?.Nome;
+                var user2 = await _userManager.FindByIdAsync(User.IdModificacao);
+                IdModificacaoName = user2?.Nome;
             }
             else
             {

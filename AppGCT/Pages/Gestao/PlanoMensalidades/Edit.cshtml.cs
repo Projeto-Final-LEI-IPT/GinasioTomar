@@ -65,7 +65,7 @@ namespace AppGCT.Pages.Inscricoes.PlanoMensalidades
                 return Page();
             }
             // obtem User ID logado
-            var userId = User.FindFirstValue(ClaimTypes.Name);
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             PlanoMensalidade.IdModificacao = userId;
             PlanoMensalidade.DataModificacao = DateTime.Now;
             _context.Attach(PlanoMensalidade).State = EntityState.Modified;

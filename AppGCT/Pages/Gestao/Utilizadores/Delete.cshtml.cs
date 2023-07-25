@@ -25,6 +25,9 @@ namespace AppGCT.Pages.Gestao.Utilizadores
         public Utilizador Utilizador { get; set; }
         public IdentityRole Role { get; set; }
 
+        public string IdCriacaoName { get; set; }
+        public string IdModificacaoName { get; set; }
+
         public async Task<IActionResult> OnGetAsync(string id)
         {
             if (id == null)
@@ -43,6 +46,11 @@ namespace AppGCT.Pages.Gestao.Utilizadores
                 }
                 else
                 {
+                    var user = await _userManager.FindByIdAsync(Utilizador.IdCriacao);
+                    IdCriacaoName = user?.Nome;
+                    var user2 = await _userManager.FindByIdAsync(Utilizador.IdModificacao);
+                    IdModificacaoName = user2?.Nome;
+
                     var roles = await _userManager.GetRolesAsync(Utilizador);
                     if (roles.Any())
                     {

@@ -105,7 +105,7 @@ namespace AppGCT.Pages.Gestao.RubricasPrecario
 
             Rubrica.DataCriacao = DateTime.Now;
             // obtem User ID logado
-            var userId = User.FindFirstValue(ClaimTypes.Name);
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             Rubrica.IdCriacao = userId;
             Rubrica.DataModificacao = DateTime.MinValue;
             Rubrica.IdModificacao = "";

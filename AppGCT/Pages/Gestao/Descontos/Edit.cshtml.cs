@@ -54,7 +54,7 @@ namespace AppGCT.Pages.Gestao.Descontos
 
             _context.Attach(Desconto).State = EntityState.Modified;
             // obtem User ID logado
-            var userId = User.FindFirstValue(ClaimTypes.Name);
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             Desconto.IdModificacao = userId;
             Desconto.DataModificacao = DateTime.Now;
             try

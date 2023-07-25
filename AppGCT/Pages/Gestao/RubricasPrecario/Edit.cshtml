@@ -171,7 +171,9 @@
                 <label asp-for="Rubrica.HorasSemanais" class="control-label"></label>
                 <input asp-for="Rubrica.HorasSemanais" class="form-control" disabled/>
                 <span asp-validation-for="Rubrica.HorasSemanais" class="text-danger"></span>
-            </div>            
+            </div>
+            <input type="hidden" asp-for="Rubrica.DataCriacao" />
+            <input type="hidden" asp-for="Rubrica.IdCriacao" />
             <div class="form-group">
                 <input type="submit" value="Guardar" class="btn btn-primary" />
             </div>

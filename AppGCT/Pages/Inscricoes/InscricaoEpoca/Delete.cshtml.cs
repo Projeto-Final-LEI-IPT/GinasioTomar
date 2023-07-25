@@ -8,6 +8,8 @@ using Microsoft.EntityFrameworkCore;
 using AppGCT.Data;
 using AppGCT.Models;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using AppGCT.Areas.Identity.Data;
 
 namespace AppGCT.Pages.Inscricoes.InscricaoEpoca
 {
@@ -15,14 +17,18 @@ namespace AppGCT.Pages.Inscricoes.InscricaoEpoca
     public class DeleteModel : PageModel
     {
         private readonly AppGCT.Data.AppGCTContext _context;
+        private readonly UserManager<Utilizador> _userManager;
 
-        public DeleteModel(AppGCT.Data.AppGCTContext context)
+        public DeleteModel(AppGCT.Data.AppGCTContext context, UserManager<Utilizador> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
 
         [BindProperty]
-      public Inscricao Inscricao { get; set; } = default!;
+        public Inscricao Inscricao { get; set; } = default!;
+        public string IdCriacaoName { get; set; }
+        public string IdModificacaoName { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -41,6 +47,10 @@ namespace AppGCT.Pages.Inscricoes.InscricaoEpoca
             else 
             {
                 Inscricao = inscricao;
+                var user = await _userManager.FindByIdAsync(Inscricao.IdCriacao);
+                IdCriacaoName = user?.Nome;
+                var user2 = await _userManager.FindByIdAsync(Inscricao.IdModificacao);
+                IdModificacaoName = user2?.Nome;
             }
             return Page();
         }

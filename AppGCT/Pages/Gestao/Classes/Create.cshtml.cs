@@ -40,8 +40,8 @@ namespace AppGCT.Pages.Gestao.Classes
             }
 
           Classe.DataCriacao = DateTime.Now;
-          // obtem User ID logado
-          var userId = User.FindFirstValue(ClaimTypes.Name);
+            // obtem User ID logado
+          var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
           Classe.IdCriacao = userId;
           Classe.DataModificacao = DateTime.MinValue;
           Classe.IdModificacao = "";
