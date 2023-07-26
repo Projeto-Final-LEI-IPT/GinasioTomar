@@ -13,7 +13,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authorization;
 using AppGCT.Areas.Identity.Data;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNet.Identity;
 
 namespace AppGCT.Pages.Gestao.Movimentos
 {
@@ -22,9 +21,9 @@ namespace AppGCT.Pages.Gestao.Movimentos
     public class CreateModel : PageModel
     {
         private readonly AppGCT.Data.AppGCTContext _context;
-        private readonly Microsoft.AspNetCore.Identity.UserManager<Utilizador> _userManager;
+        private readonly UserManager<Utilizador> _userManager;
 
-        public CreateModel(AppGCT.Data.AppGCTContext context, Microsoft.AspNetCore.Identity.UserManager<Utilizador> userManager)
+        public CreateModel(AppGCT.Data.AppGCTContext context, UserManager<Utilizador> userManager)
         {
             _context = context;
             _userManager = userManager;
@@ -47,11 +46,13 @@ namespace AppGCT.Pages.Gestao.Movimentos
 
             if (Movimento.NumFatura != null) { 
             // Valida se o NumFatura já existe na BD
-                if (await _context.Movimento.AnyAsync(e => e.NumFatura == Movimento.NumFatura))
-                {
-                    ModelState.AddModelError("Movimento.NumFatura", "Já existe um movimento com número fatura igual");
-                    return false;
-                }
+
+                //if (await _context.Movimento.AnyAsync(e => e.NumFatura == Movimento.NumFatura))
+                //{
+                //    ModelState.AddModelError("Movimento.NumFatura", "Já existe um movimento com número fatura igual");
+                //    return false;
+                //}
+
             }
 
             // Se tipo de rubrica é devolução, o numero de nota de crédito tem de estar preenchido (não pode ser null)
@@ -65,11 +66,11 @@ namespace AppGCT.Pages.Gestao.Movimentos
             if (Movimento.NumNotaCredito != null)
             {
                 // Valida se o NumNotaCredito já existe na BD
-                if (await _context.Movimento.AnyAsync(e => e.NumNotaCredito == Movimento.NumNotaCredito))
-                {
-                    ModelState.AddModelError("Movimento.NumNotaCredito", "Já existe um movimento com número nota crédito igual");
-                    return false;
-                }
+                //if (await _context.Movimento.AnyAsync(e => e.NumNotaCredito == Movimento.NumNotaCredito))
+                //{
+                //    ModelState.AddModelError("Movimento.NumNotaCredito", "Já existe um movimento com número nota crédito igual");
+                //    return false;
+                //}
             }
 
             // Validações se Rubrica não estiver preenchida
@@ -78,6 +79,20 @@ namespace AppGCT.Pages.Gestao.Movimentos
 
                     ModelState.AddModelError("Movimento.RubricaId", "Rúbrica é um campo obrigatório");
                     return false;
+            }
+            else
+            {
+                // Validação do preenchimento do Ginasta, para Rúbricas do Ginasta (mensalidade, seguros, ... )
+                switch ("G")
+                {
+                    case "G":
+                        if (Movimento.AtletaMovimentoId.Equals(null))
+                        {
+                            ModelState.AddModelError("Movimento.AtletaMovimentoId", "Ginasta é um campo obrigatório");
+                            return false;
+                        }
+                        break;
+                }
             }
 
             // Validações se Valor Movimento é superior a zero
@@ -92,7 +107,7 @@ namespace AppGCT.Pages.Gestao.Movimentos
             return true;
         }
 
-        public async Task OnGetAsync()
+        public async Task<IActionResult> OnGet()
         {
             var atletas = _context.Ginasta.ToList();
             atletas.Insert(0, new Ginasta
@@ -110,17 +125,19 @@ namespace AppGCT.Pages.Gestao.Movimentos
 
             });
             ViewData["MetodoPagamentoId"] = new SelectList(metodos, "CodMetodo", "DescMetodo");
-
+            
             List<string> userIdsInRole;
             //obtem lista de utilizadores associados ao role se role != null
             userIdsInRole = (await _userManager.GetUsersInRoleAsync("Sócio"))
                                                .Select(u => u.Id)
                                                .ToList();
+            await _context.SaveChangesAsync();
+
             // preenche dropdown Sócios para filtro
             var socios = _context.Utilizador.Where(i => i.EstadoUtilizador == "A" &&
                                                    userIdsInRole.Contains(i.Id) && i.NumSocio != null && i.NumSocio != "")
                                                     .ToList();
-
+            
             ViewData["UtilizadorId"] = new SelectList(socios, "Id", "ID_Description");
             var rubricas = _context.Rubrica.ToList();
             rubricas.Insert(0, new Rubrica
@@ -130,7 +147,8 @@ namespace AppGCT.Pages.Gestao.Movimentos
 
             });
             ViewData["RubricaId"] = new SelectList(rubricas, "CodRubrica", "ID_DescriptionRubrica");
-            //return Page();
+
+            return Page();
         }
 
         [BindProperty]
@@ -165,11 +183,13 @@ namespace AppGCT.Pages.Gestao.Movimentos
             {
                 return Page();
             }
-
-            if (!await ValidaMovimento())
+            var flag = await ValidaMovimento();
+            await _context.SaveChangesAsync();
+            if (!flag)
             {
                 //faz refresh das dropdown's
-                _ = OnGetAsync();
+
+                OnGet();
                 return Page();
             }
 

@@ -50,8 +50,10 @@
                     var lblNotCredField = $('#lblNotaCred');
                     var lblvalDescontoField = $('#lblvalDesconto');
 
-                    TipoDespesaField.find('option:first').attr('selected', 'selected');
+                    //TipoDespesaField.find('option:first').attr('selected', 'selected');
                     MetodoPagamentoField.find('option:first').attr('selected', 'selected');
+
+                    console.log("Cá estou outra vez");
 
                     // Função para alterações sobre o campo Classe
                     TipoDespesaField.on('change', function () {
@@ -199,9 +201,9 @@
                 <input asp-for="Movimento.DtMovimento" class="form-control" />
                 <span asp-validation-for="Movimento.DtMovimento" class="text-danger"></span>
             </div>
-            <div id="lblMetodo" class="form-group" hidden>
+            <div id="lblMetodo" class="form-group" >
                 <label asp-for="Movimento.MetodoPagamentoId" class="control-label" >Método de Pagamento</label>
-                <select asp-for="Movimento.MetodoPagamentoId" class="form-control" asp-items="ViewBag.MetodoPagamentoId" disabled ></select>
+                <select asp-for="Movimento.MetodoPagamentoId" class="form-control" asp-items="ViewBag.MetodoPagamentoId"  ></select>
             </div>
             <div class="form-group">
                 <label asp-for="Movimento.ValorMovimento" class="control-label"></label>
@@ -220,6 +222,7 @@
             <div id="lblAtletaField" class="form-group">
                 <label asp-for="Movimento.AtletaMovimentoId" class="control-label">Ginasta</label>
                 <select asp-for="Movimento.AtletaMovimentoId" class ="form-control" asp-items="ViewBag.AtletaMovimentoId"></select>
+                @Html.ValidationMessageFor(model => model.Movimento.AtletaMovimentoId, null, new { @class = "validation-error" })
             </div>
             <div class="form-group">
                 <input type="submit" value="Criar" class="btn btn-primary" />
