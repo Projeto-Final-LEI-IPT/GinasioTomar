@@ -11,6 +11,8 @@ using Microsoft.AspNet.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authorization;
 using System.Data;
+using System.Drawing;
+using System.Text.RegularExpressions;
 
 namespace AppGCT.Pages.Inscricoes.Ginastas
 {
@@ -24,6 +26,30 @@ namespace AppGCT.Pages.Inscricoes.Ginastas
         {
             _context = context;
         }
+        private async Task<bool> NIFValido(string nif)
+        {
+            if (string.IsNullOrEmpty(nif) || nif.Length != 9 || !Regex.IsMatch(nif, @"^\d{9}$"))
+            {
+                return false;
+            }
+
+            int[] weight = { 9, 8, 7, 6, 5, 4, 3, 2, 1 };
+            int sum = 0;
+
+            for (int i = 0; i < 8; i++)
+            {
+                sum += (nif[i] - '0') * weight[i];
+            }
+
+            int checkDigit = 11 - (sum % 11);
+            if (checkDigit >= 10)
+            {
+                checkDigit = 0;
+            }
+
+            return (checkDigit == nif[8] - '0');
+        }
+
 
         public IActionResult OnGet()
         {
@@ -55,10 +81,31 @@ namespace AppGCT.Pages.Inscricoes.Ginastas
             Ginasta.IdModificacao = "";
             Ginasta.EstadoGinasta = "A";
             Ginasta.DataModificacao = DateTime.MinValue;
+
             if (!ModelState.IsValid || _context.Ginasta == null || Ginasta == null)
             {
                 return Page();
             }
+
+            //valida NIF
+            if (!await NIFValido(Ginasta.NIF))
+            {
+                ModelState.AddModelError("Ginasta.NIF", "NIF é inválido");
+                OnGet();
+                return Page();
+            }
+
+            //valida NIF(EE)
+            if (Ginasta.NIFEE != null)
+            {
+                if (!await NIFValido(Ginasta.NIFEE))
+                {
+                    ModelState.AddModelError("Ginasta.NIFEE", "NIF EE é inválido");
+                    OnGet();
+                    return Page();
+                }
+            }
+            
 
             // Read the uploaded image file from the form
             //var imageFile = Request.Form.Files.FirstOrDefault();

@@ -261,36 +261,36 @@ namespace AppGCT.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    NomeCompleto = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ISexo = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    NomeCompleto = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    ISexo = table.Column<string>(type: "nvarchar(1)", maxLength: 1, nullable: false),
                     DtNascim = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Foto = table.Column<byte[]>(type: "varbinary(max)", nullable: true),
-                    EstadoGinasta = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    NumCC = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    NIF = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    NISS = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Morada = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CodPostal = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Localidade = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    IBolsa = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    IIrmaos = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    NomeIrmaos = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    NomeEE = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    NIFEE = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    prefixoTelemEE = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    numTelemovelEE = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    IGrauEE = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    EmailEE = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    NomeEmerEE = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    GrauEmerEE = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    PrefixoTlmEmerEE = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    EstadoGinasta = table.Column<string>(type: "nvarchar(1)", maxLength: 1, nullable: false),
+                    NumCC = table.Column<string>(type: "nvarchar(9)", maxLength: 9, nullable: false),
+                    NIF = table.Column<string>(type: "nvarchar(9)", maxLength: 9, nullable: false),
+                    NISS = table.Column<string>(type: "nvarchar(12)", maxLength: 12, nullable: false),
+                    Morada = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    CodPostal = table.Column<string>(type: "nvarchar(8)", maxLength: 8, nullable: true),
+                    Localidade = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: true),
+                    IBolsa = table.Column<string>(type: "nvarchar(1)", maxLength: 1, nullable: false),
+                    IIrmaos = table.Column<string>(type: "nvarchar(1)", maxLength: 1, nullable: false),
+                    NomeIrmaos = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
+                    Email = table.Column<string>(type: "nvarchar(70)", maxLength: 70, nullable: true),
+                    NomeEE = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    NIFEE = table.Column<string>(type: "nvarchar(9)", maxLength: 9, nullable: false),
+                    prefixoTelemEE = table.Column<string>(type: "nvarchar(6)", maxLength: 6, nullable: true),
+                    numTelemovelEE = table.Column<string>(type: "nvarchar(9)", maxLength: 9, nullable: false),
+                    IGrauEE = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: false),
+                    EmailEE = table.Column<string>(type: "nvarchar(70)", maxLength: 70, nullable: false),
+                    NomeEmerEE = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
+                    GrauEmerEE = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: true),
+                    PrefixoTlmEmerEE = table.Column<string>(type: "nvarchar(6)", maxLength: 6, nullable: true),
                     NumTlmEmerEE = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    EmailTlmEmerEE = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    EmailTlmEmerEE = table.Column<string>(type: "nvarchar(70)", maxLength: 70, nullable: true),
                     DataCriacao = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    IdCriacao = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    IdCriacao = table.Column<string>(type: "nvarchar(36)", maxLength: 36, nullable: true),
                     DataModificacao = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    IdModificacao = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    IdModificacao = table.Column<string>(type: "nvarchar(36)", maxLength: 36, nullable: true),
                     UtilizadorId = table.Column<string>(type: "nvarchar(450)", nullable: false)
                 },
                 constraints: table =>
@@ -489,20 +489,20 @@ namespace AppGCT.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "26df024b-ad29-46b4-b3e7-035471e2bba6", null, "Ginásio", "GINÁSIO" },
-                    { "bd276378-4cb4-4569-8817-d7cf3d816ac5", null, "Sócio", "SÓCIO" },
-                    { "db5357e8-797f-4fb8-8239-c012c0eff06d", null, "Administrador", "ADMINISTRADOR" }
+                    { "107d3d2a-307a-4c3a-9e4d-20290e86829f", null, "Administrador", "ADMINISTRADOR" },
+                    { "376f5a35-f2c5-49a4-bbd4-f3833fdf2014", null, "Sócio", "SÓCIO" },
+                    { "380dbc83-f621-4255-97b7-a383b0e63e37", null, "Ginásio", "GINÁSIO" }
                 });
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "DataAprovacao", "DataCriacao", "DataModificacao", "DataNascim", "Email", "EmailConfirmed", "EstadoUtilizador", "IdCriacao", "IdModificacao", "LockoutEnabled", "LockoutEnd", "Morada", "NIF", "Nome", "NormalizedEmail", "NormalizedUserName", "NumSocio", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UltimoLogin", "UserName" },
-                values: new object[] { "b5bd6de6-0bb1-4350-b3f6-dc1ba3a633af", 0, "17fdde02-5c5d-4762-aa45-2c8a82b96290", new DateTime(2023, 7, 24, 20, 54, 38, 967, DateTimeKind.Local).AddTicks(824), new DateTime(2023, 7, 24, 20, 54, 38, 967, DateTimeKind.Local).AddTicks(775), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2023, 7, 24, 20, 54, 38, 967, DateTimeKind.Local).AddTicks(830), "admin@localhost", true, "A", "SEED", " ", false, null, "Ginásio Clube de Tomar", "999999999", "Administrador", "ADMIN@LOCALHOST", "ADMIN@LOCALHOST", " ", "AQAAAAIAAYagAAAAEHcYxDzV0sdm77bje2CiJyMExBwQ4TUntx0f4uFwlLOT1LKB2pB5UA5aC23Xcz2uxQ==", "999999999", false, "48c0e654-5d40-4b5f-8115-59e2c3550bdf", false, null, "admin@localhost" });
+                values: new object[] { "637009ef-6852-486f-a7f9-76b905c9d958", 0, "abee974f-0b1a-4632-8d43-b5fa55a5caf5", new DateTime(2023, 7, 26, 21, 58, 49, 319, DateTimeKind.Local).AddTicks(9571), new DateTime(2023, 7, 26, 21, 58, 49, 319, DateTimeKind.Local).AddTicks(9495), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2023, 7, 26, 21, 58, 49, 319, DateTimeKind.Local).AddTicks(9580), "admin@localhost", true, "A", "SEED", " ", false, null, "Ginásio Clube de Tomar", "999999999", "Administrador", "ADMIN@LOCALHOST", "ADMIN@LOCALHOST", " ", "AQAAAAIAAYagAAAAEAndW736/VhqxEB6wIb4CD2p/XMeHDgS7uSQNwr5Uamo2G/1/s3nHlGk9J2uZmg6Mg==", "999999999", false, "3035c1f7-29de-4a6b-870f-a0356e23c364", false, null, "admin@localhost" });
 
             migrationBuilder.InsertData(
                 table: "AspNetUserRoles",
                 columns: new[] { "RoleId", "UserId" },
-                values: new object[] { "db5357e8-797f-4fb8-8239-c012c0eff06d", "b5bd6de6-0bb1-4350-b3f6-dc1ba3a633af" });
+                values: new object[] { "107d3d2a-307a-4c3a-9e4d-20290e86829f", "637009ef-6852-486f-a7f9-76b905c9d958" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
