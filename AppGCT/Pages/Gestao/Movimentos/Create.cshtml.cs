@@ -44,14 +44,14 @@ namespace AppGCT.Pages.Gestao.Movimentos
                 return false;
             }
 
-            if (Movimento.NumFatura != null) { 
-            // Valida se o NumFatura já existe na BD
+            if (Movimento.NumFatura != null) {
+                // Valida se o NumFatura já existe na BD
 
-                //if (await _context.Movimento.AnyAsync(e => e.NumFatura == Movimento.NumFatura))
-                //{
-                //    ModelState.AddModelError("Movimento.NumFatura", "Já existe um movimento com número fatura igual");
-                //    return false;
-                //}
+                if (await _context.Movimento.AnyAsync(e => e.NumFatura == Movimento.NumFatura))
+                {
+                    ModelState.AddModelError("Movimento.NumFatura", "Já existe um movimento com número fatura igual");
+                    return false;
+                }
 
             }
 
@@ -66,11 +66,11 @@ namespace AppGCT.Pages.Gestao.Movimentos
             if (Movimento.NumNotaCredito != null)
             {
                 // Valida se o NumNotaCredito já existe na BD
-                //if (await _context.Movimento.AnyAsync(e => e.NumNotaCredito == Movimento.NumNotaCredito))
-                //{
-                //    ModelState.AddModelError("Movimento.NumNotaCredito", "Já existe um movimento com número nota crédito igual");
-                //    return false;
-                //}
+                if (await _context.Movimento.AnyAsync(e => e.NumNotaCredito == Movimento.NumNotaCredito))
+                {
+                    ModelState.AddModelError("Movimento.NumNotaCredito", "Já existe um movimento com número nota crédito igual");
+                    return false;
+                }
             }
 
             // Validações se Rubrica não estiver preenchida
@@ -131,7 +131,6 @@ namespace AppGCT.Pages.Gestao.Movimentos
             userIdsInRole = (await _userManager.GetUsersInRoleAsync("Sócio"))
                                                .Select(u => u.Id)
                                                .ToList();
-            await _context.SaveChangesAsync();
 
             // preenche dropdown Sócios para filtro
             var socios = _context.Utilizador.Where(i => i.EstadoUtilizador == "A" &&
@@ -184,7 +183,7 @@ namespace AppGCT.Pages.Gestao.Movimentos
                 return Page();
             }
             var flag = await ValidaMovimento();
-            await _context.SaveChangesAsync();
+            
             if (!flag)
             {
                 //faz refresh das dropdown's
@@ -225,7 +224,7 @@ namespace AppGCT.Pages.Gestao.Movimentos
 
 
             _context.Movimento.Add(Movimento);
-            await _context.SaveChangesAsync();
+            _context.SaveChangesAsync();
 
             return RedirectToPage("./Index");
         }
