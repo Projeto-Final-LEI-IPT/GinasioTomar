@@ -112,6 +112,7 @@ namespace AppGCT.Pages.Gestao.Utilizadores
                     Nome = Input.Nome,
                     NIF = Input.NIF,
                     Morada = Input.Morada,
+                    RoleAux = Input.RoleName,
                     PhoneNumber = Input.Contato,
                     EmailConfirmed = true,
                     EstadoUtilizador = "A",

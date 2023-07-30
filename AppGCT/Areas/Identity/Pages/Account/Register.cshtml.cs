@@ -153,6 +153,7 @@ namespace AppGCT.Areas.Identity.Pages.Account
                 user.DataNascim = Input.Dtnascim;
                 user.Morada = Input.Morada;
                 user.PhoneNumber = Input.Contato;
+                user.RoleAux = "Sócio";
                 // REGISTA UTILIZADOR COMO 'P-PRÉ ATIVO'
                 user.EstadoUtilizador = "P";
                 user.UltimoLogin = DateTime.MinValue;

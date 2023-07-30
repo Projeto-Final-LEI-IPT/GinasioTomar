@@ -37,6 +37,7 @@ namespace AppGCT.Data
                 Nome = "Administrador",
                 NumSocio = " ",
                 Morada = "Ginásio Clube de Tomar",
+                RoleAux = "Administrador",
                 EstadoUtilizador = "A",
                 NIF = "999999999",
                 PhoneNumber = "999999999",

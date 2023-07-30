@@ -107,7 +107,7 @@ namespace AppGCT.Pages.Gestao.Movimentos
             return true;
         }
 
-        public async Task<IActionResult> OnGet()
+        public IActionResult OnGet()
         {
             var atletas = _context.Ginasta.ToList();
             atletas.Insert(0, new Ginasta
@@ -125,16 +125,10 @@ namespace AppGCT.Pages.Gestao.Movimentos
 
             });
             ViewData["MetodoPagamentoId"] = new SelectList(metodos, "CodMetodo", "DescMetodo");
-            
-            List<string> userIdsInRole;
-            //obtem lista de utilizadores associados ao role se role != null
-            userIdsInRole = (await _userManager.GetUsersInRoleAsync("Sócio"))
-                                               .Select(u => u.Id)
-                                               .ToList();
 
             // preenche dropdown Sócios para filtro
             var socios = _context.Utilizador.Where(i => i.EstadoUtilizador == "A" &&
-                                                   userIdsInRole.Contains(i.Id) && i.NumSocio != null && i.NumSocio != "")
+                                                   i.RoleAux == "Sócio")
                                                     .ToList();
             
             ViewData["UtilizadorId"] = new SelectList(socios, "Id", "ID_Description");
