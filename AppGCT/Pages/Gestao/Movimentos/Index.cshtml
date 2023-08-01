@@ -47,10 +47,7 @@
                 @Html.DisplayNameFor(model => model.Movimento[0].DesRubrica)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Movimento[0].NumFatura)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Movimento[0].NumNotaCredito)
+                Nº Documento
             </th>
             <th>
                 Sócio
@@ -79,12 +76,27 @@
             <td>
                 @Html.DisplayFor(modelItem => item.DesRubrica)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NumFatura)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NumNotaCredito)
-            </td>
+            @if (item.TipoDespesa.TipoRubrica == "P")
+            {
+                <td>
+                    FT nº @Html.DisplayFor(modelItem => item.NumFatura)
+                </td>
+            }
+            else
+            {
+                    @if (item.TipoDespesa.TipoRubrica == "D")
+                    {
+                        <td>
+                            NC nº @Html.DisplayFor(modelItem => item.NumNotaCredito)
+                        </td>
+                    }
+                    else
+                    {
+                        <td>
+                            N/A
+                        </td>
+                    }
+            }
             <td>
                 @Html.DisplayFor(modelItem => item.Socio.ID_Description )
             </td>

@@ -31,7 +31,12 @@ namespace AppGCT.Pages.Gestao.Movimentos
             {
                 return false;
             }
-
+            // Só é possível criar Movimento para a DATA ATUAL
+            if (Movimento.DtMovimento != DateTime.Today)
+            {
+                ModelState.AddModelError("Movimento.DtMovimento", "Data de Movimento deve ser a data atual");
+                return false;
+            }
             // Se tipo de rubrica é pagamento, o numero da fatura tem de estar preenchido (não pode ser null)
             var tipoRubrica = _context.Rubrica.Where(i => i.CodRubrica == Movimento.RubricaId).FirstOrDefault().TipoRubrica;
             if (tipoRubrica == "P" && Movimento.NumFatura == null)
@@ -152,12 +157,16 @@ namespace AppGCT.Pages.Gestao.Movimentos
                 case "S":
                     Movimento.ValorMovimento = _context.Rubrica.Where(i => i.CodRubrica == Movimento.RubricaId).FirstOrDefault().ValorUnitario;
                     Movimento.ValorDesconto = 0;
-                    saldoAux = (int)(Movimento.ValorMovimento * -1) + (int)Movimento.ValorDesconto;
+                    saldoAux = (int)(Movimento.ValorMovimento * -1);
                     break;
                 case "P":
-                    Movimento.ValorDesconto = 0;
+                    if(!(Movimento.MetodoPagamentoId == "TB"))
+                    {
+                        Movimento.ValorDesconto = 0;
+                    }
+                    
                     Movimento.Atleta = null;
-                    saldoAux = (int)(Movimento.ValorMovimento * 1);
+                    saldoAux = (int)(Movimento.ValorMovimento * 1) + (int)Movimento.ValorDesconto;
                     break;
                 case "D":
                     Movimento.ValorDesconto = 0;

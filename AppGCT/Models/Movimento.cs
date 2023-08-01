@@ -84,6 +84,7 @@ namespace AppGCT.Models
         /// <summary>
         /// Chave Forasteira com tabela GINASTA ( --- preenchimento obrigatório --- )
         /// </summary>
+        [Required(ErrorMessage = "Rúbrica é campo obrigatório!")]
         public string RubricaId { get; set; }
         [Display(Name = "Rúbrica")]
         public Rubrica? TipoDespesa { get; set; }
