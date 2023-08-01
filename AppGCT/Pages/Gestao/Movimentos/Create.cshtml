@@ -215,6 +215,7 @@
             <div class="form-group">
                 <label asp-for="Movimento.AtletaMovimentoId" class="control-label">Ginasta</label>
                 <select asp-for="Movimento.AtletaMovimentoId" class ="form-control" asp-items="ViewBag.AtletaMovimentoId"></select>
+                @Html.ValidationMessageFor(model => model.Movimento.AtletaMovimentoId, null, new { @class = "validation-error" })
             </div>
             <div class="form-group">
                 <input type="submit" value="Criar" class="btn btn-primary" />
