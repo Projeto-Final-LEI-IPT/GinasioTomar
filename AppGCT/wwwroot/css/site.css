@@ -41,3 +41,7 @@ div:not(:first-child):not(:last-child) {
     width: 100px;
     /* only for IE8 max-width: 100%;*/
 }
+
+.bg-positivos {
+    text-align: left;
+}

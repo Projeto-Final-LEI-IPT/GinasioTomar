@@ -67,11 +67,59 @@
             <td>
                 @Html.DisplayFor(modelItem => item.DtMovimento)
             </td>
+                @if (   item.TipoDespesa.TipoRubrica == "S" 
+                     || item.TipoDespesa.TipoRubrica == "G" 
+                     || item.TipoDespesa.TipoRubrica == "R" )
+                {
+
+                    <td >
+                        @{
+                            var valorMov = item.ValorMovimento * -1;
+                        }
+                        <div class="badge bg-bg-light text-dark d-inline-flex align-items-center justify-content-end" style="width: 6rem;">
+                            @Html.DisplayFor(modelItem => valorMov)€
+                        </div>
+                    </td>
+                }
+                else
+                {
+                    @if (  item.TipoDespesa.TipoRubrica == "D"
+                        || item.TipoDespesa.TipoRubrica == "P")
+                    {
+                        <td  >
+                            @{
+                                var valorMov = item.ValorMovimento;
+                            }
+                            <div class="badge bg-success d-inline-flex align-items-center justify-content-end" style="width: 6rem;">
+                                @Html.DisplayFor(modelItem => valorMov)€
+                            </div>
+                        </td>
+                    }
+                    else
+                    {
+                        <td>
+                            Desconhecido-Contact.Inform.
+                        </td>
+                    }
+                }
             <td>
-                @Html.DisplayFor(modelItem => item.ValorMovimento)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ValorDesconto)
+                @{
+                    var valorDesc = item.ValorDesconto;
+                }
+                    @{
+                        if (valorDesc > 0)
+                        {
+                            <div class="badge bg-success d-inline-flex align-items-center justify-content-end" style="width: 6rem;">
+                                @Html.DisplayFor(modelItem => valorDesc)€
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="badge bg-bg-light text-dark d-inline-flex align-items-center justify-content-end" style="width: 6rem;">
+                                @Html.DisplayFor(modelItem => valorDesc)€
+                            </div>
+                        }
+                    }
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.DesRubrica)
@@ -79,7 +127,7 @@
             @if (item.TipoDespesa.TipoRubrica == "P")
             {
                 <td>
-                    FT nº @Html.DisplayFor(modelItem => item.NumFatura)
+                    FA N.º @Html.DisplayFor(modelItem => item.NumFatura)
                 </td>
             }
             else
@@ -87,7 +135,7 @@
                     @if (item.TipoDespesa.TipoRubrica == "D")
                     {
                         <td>
-                            NC nº @Html.DisplayFor(modelItem => item.NumNotaCredito)
+                            NC N.º @Html.DisplayFor(modelItem => item.NumNotaCredito)
                         </td>
                     }
                     else
@@ -104,7 +152,7 @@
                 @Html.DisplayFor(modelItem => item.Atleta.NomeCompleto)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.FormaPagamento.CodMetodo)
+                @Html.DisplayFor(modelItem => item.FormaPagamento.DescMetodo)
             </td>
             <td>
                 @if (User.IsInRole("Administrador"))
