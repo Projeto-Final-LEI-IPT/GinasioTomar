@@ -36,6 +36,7 @@ namespace AppGCT.Data
                 EmailConfirmed = true,
                 Nome = "Administrador",
                 NumSocio = " ",
+                RoleAux = "Administrador",
                 Morada = "Ginásio Clube de Tomar",
                 EstadoUtilizador = "A",
                 NIF = "999999999",

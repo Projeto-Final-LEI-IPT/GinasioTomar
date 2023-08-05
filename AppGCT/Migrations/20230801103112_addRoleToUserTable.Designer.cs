@@ -4,6 +4,7 @@ using AppGCT.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AppGCT.Migrations
 {
     [DbContext(typeof(AppGCTContext))]
-    partial class AppGCTContextModelSnapshot : ModelSnapshot
+    [Migration("20230801103112_addRoleToUserTable")]
+    partial class addRoleToUserTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -134,13 +137,13 @@ namespace AppGCT.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "9e917e58-563a-43c4-9f26-abd6aca1deee",
+                            Id = "be685766-768a-4010-bd3c-8f4b19c399ff",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "643098e2-8800-45cd-913c-a91337a9e962",
-                            DataAprovacao = new DateTime(2023, 8, 1, 15, 46, 14, 124, DateTimeKind.Local).AddTicks(3109),
-                            DataCriacao = new DateTime(2023, 8, 1, 15, 46, 14, 124, DateTimeKind.Local).AddTicks(3027),
+                            ConcurrencyStamp = "3c555253-f733-4363-ba61-935396f328b0",
+                            DataAprovacao = new DateTime(2023, 8, 1, 11, 31, 12, 197, DateTimeKind.Local).AddTicks(243),
+                            DataCriacao = new DateTime(2023, 8, 1, 11, 31, 12, 197, DateTimeKind.Local).AddTicks(172),
                             DataModificacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DataNascim = new DateTime(2023, 8, 1, 15, 46, 14, 124, DateTimeKind.Local).AddTicks(3119),
+                            DataNascim = new DateTime(2023, 8, 1, 11, 31, 12, 197, DateTimeKind.Local).AddTicks(250),
                             Email = "admin@localhost",
                             EmailConfirmed = true,
                             EstadoUtilizador = "A",
@@ -153,11 +156,11 @@ namespace AppGCT.Migrations
                             NormalizedEmail = "ADMIN@LOCALHOST",
                             NormalizedUserName = "ADMIN@LOCALHOST",
                             NumSocio = " ",
-                            PasswordHash = "AQAAAAIAAYagAAAAEMUydp5MmsXxa+vaU6lpnJyCqZcCD/4d+SL5swD+P4XbHY0xPbFDeLt+Y/54Ewu+ug==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEEFqKf1QE6rr2j5wvH7cdpvm0lv8RNeWiOHbXiNB+SIFYAeeubAkP3V4JJZjw6PtqQ==",
                             PhoneNumber = "999999999",
                             PhoneNumberConfirmed = false,
                             RoleAux = "Administrador",
-                            SecurityStamp = "d305a138-8d45-4bda-abc8-583e0d936800",
+                            SecurityStamp = "459a361a-0b98-41ff-acb8-4d1fc25bd6d7",
                             TwoFactorEnabled = false,
                             UserName = "admin@localhost"
                         });
@@ -553,8 +556,7 @@ namespace AppGCT.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("DesRubrica")
-                        .HasMaxLength(30)
-                        .HasColumnType("nvarchar(30)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("DtMovimento")
                         .HasColumnType("datetime2");
@@ -565,22 +567,13 @@ namespace AppGCT.Migrations
                     b.Property<string>("IdModificacao")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<decimal?>("MSaldo")
-                        .HasPrecision(18, 2)
-                        .HasColumnType("decimal(18,2)");
-
                     b.Property<string>("MetodoPagamentoId")
                         .HasColumnType("nvarchar(2)");
 
                     b.Property<string>("NumFatura")
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("NumNotaCredito")
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<string>("Observacoes")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("RubricaId")
@@ -788,19 +781,19 @@ namespace AppGCT.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "7f11615e-2242-4cb4-9cf6-ceaee7180e39",
+                            Id = "1ee157c5-51b6-4f37-99b1-a3f3c41060a4",
                             Name = "Administrador",
                             NormalizedName = "ADMINISTRADOR"
                         },
                         new
                         {
-                            Id = "77b58475-272e-4ef4-ac72-c8318375a6b7",
+                            Id = "140a20ac-e8a6-4d34-b69d-d954f048882f",
                             Name = "Ginásio",
                             NormalizedName = "GINÁSIO"
                         },
                         new
                         {
-                            Id = "07811f89-1b44-4371-a9d1-ae6613cdf208",
+                            Id = "048fb1a2-8e33-4d81-805d-823bf4744ab2",
                             Name = "Sócio",
                             NormalizedName = "SÓCIO"
                         });
@@ -897,8 +890,8 @@ namespace AppGCT.Migrations
                     b.HasData(
                         new
                         {
-                            UserId = "9e917e58-563a-43c4-9f26-abd6aca1deee",
-                            RoleId = "7f11615e-2242-4cb4-9cf6-ceaee7180e39"
+                            UserId = "be685766-768a-4010-bd3c-8f4b19c399ff",
+                            RoleId = "1ee157c5-51b6-4f37-99b1-a3f3c41060a4"
                         });
                 });
 

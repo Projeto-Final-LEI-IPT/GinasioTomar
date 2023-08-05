@@ -33,6 +33,11 @@ div:not(:first-child):not(:last-child) {
     grid-template-columns: 200px 200px 200px;
 }
 
+.wrapper1 {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+}
+
 .btn-xl {
     border: 1px solid gray;
     border-radius: 7%;
@@ -40,4 +45,12 @@ div:not(:first-child):not(:last-child) {
     word-wrap: break-word;
     width: 100px;
     /* only for IE8 max-width: 100%;*/
+}
+
+.bg-positivos {
+    text-align: left;
+}
+
+.valoresCSS{
+    font-size: 18px;
 }

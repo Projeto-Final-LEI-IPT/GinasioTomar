@@ -25,13 +25,18 @@ namespace AppGCT.Pages.Gestao.Movimentos
             _context = context;
         }
 
-        private async Task<bool> ValidaMovimento()
+        private async Task<bool> ValidaMovimento(string? tipoMov)
         {
             if (_context.Movimento == null || Movimento == null)
             {
                 return false;
             }
-
+            // Só é possível criar Movimento para a DATA ATUAL
+            if (Movimento.DtMovimento != DateTime.Today)
+            {
+                ModelState.AddModelError("Movimento.DtMovimento", "Data de Movimento deve ser a data atual");
+                return false;
+            }
             // Se tipo de rubrica é pagamento, o numero da fatura tem de estar preenchido (não pode ser null)
             var tipoRubrica = _context.Rubrica.Where(i => i.CodRubrica == Movimento.RubricaId).FirstOrDefault().TipoRubrica;
             if (tipoRubrica == "P" && Movimento.NumFatura == null)
@@ -74,6 +79,29 @@ namespace AppGCT.Pages.Gestao.Movimentos
                     ModelState.AddModelError("Movimento.RubricaId", "Rúbrica é um campo obrigatório");
                     return false;
             }
+            else
+            {
+                // Validação do preenchimento do Ginasta, para Rúbricas do Ginasta (mensalidade, seguros, ... )
+                switch (tipoMov)
+                {
+                    case "G":
+                        if (Movimento.AtletaMovimentoId.Equals(null))
+                        {
+                            ModelState.AddModelError("Movimento.AtletaMovimentoId", "Ginasta é um campo obrigatório");
+                            return false;
+                        }
+                        break;
+                }
+            }
+
+            // Validações se Valor Movimento é superior a zero
+            if (Movimento.ValorMovimento <= 0)
+            {
+
+                ModelState.AddModelError("Movimento.ValorMovimento", "Valor movimento tem de ser superior a 0,00€");
+                return false;
+
+            }
 
             return true;
         }
@@ -96,7 +124,13 @@ namespace AppGCT.Pages.Gestao.Movimentos
 
             });
             ViewData["MetodoPagamentoId"] = new SelectList(metodos, "CodMetodo", "DescMetodo");
-            ViewData["UtilizadorId"] = new SelectList(_context.Users, "Id", "ID_Description");
+
+            // preenche dropdown Sócios para filtro
+            var socios = _context.Utilizador.Where(i => i.EstadoUtilizador == "A" &&
+                                                   i.RoleAux == "Sócio")
+                                                    .ToList();
+
+            ViewData["UtilizadorId"] = new SelectList(socios, "Id", "ID_Description");
             var rubricas = _context.Rubrica.ToList();
             rubricas.Insert(0, new Rubrica
             {
@@ -115,7 +149,7 @@ namespace AppGCT.Pages.Gestao.Movimentos
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync()
         {
-
+            var saldoAux = 0;
             var tipoMov = _context.Rubrica.Where(i => i.CodRubrica == Movimento.RubricaId).FirstOrDefault().TipoRubrica;
             switch (tipoMov)
             {
@@ -123,12 +157,20 @@ namespace AppGCT.Pages.Gestao.Movimentos
                 case "S":
                     Movimento.ValorMovimento = _context.Rubrica.Where(i => i.CodRubrica == Movimento.RubricaId).FirstOrDefault().ValorUnitario;
                     Movimento.ValorDesconto = 0;
+                    saldoAux = (int)(Movimento.ValorMovimento * -1);
                     break;
                 case "P":
-                    Movimento.ValorDesconto = 0;
+                    if(!(Movimento.MetodoPagamentoId == "TB"))
+                    {
+                        Movimento.ValorDesconto = 0;
+                    }
+                    
+                    Movimento.Atleta = null;
+                    saldoAux = (int)(Movimento.ValorMovimento * 1) + (int)Movimento.ValorDesconto;
                     break;
                 case "D":
                     Movimento.ValorDesconto = 0;
+                    saldoAux = (int)(Movimento.ValorMovimento * 1);
                     break;
             }
 
@@ -137,7 +179,7 @@ namespace AppGCT.Pages.Gestao.Movimentos
                 return Page();
             }
 
-            if (!await ValidaMovimento())
+            if (!await ValidaMovimento(tipoMov))
             {
                 //faz refresh das dropdown's
                 OnGet();
@@ -155,6 +197,25 @@ namespace AppGCT.Pages.Gestao.Movimentos
             Movimento.IdCriacao = userId;
             Movimento.DataModificacao = DateTime.MinValue;
             Movimento.IdModificacao = "";
+
+            var idSoc = Movimento.UtilizadorId;
+            var saldoAnt = _context.Saldo.Where(i => i.IdSocio == idSoc).FirstOrDefault().MSaldo;
+            Movimento.MSaldo = saldoAnt + saldoAux;
+
+            Movimento.Observacoes = "";
+
+            // Atualiza Saldo do Sócio na tabela Saldos
+            var saldoObj = _context.Saldo.FirstOrDefault(s => s.IdSocio == idSoc);
+
+            if (saldoObj != null)
+            {
+                // Step 3: Modify the properties you want to update
+                saldoObj.MSaldo = Movimento.MSaldo;
+
+                // Step 4: Save the changes back to the database
+                _context.Saldo.Update(saldoObj);
+
+            }
 
             _context.Movimento.Add(Movimento);
             await _context.SaveChangesAsync();
