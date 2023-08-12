@@ -18,6 +18,7 @@ public class Utilizador : IdentityUser
     public string NumSocio { get; set; }
     public string NIF { get; set; }
     public string EstadoUtilizador { get; set; }
+    public string RoleAux { get; set; }
     [PersonalData]
     public string Morada { get; set; }
     [PersonalData]

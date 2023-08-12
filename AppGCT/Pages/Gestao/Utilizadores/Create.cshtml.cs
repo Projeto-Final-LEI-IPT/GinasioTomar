@@ -120,6 +120,7 @@ namespace AppGCT.Pages.Gestao.Utilizadores
                     DataNascim = Input.Dtnascim,
                     Nome = Input.Nome,
                     NIF = Input.NIF,
+                    RoleAux = Input.RoleName,
                     Morada = Input.Morada,
                     PhoneNumber = Input.Contato,
                     EmailConfirmed = true,

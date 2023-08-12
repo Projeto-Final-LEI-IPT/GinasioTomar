@@ -40,15 +40,22 @@
                     var NotaCreditoField = $('#Movimento_NumNotaCredito');
                     var TipoDespesaField = $('#Movimento_RubricaId');
                     var MetodoPagamentoField = $('#Movimento_MetodoPagamentoId');
+                    var AtletaMovimentoIdField = $('#Movimento_AtletaMovimentoId');
                     var ValorMovimentoField = $('#Movimento_ValorMovimento');
                     var ValorDescontoField = $('#Movimento_ValorDesconto');
                     var lblMetPagField = $('#lblMetodo');
                     var lblFaturaField = $('#lblFatura');
                     var lblNotCredField = $('#lblNotaCred');
                     var lblvalDescontoField = $('#lblvalDesconto');
+                    var lblAtletaField = $('#lblAtleta');
+
+
+                    NotaCreditoField.attr('placeholder', '');
+                    FaturaField.attr('placeholder', '');
 
                     TipoDespesaField.find('option:first').attr('selected', 'selected');
                     MetodoPagamentoField.find('option:first').attr('selected', 'selected');
+                    AtletaMovimentoIdField.find('option:first').attr('selected', 'selected');
 
                     // Função para alterações sobre o campo Classe
                     TipoDespesaField.on('change', function () {
@@ -56,17 +63,27 @@
                         if (selectedValue == "") {
                             FaturaField.prop('disabled', true);
                             NotaCreditoField.prop('disabled', true);
-                            MetodoPagamentoField.prop('disabled', true);
                             ValorMovimentoField.prop('disabled', true);
                             ValorDescontoField.prop('disabled', true);
-                            lblMetPagField.prop('hidden', true);
                             lblNotCredField.prop('hidden', false);
                             lblFaturaField.prop('hidden', false);
+                            NotaCreditoField.attr('placeholder', '');
+                            FaturaField.attr('placeholder', '');
                             lblvalDescontoField.prop('hidden', false);
                             FaturaField.val('');
                             NotaCreditoField.val('');
                             ValorMovimentoField.val(0);
                             ValorDescontoField.val(0);
+
+                            // Mostrar Atleta, desabilitar e reposicionar na primeira posição
+                            lblAtletaField.prop('hidden', false);
+                            AtletaMovimentoIdField.prop('disabled', true);
+                            AtletaMovimentoIdField[0].selectedIndex = 0;
+
+                            // Esconder Método de Pagamento, desabilitar e reposicionar na primeira posição
+                            lblMetPagField.prop('hidden', true);
+                            MetodoPagamentoField.prop('disabled', true);
+                            MetodoPagamentoField[0].selectedIndex = 0;
                         }
                         else {
                             $.ajax({
@@ -82,6 +99,7 @@
                                                     FaturaField.prop('disabled', false);
                                                     lblFaturaField.prop('hidden', false);
                                                     FaturaField.val('');
+                                                    FaturaField.attr('placeholder', 'Mínimo 5 caracteres');
                                                     //Esconder e desativar campo Nota de Crédito
                                                     NotaCreditoField.prop('disabled', true);
                                                     lblNotCredField.prop('hidden', true);
@@ -89,7 +107,7 @@
                                                     // Mostrar DIV do Metodo de Pagamento
                                                     lblMetPagField.prop('hidden', false);
                                                     MetodoPagamentoField.prop('disabled', false);
-                                                    MetodoPagamentoField.find('option:first').attr('selected', 'selected');
+                                                    MetodoPagamentoField[0].selectedIndex = 0;
                                                     // habilitar Valor Movimento
                                                     ValorMovimentoField.prop('disabled', false);
                                                     ValorMovimentoField.val(0);
@@ -97,6 +115,14 @@
                                                     ValorDescontoField.prop('disabled', true);
                                                     ValorDescontoField.val(0);
                                                     lblvalDescontoField.prop('hidden', false);
+
+                                                    // Mostrar Atleta e reposicionar na primeira posição
+                                                    lblAtletaField.prop('hidden', true);
+                                                    AtletaMovimentoIdField.prop('disabled', true);
+                                                    // As duas linhas abaixo fazem o mesmo, mas a segunda é mais simples
+                                                    // Fonte: https://stackoverflow.com/questions/1414276/how-to-make-the-first-option-of-select-selected-with-jquery
+                                                    //AtletaMovimentoIdField.val($("#target option:first").val());
+                                                    AtletaMovimentoIdField[0].selectedIndex = 0;
                                                     break;
                                                 case 'D':
                                                     FaturaField.prop('disabled', true);
@@ -105,10 +131,11 @@
                                                     //Mostrar e ativar campo Nota de Crédito
                                                     NotaCreditoField.prop('disabled', false);
                                                     lblNotCredField.prop('hidden', false);
-                                                    NotaCreditoField.val('');
+                                                    NotaCreditoField.attr('placeholder', 'Mínimo 5 caracteres');
 
                                                     MetodoPagamentoField.prop('disabled', true);
                                                     lblMetPagField.prop('hidden', true);
+                                                    MetodoPagamentoField[0].selectedIndex = 0;
                                                     
                                                     // habilitar Valor Movimento
                                                     ValorMovimentoField.prop('disabled', false);
@@ -122,8 +149,49 @@
                                                     ValorDescontoField.val(0);
                                                     ValorDescontoField.prop('disabled', true);
                                                     lblvalDescontoField.prop('hidden', true);
+
+                                                    // Esconder Atleta e reposicionar na primeira posição
+                                                    lblAtletaField.prop('hidden', true);
+                                                    AtletaMovimentoIdField.prop('disabled', true);
+                                                    // As duas linhas abaixo fazem o mesmo, mas a segunda é mais simples
+                                                    // Fonte: https://stackoverflow.com/questions/1414276/how-to-make-the-first-option-of-select-selected-with-jquery
+                                                    //AtletaMovimentoIdField.val($("#target option:first").val());
+                                                    AtletaMovimentoIdField[0].selectedIndex = 0;
                                                     break;
                                                 case 'G':
+
+                                                    //Esconder e desativar campo Fatura
+                                                    FaturaField.prop('disabled', true);
+                                                    lblFaturaField.prop('hidden', true);
+                                                    FaturaField.val('');
+                                                    //Esconder e desativar campo Nota de Crédito
+                                                    NotaCreditoField.prop('disabled', true);
+                                                    lblNotCredField.prop('hidden', true);
+                                                    NotaCreditoField.val('');
+
+                                                    //Esconder e desativar método de pagamento quando Rubrica é uma intenção de cobrança
+                                                    MetodoPagamentoField.prop('disabled', true);
+                                                    lblMetPagField.prop('hidden', true);
+                                                    MetodoPagamentoField[0].selectedIndex = 0;
+
+                                                    // preencher valor do movimento com valor unitário que provém do preçário
+                                                    ValorMovimentoField.val(itemData[0].valor);
+                                                    ValorMovimentoField.prop('disabled', true);
+
+                                                    // preencher valor do desconto com zeros ( não era necessário, mas faz-se por uma questão de coerência a ler o código
+                                                    //     e esconder campo
+                                                    ValorDescontoField.val(0);
+                                                    ValorDescontoField.prop('disabled', true);
+                                                    lblvalDescontoField.prop('hidden', true);
+
+                                                    // Mostrar Atleta e reposicionar na primeira posição
+                                                    lblAtletaField.prop('hidden', false);
+                                                    AtletaMovimentoIdField.prop('disabled', false);
+                                                    // As duas linhas abaixo fazem o mesmo, mas a segunda é mais simples
+                                                    // Fonte: https://stackoverflow.com/questions/1414276/how-to-make-the-first-option-of-select-selected-with-jquery
+                                                    //AtletaMovimentoIdField.val($("#target option:first").val());
+                                                    AtletaMovimentoIdField[0].selectedIndex = 0;
+                                                break;
                                                 case 'S':
                                                     
                                                    //Esconder e desativar campo Fatura
@@ -138,6 +206,7 @@
                                                     //Esconder e desativar método de pagamento quando Rubrica é uma intenção de cobrança
                                                     MetodoPagamentoField.prop('disabled', true);
                                                     lblMetPagField.prop('hidden', true);
+                                                    MetodoPagamentoField[0].selectedIndex = 0;
 
                                                     // preencher valor do movimento com valor unitário que provém do preçário
                                                     ValorMovimentoField.val(itemData[0].valor);
@@ -148,7 +217,16 @@
                                                     ValorDescontoField.val(0);
                                                     ValorDescontoField.prop('disabled', true);
                                                     lblvalDescontoField.prop('hidden', true);
-                                                    break;
+
+                                                    // Esconder Atleta e reposicionar na primeira posição
+                                                    lblAtletaField.prop('hidden', false);
+                                                    AtletaMovimentoIdField.prop('disabled', true);
+                                                    // As duas linhas abaixo fazem o mesmo, mas a segunda é mais simples
+                                                    // Fonte: https://stackoverflow.com/questions/1414276/how-to-make-the-first-option-of-select-selected-with-jquery
+                                                    //AtletaMovimentoIdField.val($("#target option:first").val());
+                                                    AtletaMovimentoIdField[0].selectedIndex = 0;
+
+                                                break;
                                                 default:
                                                     alert("Pedimos desculpa, mas algo não correu como esperado.");
                                             }
@@ -212,9 +290,10 @@
                 <label asp-for="Movimento.UtilizadorId" class="control-label"></label>
                 <select asp-for="Movimento.UtilizadorId" class ="form-control" asp-items="ViewBag.UtilizadorId"></select>
             </div>
-            <div class="form-group">
+            <div id="lblAtleta" class="form-group">
                 <label asp-for="Movimento.AtletaMovimentoId" class="control-label">Ginasta</label>
-                <select asp-for="Movimento.AtletaMovimentoId" class ="form-control" asp-items="ViewBag.AtletaMovimentoId"></select>
+                <select asp-for="Movimento.AtletaMovimentoId" class ="form-control" asp-items="ViewBag.AtletaMovimentoId" disabled></select>
+                @Html.ValidationMessageFor(model => model.Movimento.AtletaMovimentoId, null, new { @class = "validation-error" })
             </div>
             <div class="form-group">
                 <input type="submit" value="Criar" class="btn btn-primary" />

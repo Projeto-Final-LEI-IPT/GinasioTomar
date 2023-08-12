@@ -12,12 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AppGCT.Migrations
 {
     [DbContext(typeof(AppGCTContext))]
-<<<<<<<< HEAD:AppGCT/Migrations/20230726205850_initialCreate.Designer.cs
-    [Migration("20230726205850_initialCreate")]
-========
-    [Migration("20230801101013_initialCreate")]
->>>>>>>> main:AppGCT/Migrations/20230801101013_initialCreate.Designer.cs
-    partial class initialCreate
+    [Migration("20230801103112_addRoleToUserTable")]
+    partial class addRoleToUserTable
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -109,6 +105,10 @@ namespace AppGCT.Migrations
                     b.Property<bool>("PhoneNumberConfirmed")
                         .HasColumnType("bit");
 
+                    b.Property<string>("RoleAux")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("nvarchar(max)");
 
@@ -137,23 +137,13 @@ namespace AppGCT.Migrations
                     b.HasData(
                         new
                         {
-<<<<<<<< HEAD:AppGCT/Migrations/20230726205850_initialCreate.Designer.cs
-                            Id = "637009ef-6852-486f-a7f9-76b905c9d958",
+                            Id = "be685766-768a-4010-bd3c-8f4b19c399ff",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "abee974f-0b1a-4632-8d43-b5fa55a5caf5",
-                            DataAprovacao = new DateTime(2023, 7, 26, 21, 58, 49, 319, DateTimeKind.Local).AddTicks(9571),
-                            DataCriacao = new DateTime(2023, 7, 26, 21, 58, 49, 319, DateTimeKind.Local).AddTicks(9495),
+                            ConcurrencyStamp = "3c555253-f733-4363-ba61-935396f328b0",
+                            DataAprovacao = new DateTime(2023, 8, 1, 11, 31, 12, 197, DateTimeKind.Local).AddTicks(243),
+                            DataCriacao = new DateTime(2023, 8, 1, 11, 31, 12, 197, DateTimeKind.Local).AddTicks(172),
                             DataModificacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DataNascim = new DateTime(2023, 7, 26, 21, 58, 49, 319, DateTimeKind.Local).AddTicks(9580),
-========
-                            Id = "02bd1baf-f03f-4647-ae45-58f1270b1363",
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "ac26801c-a874-4631-8cda-e0c7ca4812f1",
-                            DataAprovacao = new DateTime(2023, 8, 1, 11, 10, 12, 311, DateTimeKind.Local).AddTicks(5456),
-                            DataCriacao = new DateTime(2023, 8, 1, 11, 10, 12, 311, DateTimeKind.Local).AddTicks(5382),
-                            DataModificacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DataNascim = new DateTime(2023, 8, 1, 11, 10, 12, 311, DateTimeKind.Local).AddTicks(5466),
->>>>>>>> main:AppGCT/Migrations/20230801101013_initialCreate.Designer.cs
+                            DataNascim = new DateTime(2023, 8, 1, 11, 31, 12, 197, DateTimeKind.Local).AddTicks(250),
                             Email = "admin@localhost",
                             EmailConfirmed = true,
                             EstadoUtilizador = "A",
@@ -166,17 +156,11 @@ namespace AppGCT.Migrations
                             NormalizedEmail = "ADMIN@LOCALHOST",
                             NormalizedUserName = "ADMIN@LOCALHOST",
                             NumSocio = " ",
-<<<<<<<< HEAD:AppGCT/Migrations/20230726205850_initialCreate.Designer.cs
-                            PasswordHash = "AQAAAAIAAYagAAAAEAndW736/VhqxEB6wIb4CD2p/XMeHDgS7uSQNwr5Uamo2G/1/s3nHlGk9J2uZmg6Mg==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEEFqKf1QE6rr2j5wvH7cdpvm0lv8RNeWiOHbXiNB+SIFYAeeubAkP3V4JJZjw6PtqQ==",
                             PhoneNumber = "999999999",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "3035c1f7-29de-4a6b-870f-a0356e23c364",
-========
-                            PasswordHash = "AQAAAAIAAYagAAAAEEx0dYmCClW0HkYpYlzWH6iClumRzJos4mU/ebsINPbJ7WrGEYo+0FnnnG+yUmFRcA==",
-                            PhoneNumber = "999999999",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "f7ff1e64-6d9e-49bb-978b-a8768b075f34",
->>>>>>>> main:AppGCT/Migrations/20230801101013_initialCreate.Designer.cs
+                            RoleAux = "Administrador",
+                            SecurityStamp = "459a361a-0b98-41ff-acb8-4d1fc25bd6d7",
                             TwoFactorEnabled = false,
                             UserName = "admin@localhost"
                         });
@@ -296,15 +280,14 @@ namespace AppGCT.Migrations
 
             modelBuilder.Entity("AppGCT.Models.Ginasta", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int?>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int?>("Id"));
 
                     b.Property<string>("CodPostal")
-                        .HasMaxLength(8)
-                        .HasColumnType("nvarchar(8)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("DataCriacao")
                         .HasColumnType("datetime2");
@@ -316,124 +299,96 @@ namespace AppGCT.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Email")
-                        .HasMaxLength(70)
-                        .HasColumnType("nvarchar(70)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("EmailEE")
                         .IsRequired()
-                        .HasMaxLength(70)
-                        .HasColumnType("nvarchar(70)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("EmailTlmEmerEE")
-                        .HasMaxLength(70)
-                        .HasColumnType("nvarchar(70)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("EstadoGinasta")
                         .IsRequired()
-                        .HasMaxLength(1)
-                        .HasColumnType("nvarchar(1)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<byte[]>("Foto")
                         .HasColumnType("varbinary(max)");
 
                     b.Property<string>("GrauEmerEE")
-                        .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("IBolsa")
                         .IsRequired()
-                        .HasMaxLength(1)
-                        .HasColumnType("nvarchar(1)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("IGrauEE")
-                        .IsRequired()
-                        .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("IIrmaos")
                         .IsRequired()
-                        .HasMaxLength(1)
-                        .HasColumnType("nvarchar(1)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ISexo")
                         .IsRequired()
-                        .HasMaxLength(1)
-                        .HasColumnType("nvarchar(1)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("IdCriacao")
-                        .HasMaxLength(36)
-                        .HasColumnType("nvarchar(36)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("IdModificacao")
-                        .HasMaxLength(36)
-                        .HasColumnType("nvarchar(36)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Localidade")
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Morada")
                         .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("NIF")
                         .IsRequired()
-                        .HasMaxLength(9)
-                        .HasColumnType("nvarchar(9)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("NIFEE")
-                        .IsRequired()
-                        .HasMaxLength(9)
-                        .HasColumnType("nvarchar(9)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("NISS")
                         .IsRequired()
-                        .HasMaxLength(12)
-                        .HasColumnType("nvarchar(12)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("NomeCompleto")
                         .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("NomeEE")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("NomeEmerEE")
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("NomeIrmaos")
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("NumCC")
                         .IsRequired()
-                        .HasMaxLength(9)
-                        .HasColumnType("nvarchar(9)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("NumTlmEmerEE")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PrefixoTlmEmerEE")
-                        .HasMaxLength(6)
-                        .HasColumnType("nvarchar(6)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UtilizadorId")
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("numTelemovelEE")
-                        .IsRequired()
-                        .HasMaxLength(9)
-                        .HasColumnType("nvarchar(9)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("prefixoTelemEE")
-                        .HasMaxLength(6)
-                        .HasColumnType("nvarchar(6)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -826,31 +781,19 @@ namespace AppGCT.Migrations
                     b.HasData(
                         new
                         {
-<<<<<<<< HEAD:AppGCT/Migrations/20230726205850_initialCreate.Designer.cs
-                            Id = "107d3d2a-307a-4c3a-9e4d-20290e86829f",
-========
-                            Id = "068bae74-315d-4d88-9b27-189bd6bd79c1",
->>>>>>>> main:AppGCT/Migrations/20230801101013_initialCreate.Designer.cs
+                            Id = "1ee157c5-51b6-4f37-99b1-a3f3c41060a4",
                             Name = "Administrador",
                             NormalizedName = "ADMINISTRADOR"
                         },
                         new
                         {
-<<<<<<<< HEAD:AppGCT/Migrations/20230726205850_initialCreate.Designer.cs
-                            Id = "380dbc83-f621-4255-97b7-a383b0e63e37",
-========
-                            Id = "d247230c-3c99-42e7-b0d4-81551bfa2acc",
->>>>>>>> main:AppGCT/Migrations/20230801101013_initialCreate.Designer.cs
+                            Id = "140a20ac-e8a6-4d34-b69d-d954f048882f",
                             Name = "Ginásio",
                             NormalizedName = "GINÁSIO"
                         },
                         new
                         {
-<<<<<<<< HEAD:AppGCT/Migrations/20230726205850_initialCreate.Designer.cs
-                            Id = "376f5a35-f2c5-49a4-bbd4-f3833fdf2014",
-========
-                            Id = "e982396c-c9f6-4a9e-888e-9b2f83e80071",
->>>>>>>> main:AppGCT/Migrations/20230801101013_initialCreate.Designer.cs
+                            Id = "048fb1a2-8e33-4d81-805d-823bf4744ab2",
                             Name = "Sócio",
                             NormalizedName = "SÓCIO"
                         });
@@ -947,13 +890,8 @@ namespace AppGCT.Migrations
                     b.HasData(
                         new
                         {
-<<<<<<<< HEAD:AppGCT/Migrations/20230726205850_initialCreate.Designer.cs
-                            UserId = "637009ef-6852-486f-a7f9-76b905c9d958",
-                            RoleId = "107d3d2a-307a-4c3a-9e4d-20290e86829f"
-========
-                            UserId = "02bd1baf-f03f-4647-ae45-58f1270b1363",
-                            RoleId = "068bae74-315d-4d88-9b27-189bd6bd79c1"
->>>>>>>> main:AppGCT/Migrations/20230801101013_initialCreate.Designer.cs
+                            UserId = "be685766-768a-4010-bd3c-8f4b19c399ff",
+                            RoleId = "1ee157c5-51b6-4f37-99b1-a3f3c41060a4"
                         });
                 });
 

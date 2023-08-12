@@ -5,15 +5,64 @@
     ViewData["Title"] = "Gestão Movimentos Contabilísticos";
     Layout = "~/Pages/Shared/_Layout.cshtml";
 }
+<div class="wrapper1">
+    <div>
+        <h1>Gestão Movimentos Contabilísticos</h1>
+    </div>
+    @*
+    Mostrar Saldo ao Sócio
+    *@
+    @if (User.IsInRole("Sócio"))
+    {
+        @if (@ViewBag.SaldoSocioVB < 0)
+        {
+            <div class="badge rounded-pill bg-danger d-inline-flex align-items-center justify-content-end" style="width: 7rem;">
+                Saldo: @ViewBag.SaldoSocioVB€
+            </div>
+        }
+        else
+        {
+            <div class="badge rounded-pill bg-success d-inline-flex align-items-center justify-content-end" style="width: 7rem;">
+                Saldo: @ViewBag.SaldoSocioVB€
+            </div>
+        }
+    }
+    @*
+    Mostrar Saldo ao Administrador e Ginásio
+    *@
+    @if (User.IsInRole("Administrador") || User.IsInRole("Ginásio"))
+    {
+    @*
+    Se Saldo não está preenchido é porque não é para mostrar (ou seja, não foi submetido nenhum filtro por sócio)
+    *@
+        @if (@ViewBag.SaldoAdminGinVB != 9999999)
+        {
+            @if (@ViewBag.SaldoAdminGinVB < 0)
+            {
+                <div class="badge rounded-pill bg-danger d-inline-flex align-items-center justify-content-end" style="width: 7rem;">
+                    Saldo: @ViewBag.SaldoAdminGinVB€
+                </div>
+            }
+            else
+            {
+                <div class="badge rounded-pill bg-success d-inline-flex align-items-center justify-content-end" style="width: 7rem;">
+                    Saldo: @ViewBag.SaldoAdminGinVB€
+                </div>
+            }
+        }
+    }
+</div>
 
-<h1>Gestão Movimentos Contabilísticos</h1>
 @if (User.IsInRole("Administrador") || User.IsInRole("Ginásio"))
 {
 <div>
 
     <a class='btn btn-primary btn-sm' asp-area='' asp-page='/Gestao/Movimentos/Create'>Novo movimento</a>
+
 </div>
 }
+
+
 <form asp-page="./Index" method="get">
     <div class="form-actions no-color">
         <p>
@@ -35,7 +84,7 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Movimento[0].DtMovimento)
+                Dt. Movim.
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Movimento[0].ValorMovimento)
@@ -44,13 +93,13 @@
                 @Html.DisplayNameFor(model => model.Movimento[0].ValorDesconto)
             </th>
             <th>
+                @Html.DisplayNameFor(model => model.Movimento[0].MSaldo)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.Movimento[0].DesRubrica)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Movimento[0].NumFatura)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Movimento[0].NumNotaCredito)
+                Nº Documento
             </th>
             <th>
                 Sócio
@@ -59,7 +108,7 @@
                 @Html.DisplayNameFor(model => model.Movimento[0].Atleta)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Movimento[0].FormaPagamento)
+                Mét. Pagam.
             </th>
             <th></th>
         </tr>
@@ -70,29 +119,110 @@
             <td>
                 @Html.DisplayFor(modelItem => item.DtMovimento)
             </td>
+                @if (   item.TipoDespesa.TipoRubrica == "S" 
+                     || item.TipoDespesa.TipoRubrica == "G" 
+                     || item.TipoDespesa.TipoRubrica == "R" )
+                {
+
+                    <td >
+                        @{
+                            var valorMov = item.ValorMovimento * -1;
+                        }
+                        <p class="valoresCSS">
+                        <span class="badge bg-bg-light text-dark d-inline-flex align-items-center justify-content-end" style="width: 6rem;">
+                            @Html.DisplayFor(modelItem => valorMov)€
+                        </span>
+                        </p>
+                    </td>
+                }
+                else
+                {
+                    @if (  item.TipoDespesa.TipoRubrica == "D"
+                        || item.TipoDespesa.TipoRubrica == "P")
+                    {
+                        <td  >
+                            @{
+                                var valorMov = item.ValorMovimento;
+                            }
+                            <p class="valoresCSS">
+                                <span class="badge bg-success d-inline-flex align-items-center justify-content-end" style="width: 6rem;">
+                                    @Html.DisplayFor(modelItem => valorMov)€
+                                </span>
+                            </p>
+                        </td>
+                    }
+                    else
+                    {
+                        <td>
+                            Desconhecido-Contact.Inform.
+                        </td>
+                    }
+                }
             <td>
-                @Html.DisplayFor(modelItem => item.ValorMovimento)
+                @{
+                    var valorDesc = item.ValorDesconto;
+                }
+                    @{
+                        if (valorDesc > 0)
+                        {
+                            <p class="valoresCSS">
+                                <span class="badge bg-success d-inline-flex align-items-center justify-content-end" style="width: 6rem;">
+                                    @Html.DisplayFor(modelItem => valorDesc)€
+                                </span>
+                            </p>
+                        }
+                        else
+                        {
+                            <p class="valoresCSS">
+                                <span class="badge bg-bg-light text-dark d-inline-flex align-items-center justify-content-end" style="width: 6rem;">
+                                    @Html.DisplayFor(modelItem => valorDesc)€
+                                </span>
+                            </p>
+                        }
+                    }
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ValorDesconto)
-            </td>
+                <td>
+                    @{
+                        var saldo = item.MSaldo;
+                    }
+                    <p class="valoresCSS">
+                        <span class="badge bg-bg-light text-dark d-inline-flex align-items-center justify-content-end" style="width: 6rem;">
+                            @Html.DisplayFor(modelItem => saldo)€
+                        </span>
+                    </p>
+                </td>
             <td>
                 @Html.DisplayFor(modelItem => item.DesRubrica)
             </td>
+            @if (item.TipoDespesa.TipoRubrica == "P")
+            {
+                <td>
+                    FA N.º @Html.DisplayFor(modelItem => item.NumFatura)
+                </td>
+            }
+            else
+            {
+                    @if (item.TipoDespesa.TipoRubrica == "D")
+                    {
+                        <td>
+                            NC N.º @Html.DisplayFor(modelItem => item.NumNotaCredito)
+                        </td>
+                    }
+                    else
+                    {
+                        <td>
+                            N/A
+                        </td>
+                    }
+            }
             <td>
-                @Html.DisplayFor(modelItem => item.NumFatura)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NumNotaCredito)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Socio.ID_Description )
+                @Html.DisplayFor(modelItem => item.Socio.ID_Description)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Atleta.NomeCompleto)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.FormaPagamento.CodMetodo)
+                @Html.DisplayFor(modelItem => item.FormaPagamento.DescMetodo)
             </td>
             <td>
                 @if (User.IsInRole("Administrador"))
