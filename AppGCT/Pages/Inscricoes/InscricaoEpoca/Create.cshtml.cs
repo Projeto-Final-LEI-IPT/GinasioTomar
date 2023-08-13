@@ -161,24 +161,6 @@ namespace AppGCT.Pages.Inscricoes.InscricaoEpoca
             //percorre todas as rúbricas e lança os movimentos
             foreach (var rubricaini in rubricasIniciais)
             {
-                var movimento = new Movimento 
-                {
-                    DesRubrica = rubricaini.DescricaoRubrica,
-                    DtMovimento = DateTime.Now,
-                    ValorMovimento = rubricaini.ValorUnitario,
-                    ValorDesconto = 0,
-                    NumFatura = "",
-                    NumNotaCredito = "",
-                    DataCriacao = DateTime.Now,
-                    IdCriacao = User.Identity.GetUserId(),
-                    DataModificacao = DateTime.MinValue,
-                    IdModificacao = " ",
-                    UtilizadorId = idsocio,
-                    AtletaMovimentoId = Inscricao.GinastaId,
-                    RubricaId = rubricaini.CodRubrica,
-                    MetodoPagamentoId = null                  
-                };
-                _context.Movimento.Add(movimento);
                 //atualiza tabela de saldos
                 if (rubricaini.TipoMovimento == "D")
                 {
@@ -189,6 +171,26 @@ namespace AppGCT.Pages.Inscricoes.InscricaoEpoca
                     saldo.MSaldo = saldo.MSaldo + rubricaini.ValorUnitario;
                 }
                 _context.Saldo.Update(saldo);
+
+                var movimento = new Movimento 
+                {
+                    DesRubrica = rubricaini.DescricaoRubrica,
+                    DtMovimento = DateTime.Now,
+                    ValorMovimento = rubricaini.ValorUnitario,
+                    ValorDesconto = 0,
+                    NumFatura = "",
+                    NumNotaCredito = "",
+                    MSaldo = saldo.MSaldo,
+                    DataCriacao = DateTime.Now,
+                    IdCriacao = User.Identity.GetUserId(),
+                    DataModificacao = DateTime.MinValue,
+                    IdModificacao = " ",
+                    UtilizadorId = idsocio,
+                    AtletaMovimentoId = Inscricao.GinastaId,
+                    RubricaId = rubricaini.CodRubrica,
+                    MetodoPagamentoId = null                  
+                };
+                _context.Movimento.Add(movimento);
             }
 
             Inscricao.IdFGP = "";

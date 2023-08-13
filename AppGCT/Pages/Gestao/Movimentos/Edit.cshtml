@@ -20,7 +20,7 @@
             <input type="hidden" asp-for="Movimento.Id" />
             <div class="form-group">
                 <label asp-for="Movimento.DesRubrica" class="control-label"></label>
-                <input asp-for="Movimento.DesRubrica" class="form-control" />
+                <input asp-for="Movimento.DesRubrica" class="form-control" disabled />
                 <span asp-validation-for="Movimento.DesRubrica" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -30,44 +30,63 @@
             </div>
             <div class="form-group">
                 <label asp-for="Movimento.ValorMovimento" class="control-label"></label>
-                <input asp-for="Movimento.ValorMovimento" class="form-control" />
+                <input asp-for="Movimento.ValorMovimento" class="form-control" disabled />
                 <span asp-validation-for="Movimento.ValorMovimento" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Movimento.ValorDesconto" class="control-label"></label>
-                <input asp-for="Movimento.ValorDesconto" class="form-control" />
+                <input asp-for="Movimento.ValorDesconto" class="form-control" disabled />
                 <span asp-validation-for="Movimento.ValorDesconto" class="text-danger"></span>
             </div>
+            @if (@ViewBag.TipoRubrica == "P")
+            {
+                <div class="form-group">
+                    <label asp-for="Movimento.NumFatura" class="control-label"></label>
+                    <input asp-for="Movimento.NumFatura" class="form-control" />
+                    <span asp-validation-for="Movimento.NumFatura" class="text-danger"></span>
+                </div>
+                <input type="hidden" asp-for="Movimento.NumNotaCredito" />
+            }
+            @if (@ViewBag.TipoRubrica == "D")
+            {
+
+                <input type="hidden" asp-for="Movimento.NumFatura" />
+                <div class="form-group">
+                    <label asp-for="Movimento.NumNotaCredito" class="control-label"></label>
+                    <input asp-for="Movimento.NumNotaCredito" class="form-control" />
+                    <span asp-validation-for="Movimento.NumNotaCredito" class="text-danger"></span>
+                </div>
+            }
             <div class="form-group">
-                <label asp-for="Movimento.NumFatura" class="control-label"></label>
-                <input asp-for="Movimento.NumFatura" class="form-control" />
-                <span asp-validation-for="Movimento.NumFatura" class="text-danger"></span>
+                <label asp-for="Movimento.MSaldo" class="control-label"></label>
+                <input asp-for="Movimento.MSaldo" class="form-control" disabled />
+                <span asp-validation-for="Movimento.MSaldo" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Movimento.NumNotaCredito" class="control-label"></label>
-                <input asp-for="Movimento.NumNotaCredito" class="form-control" />
-                <span asp-validation-for="Movimento.NumNotaCredito" class="text-danger"></span>
+                <label asp-for="Movimento.Observacoes" class="control-label"></label>
+                <input asp-for="Movimento.Observacoes" class="form-control" disabled />
+                <span asp-validation-for="Movimento.Observacoes" class="text-danger"></span>
             </div>
             <input type="hidden" asp-for="Movimento.DataCriacao" />
             <input type="hidden" asp-for="Movimento.IdCriacao" />
             <div class="form-group">
                 <label asp-for="Movimento.UtilizadorId" class="control-label"></label>
-                <select asp-for="Movimento.UtilizadorId" class="form-control" asp-items="ViewBag.UtilizadorId"></select>
+                <select asp-for="Movimento.UtilizadorId" class="form-control" asp-items="ViewBag.UtilizadorId" disabled ></select>
                 <span asp-validation-for="Movimento.UtilizadorId" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Movimento.AtletaMovimentoId" class="control-label"></label>
-                <select asp-for="Movimento.AtletaMovimentoId" class="form-control" asp-items="ViewBag.AtletaMovimentoId"></select>
+                <select asp-for="Movimento.AtletaMovimentoId" class="form-control" asp-items="ViewBag.AtletaMovimentoId" disabled ></select>
                 <span asp-validation-for="Movimento.AtletaMovimentoId" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Movimento.RubricaId" class="control-label"></label>
-                <select asp-for="Movimento.RubricaId" class="form-control" asp-items="ViewBag.RubricaId"></select>
+                <select asp-for="Movimento.RubricaId" class="form-control" asp-items="ViewBag.RubricaId" disabled ></select>
                 <span asp-validation-for="Movimento.RubricaId" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Movimento.MetodoPagamentoId" class="control-label"></label>
-                <select asp-for="Movimento.MetodoPagamentoId" class="form-control" asp-items="ViewBag.MetodoPagamentoId"></select>
+                <select asp-for="Movimento.MetodoPagamentoId" class="form-control" asp-items="ViewBag.MetodoPagamentoId" disabled ></select>
                 <span asp-validation-for="Movimento.MetodoPagamentoId" class="text-danger"></span>
             </div>
             <div class="form-group">

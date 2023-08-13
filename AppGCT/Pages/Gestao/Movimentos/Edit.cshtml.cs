@@ -43,6 +43,11 @@ namespace AppGCT.Pages.Gestao.Movimentos
            ViewData["MetodoPagamentoId"] = new SelectList(_context.MetodoPagamento, "CodMetodo", "ID_DescrMetodo");
            ViewData["UtilizadorId"] = new SelectList(_context.Users, "Id", "ID_Description");
            ViewData["RubricaId"] = new SelectList(_context.Rubrica, "CodRubrica", "ID_DescriptionRubrica");
+
+            // Passamos TipoRubrica para a View, para sabermos que cmapo mostrar (Nuemro de fatura ou Nota de Crédito)
+            var tipoRub = _context.Rubrica.Where(i => i.CodRubrica == movimento.RubricaId).FirstOrDefault().TipoRubrica;
+
+            ViewData["TipoRubrica"] = tipoRub;
             return Page();
         }
 
