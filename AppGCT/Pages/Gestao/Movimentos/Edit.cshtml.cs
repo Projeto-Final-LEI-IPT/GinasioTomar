@@ -10,6 +10,7 @@ using AppGCT.Data;
 using AppGCT.Models;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.IdentityModel.Tokens;
 
 namespace AppGCT.Pages.Gestao.Movimentos
 {
@@ -41,8 +42,8 @@ namespace AppGCT.Pages.Gestao.Movimentos
             Movimento = movimento;
            ViewData["AtletaMovimentoId"] = new SelectList(_context.Ginasta, "Id", "ID_DescrGinasta");
            ViewData["MetodoPagamentoId"] = new SelectList(_context.MetodoPagamento, "CodMetodo", "ID_DescrMetodo");
-           ViewData["UtilizadorId"] = new SelectList(_context.Users, "Id", "ID_Description");
-           ViewData["RubricaId"] = new SelectList(_context.Rubrica, "CodRubrica", "ID_DescriptionRubrica");
+           ViewData["UtilizadorId"] = new SelectList(_context.Users.Where(i => i.Id == Movimento.UtilizadorId), "Id", "ID_Description");
+           ViewData["RubricaId"] = new SelectList(_context.Rubrica.Where(i => i.CodRubrica == Movimento.RubricaId), "CodRubrica", "ID_DescriptionRubrica");
 
             // Passamos TipoRubrica para a View, para sabermos que cmapo mostrar (Nuemro de fatura ou Nota de Crédito)
             var tipoRub = _context.Rubrica.Where(i => i.CodRubrica == movimento.RubricaId).FirstOrDefault().TipoRubrica;
@@ -59,36 +60,29 @@ namespace AppGCT.Pages.Gestao.Movimentos
             {
                 return Page();
             }
-
-            Movimento.DataModificacao = DateTime.Now;
+            var movimentoAtualizar = _context.Movimento.Where(i => i.Id == Movimento.Id).FirstOrDefault();
+            movimentoAtualizar.DtMovimento = Movimento.DtMovimento;
+            movimentoAtualizar.DataModificacao = DateTime.Now;
             // obtem User ID logado
             var userId = User.FindFirstValue(ClaimTypes.Name);
-            Movimento.IdModificacao = userId;
+            movimentoAtualizar.IdModificacao = userId;
 
-            _context.Attach(Movimento).State = EntityState.Modified;
+            if (!Movimento.NumFatura.IsNullOrEmpty())
+            {
+                movimentoAtualizar.NumFatura = Movimento.NumFatura;
+            }
 
-            try
+            if (!Movimento.NumNotaCredito.IsNullOrEmpty())
             {
-                await _context.SaveChangesAsync();
+                movimentoAtualizar.NumNotaCredito = Movimento.NumNotaCredito;
             }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!MovimentoExists(Movimento.Id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+
+
+            _context.Update(movimentoAtualizar);
+            _context.SaveChanges();
 
             return RedirectToPage("./Index");
         }
 
-        private bool MovimentoExists(int? id)
-        {
-          return (_context.Movimento?.Any(e => e.Id == id)).GetValueOrDefault();
-        }
     }
 }

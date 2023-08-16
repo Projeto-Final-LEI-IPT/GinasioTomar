@@ -43,6 +43,11 @@ div:not(:first-child):not(:last-child) {
     grid-template-columns: 1fr 1fr;
 }
 
+.wrapper3 {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+
 .right {
     margin-right: 8px;
 }

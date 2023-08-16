@@ -26,7 +26,7 @@ namespace AppGCT.Pages.Gestao.Movimentos
             _context = context;
         }
 
-        private async Task<bool> ValidaMovimento(string? tipoRub)
+        private async Task<bool> ValidaMovimento(string? tipoRub, int? atletaIdentifier)
         {
             if (_context.Movimento == null || Movimento == null)
             {
@@ -114,6 +114,15 @@ namespace AppGCT.Pages.Gestao.Movimentos
                     ModelState.AddModelError("Movimento.ValorDesconto", "Valor desconto deve ser igual ou inferior ao parametrizado no método de pagamento");
                     return false;
                 }
+            }
+
+            // Validações se Atleta não é selecionado
+            if (atletaIdentifier == 0)
+            {
+
+                ModelState.AddModelError("Movimento.AtletaMovimentoId", "Preenchimento de Ginasta obrigatório");
+                return false;
+
             }
 
 
@@ -205,7 +214,9 @@ namespace AppGCT.Pages.Gestao.Movimentos
                 return Page();
             }
 
-            if (!await ValidaMovimento(tipoRub))
+            var atletaIdentifier = Movimento.AtletaMovimentoId;
+
+            if (!await ValidaMovimento(tipoRub, atletaIdentifier))
             {
                 //faz refresh das dropdown's
                 OnGet();
