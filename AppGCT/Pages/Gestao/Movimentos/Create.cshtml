@@ -43,10 +43,12 @@
                     var AtletaMovimentoIdField = $('#Movimento_AtletaMovimentoId');
                     var ValorMovimentoField = $('#Movimento_ValorMovimento');
                     var ValorDescontoField = $('#Movimento_ValorDesconto');
+                    var ObservacoesField = $('#Movimento_Observacoes');
                     var lblMetPagField = $('#lblMetodo');
                     var lblFaturaField = $('#lblFatura');
                     var lblNotCredField = $('#lblNotaCred');
                     var lblvalDescontoField = $('#lblvalDesconto');
+                    var lblObservacoesField = $('#lblObservacoes');
                     var lblAtletaField = $('#lblAtleta');
 
 
@@ -65,13 +67,16 @@
                             NotaCreditoField.prop('disabled', true);
                             ValorMovimentoField.prop('disabled', true);
                             ValorDescontoField.prop('disabled', true);
+                            ObservacoesField.prop('disabled', true);
                             lblNotCredField.prop('hidden', false);
                             lblFaturaField.prop('hidden', false);
                             NotaCreditoField.attr('placeholder', '');
                             FaturaField.attr('placeholder', '');
                             lblvalDescontoField.prop('hidden', false);
+                            lblObservacoesField.prop('hidden', true);
                             FaturaField.val('');
                             NotaCreditoField.val('');
+                            ObservacoesField.val('');
                             ValorMovimentoField.val(0);
                             ValorDescontoField.val(0);
 
@@ -115,6 +120,10 @@
                                                     ValorDescontoField.prop('disabled', true);
                                                     ValorDescontoField.val(0);
                                                     lblvalDescontoField.prop('hidden', false);
+                                                    //Esconder e desativar campo Observações
+                                                    ObservacoesField.prop('disabled', true);
+                                                    ObservacoesField.val('');
+                                                    lblObservacoesField.prop('hidden', true);
 
                                                     // Mostrar Atleta e reposicionar na primeira posição
                                                     lblAtletaField.prop('hidden', true);
@@ -149,6 +158,11 @@
                                                     ValorDescontoField.val(0);
                                                     ValorDescontoField.prop('disabled', true);
                                                     lblvalDescontoField.prop('hidden', true);
+    
+                                                    //Esconder e desativar campo Observações
+                                                    ObservacoesField.prop('disabled', true);
+                                                    ObservacoesField.val('');
+                                                    lblObservacoesField.prop('hidden', true);
 
                                                     // Esconder Atleta e reposicionar na primeira posição
                                                     lblAtletaField.prop('hidden', true);
@@ -184,6 +198,11 @@
                                                     ValorDescontoField.prop('disabled', true);
                                                     lblvalDescontoField.prop('hidden', true);
 
+                                                    //Esconder e desativar campo Observações
+                                                    ObservacoesField.prop('disabled', true);
+                                                    ObservacoesField.val('');
+                                                    lblObservacoesField.prop('hidden', true);
+
                                                     // Mostrar Atleta e reposicionar na primeira posição
                                                     lblAtletaField.prop('hidden', false);
                                                     AtletaMovimentoIdField.prop('disabled', false);
@@ -218,6 +237,11 @@
                                                     ValorDescontoField.prop('disabled', true);
                                                     lblvalDescontoField.prop('hidden', true);
 
+                                                    //Esconder e desativar campo Observações
+                                                    ObservacoesField.prop('disabled', true);
+                                                    ObservacoesField.val('');
+                                                    lblObservacoesField.prop('hidden', true);
+
                                                     // Esconder Atleta e reposicionar na primeira posição
                                                     lblAtletaField.prop('hidden', false);
                                                     AtletaMovimentoIdField.prop('disabled', true);
@@ -227,6 +251,45 @@
                                                     AtletaMovimentoIdField[0].selectedIndex = 0;
 
                                                 break;
+                                            case 'R':
+                                                // Esconder número de fatura e inicializar o seu valor
+                                                FaturaField.prop('disabled', true);
+                                                lblFaturaField.prop('hidden', true);
+                                                FaturaField.val('');
+                                                // Esconder Nota de Crédito e inicializar o seu valor
+                                                NotaCreditoField.prop('disabled', true);
+                                                lblNotCredField.prop('hidden', true);
+                                                NotaCreditoField.val('');
+
+                                                // Esconder Método de Pagamento e inicializar o seu valor
+                                                MetodoPagamentoField.prop('disabled', true);
+                                                lblMetPagField.prop('hidden', true);
+                                                MetodoPagamentoField[0].selectedIndex = 0;
+
+                                                // habilitar Valor Movimento
+                                                ValorMovimentoField.prop('disabled', false);
+                                                ValorMovimentoField.val(0);
+
+                                                // preencher valor do desconto com zeros ( não era necessário, mas faz-se por uma questão de coerência a ler o código
+                                                //     e esconder campo
+                                                ValorDescontoField.val(0);
+                                                ValorDescontoField.prop('disabled', true);
+                                                lblvalDescontoField.prop('hidden', true);
+
+                                                //Esconder e desativar campo Observações
+                                                ObservacoesField.prop('disabled', false);
+                                                ObservacoesField.val('');
+                                                lblObservacoesField.prop('hidden', false);
+
+                                                // Esconder Atleta e reposicionar na primeira posição
+                                                lblAtletaField.prop('hidden', true);
+                                                AtletaMovimentoIdField.prop('disabled', true);
+                                                // As duas linhas abaixo fazem o mesmo, mas a segunda é mais simples
+                                                // Fonte: https://stackoverflow.com/questions/1414276/how-to-make-the-first-option-of-select-selected-with-jquery
+                                                //AtletaMovimentoIdField.val($("#target option:first").val());
+                                                AtletaMovimentoIdField[0].selectedIndex = 0;
+
+                                            break;
                                                 default:
                                                     alert("Pedimos desculpa, mas algo não correu como esperado.");
                                             }
@@ -244,15 +307,30 @@
                     // Função para alterações sobre o campo Classe
                     MetodoPagamentoField.on('change', function () {
                         var selectedValue = $(this).val();
-                        if (selectedValue == "TB") {
-                            ValorDescontoField.prop('disabled', false);
-                            ValorDescontoField.val(0);
-                            
-                        }            
-                        else{
-                            ValorDescontoField.prop('disabled', true);
-                            ValorDescontoField.val(0);
-                        }
+                        $.ajax({
+                            url: '@Url.Page("/Gestao/Movimentos/Create", "Desconto")',
+                            data: { selectedValue: selectedValue },
+                            type: 'GET',
+                            success: function (data) {
+                                //console.log("Sucesso" data.valor);
+                                $.each(data, function (index, itemData) {
+                                    console.log("Cá estou", itemData[0]);
+                                    // preencher valor do desconto com zeros ( não era necessário, mas faz-se por uma questão de coerência a ler o código
+                                    //     e esconder campo
+                                    ValorDescontoField.val(itemData[0].desconto);
+                                    if(itemData[0].desconto>0){
+                                        ValorDescontoField.prop('disabled', false);
+                                    }
+                                    else{
+                                        ValorDescontoField.prop('disabled', true);
+                                    }
+                                });
+                            },
+                            error: function (xhr, status, error) {
+                                console.log("Erro");
+
+                            }
+                        });
                 });
                 });
                                         // Protege ou desprotege campos com base no valor do ClasseId
@@ -285,6 +363,11 @@
                 <label asp-for="Movimento.ValorDesconto" class="control-label"></label>
                 <input asp-for="Movimento.ValorDesconto" class="form-control" value=0 disabled />
                 <span asp-validation-for="Movimento.ValorDesconto" class="text-danger"></span>
+            </div>
+            <div id="lblObservacoes" class="form-group">
+                <label asp-for="Movimento.Observacoes" class="control-label"></label>
+                <input asp-for="Movimento.Observacoes" class="form-control" disabled />
+                <span asp-validation-for="Movimento.Observacoes" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Movimento.UtilizadorId" class="control-label"></label>

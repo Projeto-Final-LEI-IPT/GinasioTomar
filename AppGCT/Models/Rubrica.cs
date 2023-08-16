@@ -192,6 +192,8 @@ namespace AppGCT.Models
                         return "Lançamentos Ginasta";
                     case "S":
                         return "Lançamentos Sócio";
+                    case "R":
+                        return "Regularizações";
                     default:
                         return "Desconhecido";
                 }

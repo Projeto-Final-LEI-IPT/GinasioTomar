@@ -16,13 +16,13 @@
     {
         @if (@ViewBag.SaldoSocioVB < 0)
         {
-            <div class="badge rounded-pill bg-danger d-inline-flex align-items-center justify-content-end" style="width: 7rem;">
+            <div class="badge rounded-pill bg-danger d-inline-flex align-items-center justify-content-center" style="width: 7rem;">
                 Saldo: @ViewBag.SaldoSocioVB€
             </div>
         }
         else
         {
-            <div class="badge rounded-pill bg-success d-inline-flex align-items-center justify-content-end" style="width: 7rem;">
+            <div class="badge rounded-pill bg-success d-inline-flex align-items-center justify-content-center" style="width: 7rem;">
                 Saldo: @ViewBag.SaldoSocioVB€
             </div>
         }
@@ -39,13 +39,13 @@
         {
             @if (@ViewBag.SaldoAdminGinVB < 0)
             {
-                <div class="badge rounded-pill bg-danger d-inline-flex align-items-center justify-content-end" style="width: 7rem;">
+                <div class="badge rounded-pill bg-danger d-inline-flex align-items-center justify-content-center" style="width: 7rem;">
                     Saldo: @ViewBag.SaldoAdminGinVB€
                 </div>
             }
             else
             {
-                <div class="badge rounded-pill bg-success d-inline-flex align-items-center justify-content-end" style="width: 7rem;">
+                <div class="badge rounded-pill bg-success d-inline-flex align-items-center justify-content-center" style="width: 7rem;">
                     Saldo: @ViewBag.SaldoAdminGinVB€
                 </div>
             }
@@ -120,8 +120,8 @@
                 @Html.DisplayFor(modelItem => item.DtMovimento)
             </td>
                 @if (   item.TipoDespesa.TipoRubrica == "S" 
-                     || item.TipoDespesa.TipoRubrica == "G" 
-                     || item.TipoDespesa.TipoRubrica == "R" )
+                     || item.TipoDespesa.TipoRubrica == "G"
+                     || ( item.TipoDespesa.TipoRubrica == "R" && item.TipoDespesa.TipoMovimento == "D" ) )
                 {
 
                     <td >
@@ -138,7 +138,8 @@
                 else
                 {
                     @if (  item.TipoDespesa.TipoRubrica == "D"
-                        || item.TipoDespesa.TipoRubrica == "P")
+                        || item.TipoDespesa.TipoRubrica == "P"
+                        || (item.TipoDespesa.TipoRubrica == "R" && item.TipoDespesa.TipoMovimento == "C"))
                     {
                         <td  >
                             @{
@@ -225,15 +226,17 @@
                 @Html.DisplayFor(modelItem => item.FormaPagamento.DescMetodo)
             </td>
             <td>
-                @if (User.IsInRole("Administrador"))
-                {
-                    <a class='btn btn-primary btn-sm' asp-area='' asp-page='/Gestao/Movimentos/Edit' asp-route-id='@item.Id'>Editar</a>
-                }
-                <a class='btn btn-primary btn-sm' asp-area='' asp-page='/Gestao/Movimentos/Details' asp-route-id='@item.Id'>Detalhes</a>
-                @if (User.IsInRole("Administrador"))
-                {
-                    <a class='btn btn-danger btn-sm' asp-area='' asp-page='/Gestao/Movimentos/Delete' asp-route-id='@item.Id'>Apagar</a>
-                }
+                    <div class="wrapper2">
+                        <div class="right">
+                            @if (User.IsInRole("Administrador"))
+                            {
+                                <a class='btn btn-primary btn-sm' style="width: 5rem;" asp-area='' asp-page='/Gestao/Movimentos/Edit' asp-route-id='@item.Id'>Editar</a>
+                            }
+                        </div>
+                        <div>
+                            <a class='btn btn-primary btn-sm' style="width: 5rem;" asp-area='' asp-page='/Gestao/Movimentos/Details' asp-route-id='@item.Id'>Detalhes</a>
+                        </div>
+                    </div>
             </td>
         </tr>
 }

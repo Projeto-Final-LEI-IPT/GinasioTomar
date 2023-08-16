@@ -51,6 +51,18 @@
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Movimento.NumNotaCredito)
         </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Movimento.MSaldo)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Movimento.MSaldo)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Movimento.Observacoes)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Movimento.Observacoes)
+        </dd>
         @if (User.IsInRole("Administrador") || User.IsInRole("Ginásio"))
         {
             <dt class="col-sm-2">

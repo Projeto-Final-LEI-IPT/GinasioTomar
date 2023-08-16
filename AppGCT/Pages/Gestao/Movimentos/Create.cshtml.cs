@@ -11,6 +11,7 @@ using System.Security.Claims;
 using System.Collections;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.IdentityModel.Tokens;
 
 namespace AppGCT.Pages.Gestao.Movimentos
 {
@@ -25,7 +26,7 @@ namespace AppGCT.Pages.Gestao.Movimentos
             _context = context;
         }
 
-        private async Task<bool> ValidaMovimento(string? tipoMov)
+        private async Task<bool> ValidaMovimento(string? tipoRub, int? atletaIdentifier)
         {
             if (_context.Movimento == null || Movimento == null)
             {
@@ -82,7 +83,7 @@ namespace AppGCT.Pages.Gestao.Movimentos
             else
             {
                 // Validação do preenchimento do Ginasta, para Rúbricas do Ginasta (mensalidade, seguros, ... )
-                switch (tipoMov)
+                switch (tipoRub)
                 {
                     case "G":
                         if (Movimento.AtletaMovimentoId.Equals(null))
@@ -102,6 +103,28 @@ namespace AppGCT.Pages.Gestao.Movimentos
                 return false;
 
             }
+            // Validações se Valor Desconto é igual ou inferior ao valor paramentrizado no Método de Pagamento
+            // apenas se deve validar qu7ando a rubrica é de pagamento, pois se não for, a avriavés descontoAux será populada com NULL, dando erro o IF
+            if (tipoRub == "P")
+            {
+                var descontoAux = _context.MetodoPagamento.Where(i => i.CodMetodo == Movimento.MetodoPagamentoId).FirstOrDefault().ValorDesconto;
+                if (Movimento.ValorDesconto > descontoAux)
+                {
+
+                    ModelState.AddModelError("Movimento.ValorDesconto", "Valor desconto deve ser igual ou inferior ao parametrizado no método de pagamento");
+                    return false;
+                }
+            }
+
+            // Validações se Atleta não é selecionado
+            if (atletaIdentifier == 0)
+            {
+
+                ModelState.AddModelError("Movimento.AtletaMovimentoId", "Preenchimento de Ginasta obrigatório");
+                return false;
+
+            }
+
 
             return true;
         }
@@ -149,28 +172,40 @@ namespace AppGCT.Pages.Gestao.Movimentos
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync()
         {
-            var saldoAux = 0;
-            var tipoMov = _context.Rubrica.Where(i => i.CodRubrica == Movimento.RubricaId).FirstOrDefault().TipoRubrica;
-            switch (tipoMov)
+            var saldoAux = 0.0;
+            var tipoRub = _context.Rubrica.Where(i => i.CodRubrica == Movimento.RubricaId).FirstOrDefault().TipoRubrica;
+            switch (tipoRub)
             {
                 case "G":
                 case "S":
                     Movimento.ValorMovimento = _context.Rubrica.Where(i => i.CodRubrica == Movimento.RubricaId).FirstOrDefault().ValorUnitario;
                     Movimento.ValorDesconto = 0;
-                    saldoAux = (int)(Movimento.ValorMovimento * -1);
+                    saldoAux = (double)(Movimento.ValorMovimento) * -1.0;
                     break;
                 case "P":
-                    if(!(Movimento.MetodoPagamentoId == "TB"))
+                    if (!Movimento.ValorDesconto.HasValue)
                     {
                         Movimento.ValorDesconto = 0;
                     }
-                    
                     Movimento.Atleta = null;
-                    saldoAux = (int)(Movimento.ValorMovimento * 1) + (int)Movimento.ValorDesconto;
+                    saldoAux = (double)(Movimento.ValorMovimento) * 1.0 + (double)Movimento.ValorDesconto;
                     break;
                 case "D":
                     Movimento.ValorDesconto = 0;
-                    saldoAux = (int)(Movimento.ValorMovimento * 1);
+                    saldoAux = (double)(Movimento.ValorMovimento) * 1.0;
+                    break;
+                case "R":
+                    var tipoMov = _context.Rubrica.Where(i => i.CodRubrica == Movimento.RubricaId).FirstOrDefault().TipoMovimento;
+                    Movimento.ValorDesconto = 0;
+                    switch (tipoMov)
+                    {
+                        case "D":
+                            saldoAux = (double)(Movimento.ValorMovimento) * -1.0;
+                            break;
+                        case "C":
+                            saldoAux = (double)(Movimento.ValorMovimento) * 1.0;
+                            break;
+                    } 
                     break;
             }
 
@@ -179,7 +214,9 @@ namespace AppGCT.Pages.Gestao.Movimentos
                 return Page();
             }
 
-            if (!await ValidaMovimento(tipoMov))
+            var atletaIdentifier = Movimento.AtletaMovimentoId;
+
+            if (!await ValidaMovimento(tipoRub, atletaIdentifier))
             {
                 //faz refresh das dropdown's
                 OnGet();
@@ -199,10 +236,13 @@ namespace AppGCT.Pages.Gestao.Movimentos
             Movimento.IdModificacao = "";
 
             var idSoc = Movimento.UtilizadorId;
-            var saldoAnt = _context.Saldo.Where(i => i.IdSocio == idSoc).FirstOrDefault().MSaldo;
-            Movimento.MSaldo = saldoAnt + saldoAux;
+            var saldoAnt = (double)_context.Saldo.Where(i => i.IdSocio == idSoc).FirstOrDefault().MSaldo;
+            Movimento.MSaldo = (decimal?)(saldoAnt + saldoAux);
 
-            Movimento.Observacoes = "";
+            if (Movimento.Observacoes.IsNullOrEmpty())
+            {
+                Movimento.Observacoes = "";
+            }
 
             // Atualiza Saldo do Sócio na tabela Saldos
             var saldoObj = _context.Saldo.FirstOrDefault(s => s.IdSocio == idSoc);
@@ -233,6 +273,24 @@ namespace AppGCT.Pages.Gestao.Movimentos
             {
                 items = new[] {
                     new {tipoRubrica = tipoMov , valor = montante}
+                    }
+            });
+
+            //return new JsonResult(new
+            //{
+            //    valor = tipoMov,
+            //    valorUnitario = montante
+            //});
+        }
+
+        public JsonResult OnGetDesconto(string selectedValue)
+        {
+            var valorDesconto = _context.MetodoPagamento.Where(i => i.CodMetodo == selectedValue).FirstOrDefault().ValorDesconto;
+
+            return new JsonResult(new
+            {
+                items = new[] {
+                    new {desconto = valorDesconto}
                     }
             });
 

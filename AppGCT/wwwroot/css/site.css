@@ -38,6 +38,20 @@ div:not(:first-child):not(:last-child) {
     grid-template-columns: 2fr 1fr;
 }
 
+.wrapper2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.wrapper3 {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+
+.right {
+    margin-right: 8px;
+}
+
 .btn-xl {
     border: 1px solid gray;
     border-radius: 7%;

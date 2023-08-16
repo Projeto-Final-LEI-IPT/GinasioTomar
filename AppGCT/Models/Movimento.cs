@@ -33,12 +33,12 @@ namespace AppGCT.Models
         public Decimal? ValorDesconto { get; set; }
 
         [DataType((DataType.Text))]
-        [StringLength(50, MinimumLength = 5, ErrorMessage = "Número de Fatura tem de ter pelo menos 5 caracteres")]
+        [StringLength(15, MinimumLength = 5, ErrorMessage = "Número de Fatura tem de ter entre 5 e 15 caracteres")]
         [Display(Name = "Número de Fatura")]
         public string? NumFatura { get; set; }
 
         [DataType((DataType.Text))]
-        [StringLength(50, MinimumLength = 5, ErrorMessage = "Número de Nota de Crédito tem de ter pelo menos 5 caracteres")]
+        [StringLength(15, MinimumLength = 5, ErrorMessage = "Número de Nota de Crédito tem de ter entre 5 e 15 caracteres")]
         [Display(Name = "Número de Nota de Crédito")]
         public string? NumNotaCredito { get; set; }
 
@@ -48,6 +48,7 @@ namespace AppGCT.Models
         public Decimal? MSaldo { get; set; }
 
         [DataType((DataType.Text))]
+        [StringLength(100, MinimumLength = 5, ErrorMessage = "Observações tem de ter entre 5 e 100 caracteres")]
         [Display(Name = "Observações")]
         public string? Observacoes { get; set; }
 
@@ -56,12 +57,14 @@ namespace AppGCT.Models
         public DateTime DataCriacao { get; set; }
         [DataType((DataType.Text))]
         [Display(Name = "Criado por")]
+        [StringLength(36)]
         public string? IdCriacao { get; set; }
         [DataType((DataType.Date))]
         [Display(Name = "Data de Modificação")]
         public DateTime DataModificacao { get; set; }
         [DataType((DataType.Text))]
         [Display(Name = "Modificado por")]
+        [StringLength(36)]
         public string? IdModificacao { get; set; }
         [Display(Name = "Número de Sócio")]
 
