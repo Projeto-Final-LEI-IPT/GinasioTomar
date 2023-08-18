@@ -26,7 +26,7 @@ namespace AppGCT.Pages.Gestao.Movimentos
             _context = context;
         }
 
-        private async Task<bool> ValidaMovimento(string? tipoRub, int? atletaIdentifier)
+        private async Task<bool> ValidaMovimento(string? tipoRub, int? atletaIdentifier, string? socioIdentifier)
         {
             if (_context.Movimento == null || Movimento == null)
             {
@@ -125,19 +125,28 @@ namespace AppGCT.Pages.Gestao.Movimentos
 
             }
 
+            if (atletaIdentifier != 0)
+            {
+                var socioRight = _context.Ginasta.Where(i => i.Id == atletaIdentifier).FirstOrDefault().UtilizadorId;
+                if(socioRight != socioIdentifier)
+                {
+                    ModelState.AddModelError("Movimento.AtletaMovimentoId", "O ginasta deve estar associado ao sócio selecionado");
+                    return false;
+                }
+            }
 
             return true;
         }
 
         public IActionResult OnGet()
         {
-            var atletas = _context.Ginasta.ToList();
+            var atletas = _context.Ginasta.Include(m => m.Socio).ToList();
             atletas.Insert(0, new Ginasta
             {
                 NomeCompleto = "Seleccionar Ginasta"
 
             });
-            ViewData["AtletaMovimentoId"] = new SelectList(atletas, "Id", "NomeCompleto");
+            ViewData["AtletaMovimentoId"] = new SelectList(atletas, "Id", "ID_DescrGinastaSocio");
             var metodos = _context.MetodoPagamento.ToList();
             metodos.Insert(0, new MetodoPagamento
             {
@@ -215,8 +224,9 @@ namespace AppGCT.Pages.Gestao.Movimentos
             }
 
             var atletaIdentifier = Movimento.AtletaMovimentoId;
+            var socioIdentifier = Movimento.UtilizadorId;
 
-            if (!await ValidaMovimento(tipoRub, atletaIdentifier))
+            if (!await ValidaMovimento(tipoRub, atletaIdentifier, socioIdentifier))
             {
                 //faz refresh das dropdown's
                 OnGet();
