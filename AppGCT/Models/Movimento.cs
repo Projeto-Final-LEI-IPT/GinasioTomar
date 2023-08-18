@@ -96,7 +96,7 @@ namespace AppGCT.Models
         /// Chave Forasteira com tabela MetodoPagamento ( --- preenchimento opcional --- )
         /// </summary>
         public string? MetodoPagamentoId { get; set; }
-        [Display(Name = "Método Pagamento")]
+        [Display(Name = "Método de Pagamento")]
         public MetodoPagamento? FormaPagamento { get; set; }
     }
 }

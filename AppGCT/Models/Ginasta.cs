@@ -213,6 +213,15 @@ namespace AppGCT.Models
         }
         [Display(Name = "Ginasta")]
 
+        public string ID_DescrGinastaSocio
+        {
+            get
+            {
+                return string.Format("{0} - Sócio: {1}", NomeCompleto, Socio);
+            }
+        }
+        [Display(Name = "Ginasta ")]
+
         public Utilizador? Socio { get; set; }
 
         public List<Inscricao>? Inscricoes { get; set; }
