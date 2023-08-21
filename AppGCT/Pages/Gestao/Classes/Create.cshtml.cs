@@ -9,6 +9,7 @@ using AppGCT.Data;
 using AppGCT.Models;
 using Microsoft.AspNetCore.Authorization;
 using System.Security.Claims;
+using Microsoft.EntityFrameworkCore;
 
 namespace AppGCT.Pages.Gestao.Classes
 {
@@ -16,6 +17,22 @@ namespace AppGCT.Pages.Gestao.Classes
     public class CreateModel : PageModel
     {
         private readonly AppGCT.Data.AppGCTContext _context;
+        private async Task<bool> ValidaClasse()
+        {
+            if (_context.Classe == null || Classe == null)
+            {
+                return false;
+            }
+
+            // Valida se o NomeClasse já existe na BD
+            if (await _context.Classe.AnyAsync(e => e.NomeClasse == Classe.NomeClasse))
+            {
+                ModelState.AddModelError("Classe.NomeClasse", "Já existe uma Classe com esse nome.");
+                return false;
+            }
+
+            return true;
+        }
 
         public CreateModel(AppGCT.Data.AppGCTContext context)
         {
@@ -35,12 +52,16 @@ namespace AppGCT.Pages.Gestao.Classes
         public async Task<IActionResult> OnPostAsync()
         {
           if (!ModelState.IsValid || _context.Classe == null || Classe == null)
-            {
-                return Page();
-            }
+          {
+             return Page();
+          }
 
+          if (!await ValidaClasse())
+          {
+             return Page();
+          }
           Classe.DataCriacao = DateTime.Now;
-            // obtem User ID logado
+          // obtem User ID logado
           var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
           Classe.IdCriacao = userId;
           Classe.DataModificacao = DateTime.MinValue;
