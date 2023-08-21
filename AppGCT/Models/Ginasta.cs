@@ -156,6 +156,7 @@ namespace AppGCT.Models
         [RegularExpression(@"^[0-9]{9}$", ErrorMessage = "Tlm. Emergência só aceita números entre 0 e 9")]
         [DataType((DataType.Text))]
         [Display(Name = "Tlm. (Emergência)")]
+        [StringLength(9)]
         public string? NumTlmEmerEE { get; set; }
 
         [StringLength(70)]
