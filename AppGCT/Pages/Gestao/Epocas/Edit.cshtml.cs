@@ -17,6 +17,42 @@ namespace AppGCT.Pages.Ginasio.Epocas
     public class EditModel : PageModel
     {
         private readonly AppGCT.Data.AppGCTContext _context;
+        private async Task<bool> ValidaEpoca()
+        {
+            if (_context.Epoca == null || Epoca == null)
+            {
+                return false;
+            }
+
+            // Valida se o NomeÉpoca já existe na BD (exceção feita a ela própria)
+            if (await _context.Epoca.AnyAsync(e => e.NomeEpoca == Epoca.NomeEpoca && e.IdEpoca != Epoca.IdEpoca))
+            {
+                ModelState.AddModelError("Epoca.NomeEpoca", "Já existe uma época com esse nome.");
+                return false;
+            }
+
+            // Valida se Data Fim é inferior à Data Inicio
+            if (Epoca.DataFim < Epoca.DataInicio)
+            {
+                ModelState.AddModelError("Epoca.DataFim", "A data fim deve ser superior à data início.");
+                return false;
+            }
+
+            var isOverlapping = _context.Epoca.Any(e =>
+                                ((e.DataInicio >= Epoca.DataInicio && e.DataInicio <= Epoca.DataFim) ||
+                                (e.DataFim >= Epoca.DataInicio && e.DataFim <= Epoca.DataFim) ||
+                                (Epoca.DataInicio >= e.DataInicio && Epoca.DataInicio <= e.DataFim) ||
+                                (Epoca.DataFim >= e.DataInicio && Epoca.DataFim <= e.DataFim)) &&
+                                (e.IdEpoca != Epoca.IdEpoca));
+
+            if (isOverlapping)
+            {
+                ModelState.AddModelError("Epoca.DataInicio", "Já existe uma época com datas sobrepostas.");
+                return false;
+            }
+
+            return true;
+        }
 
         public EditModel(AppGCT.Data.AppGCTContext context)
         {
@@ -47,6 +83,10 @@ namespace AppGCT.Pages.Ginasio.Epocas
         public async Task<IActionResult> OnPostAsync()
         {
             if (!ModelState.IsValid)
+            {
+                return Page();
+            }
+            if (!await ValidaEpoca())
             {
                 return Page();
             }
