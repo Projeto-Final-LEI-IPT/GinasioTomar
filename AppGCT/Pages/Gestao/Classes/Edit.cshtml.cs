@@ -25,7 +25,7 @@ namespace AppGCT.Pages.Gestao.Classes
             }
 
             // Valida se o NomeClasse já existe na BD
-            if (await _context.Classe.AnyAsync(e => e.NomeClasse == Classe.NomeClasse))
+            if (await _context.Classe.AnyAsync(e => e.NomeClasse == Classe.NomeClasse && e.IdClasse != Classe.IdClasse))
             {
                 ModelState.AddModelError("Classe.NomeClasse", "Já existe uma Classe com esse nome.");
                 return false;
