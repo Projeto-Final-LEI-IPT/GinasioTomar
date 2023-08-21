@@ -15,8 +15,8 @@ namespace AppGCT.Models
 
         [Display(Name = "Descrição")]
         [Required(ErrorMessage = "Descrição Rúbrica é campo obrigatório!")]
+        [StringLength(30, MinimumLength = 5, ErrorMessage = "Descrição Rúbrica tem de ter entre 5 e 30 caracteres")]
         [DataType(DataType.Text)]
-        [StringLength(30)]
         public string? DescricaoRubrica { get; set; }
 
         [Display(Name = "Estado")]
