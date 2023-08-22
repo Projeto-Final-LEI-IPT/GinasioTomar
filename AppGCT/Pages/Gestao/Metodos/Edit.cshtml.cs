@@ -17,6 +17,22 @@ namespace AppGCT.Pages.Gestao.Metodos
     public class EditModel : PageModel
     {
         private readonly AppGCT.Data.AppGCTContext _context;
+        private async Task<bool> ValidaMetodo()
+        {
+            if (_context.MetodoPagamento == null || MetodoPagamento == null)
+            {
+                return false;
+            }
+
+            // Valida se o nome metodo já existe na BD
+            if (await _context.MetodoPagamento.AnyAsync(e => e.DescMetodo == MetodoPagamento.DescMetodo && e.CodMetodo != MetodoPagamento.CodMetodo))
+            {
+                ModelState.AddModelError("MetodoPagamento.DescMetodo", "Já existe um Método Pagamento com esta descrição.");
+                return false;
+            }
+
+            return true;
+        }
 
         public EditModel(AppGCT.Data.AppGCTContext context)
         {
@@ -47,6 +63,10 @@ namespace AppGCT.Pages.Gestao.Metodos
         public async Task<IActionResult> OnPostAsync()
         {
             if (!ModelState.IsValid)
+            {
+                return Page();
+            }
+            if (!await ValidaMetodo())
             {
                 return Page();
             }

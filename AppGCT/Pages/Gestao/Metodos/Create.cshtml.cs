@@ -9,6 +9,7 @@ using AppGCT.Data;
 using AppGCT.Models;
 using Microsoft.AspNetCore.Authorization;
 using System.Security.Claims;
+using Microsoft.EntityFrameworkCore;
 
 namespace AppGCT.Pages.Gestao.Metodos
 {
@@ -16,6 +17,29 @@ namespace AppGCT.Pages.Gestao.Metodos
     public class CreateModel : PageModel
     {
         private readonly AppGCT.Data.AppGCTContext _context;
+        private async Task<bool> ValidaMetodo()
+        {
+            if (_context.MetodoPagamento == null || MetodoPagamento == null)
+            {
+                return false;
+            }
+
+            // Valida se o códido metodo já existe na BD
+            if (await _context.MetodoPagamento.AnyAsync(e => e.CodMetodo == MetodoPagamento.CodMetodo))
+            {
+                ModelState.AddModelError("MetodoPagamento.CodMetodo", "Código Método Pagamento já existente.");
+                return false;
+            }
+
+            // Valida se o nome metodo já existe na BD
+            if (await _context.MetodoPagamento.AnyAsync(e => e.DescMetodo == MetodoPagamento.DescMetodo))
+            {
+                ModelState.AddModelError("MetodoPagamento.DescMetodo", "Já existe um Método Pagamento com esta descrição.");
+                return false;
+            }
+
+            return true;
+        }
 
         public CreateModel(AppGCT.Data.AppGCTContext context)
         {
@@ -34,7 +58,11 @@ namespace AppGCT.Pages.Gestao.Metodos
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync()
         {
-          if (!ModelState.IsValid || _context.MetodoPagamento == null || MetodoPagamento == null)
+            if (!ModelState.IsValid || _context.MetodoPagamento == null || MetodoPagamento == null)
+            {
+                return Page();
+            }
+            if (!await ValidaMetodo())
             {
                 return Page();
             }

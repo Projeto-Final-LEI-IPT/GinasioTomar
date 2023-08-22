@@ -17,6 +17,22 @@ namespace AppGCT.Pages.Gestao.Classes
     public class EditModel : PageModel
     {
         private readonly AppGCT.Data.AppGCTContext _context;
+        private async Task<bool> ValidaClasse()
+        {
+            if (_context.Classe == null || Classe == null)
+            {
+                return false;
+            }
+
+            // Valida se o NomeClasse já existe na BD
+            if (await _context.Classe.AnyAsync(e => e.NomeClasse == Classe.NomeClasse && e.IdClasse != Classe.IdClasse))
+            {
+                ModelState.AddModelError("Classe.NomeClasse", "Já existe uma Classe com esse nome.");
+                return false;
+            }
+
+            return true;
+        }
 
         public EditModel(AppGCT.Data.AppGCTContext context)
         {
@@ -47,6 +63,10 @@ namespace AppGCT.Pages.Gestao.Classes
         public async Task<IActionResult> OnPostAsync()
         {
             if (!ModelState.IsValid)
+            {
+                return Page();
+            }
+            if (!await ValidaClasse())
             {
                 return Page();
             }

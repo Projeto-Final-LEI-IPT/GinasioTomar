@@ -18,6 +18,22 @@ namespace AppGCT.Pages.Gestao.Descontos
     public class EditModel : PageModel
     {
         private readonly AppGCT.Data.AppGCTContext _context;
+        private async Task<bool> ValidaDesconto()
+        {
+            if (_context.Desconto == null || Desconto == null)
+            {
+                return false;
+            }
+
+            // Valida se o Desc Desconto já existe na BD
+            if (await _context.Desconto.AnyAsync(e => e.DescDesconto == Desconto.DescDesconto && e.CodDesconto != Desconto.CodDesconto))
+            {
+                ModelState.AddModelError("Desconto.DescDesconto", "Já existe um Desconto com esta descrição.");
+                return false;
+            }
+
+            return true;
+        }
 
         public EditModel(AppGCT.Data.AppGCTContext context)
         {
@@ -51,7 +67,10 @@ namespace AppGCT.Pages.Gestao.Descontos
             {
                 return Page();
             }
-
+            if (!await ValidaDesconto())
+            {
+                return Page();
+            }
             _context.Attach(Desconto).State = EntityState.Modified;
             // obtem User ID logado
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);

@@ -58,15 +58,17 @@ namespace AppGCT.Areas.Identity.Pages.Account.Manage
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
    
-            [Required]
-            [StringLength(50, MinimumLength = 15)]
+            [Required(ErrorMessage = "Morada é campo obrigatório!")]
+            [StringLength(50, MinimumLength = 15, ErrorMessage = "Morada tem de ter entre 15 e 50 caracteres.")]
             [DataType(DataType.Text)]
             [Display(Name = "Morada")]
             public string Morada { get; set; }
 
 
             [Phone]
-            [RegularExpression(@"^[0-9]*$"), Required, StringLength(9, MinimumLength = 9)]
+            [Required(ErrorMessage = "Contacto é campo obrigatório!")]
+            [StringLength(9, MinimumLength = 9, ErrorMessage = "Contacto tem de ter 9 digitos.")]
+            [RegularExpression(@"^[0-9]*$", ErrorMessage = "Apenas digitos de 0 a 9 são permitidos")]
             [DataType(DataType.Text)]
             [Display(Name = "Contacto")]
             public string PhoneNumber { get; set; }

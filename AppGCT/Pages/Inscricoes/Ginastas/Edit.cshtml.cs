@@ -78,7 +78,13 @@ namespace AppGCT.Pages.Inscricoes.Ginastas
             {
                 return Page();
             }
-
+            //valida data nascimento
+            if (Ginasta.DtNascim.Date >= DateTime.Now.Date)
+            {
+                ModelState.AddModelError("Ginasta.DtNascim", "Data Nascimento tem de ser inferior à data atual");
+                OnGetAsync(Ginasta.Id);
+                return Page();
+            }
             Ginasta.IdModificacao = User.Identity.GetUserId(); ;
             Ginasta.DataModificacao = DateTime.Now;
 

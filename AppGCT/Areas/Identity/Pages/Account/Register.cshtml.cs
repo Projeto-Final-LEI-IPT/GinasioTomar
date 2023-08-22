@@ -82,34 +82,39 @@ namespace AppGCT.Areas.Identity.Pages.Account
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
-            [Required]
+            [Required(ErrorMessage = "Nome Completo é campo obrigatório!")]
+            [StringLength(50, MinimumLength = 5, ErrorMessage = "Nome Completo tem de ter minimo 5 e máximo 50 caracteres")]
             [DataType(DataType.Text)]
             [Display(Name = "Nome")]
             public string Nome { get; set; }
 
-            [RegularExpression(@"^[0-9]*$"), Required, StringLength(9, MinimumLength = 9)]
-            [DataType(DataType.Text)]
+            [Required(ErrorMessage = "NIF é campo obrigatório!")]
+            [StringLength(9, MinimumLength = 9, ErrorMessage = "NIF tem de ter 9 digitos numéricos.")]
+            [RegularExpression(@"^(1\d{8}|[2-3]\d{8}|45\d{7})$", ErrorMessage = "NIF inválido.")]
+            [DataType((DataType.Text))]
             [Display(Name = "NIF")]
             public string NIF { get; set; }
 
-            [Required]
+            [Required(ErrorMessage = "Data Nascimento é campo obrigatório!")]
             [DataType(DataType.Date)]
             [Display(Name = "Dtnascim")]
             public DateTime Dtnascim { get; set; }
 
-            [Required]
-            [StringLength(50, MinimumLength = 15)]
+            [Required(ErrorMessage = "Morada é campo obrigatório!")]
+            [StringLength(50, MinimumLength = 15, ErrorMessage = "Morada tem de ter entre 15 e 50 caracteres.")]
             [DataType(DataType.Text)]
             [Display(Name = "Morada")]
             public string Morada { get; set; }
 
-            [RegularExpression(@"^[0-9]*$"), Required, StringLength(9, MinimumLength = 9)]
+            [Required(ErrorMessage = "Contacto é campo obrigatório!")]
+            [StringLength(9, MinimumLength =9, ErrorMessage = "Contacto tem de ter 9 digitos.")]
+            [RegularExpression(@"^[0-9]*$", ErrorMessage = "Apenas digitos de 0 a 9 são permitidos")]
             [DataType(DataType.Text)]
-            [Display(Name = "Contato")]
+            [Display(Name = "Contacto")]
             public string Contato { get; set; }
 
-            [Required]
-            [EmailAddress]
+            [Required(ErrorMessage = "Email é campo obrigatório!")]
+            [EmailAddress(ErrorMessage = "Email inválido")]
             [Display(Name = "Email")]
             public string Email { get; set; }
 
@@ -117,8 +122,10 @@ namespace AppGCT.Areas.Identity.Pages.Account
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
-            [Required]
-            [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
+            [Required(ErrorMessage = "Password é campo obrigatório!")]
+            [StringLength(50, ErrorMessage = "A {0} tem de ter pelo menos {2} e um máximo de {1} caracteres.", MinimumLength = 6)]
+            [RegularExpression(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9]).+$",
+             ErrorMessage = "Password tem de ter uma letra minúscula, uma letra maiúscula e um carater não alfanumérico")]
             [DataType(DataType.Password)]
             [Display(Name = "Password")]
             public string Password { get; set; }
@@ -128,8 +135,9 @@ namespace AppGCT.Areas.Identity.Pages.Account
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
             [DataType(DataType.Password)]
+            [StringLength(50)]
             [Display(Name = "Confirm password")]
-            [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+            [Compare("Password", ErrorMessage = "Password e Confirme Password são diferentes.")]
             public string ConfirmPassword { get; set; }
         }
 
