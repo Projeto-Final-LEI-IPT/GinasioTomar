@@ -3,6 +3,7 @@
 using System;
 using System.Threading.Tasks;
 using AppGCT.Areas.Identity.Data;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -10,6 +11,8 @@ using Microsoft.Extensions.Logging;
 
 namespace AppGCT.Areas.Identity.Pages.Account.Manage
 {
+    //propositado para não permitir nenhum role
+    [Authorize(Roles = "Admin")]
     public class PersonalDataModel : PageModel
     {
         private readonly UserManager<Utilizador> _userManager;
