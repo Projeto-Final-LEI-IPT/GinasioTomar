@@ -13,26 +13,57 @@ namespace AppGCT.Areas.Identity.Data;
 public class Utilizador : IdentityUser
 {
     [PersonalData]
+    [Required(ErrorMessage = "Nome Completo é campo obrigatório!")]
+    [StringLength(50, MinimumLength = 5, ErrorMessage = "Nome Completo tem de ter minimo 5 e máximo 50 caracteres")]
+    [DataType(DataType.Text)]
+    [Display(Name = "Nome")]
     public string Nome { get; set; }
+
     [PersonalData]
+    [StringLength(10)]
+    [DataType(DataType.Text)]
+    [Display(Name = "Nº Sócio")]
     public string NumSocio { get; set; }
+
+    [Required(ErrorMessage = "NIF é campo obrigatório!")]
+    [StringLength(9, MinimumLength = 9, ErrorMessage = "NIF tem de ter 9 digitos numéricos.")]
+    [RegularExpression(@"^(1\d{8}|[2-3]\d{8}|45\d{7})$", ErrorMessage = "NIF inválido.")]
+    [DataType((DataType.Text))]
+    [Display(Name = "NIF")]
     public string NIF { get; set; }
+
+    [StringLength(1)]
+    [DataType(DataType.Text)]
+    [Display(Name = "Estado Utilizador")]
     public string EstadoUtilizador { get; set; }
+
+    [StringLength(15)]
+    [DataType(DataType.Text)]
+    [Display(Name = "Role Aux")]
     public string RoleAux { get; set; }
+
     [PersonalData]
+    [Required(ErrorMessage = "Morada é campo obrigatório!")]
+    [StringLength(50, MinimumLength = 15, ErrorMessage = "Morada tem de ter entre 15 e 50 caracteres.")]
+    [DataType(DataType.Text)]
+    [Display(Name = "Morada")]
     public string Morada { get; set; }
+
     [PersonalData]
     [DataType(DataType.Date)]
     public DateTime DataNascim { get; set; }
+
     [DataType(DataType.Date)]
     public DateTime? DataAprovacao { get; set; }
     public DateTime? UltimoLogin { get; set; }
     [PersonalData]
     [DataType(DataType.Date)]
     public DateTime DataCriacao { get; set; }
+    [StringLength(36)]
     public string? IdCriacao { get; set; }
     [DataType(DataType.Date)]
     public DateTime? DataModificacao { get; set; }
+    [StringLength(36)]
     public string? IdModificacao { get; set; }
     public string ID_Description
     {
