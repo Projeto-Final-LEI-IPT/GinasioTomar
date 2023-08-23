@@ -12,6 +12,8 @@ using System.Collections;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.Extensions.Logging;
+using Microsoft.CodeAnalysis.Elfie.Diagnostics;
 
 namespace AppGCT.Pages.Gestao.Movimentos
 {
@@ -125,12 +127,70 @@ namespace AppGCT.Pages.Gestao.Movimentos
 
             }
 
-            if (atletaIdentifier != 0)
+            if (atletaIdentifier != 0 && !atletaIdentifier.Equals(null))
             {
                 var socioRight = _context.Ginasta.Where(i => i.Id == atletaIdentifier).FirstOrDefault().UtilizadorId;
                 if(socioRight != socioIdentifier)
                 {
                     ModelState.AddModelError("Movimento.AtletaMovimentoId", "O ginasta deve estar associado ao sócio selecionado");
+                    return false;
+                }
+            }
+
+            // Lançamento de movimentos de mensalidades só pode acontecer durante o periodo da epoca e se o ginasta 
+            // tiver inscrição valida para classe associada à mensalidade;
+            if( tipoRub == "G")
+            {
+                var epoca = 0;
+                try
+                {
+                    epoca = _context.Epoca.Where(i => i.DataInicio <= Movimento.DtMovimento &&
+                                                      i.DataFim >= Movimento.DtMovimento &&
+                                                      i.EstadoEpoca == "A").FirstOrDefault().IdEpoca;
+                }
+                catch (NullReferenceException ex) // <- this 'ex' correctly contains the exception
+                {
+                    ModelState.AddModelError("Movimento.RubricaId", "Não existe época ativa na data atual");
+                    return false;
+                }
+                catch (Exception ex) // <- this 'ex' correctly contains the exception
+                {
+                    ModelState.AddModelError("Movimento.RubricaId", "Algo não correu como esperado. Contacte a Informática");
+                    return false;
+                }
+
+                var classeMovimento = 0;
+                try
+                {
+                    // Consultar CLASSE para ir verificar se a INSCRICAO do ATLETA é referente a essa CLASSE
+                    classeMovimento = (int)_context.Rubrica.Where(i => i.CodRubrica == Movimento.RubricaId).FirstOrDefault().ClasseId;
+                }
+                catch (InvalidOperationException ex) // <- this 'ex' correctly contains the exception
+                {
+                    ModelState.AddModelError("Movimento.RubricaId", "A Rúbrica selecionada não tem classe associada");
+                    return false;
+                }
+                catch (Exception ex) // <- this 'ex' correctly contains the exception
+                {
+                    ModelState.AddModelError("Movimento.RubricaId", "Algo não correu como esperado. Contacte a Informática");
+                    return false;
+                }
+                // Verifica se existe Inscrição para o conjunto selecionado (Ginasta/Epoca/Classe)
+                try
+                {
+                    var inscricaoEpoca = _context.Inscricao.Where(i => i.GinastaId == atletaIdentifier &&
+                               i.EpocaId == epoca &&
+                               i.ClasseId == classeMovimento).First();
+                }
+                catch (InvalidOperationException ex) // <- this 'ex' correctly contains the exception
+                {
+                    ModelState.AddModelError("Movimento.AtletaMovimentoId", "Atleta selecionado não está inscrito na " +
+                        "época em vigor");
+                    return false;
+                }
+                catch (Exception ex) // <- this 'ex' correctly contains the exception
+                {
+                    ModelState.AddModelError("Movimento.AtletaMovimentoId", "Algo não correu como esperado. Contacte a Informática");
                     return false;
                 }
             }
@@ -240,7 +300,7 @@ namespace AppGCT.Pages.Gestao.Movimentos
 
             Movimento.DataCriacao = DateTime.Now;
             // obtem User ID logado
-            var userId = User.FindFirstValue(ClaimTypes.Name);
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             Movimento.IdCriacao = userId;
             Movimento.DataModificacao = DateTime.MinValue;
             Movimento.IdModificacao = "";

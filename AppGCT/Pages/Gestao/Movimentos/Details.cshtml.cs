@@ -8,6 +8,8 @@ using Microsoft.EntityFrameworkCore;
 using AppGCT.Data;
 using AppGCT.Models;
 using Microsoft.AspNetCore.Authorization;
+using AppGCT.Areas.Identity.Data;
+using Microsoft.AspNetCore.Identity;
 
 namespace AppGCT.Pages.Gestao.Movimentos
 {
@@ -15,13 +17,17 @@ namespace AppGCT.Pages.Gestao.Movimentos
     public class DetailsModel : PageModel
     {
         private readonly AppGCT.Data.AppGCTContext _context;
+        private readonly UserManager<Utilizador> _userManager;
 
-        public DetailsModel(AppGCT.Data.AppGCTContext context)
+        public DetailsModel(AppGCT.Data.AppGCTContext context, UserManager<Utilizador> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
+        public string IdCriacaoName { get; set; }
+        public string IdModificacaoName { get; set; }
 
-      public Movimento Movimento { get; set; } = default!; 
+        public Movimento Movimento { get; set; } = default!;
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -39,9 +45,13 @@ namespace AppGCT.Pages.Gestao.Movimentos
             {
                 return NotFound();
             }
-            else 
+            else
             {
                 Movimento = movimento;
+                var user = await _userManager.FindByIdAsync(Movimento.IdCriacao);
+                IdCriacaoName = user?.Nome;
+                var user2 = await _userManager.FindByIdAsync(Movimento.IdModificacao);
+                IdModificacaoName = user2?.Nome;
             }
             return Page();
         }
