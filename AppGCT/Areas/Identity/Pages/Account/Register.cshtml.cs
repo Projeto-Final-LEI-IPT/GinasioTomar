@@ -20,6 +20,7 @@ using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
 using AppGCT.Outros;
 using AppGCT.Models;
+using System.Text.RegularExpressions;
 
 namespace AppGCT.Areas.Identity.Pages.Account
 {
@@ -51,6 +52,30 @@ namespace AppGCT.Areas.Identity.Pages.Account
             _roleManager = roleManager;
             _emailSender = emailSender;
             _context = context;
+        }
+
+        private async Task<bool> NIFValido(string nif)
+        {
+            if (string.IsNullOrEmpty(nif) || nif.Length != 9 || !Regex.IsMatch(nif, @"^\d{9}$"))
+            {
+                return false;
+            }
+
+            int[] weight = { 9, 8, 7, 6, 5, 4, 3, 2, 1 };
+            int sum = 0;
+
+            for (int i = 0; i < 8; i++)
+            {
+                sum += (nif[i] - '0') * weight[i];
+            }
+
+            int checkDigit = 11 - (sum % 11);
+            if (checkDigit >= 10)
+            {
+                checkDigit = 0;
+            }
+
+            return (checkDigit == nif[8] - '0');
         }
 
         /// <summary>
@@ -151,11 +176,19 @@ namespace AppGCT.Areas.Identity.Pages.Account
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
             var dataDia = DateTime.Now;
+            //valida data nascimento
             if (Input.Dtnascim >= dataDia)
             {
                 ModelState.AddModelError("Input.DtNascim", "Data de Nascimento inválida");
                 return Page();
             }
+            //valida NIF
+            if (!await NIFValido(Input.NIF))
+            {
+                ModelState.AddModelError("Input.NIF", "NIF inválido.");
+                return Page();
+            }
+
             returnUrl ??= Url.Content("~/");
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)

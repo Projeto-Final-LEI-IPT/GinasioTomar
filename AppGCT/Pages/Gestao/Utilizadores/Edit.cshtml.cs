@@ -13,6 +13,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Security.Claims;
 using System.ComponentModel;
 using Microsoft.IdentityModel.Tokens;
+using System.Text.RegularExpressions;
 
 namespace AppGCT.Pages.Gestao.Utilizadores
 {
@@ -28,6 +29,30 @@ namespace AppGCT.Pages.Gestao.Utilizadores
             _roleManager = roleManager;
         }
 
+        private async Task<bool> NIFValido(string nif)
+        {
+            if (string.IsNullOrEmpty(nif) || nif.Length != 9 || !Regex.IsMatch(nif, @"^\d{9}$"))
+            {
+                return false;
+            }
+
+            int[] weight = { 9, 8, 7, 6, 5, 4, 3, 2, 1 };
+            int sum = 0;
+
+            for (int i = 0; i < 8; i++)
+            {
+                sum += (nif[i] - '0') * weight[i];
+            }
+
+            int checkDigit = 11 - (sum % 11);
+            if (checkDigit >= 10)
+            {
+                checkDigit = 0;
+            }
+
+            return (checkDigit == nif[8] - '0');
+        }
+
         public string Username { get; set; }
         public List<IdentityRole> Roles { get; set; }
 
@@ -36,34 +61,39 @@ namespace AppGCT.Pages.Gestao.Utilizadores
 
         public class EditUserModel
         {
-            [Required]
+            [Required(ErrorMessage = "Nome é campo obrigatório!")]
+            [StringLength(50, MinimumLength = 5, ErrorMessage = "Nome deve conter no minimo 5 caracteres e máximo 50 caracteres!")]
             [DataType(DataType.Text)]
             [Display(Name = "Nome")]
             public string Nome { get; set; }
 
-            [RegularExpression(@"^[0-9]*$"), Required, StringLength(9, MinimumLength = 9)]
-            [DataType(DataType.Text)]
+            [Required(ErrorMessage = "NIF é campo obrigatório!")]
+            [StringLength(9, MinimumLength = 9, ErrorMessage = "NIF tem de ter 9 digitos numéricos.")]
+            [RegularExpression(@"^(1\d{8}|[2-3]\d{8}|45\d{7})$", ErrorMessage = "NIF inválido.")]
+            [DataType((DataType.Text))]
             [Display(Name = "NIF")]
             public string NIF { get; set; }
 
-            [Required]
+            [Required(ErrorMessage = "Data Nascimento é campo obrigatório!")]
             [DataType(DataType.Date)]
             [Display(Name = "Dtnascim")]
             public DateTime Dtnascim { get; set; }
 
-            [Required]
-            [StringLength(50, MinimumLength = 15)]
+            [Required(ErrorMessage = "Morada é campo obrigatório!")]
+            [StringLength(50, MinimumLength = 15, ErrorMessage = "Morada tem de ter entre 15 e 50 caracteres.")]
             [DataType(DataType.Text)]
             [Display(Name = "Morada")]
             public string Morada { get; set; }
 
-            [RegularExpression(@"^[0-9]*$"), Required, StringLength(9, MinimumLength = 9)]
+            [Required(ErrorMessage = "Contacto é campo obrigatório!")]
+            [StringLength(9, MinimumLength = 9, ErrorMessage = "Contacto tem de ter 9 digitos.")]
+            [RegularExpression(@"^[0-9]*$", ErrorMessage = "Apenas digitos de 0 a 9 são permitidos")]
             [DataType(DataType.Text)]
-            [Display(Name = "Contato")]
+            [Display(Name = "Contacto")]
             public string Contato { get; set; }
 
-            [Required]
-            [EmailAddress]
+            [Required(ErrorMessage = "Email é campo obrigatório!")]
+            [EmailAddress(ErrorMessage = "Email inválido")]
             [Display(Name = "Email")]
             public string Email { get; set; }
 
@@ -117,9 +147,17 @@ namespace AppGCT.Pages.Gestao.Utilizadores
             ModelState.Remove("Input.NumSocio"); // Remove validação para o campo RoleName que não é editavel
 
             var dataDia = DateTime.Now;
+            //valida data nascimento
             if (Input.Dtnascim >= dataDia)
             {
                 ModelState.AddModelError("Input.DtNascim", "Data de Nascimento inválida");
+                return Page();
+            }
+
+            //valida NIF
+            if (!await NIFValido(Input.NIF))
+            {
+                ModelState.AddModelError("Input.NIF", "NIF inválido.");
                 return Page();
             }
 

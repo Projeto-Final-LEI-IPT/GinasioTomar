@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using SendGrid.Helpers.Mail;
 using System.ComponentModel.DataAnnotations;
 using System.Security.Claims;
+using System.Text.RegularExpressions;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace AppGCT.Pages.Gestao.Utilizadores
@@ -26,6 +27,30 @@ namespace AppGCT.Pages.Gestao.Utilizadores
             _context = context; 
         }
 
+        private async Task<bool> NIFValido(string nif)
+        {
+            if (string.IsNullOrEmpty(nif) || nif.Length != 9 || !Regex.IsMatch(nif, @"^\d{9}$"))
+            {
+                return false;
+            }
+
+            int[] weight = { 9, 8, 7, 6, 5, 4, 3, 2, 1 };
+            int sum = 0;
+
+            for (int i = 0; i < 8; i++)
+            {
+                sum += (nif[i] - '0') * weight[i];
+            }
+
+            int checkDigit = 11 - (sum % 11);
+            if (checkDigit >= 10)
+            {
+                checkDigit = 0;
+            }
+
+            return (checkDigit == nif[8] - '0');
+        }
+
         public string Username { get; set; }
         public List<IdentityRole> Roles { get; set; }
 
@@ -40,50 +65,62 @@ namespace AppGCT.Pages.Gestao.Utilizadores
             [Display(Name = "Nome")]
             public string Nome { get; set; }
 
-            [RegularExpression(@"^[0-9]*$"), Required, StringLength(9, MinimumLength = 9)]
-            [DataType(DataType.Text)]
+            [Required(ErrorMessage = "NIF é campo obrigatório!")]
+            [StringLength(9, MinimumLength = 9, ErrorMessage = "NIF tem de ter 9 digitos numéricos.")]
+            [RegularExpression(@"^(1\d{8}|[2-3]\d{8}|45\d{7})$", ErrorMessage = "NIF inválido.")]
+            [DataType((DataType.Text))]
             [Display(Name = "NIF")]
             public string NIF { get; set; }
 
-            [Required]
+            [Required(ErrorMessage = "Data Nascimento é campo obrigatório!")]
             [DataType(DataType.Date)]
             [Display(Name = "Dtnascim")]
-            public DateTime Dtnascim { get; set; }
+            public DateTime Dtnascim { get; set; } = new DateTime(2000, 1, 1);
 
-            [Required]
-            [StringLength(50, MinimumLength = 15)]
+            [Required(ErrorMessage = "Morada é campo obrigatório!")]
+            [StringLength(50, MinimumLength = 15, ErrorMessage = "Morada tem de ter entre 15 e 50 caracteres.")]
             [DataType(DataType.Text)]
             [Display(Name = "Morada")]
             public string Morada { get; set; }
 
-            [RegularExpression(@"^[0-9]*$"), Required, StringLength(9, MinimumLength = 9)]
+            [Required(ErrorMessage = "Contacto é campo obrigatório!")]
+            [StringLength(9, MinimumLength = 9, ErrorMessage = "Contacto tem de ter 9 digitos.")]
+            [RegularExpression(@"^[0-9]*$", ErrorMessage = "Apenas digitos de 0 a 9 são permitidos")]
             [DataType(DataType.Text)]
-            [Display(Name = "Contato")]
+            [Display(Name = "Contacto")]
             public string Contato { get; set; }
 
-            [Required]
-            [EmailAddress]
+            [Required(ErrorMessage = "Email é campo obrigatório!")]
+            [EmailAddress(ErrorMessage = "Email inválido")]
             [Display(Name = "Email")]
             public string Email { get; set; }
 
-            [Required]
-            [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
+            [Required(ErrorMessage = "Password é campo obrigatório!")]
+            [StringLength(50, ErrorMessage = "A {0} tem de ter pelo menos {2} e um máximo de {1} caracteres.", MinimumLength = 6)]
+            [RegularExpression(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9]).+$",
+             ErrorMessage = "Password tem de ter uma letra minúscula, uma letra maiúscula e um carater não alfanumérico")]
             [DataType(DataType.Password)]
             [Display(Name = "Password")]
             public string Password { get; set; }
 
+            [Required(ErrorMessage = "Confirme Password é campo obrigatório!")]
             [DataType(DataType.Password)]
+            [StringLength(50)]
             [Display(Name = "Confirm password")]
-            [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+            [Compare("Password", ErrorMessage = "Password e Confirme Password são diferentes.")]
             public string ConfirmPassword { get; set; }
 
-            [Required]
+            [Required(ErrorMessage = "Tipo Utilizador é campo obrigatório!")]
             [Display(Name = "Role")]
             public string RoleName { get; set; }
         }
 
         public async Task<IActionResult> OnGetAsync()
         {
+            Input = new CreateUserModel
+            {
+                Dtnascim = new DateTime(DateTime.Now.Year, 1, 1)
+            };
             Username = User.FindFirstValue(ClaimTypes.Name);
             var user = await _userManager.GetUserAsync(User);
             //se é administrador pode gerar todos os tipos de utilizador (Adminitrador,Ginásio e Sócio)
@@ -104,13 +141,20 @@ namespace AppGCT.Pages.Gestao.Utilizadores
         public async Task<IActionResult> OnPostAsync()
         {
             Roles = await _roleManager.Roles.ToListAsync();
-
+            //valida data nascimento
             var dataDia = DateTime.Now;
             if (Input.Dtnascim >= dataDia)
             {
                 ModelState.AddModelError("Input.DtNascim", "Data de Nascimento inválida");
                 return Page();
             }
+            //valida NIF
+            if (!await NIFValido(Input.NIF))
+            {
+                ModelState.AddModelError("Input.NIF", "NIF inválido.");
+                return Page();
+            }
+
             if (ModelState.IsValid)
             {
                 var userId = _userManager.GetUserId(User);

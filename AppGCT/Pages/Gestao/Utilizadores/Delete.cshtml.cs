@@ -36,11 +36,12 @@ namespace AppGCT.Pages.Gestao.Utilizadores
             }
 
             Utilizador = await _userManager.FindByIdAsync(id);
+            var currentUser = await _userManager.GetUserAsync(User);
 
             if (Utilizador != null)
             {
                 // Se for o "Administrador" devolve erro
-                if (Utilizador.UserName == "admin@localhost")
+                if (Utilizador.UserName == "admin@localhost" || Utilizador.Id == currentUser.Id)
                 {
                     return RedirectToPage("./Error");
                 }
