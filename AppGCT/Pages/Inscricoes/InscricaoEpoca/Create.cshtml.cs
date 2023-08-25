@@ -76,6 +76,18 @@ namespace AppGCT.Pages.Inscricoes.InscricaoEpoca
                 OnGet(Inscricao.GinastaId);
                 return Page();
             }
+
+            //valida se Ginasta já tem inscrição na Época
+            bool JaInscritoEpoca = await _context.Inscricao
+                                          .AnyAsync(i => i.GinastaId == Inscricao.GinastaId && i.EpocaId == Inscricao.EpocaId);
+
+            if (JaInscritoEpoca)
+            {
+                ModelState.AddModelError("Inscricao.GinastaId", "Ginasta já está inscrito na época!");
+                OnGet(Inscricao.GinastaId);
+                return Page();
+            }
+
             //obtem rubrica
             var rubrica = await _context.Rubrica
                                         .FirstOrDefaultAsync(r => r.ClasseId == Inscricao.ClasseId && r.DescontoId == Inscricao.CodDesconto);
@@ -96,6 +108,7 @@ namespace AppGCT.Pages.Inscricoes.InscricaoEpoca
                 OnGet(Inscricao.GinastaId);
                 return Page();
             }
+
             DateTime dtIni30 = epoca.DataInicio.AddMonths(-2);
 
             if (Inscricao.DtInscricao > epoca.DataFim)
