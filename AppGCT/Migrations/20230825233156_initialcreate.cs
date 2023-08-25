@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace AppGCT.Migrations
 {
     /// <inheritdoc />
-    public partial class initialCreate : Migration
+    public partial class initialcreate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -492,20 +492,74 @@ namespace AppGCT.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "713c55ef-4902-4d85-8bdf-467a70473924", null, "Administrador", "ADMINISTRADOR" },
-                    { "e2148d21-ce11-4ffd-8205-dd9e5de70c14", null, "Sócio", "SÓCIO" },
-                    { "f6100773-bf21-446e-a91b-a81eb82f3f44", null, "Ginásio", "GINÁSIO" }
+                    { "12eb2a04-e9e2-4f42-883c-de34baa7e1af", null, "Sócio", "SÓCIO" },
+                    { "a6ab9357-9b4f-454c-a1e3-4552de5b911e", null, "Ginásio", "GINÁSIO" },
+                    { "cdfb1eb3-e90f-4674-9276-f32ddacd0d21", null, "Administrador", "ADMINISTRADOR" }
                 });
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "DataAprovacao", "DataCriacao", "DataModificacao", "DataNascim", "Email", "EmailConfirmed", "EstadoUtilizador", "IdCriacao", "IdModificacao", "LockoutEnabled", "LockoutEnd", "Morada", "NIF", "Nome", "NormalizedEmail", "NormalizedUserName", "NumSocio", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "RoleAux", "SecurityStamp", "TwoFactorEnabled", "UltimoLogin", "UserName" },
-                values: new object[] { "216be702-c705-4d83-857d-74bcb4528a89", 0, "7d3e9614-6300-4db0-a02e-1f2bad3e5344", new DateTime(2023, 8, 22, 22, 10, 3, 513, DateTimeKind.Local).AddTicks(3675), new DateTime(2023, 8, 22, 22, 10, 3, 513, DateTimeKind.Local).AddTicks(3625), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2023, 8, 22, 22, 10, 3, 513, DateTimeKind.Local).AddTicks(3681), "admin@localhost", true, "A", "SEED", " ", false, null, "Ginásio Clube de Tomar", "999999999", "Administrador", "ADMIN@LOCALHOST", "ADMIN@LOCALHOST", " ", "AQAAAAIAAYagAAAAEE8WNLwRG/nHwQS7yBOP0Nyf5OA4tfeDdk2bj3nggO2HjHKtOo4qnnHWFYHUKIN/lA==", "999999999", false, "Administrador", "a9a52a8e-2a26-47d5-93a8-c11e5a4ea091", false, null, "admin@localhost" });
+                values: new object[] { "564a1ab8-5f57-4eb6-8e98-95309f1f370e", 0, "34521538-37d6-44cb-b419-42b83f78d165", new DateTime(2023, 8, 26, 0, 31, 55, 457, DateTimeKind.Local).AddTicks(765), new DateTime(2023, 8, 26, 0, 31, 55, 457, DateTimeKind.Local).AddTicks(703), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2023, 8, 26, 0, 31, 55, 457, DateTimeKind.Local).AddTicks(772), "admin@localhost", true, "A", "SEED", " ", false, null, "Ginásio Clube de Tomar", "999999999", "Administrador", "ADMIN@LOCALHOST", "ADMIN@LOCALHOST", " ", "AQAAAAIAAYagAAAAEHE3VGQ7ZQBzlX1kkKanIX7uyshk5Z5gvyt4IOQAZ8ViOYFOdl5wg+H4iu4OwYuTmA==", "999999999", false, "Administrador", "86309bcd-5d26-420a-819c-f472176a93a7", false, null, "admin@localhost" });
+
+            migrationBuilder.InsertData(
+                table: "Classe",
+                columns: new[] { "IdClasse", "DataCriacao", "DataModificacao", "EstadoClasse", "IdCriacao", "IdModificacao", "NomeClasse" },
+                values: new object[,]
+                {
+                    { 1, new DateTime(2023, 8, 26, 0, 31, 55, 592, DateTimeKind.Local).AddTicks(5511), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "A", "SEED", " ", "Aprendizagem 1" },
+                    { 2, new DateTime(2023, 8, 26, 0, 31, 55, 592, DateTimeKind.Local).AddTicks(5523), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "A", "SEED", " ", "Aprendizagem 2" },
+                    { 3, new DateTime(2023, 8, 26, 0, 31, 55, 592, DateTimeKind.Local).AddTicks(5530), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "A", "SEED", " ", "Aprendizagem 3" },
+                    { 4, new DateTime(2023, 8, 26, 0, 31, 55, 592, DateTimeKind.Local).AddTicks(5537), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "A", "SEED", " ", "Acrobática 1" },
+                    { 5, new DateTime(2023, 8, 26, 0, 31, 55, 592, DateTimeKind.Local).AddTicks(5556), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "A", "SEED", " ", "Acrobática 2" },
+                    { 6, new DateTime(2023, 8, 26, 0, 31, 55, 592, DateTimeKind.Local).AddTicks(5573), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "A", "SEED", " ", "Acrobática 3" },
+                    { 7, new DateTime(2023, 8, 26, 0, 31, 55, 592, DateTimeKind.Local).AddTicks(5582), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "A", "SEED", " ", "Trampolins 1" },
+                    { 8, new DateTime(2023, 8, 26, 0, 31, 55, 592, DateTimeKind.Local).AddTicks(5588), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "A", "SEED", " ", "Trampolins 2" },
+                    { 9, new DateTime(2023, 8, 26, 0, 31, 55, 592, DateTimeKind.Local).AddTicks(5597), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "A", "SEED", " ", "Ginástica para todos–Júnior" },
+                    { 10, new DateTime(2023, 8, 26, 0, 31, 55, 592, DateTimeKind.Local).AddTicks(5607), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "A", "SEED", " ", "Ginástica para todos–Universitários" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Desconto",
+                columns: new[] { "CodDesconto", "DataCriacao", "DataModificacao", "DescDesconto", "EstadoDesconto", "IdCriacao", "IdModificacao" },
+                values: new object[,]
+                {
+                    { "00", new DateTime(2023, 8, 26, 0, 31, 55, 592, DateTimeKind.Local).AddTicks(5806), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Bolsa", "A", "SEED", " " },
+                    { "01", new DateTime(2023, 8, 26, 0, 31, 55, 592, DateTimeKind.Local).AddTicks(5849), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Parentesco(1º familiar)", "A", "SEED", " " },
+                    { "02", new DateTime(2023, 8, 26, 0, 31, 55, 592, DateTimeKind.Local).AddTicks(5858), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Parentesco(2º familiar)", "A", "SEED", " " },
+                    { "03", new DateTime(2023, 8, 26, 0, 31, 55, 592, DateTimeKind.Local).AddTicks(5865), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Parentesco(3º familiar)", "A", "SEED", " " }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Epoca",
+                columns: new[] { "IdEpoca", "DataCriacao", "DataFim", "DataInicio", "DataModificacao", "EstadoEpoca", "IdCriacao", "IdModificacao", "NomeEpoca" },
+                values: new object[] { 1, new DateTime(2023, 8, 26, 0, 31, 55, 592, DateTimeKind.Local).AddTicks(5343), new DateTime(2024, 7, 31, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2023, 9, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "A", "SEED", " ", "2023/2024" });
+
+            migrationBuilder.InsertData(
+                table: "MetodoPagamento",
+                columns: new[] { "CodMetodo", "DataCriacao", "DataModificacao", "DescMetodo", "EstadoMetodo", "IdCriacao", "IdModificacao", "ValorDesconto" },
+                values: new object[,]
+                {
+                    { "00", new DateTime(2023, 8, 26, 0, 31, 55, 592, DateTimeKind.Local).AddTicks(5710), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Numerário", "A", "SEED", " ", 0m },
+                    { "01", new DateTime(2023, 8, 26, 0, 31, 55, 592, DateTimeKind.Local).AddTicks(5723), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Transferência Bancária", "A", "SEED", " ", 1m },
+                    { "02", new DateTime(2023, 8, 26, 0, 31, 55, 592, DateTimeKind.Local).AddTicks(5733), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Terminal Pagamento Automático(TPA)", "A", "SEED", " ", 0m }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Rubrica",
+                columns: new[] { "CodRubrica", "ClasseId", "DataCriacao", "DataModificacao", "DescontoId", "DescricaoRubrica", "EstadoRubrica", "Horario", "HorasSemanais", "IPagInscricao", "IPrecario", "IVlrUnit", "IdCriacao", "IdModificacao", "LocalTreino", "OrdemPrecario", "TipoMovimento", "TipoRubrica", "ValorUnitario" },
+                values: new object[,]
+                {
+                    { "001", null, new DateTime(2023, 8, 26, 0, 31, 55, 592, DateTimeKind.Local).AddTicks(5941), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "Inscrição", "A", "", "", "S", "S", "S", "SEED", " ", "", 1, "D", "G", 15m },
+                    { "002", null, new DateTime(2023, 8, 26, 0, 31, 55, 592, DateTimeKind.Local).AddTicks(5954), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "Filiação FGP", "A", "", "", "S", "S", "S", "SEED", " ", "", 2, "D", "G", 10m },
+                    { "003", null, new DateTime(2023, 8, 26, 0, 31, 55, 592, DateTimeKind.Local).AddTicks(5965), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "Seguro", "A", "", "", "S", "S", "S", "SEED", " ", "", 3, "D", "G", 30m },
+                    { "004", null, new DateTime(2023, 8, 26, 0, 31, 55, 592, DateTimeKind.Local).AddTicks(5974), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "Quota Sócio (Anual)", "A", "", "", "N", "S", "S", "SEED", " ", "", 4, "D", "S", 15m }
+                });
 
             migrationBuilder.InsertData(
                 table: "AspNetUserRoles",
                 columns: new[] { "RoleId", "UserId" },
-                values: new object[] { "713c55ef-4902-4d85-8bdf-467a70473924", "216be702-c705-4d83-857d-74bcb4528a89" });
+                values: new object[] { "cdfb1eb3-e90f-4674-9276-f32ddacd0d21", "564a1ab8-5f57-4eb6-8e98-95309f1f370e" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
