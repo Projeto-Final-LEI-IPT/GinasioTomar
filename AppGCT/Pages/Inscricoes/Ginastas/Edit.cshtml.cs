@@ -10,6 +10,7 @@ using AppGCT.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNetCore.Authorization;
 using System.Data;
+using System.Text.RegularExpressions;
 
 namespace AppGCT.Pages.Inscricoes.Ginastas
 {
@@ -21,6 +22,30 @@ namespace AppGCT.Pages.Inscricoes.Ginastas
         public EditModel(AppGCT.Data.AppGCTContext context)
         {
             _context = context;
+        }
+
+        private async Task<bool> NIFValido(string nif)
+        {
+            if (string.IsNullOrEmpty(nif) || nif.Length != 9 || !Regex.IsMatch(nif, @"^\d{9}$"))
+            {
+                return false;
+            }
+
+            int[] weight = { 9, 8, 7, 6, 5, 4, 3, 2, 1 };
+            int sum = 0;
+
+            for (int i = 0; i < 8; i++)
+            {
+                sum += (nif[i] - '0') * weight[i];
+            }
+
+            int checkDigit = 11 - (sum % 11);
+            if (checkDigit >= 10)
+            {
+                checkDigit = 0;
+            }
+
+            return (checkDigit == nif[8] - '0');
         }
 
         [BindProperty]
@@ -84,6 +109,25 @@ namespace AppGCT.Pages.Inscricoes.Ginastas
                 ModelState.AddModelError("Ginasta.DtNascim", "Data Nascimento tem de ser inferior à data atual");
                 OnGetAsync(Ginasta.Id);
                 return Page();
+            }
+
+            //valida NIF
+            if (!await NIFValido(Ginasta.NIF))
+            {
+                ModelState.AddModelError("Ginasta.NIF", "NIF é inválido");
+                OnGetAsync(Ginasta.Id);
+                return Page();
+            }
+
+            //valida NIF(EE)
+            if (Ginasta.NIFEE != null)
+            {
+                if (!await NIFValido(Ginasta.NIFEE))
+                {
+                    ModelState.AddModelError("Ginasta.NIFEE", "NIF EE é inválido");
+                    OnGetAsync(Ginasta.Id);
+                    return Page();
+                }
             }
             Ginasta.IdModificacao = User.Identity.GetUserId(); ;
             Ginasta.DataModificacao = DateTime.Now;

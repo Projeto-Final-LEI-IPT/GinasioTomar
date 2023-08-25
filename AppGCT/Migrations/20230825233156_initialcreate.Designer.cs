@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AppGCT.Migrations
 {
     [DbContext(typeof(AppGCTContext))]
-    [Migration("20230822211003_initialCreate")]
-    partial class initialCreate
+    [Migration("20230825233156_initialcreate")]
+    partial class initialcreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -145,13 +145,13 @@ namespace AppGCT.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "216be702-c705-4d83-857d-74bcb4528a89",
+                            Id = "564a1ab8-5f57-4eb6-8e98-95309f1f370e",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "7d3e9614-6300-4db0-a02e-1f2bad3e5344",
-                            DataAprovacao = new DateTime(2023, 8, 22, 22, 10, 3, 513, DateTimeKind.Local).AddTicks(3675),
-                            DataCriacao = new DateTime(2023, 8, 22, 22, 10, 3, 513, DateTimeKind.Local).AddTicks(3625),
+                            ConcurrencyStamp = "34521538-37d6-44cb-b419-42b83f78d165",
+                            DataAprovacao = new DateTime(2023, 8, 26, 0, 31, 55, 457, DateTimeKind.Local).AddTicks(765),
+                            DataCriacao = new DateTime(2023, 8, 26, 0, 31, 55, 457, DateTimeKind.Local).AddTicks(703),
                             DataModificacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DataNascim = new DateTime(2023, 8, 22, 22, 10, 3, 513, DateTimeKind.Local).AddTicks(3681),
+                            DataNascim = new DateTime(2023, 8, 26, 0, 31, 55, 457, DateTimeKind.Local).AddTicks(772),
                             Email = "admin@localhost",
                             EmailConfirmed = true,
                             EstadoUtilizador = "A",
@@ -164,11 +164,11 @@ namespace AppGCT.Migrations
                             NormalizedEmail = "ADMIN@LOCALHOST",
                             NormalizedUserName = "ADMIN@LOCALHOST",
                             NumSocio = " ",
-                            PasswordHash = "AQAAAAIAAYagAAAAEE8WNLwRG/nHwQS7yBOP0Nyf5OA4tfeDdk2bj3nggO2HjHKtOo4qnnHWFYHUKIN/lA==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEHE3VGQ7ZQBzlX1kkKanIX7uyshk5Z5gvyt4IOQAZ8ViOYFOdl5wg+H4iu4OwYuTmA==",
                             PhoneNumber = "999999999",
                             PhoneNumberConfirmed = false,
                             RoleAux = "Administrador",
-                            SecurityStamp = "a9a52a8e-2a26-47d5-93a8-c11e5a4ea091",
+                            SecurityStamp = "86309bcd-5d26-420a-819c-f472176a93a7",
                             TwoFactorEnabled = false,
                             UserName = "admin@localhost"
                         });
@@ -208,6 +208,108 @@ namespace AppGCT.Migrations
                     b.HasKey("IdClasse");
 
                     b.ToTable("Classe");
+
+                    b.HasData(
+                        new
+                        {
+                            IdClasse = 1,
+                            DataCriacao = new DateTime(2023, 8, 26, 0, 31, 55, 592, DateTimeKind.Local).AddTicks(5511),
+                            DataModificacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            EstadoClasse = "A",
+                            IdCriacao = "SEED",
+                            IdModificacao = " ",
+                            NomeClasse = "Aprendizagem 1"
+                        },
+                        new
+                        {
+                            IdClasse = 2,
+                            DataCriacao = new DateTime(2023, 8, 26, 0, 31, 55, 592, DateTimeKind.Local).AddTicks(5523),
+                            DataModificacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            EstadoClasse = "A",
+                            IdCriacao = "SEED",
+                            IdModificacao = " ",
+                            NomeClasse = "Aprendizagem 2"
+                        },
+                        new
+                        {
+                            IdClasse = 3,
+                            DataCriacao = new DateTime(2023, 8, 26, 0, 31, 55, 592, DateTimeKind.Local).AddTicks(5530),
+                            DataModificacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            EstadoClasse = "A",
+                            IdCriacao = "SEED",
+                            IdModificacao = " ",
+                            NomeClasse = "Aprendizagem 3"
+                        },
+                        new
+                        {
+                            IdClasse = 4,
+                            DataCriacao = new DateTime(2023, 8, 26, 0, 31, 55, 592, DateTimeKind.Local).AddTicks(5537),
+                            DataModificacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            EstadoClasse = "A",
+                            IdCriacao = "SEED",
+                            IdModificacao = " ",
+                            NomeClasse = "Acrobática 1"
+                        },
+                        new
+                        {
+                            IdClasse = 5,
+                            DataCriacao = new DateTime(2023, 8, 26, 0, 31, 55, 592, DateTimeKind.Local).AddTicks(5556),
+                            DataModificacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            EstadoClasse = "A",
+                            IdCriacao = "SEED",
+                            IdModificacao = " ",
+                            NomeClasse = "Acrobática 2"
+                        },
+                        new
+                        {
+                            IdClasse = 6,
+                            DataCriacao = new DateTime(2023, 8, 26, 0, 31, 55, 592, DateTimeKind.Local).AddTicks(5573),
+                            DataModificacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            EstadoClasse = "A",
+                            IdCriacao = "SEED",
+                            IdModificacao = " ",
+                            NomeClasse = "Acrobática 3"
+                        },
+                        new
+                        {
+                            IdClasse = 7,
+                            DataCriacao = new DateTime(2023, 8, 26, 0, 31, 55, 592, DateTimeKind.Local).AddTicks(5582),
+                            DataModificacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            EstadoClasse = "A",
+                            IdCriacao = "SEED",
+                            IdModificacao = " ",
+                            NomeClasse = "Trampolins 1"
+                        },
+                        new
+                        {
+                            IdClasse = 8,
+                            DataCriacao = new DateTime(2023, 8, 26, 0, 31, 55, 592, DateTimeKind.Local).AddTicks(5588),
+                            DataModificacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            EstadoClasse = "A",
+                            IdCriacao = "SEED",
+                            IdModificacao = " ",
+                            NomeClasse = "Trampolins 2"
+                        },
+                        new
+                        {
+                            IdClasse = 9,
+                            DataCriacao = new DateTime(2023, 8, 26, 0, 31, 55, 592, DateTimeKind.Local).AddTicks(5597),
+                            DataModificacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            EstadoClasse = "A",
+                            IdCriacao = "SEED",
+                            IdModificacao = " ",
+                            NomeClasse = "Ginástica para todos–Júnior"
+                        },
+                        new
+                        {
+                            IdClasse = 10,
+                            DataCriacao = new DateTime(2023, 8, 26, 0, 31, 55, 592, DateTimeKind.Local).AddTicks(5607),
+                            DataModificacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            EstadoClasse = "A",
+                            IdCriacao = "SEED",
+                            IdModificacao = " ",
+                            NomeClasse = "Ginástica para todos–Universitários"
+                        });
                 });
 
             modelBuilder.Entity("AppGCT.Models.Desconto", b =>
@@ -242,6 +344,48 @@ namespace AppGCT.Migrations
                     b.HasKey("CodDesconto");
 
                     b.ToTable("Desconto");
+
+                    b.HasData(
+                        new
+                        {
+                            CodDesconto = "00",
+                            DataCriacao = new DateTime(2023, 8, 26, 0, 31, 55, 592, DateTimeKind.Local).AddTicks(5806),
+                            DataModificacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DescDesconto = "Bolsa",
+                            EstadoDesconto = "A",
+                            IdCriacao = "SEED",
+                            IdModificacao = " "
+                        },
+                        new
+                        {
+                            CodDesconto = "01",
+                            DataCriacao = new DateTime(2023, 8, 26, 0, 31, 55, 592, DateTimeKind.Local).AddTicks(5849),
+                            DataModificacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DescDesconto = "Parentesco(1º familiar)",
+                            EstadoDesconto = "A",
+                            IdCriacao = "SEED",
+                            IdModificacao = " "
+                        },
+                        new
+                        {
+                            CodDesconto = "02",
+                            DataCriacao = new DateTime(2023, 8, 26, 0, 31, 55, 592, DateTimeKind.Local).AddTicks(5858),
+                            DataModificacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DescDesconto = "Parentesco(2º familiar)",
+                            EstadoDesconto = "A",
+                            IdCriacao = "SEED",
+                            IdModificacao = " "
+                        },
+                        new
+                        {
+                            CodDesconto = "03",
+                            DataCriacao = new DateTime(2023, 8, 26, 0, 31, 55, 592, DateTimeKind.Local).AddTicks(5865),
+                            DataModificacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DescDesconto = "Parentesco(3º familiar)",
+                            EstadoDesconto = "A",
+                            IdCriacao = "SEED",
+                            IdModificacao = " "
+                        });
                 });
 
             modelBuilder.Entity("AppGCT.Models.Epoca", b =>
@@ -284,6 +428,20 @@ namespace AppGCT.Migrations
                     b.HasKey("IdEpoca");
 
                     b.ToTable("Epoca");
+
+                    b.HasData(
+                        new
+                        {
+                            IdEpoca = 1,
+                            DataCriacao = new DateTime(2023, 8, 26, 0, 31, 55, 592, DateTimeKind.Local).AddTicks(5343),
+                            DataFim = new DateTime(2024, 7, 31, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DataInicio = new DateTime(2023, 9, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DataModificacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            EstadoEpoca = "A",
+                            IdCriacao = "SEED",
+                            IdModificacao = " ",
+                            NomeEpoca = "2023/2024"
+                        });
                 });
 
             modelBuilder.Entity("AppGCT.Models.Ginasta", b =>
@@ -588,6 +746,41 @@ namespace AppGCT.Migrations
                     b.HasKey("CodMetodo");
 
                     b.ToTable("MetodoPagamento");
+
+                    b.HasData(
+                        new
+                        {
+                            CodMetodo = "00",
+                            DataCriacao = new DateTime(2023, 8, 26, 0, 31, 55, 592, DateTimeKind.Local).AddTicks(5710),
+                            DataModificacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DescMetodo = "Numerário",
+                            EstadoMetodo = "A",
+                            IdCriacao = "SEED",
+                            IdModificacao = " ",
+                            ValorDesconto = 0m
+                        },
+                        new
+                        {
+                            CodMetodo = "01",
+                            DataCriacao = new DateTime(2023, 8, 26, 0, 31, 55, 592, DateTimeKind.Local).AddTicks(5723),
+                            DataModificacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DescMetodo = "Transferência Bancária",
+                            EstadoMetodo = "A",
+                            IdCriacao = "SEED",
+                            IdModificacao = " ",
+                            ValorDesconto = 1m
+                        },
+                        new
+                        {
+                            CodMetodo = "02",
+                            DataCriacao = new DateTime(2023, 8, 26, 0, 31, 55, 592, DateTimeKind.Local).AddTicks(5733),
+                            DataModificacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DescMetodo = "Terminal Pagamento Automático(TPA)",
+                            EstadoMetodo = "A",
+                            IdCriacao = "SEED",
+                            IdModificacao = " ",
+                            ValorDesconto = 0m
+                        });
                 });
 
             modelBuilder.Entity("AppGCT.Models.Movimento", b =>
@@ -801,6 +994,88 @@ namespace AppGCT.Migrations
                     b.HasIndex("DescontoId");
 
                     b.ToTable("Rubrica");
+
+                    b.HasData(
+                        new
+                        {
+                            CodRubrica = "001",
+                            DataCriacao = new DateTime(2023, 8, 26, 0, 31, 55, 592, DateTimeKind.Local).AddTicks(5941),
+                            DataModificacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DescricaoRubrica = "Inscrição",
+                            EstadoRubrica = "A",
+                            Horario = "",
+                            HorasSemanais = "",
+                            IPagInscricao = "S",
+                            IPrecario = "S",
+                            IVlrUnit = "S",
+                            IdCriacao = "SEED",
+                            IdModificacao = " ",
+                            LocalTreino = "",
+                            OrdemPrecario = 1,
+                            TipoMovimento = "D",
+                            TipoRubrica = "G",
+                            ValorUnitario = 15m
+                        },
+                        new
+                        {
+                            CodRubrica = "002",
+                            DataCriacao = new DateTime(2023, 8, 26, 0, 31, 55, 592, DateTimeKind.Local).AddTicks(5954),
+                            DataModificacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DescricaoRubrica = "Filiação FGP",
+                            EstadoRubrica = "A",
+                            Horario = "",
+                            HorasSemanais = "",
+                            IPagInscricao = "S",
+                            IPrecario = "S",
+                            IVlrUnit = "S",
+                            IdCriacao = "SEED",
+                            IdModificacao = " ",
+                            LocalTreino = "",
+                            OrdemPrecario = 2,
+                            TipoMovimento = "D",
+                            TipoRubrica = "G",
+                            ValorUnitario = 10m
+                        },
+                        new
+                        {
+                            CodRubrica = "003",
+                            DataCriacao = new DateTime(2023, 8, 26, 0, 31, 55, 592, DateTimeKind.Local).AddTicks(5965),
+                            DataModificacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DescricaoRubrica = "Seguro",
+                            EstadoRubrica = "A",
+                            Horario = "",
+                            HorasSemanais = "",
+                            IPagInscricao = "S",
+                            IPrecario = "S",
+                            IVlrUnit = "S",
+                            IdCriacao = "SEED",
+                            IdModificacao = " ",
+                            LocalTreino = "",
+                            OrdemPrecario = 3,
+                            TipoMovimento = "D",
+                            TipoRubrica = "G",
+                            ValorUnitario = 30m
+                        },
+                        new
+                        {
+                            CodRubrica = "004",
+                            DataCriacao = new DateTime(2023, 8, 26, 0, 31, 55, 592, DateTimeKind.Local).AddTicks(5974),
+                            DataModificacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DescricaoRubrica = "Quota Sócio (Anual)",
+                            EstadoRubrica = "A",
+                            Horario = "",
+                            HorasSemanais = "",
+                            IPagInscricao = "N",
+                            IPrecario = "S",
+                            IVlrUnit = "S",
+                            IdCriacao = "SEED",
+                            IdModificacao = " ",
+                            LocalTreino = "",
+                            OrdemPrecario = 4,
+                            TipoMovimento = "D",
+                            TipoRubrica = "S",
+                            ValorUnitario = 15m
+                        });
                 });
 
             modelBuilder.Entity("AppGCT.Models.Saldo", b =>
@@ -847,19 +1122,19 @@ namespace AppGCT.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "713c55ef-4902-4d85-8bdf-467a70473924",
+                            Id = "cdfb1eb3-e90f-4674-9276-f32ddacd0d21",
                             Name = "Administrador",
                             NormalizedName = "ADMINISTRADOR"
                         },
                         new
                         {
-                            Id = "f6100773-bf21-446e-a91b-a81eb82f3f44",
+                            Id = "a6ab9357-9b4f-454c-a1e3-4552de5b911e",
                             Name = "Ginásio",
                             NormalizedName = "GINÁSIO"
                         },
                         new
                         {
-                            Id = "e2148d21-ce11-4ffd-8205-dd9e5de70c14",
+                            Id = "12eb2a04-e9e2-4f42-883c-de34baa7e1af",
                             Name = "Sócio",
                             NormalizedName = "SÓCIO"
                         });
@@ -956,8 +1231,8 @@ namespace AppGCT.Migrations
                     b.HasData(
                         new
                         {
-                            UserId = "216be702-c705-4d83-857d-74bcb4528a89",
-                            RoleId = "713c55ef-4902-4d85-8bdf-467a70473924"
+                            UserId = "564a1ab8-5f57-4eb6-8e98-95309f1f370e",
+                            RoleId = "cdfb1eb3-e90f-4674-9276-f32ddacd0d21"
                         });
                 });
 
