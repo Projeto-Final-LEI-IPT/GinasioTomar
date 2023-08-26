@@ -1,0 +1,41 @@
+﻿@page
+@model AppGCT.Pages.Tarefas.IndexModel
+
+@{
+    ViewData["Title"] = "Tarefas";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<h1>Tarefas pendentes</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Sócio
+            </th>
+            <th>
+                Ginasta
+            </th>
+            <th>
+                Descrição da tarefa
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Tarefas)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Socio)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Ginasta)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DescrTarefa)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
