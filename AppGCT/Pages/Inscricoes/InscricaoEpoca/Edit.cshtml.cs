@@ -93,6 +93,36 @@ namespace AppGCT.Pages.Inscricoes.InscricaoEpoca
                 await OnGetAsync(Inscricao.GinastaId);
                 return Page();
             }
+
+            //VALIDA EXAME MÉDICO E VALIDADE 
+            if (Inscricao.IExamMed == "S")
+            {
+                if (Inscricao.DtExamMed.Date <= DateTime.Now.Date)
+                {
+                    ModelState.AddModelError("Inscricao.DtExamMed", "Só pode ser colocada uma data validade a futuro");
+                    await OnGetAsync(Inscricao.GinastaId);
+                    return Page();
+                }   
+            }else
+            {
+                Inscricao.DtExamMed = DateTime.MinValue;
+            }
+
+            //VALIDA FICHA INDIVIDUAL E DATA 
+            if (Inscricao.IFicFGP == "S")
+            {
+                if (Inscricao.DtFicFGP.Date != DateTime.Now.Date)
+                {
+                    ModelState.AddModelError("Inscricao.DtFicFGP", "Data tem de ser a data do dia");
+                    await OnGetAsync(Inscricao.GinastaId);
+                    return Page();
+                }
+            }
+            else
+            {
+                Inscricao.DtFicFGP = DateTime.MinValue;
+            }
+
             //obtem rubrica
             var rubrica = await _context.Rubrica
                                         .FirstOrDefaultAsync(r => r.ClasseId == Inscricao.ClasseId && r.DescontoId == Inscricao.CodDesconto);

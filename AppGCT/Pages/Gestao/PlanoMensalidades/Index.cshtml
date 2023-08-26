@@ -42,6 +42,12 @@
                 @Html.DisplayNameFor(model => model.PlanoMensalidade[0].ValorMensalidade)
             </th>
             <th>
+                @Html.DisplayNameFor(model => model.PlanoMensalidade[0].ILancado)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PlanoMensalidade[0].ValorMensalidadeLanc)
+            </th>
+            <th>
                 Época
             </th>
             <th>
@@ -61,6 +67,12 @@
                     @Html.DisplayFor(modelItem => item.ValorMensalidade)
                 </td>
                 <td>
+                    @Html.DisplayFor(modelItem => item.ILancadoDescricao)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ValorMensalidadeLanc)
+                </td>
+                <td>
                     @Html.DisplayFor(modelItem => item.Epoca.NomeEpoca)
                 </td>
                 <td>
@@ -73,7 +85,10 @@
                         <a class='btn btn-primary btn-sm' asp-area='' asp-page='/Gestao/PlanoMensalidades/Details' asp-route-id='@item.IdPlanoM'>Detalhes</a>
                         <a class='btn btn-danger btn-sm' asp-area='' asp-page='/Gestao/PlanoMensalidades/Delete' asp-route-id='@item.IdPlanoM'>Apagar</a>
                     }
-
+                    @if (item.IdMovimento > 0)
+                    {
+                        <a class='btn btn-primary btn-sm' asp-area='' asp-page='/Gestao/Movimentos/Details' asp-route-id='@item.IdMovimento'>Detalhe Movimento</a>
+                    }
                 </td>
             </tr>
         }

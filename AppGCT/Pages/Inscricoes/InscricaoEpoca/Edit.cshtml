@@ -66,27 +66,8 @@
                     <input asp-for="Inscricao.IdadeAgosto" class="form-control" />
                     <span asp-validation-for="Inscricao.IdadeAgosto" class="text-danger"></span>
                 </div>
-                <div class="form-group">
-                    <label asp-for="Inscricao.IConsentimento" class="control-label">Consentimento de dados</label>
-                    <div class="form-check">
-                        <label class="form-check-label">
-                            <input type="radio" asp-for="Inscricao.IConsentimento" class="form-check-input" value="S" />
-                            Sim
-                        </label>
-                    </div>
-                    <div class="form-check">
-                        <label class="form-check-label">
-                            <input type="radio" asp-for="Inscricao.IConsentimento" class="form-check-input" value="N" />
-                            Não
-                        </label>
-                    </div>
-                    <span asp-validation-for="Inscricao.IConsentimento" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="Inscricao.DtConsentimento" class="control-label"></label>
-                    <input asp-for="Inscricao.DtConsentimento" class="form-control" />
-                    <span asp-validation-for="Inscricao.DtConsentimento" class="text-danger"></span>
-                </div>
+                <input type="hidden" asp-for="Inscricao.IConsentimento" />
+                <input type="hidden" asp-for="Inscricao.DtConsentimento" />
                 <div class="form-group">
                     <label asp-for="Inscricao.IExamMed" class="control-label">Exame Médico Desportivo/Atestado Méd./Termo Responsabilidade</label>
                     <div class="form-check">

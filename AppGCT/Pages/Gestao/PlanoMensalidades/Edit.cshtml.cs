@@ -53,6 +53,57 @@ namespace AppGCT.Pages.Inscricoes.PlanoMensalidades
                 return Page();
             }
 
+            //Valida ILancado e idmovimento
+            if (PlanoMensalidade.ILancado == "S")
+            {
+                //se movimento vazio
+                if (PlanoMensalidade.IdMovimento == null || PlanoMensalidade.IdMovimento == 0)
+                {
+                    ModelState.AddModelError("PlanoMensalidade.IdMovimento", "Id Movimento não está preenchido");
+                    ViewData["GinastaId"] = new SelectList(_context.Ginasta, "Id", "ID_DescrGinasta");
+                    ViewData["EpocaId"] = new SelectList(_context.Epoca, "IdEpoca", "NomeEpoca");
+                    return Page();
+                }
+                else
+                //valida se movimento existe
+                {
+                    //obtem movimento
+                    var movimento = await _context.Movimento
+                                                .FirstOrDefaultAsync(r => r.Id == PlanoMensalidade.IdMovimento);
+                    if (movimento == null)
+                    {
+                        ModelState.AddModelError("PlanoMensalidade.IdMovimento", "Id Movimento inexistente");
+                        ViewData["GinastaId"] = new SelectList(_context.Ginasta, "Id", "ID_DescrGinasta");
+                        ViewData["EpocaId"] = new SelectList(_context.Epoca, "IdEpoca", "NomeEpoca");
+                        return Page();
+                    }
+                    else
+                    {
+                        //valida se pertence ao mesmo ginasta e valor que estamos a tentar inserir
+                        if (movimento.AtletaMovimentoId != PlanoMensalidade.GinastaId)
+                        {
+                            ModelState.AddModelError("PlanoMensalidade.IdMovimento", "Id Movimento não está associado ao Ginasta");
+                            ViewData["GinastaId"] = new SelectList(_context.Ginasta, "Id", "ID_DescrGinasta");
+                            ViewData["EpocaId"] = new SelectList(_context.Epoca, "IdEpoca", "NomeEpoca");
+                            return Page();
+                        }
+                        if (movimento.ValorMovimento != PlanoMensalidade.ValorMensalidadeLanc)
+                        {
+                            ModelState.AddModelError("PlanoMensalidade.ValorMensalidadeLanc", "Valor é diferente do existente no movimento");
+                            ViewData["GinastaId"] = new SelectList(_context.Ginasta, "Id", "ID_DescrGinasta");
+                            ViewData["EpocaId"] = new SelectList(_context.Epoca, "IdEpoca", "NomeEpoca");
+                            return Page();
+                        }
+                    }
+                }
+            }
+            else
+            {
+                PlanoMensalidade.ILancado = "N";
+                PlanoMensalidade.ValorMensalidadeLanc = 0;
+                PlanoMensalidade.IdMovimento = null;
+            }
+
             // Valida se o Ginasta já está inscrito na época, só assim permite criar o plano
             var inscricao = await _context.Inscricao
                 .FirstOrDefaultAsync(i => i.GinastaId == PlanoMensalidade.GinastaId && i.EpocaId == PlanoMensalidade.EpocaId);
