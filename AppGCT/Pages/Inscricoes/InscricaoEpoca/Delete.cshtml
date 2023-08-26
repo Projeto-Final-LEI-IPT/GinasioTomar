@@ -43,7 +43,7 @@
             @Html.DisplayFor(model => model.Inscricao.IdFGP)
         </dd>
         <dt class="col-sm-2">
-            É Sócio/Ginasta?
+            @Html.DisplayNameFor(model => model.Inscricao.ISocGinasta)
         </dt>
         <dd class="col-sm-10">
             @Html.RadioButtonFor(model => model.Inscricao.ISocGinasta, "S", new { @disabled = "disabled" }) Sim
@@ -75,20 +75,20 @@
             @Html.DisplayFor(model => model.Inscricao.DtConsentimento)
         </dd>
         <dt class="col-sm-2">
-            Exame Médico Desportivo/Atestado Méd./Termo Responsabilidade
+            @Html.DisplayNameFor(model => model.Inscricao.IExamMed)
         </dt>
         <dd class="col-sm-10">
             @Html.RadioButtonFor(model => model.Inscricao.IExamMed, "S", new { @disabled = "disabled" }) Sim
             @Html.RadioButtonFor(model => model.Inscricao.IExamMed, "N", new { @disabled = "disabled" }) Não
         </dd>
         <dt class="col-sm-2">
-            Validade Exame Médico Desportivo/Atestado Méd./Termo Responsabilidade
+            @Html.DisplayNameFor(model => model.Inscricao.DtExamMed)
         </dt>
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Inscricao.DtExamMed)
         </dd>
         <dt class="col-sm-2">
-            Ficha Individual FGP (mod. 3/2017)-Assinada
+            @Html.DisplayNameFor(model => model.Inscricao.IFicFGP)
         </dt>
         <dd class="col-sm-10">
             @Html.RadioButtonFor(model => model.Inscricao.IFicFGP, "S", new { @disabled = "disabled" }) Sim
@@ -101,54 +101,54 @@
             @Html.DisplayFor(model => model.Inscricao.DtFicFGP)
         </dd>
         <dt class="col-sm-2">
-            Pagamento Seguro
+            @Html.DisplayNameFor(model => model.Inscricao.ISeguro)
         </dt>
         <dd class="col-sm-10">
             @Html.RadioButtonFor(model => model.Inscricao.ISeguro, "S", new { @disabled = "disabled" }) Sim
             @Html.RadioButtonFor(model => model.Inscricao.ISeguro, "N", new { @disabled = "disabled" }) Não
         </dd>
         <dt class="col-sm-2">
-            Pagamento Inscrição
+            @Html.DisplayNameFor(model => model.Inscricao.IPagamInscricao)
         </dt>
         <dd class="col-sm-10">
             @Html.RadioButtonFor(model => model.Inscricao.IPagamInscricao, "S", new { @disabled = "disabled" }) Sim
             @Html.RadioButtonFor(model => model.Inscricao.IPagamInscricao, "N", new { @disabled = "disabled" }) Não
         </dd>
         <dt class="col-sm-2">
-            Entrega dos documentos de leitura obrigatória
+            @Html.DisplayNameFor(model => model.Inscricao.ILeituraObrig)
         </dt>
         <dd class="col-sm-10">
             @Html.RadioButtonFor(model => model.Inscricao.ILeituraObrig, "S", new { @disabled = "disabled" }) Sim
             @Html.RadioButtonFor(model => model.Inscricao.ILeituraObrig, "N", new { @disabled = "disabled" }) Não
         </dd>
         <dt class="col-sm-2">
-            Autoriza o seu Ginasta a ser fotografado e filmado em contexto desportivo ou atividades lúdicas, promovidas pelo Ginásio Clube de Tomar. Tomo conhecimento de
-            que a imagem recolhida pode servir para documentação interna do GCT e para divulgação nos jornais, redes socias e
-            outros fins publicitários.
+            @Html.DisplayNameFor(model => model.Inscricao.IFotos)
         </dt>
         <dd class="col-sm-10">
             @Html.RadioButtonFor(model => model.Inscricao.IFotos, "S", new { @disabled = "disabled" }) Sim
             @Html.RadioButtonFor(model => model.Inscricao.IFotos, "N", new { @disabled = "disabled" }) Não
         </dd>
-        <div>
-            O ginasta tem alguma alergia a:
-        </div>
         <dt class="col-sm-2">
-            Ibuprofeno
+            O ginasta tem alguma alergia a:
+        </dt>
+        <dd class="col-sm-10">
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Inscricao.IIbuprofeno)
         </dt>
         <dd class="col-sm-10">
             @Html.RadioButtonFor(model => model.Inscricao.IIbuprofeno, "S", new { @disabled = "disabled" }) Sim
             @Html.RadioButtonFor(model => model.Inscricao.IIbuprofeno, "N", new { @disabled = "disabled" }) Não
         </dd>
         <dt class="col-sm-2">
-            Paracetamol
+            @Html.DisplayNameFor(model => model.Inscricao.IParacetamol)
         </dt>
         <dd class="col-sm-10">
             @Html.RadioButtonFor(model => model.Inscricao.IParacetamol, "S", new { @disabled = "disabled" }) Sim
             @Html.RadioButtonFor(model => model.Inscricao.IParacetamol, "N", new { @disabled = "disabled" }) Não
         </dd>
         <dt class="col-sm-2">
-            Autoriza em casos pontuais, a toma de analgésico/anti-inflamatório, em caso de hematoma com dor latente durante treino?
+            @Html.DisplayNameFor(model => model.Inscricao.IAntiInflam)
         </dt>
         <dd class="col-sm-10">
             @Html.RadioButtonFor(model => model.Inscricao.IAntiInflam, "S", new { @disabled = "disabled" }) Sim
