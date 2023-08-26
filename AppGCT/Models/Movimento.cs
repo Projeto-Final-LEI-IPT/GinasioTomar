@@ -98,5 +98,6 @@ namespace AppGCT.Models
         public string? MetodoPagamentoId { get; set; }
         [Display(Name = "Método de Pagamento")]
         public MetodoPagamento? FormaPagamento { get; set; }
+
     }
 }

@@ -142,13 +142,13 @@ namespace AppGCT.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "1f166811-1d5e-4327-8da8-1a3ca9ba0931",
+                            Id = "005429a6-991b-4294-b0c6-b4bbe45bb656",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "483cf511-eaed-404f-97ed-8c2c2b7b5ea1",
-                            DataAprovacao = new DateTime(2023, 8, 26, 15, 7, 52, 507, DateTimeKind.Local).AddTicks(7479),
-                            DataCriacao = new DateTime(2023, 8, 26, 15, 7, 52, 507, DateTimeKind.Local).AddTicks(7415),
+                            ConcurrencyStamp = "83f55a5b-d535-424e-8216-8976f0cc638f",
+                            DataAprovacao = new DateTime(2023, 8, 26, 17, 27, 16, 976, DateTimeKind.Local).AddTicks(5193),
+                            DataCriacao = new DateTime(2023, 8, 26, 17, 27, 16, 976, DateTimeKind.Local).AddTicks(5144),
                             DataModificacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DataNascim = new DateTime(2023, 8, 26, 15, 7, 52, 507, DateTimeKind.Local).AddTicks(7486),
+                            DataNascim = new DateTime(2023, 8, 26, 17, 27, 16, 976, DateTimeKind.Local).AddTicks(5199),
                             Email = "admin@localhost",
                             EmailConfirmed = true,
                             EstadoUtilizador = "A",
@@ -161,11 +161,11 @@ namespace AppGCT.Migrations
                             NormalizedEmail = "ADMIN@LOCALHOST",
                             NormalizedUserName = "ADMIN@LOCALHOST",
                             NumSocio = " ",
-                            PasswordHash = "AQAAAAIAAYagAAAAEDQRGXoOXWN/2Yqbhyep8TzXOzfVsPZxl5HQ3yHgSbRf3LDvGJi5XYhScjyi0wpjwA==",
+                            PasswordHash = "AQAAAAIAAYagAAAAELB6FIPCnPo0alw0taG9XdUy77vOfS9OH/xHR5slzSJbwsbQKgn1CLg9fC0/aBN4xw==",
                             PhoneNumber = "999999999",
                             PhoneNumberConfirmed = false,
                             RoleAux = "Administrador",
-                            SecurityStamp = "703703f5-a25e-4dd5-b925-bc5e49e15642",
+                            SecurityStamp = "4ab13e80-bd29-4132-a5d7-ef736e6bcd48",
                             TwoFactorEnabled = false,
                             UserName = "admin@localhost"
                         });
@@ -210,7 +210,7 @@ namespace AppGCT.Migrations
                         new
                         {
                             IdClasse = 1,
-                            DataCriacao = new DateTime(2023, 8, 26, 15, 7, 52, 639, DateTimeKind.Local).AddTicks(2088),
+                            DataCriacao = new DateTime(2023, 8, 26, 17, 27, 17, 66, DateTimeKind.Local).AddTicks(6050),
                             DataModificacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             EstadoClasse = "A",
                             IdCriacao = "SEED",
@@ -220,7 +220,7 @@ namespace AppGCT.Migrations
                         new
                         {
                             IdClasse = 2,
-                            DataCriacao = new DateTime(2023, 8, 26, 15, 7, 52, 639, DateTimeKind.Local).AddTicks(2106),
+                            DataCriacao = new DateTime(2023, 8, 26, 17, 27, 17, 66, DateTimeKind.Local).AddTicks(6056),
                             DataModificacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             EstadoClasse = "A",
                             IdCriacao = "SEED",
@@ -230,7 +230,7 @@ namespace AppGCT.Migrations
                         new
                         {
                             IdClasse = 3,
-                            DataCriacao = new DateTime(2023, 8, 26, 15, 7, 52, 639, DateTimeKind.Local).AddTicks(2120),
+                            DataCriacao = new DateTime(2023, 8, 26, 17, 27, 17, 66, DateTimeKind.Local).AddTicks(6060),
                             DataModificacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             EstadoClasse = "A",
                             IdCriacao = "SEED",
@@ -240,7 +240,7 @@ namespace AppGCT.Migrations
                         new
                         {
                             IdClasse = 4,
-                            DataCriacao = new DateTime(2023, 8, 26, 15, 7, 52, 639, DateTimeKind.Local).AddTicks(2126),
+                            DataCriacao = new DateTime(2023, 8, 26, 17, 27, 17, 66, DateTimeKind.Local).AddTicks(6063),
                             DataModificacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             EstadoClasse = "A",
                             IdCriacao = "SEED",
@@ -250,7 +250,7 @@ namespace AppGCT.Migrations
                         new
                         {
                             IdClasse = 5,
-                            DataCriacao = new DateTime(2023, 8, 26, 15, 7, 52, 639, DateTimeKind.Local).AddTicks(2140),
+                            DataCriacao = new DateTime(2023, 8, 26, 17, 27, 17, 66, DateTimeKind.Local).AddTicks(6079),
                             DataModificacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             EstadoClasse = "A",
                             IdCriacao = "SEED",
@@ -260,7 +260,7 @@ namespace AppGCT.Migrations
                         new
                         {
                             IdClasse = 6,
-                            DataCriacao = new DateTime(2023, 8, 26, 15, 7, 52, 639, DateTimeKind.Local).AddTicks(2149),
+                            DataCriacao = new DateTime(2023, 8, 26, 17, 27, 17, 66, DateTimeKind.Local).AddTicks(6088),
                             DataModificacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             EstadoClasse = "A",
                             IdCriacao = "SEED",
@@ -270,7 +270,7 @@ namespace AppGCT.Migrations
                         new
                         {
                             IdClasse = 7,
-                            DataCriacao = new DateTime(2023, 8, 26, 15, 7, 52, 639, DateTimeKind.Local).AddTicks(2158),
+                            DataCriacao = new DateTime(2023, 8, 26, 17, 27, 17, 66, DateTimeKind.Local).AddTicks(6092),
                             DataModificacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             EstadoClasse = "A",
                             IdCriacao = "SEED",
@@ -280,7 +280,7 @@ namespace AppGCT.Migrations
                         new
                         {
                             IdClasse = 8,
-                            DataCriacao = new DateTime(2023, 8, 26, 15, 7, 52, 639, DateTimeKind.Local).AddTicks(2168),
+                            DataCriacao = new DateTime(2023, 8, 26, 17, 27, 17, 66, DateTimeKind.Local).AddTicks(6096),
                             DataModificacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             EstadoClasse = "A",
                             IdCriacao = "SEED",
@@ -290,7 +290,7 @@ namespace AppGCT.Migrations
                         new
                         {
                             IdClasse = 9,
-                            DataCriacao = new DateTime(2023, 8, 26, 15, 7, 52, 639, DateTimeKind.Local).AddTicks(2177),
+                            DataCriacao = new DateTime(2023, 8, 26, 17, 27, 17, 66, DateTimeKind.Local).AddTicks(6099),
                             DataModificacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             EstadoClasse = "A",
                             IdCriacao = "SEED",
@@ -300,7 +300,7 @@ namespace AppGCT.Migrations
                         new
                         {
                             IdClasse = 10,
-                            DataCriacao = new DateTime(2023, 8, 26, 15, 7, 52, 639, DateTimeKind.Local).AddTicks(2189),
+                            DataCriacao = new DateTime(2023, 8, 26, 17, 27, 17, 66, DateTimeKind.Local).AddTicks(6134),
                             DataModificacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             EstadoClasse = "A",
                             IdCriacao = "SEED",
@@ -346,7 +346,7 @@ namespace AppGCT.Migrations
                         new
                         {
                             CodDesconto = "00",
-                            DataCriacao = new DateTime(2023, 8, 26, 15, 7, 52, 639, DateTimeKind.Local).AddTicks(2663),
+                            DataCriacao = new DateTime(2023, 8, 26, 17, 27, 17, 66, DateTimeKind.Local).AddTicks(6264),
                             DataModificacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DescDesconto = "Bolsa",
                             EstadoDesconto = "A",
@@ -356,7 +356,7 @@ namespace AppGCT.Migrations
                         new
                         {
                             CodDesconto = "01",
-                            DataCriacao = new DateTime(2023, 8, 26, 15, 7, 52, 639, DateTimeKind.Local).AddTicks(2671),
+                            DataCriacao = new DateTime(2023, 8, 26, 17, 27, 17, 66, DateTimeKind.Local).AddTicks(6297),
                             DataModificacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DescDesconto = "Parentesco(1º familiar)",
                             EstadoDesconto = "A",
@@ -366,7 +366,7 @@ namespace AppGCT.Migrations
                         new
                         {
                             CodDesconto = "02",
-                            DataCriacao = new DateTime(2023, 8, 26, 15, 7, 52, 639, DateTimeKind.Local).AddTicks(2675),
+                            DataCriacao = new DateTime(2023, 8, 26, 17, 27, 17, 66, DateTimeKind.Local).AddTicks(6301),
                             DataModificacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DescDesconto = "Parentesco(2º familiar)",
                             EstadoDesconto = "A",
@@ -376,7 +376,7 @@ namespace AppGCT.Migrations
                         new
                         {
                             CodDesconto = "03",
-                            DataCriacao = new DateTime(2023, 8, 26, 15, 7, 52, 639, DateTimeKind.Local).AddTicks(2679),
+                            DataCriacao = new DateTime(2023, 8, 26, 17, 27, 17, 66, DateTimeKind.Local).AddTicks(6304),
                             DataModificacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DescDesconto = "Parentesco(3º familiar)",
                             EstadoDesconto = "A",
@@ -430,7 +430,7 @@ namespace AppGCT.Migrations
                         new
                         {
                             IdEpoca = 1,
-                            DataCriacao = new DateTime(2023, 8, 26, 15, 7, 52, 639, DateTimeKind.Local).AddTicks(1857),
+                            DataCriacao = new DateTime(2023, 8, 26, 17, 27, 17, 66, DateTimeKind.Local).AddTicks(5938),
                             DataFim = new DateTime(2024, 7, 31, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DataInicio = new DateTime(2023, 9, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DataModificacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -748,7 +748,7 @@ namespace AppGCT.Migrations
                         new
                         {
                             CodMetodo = "00",
-                            DataCriacao = new DateTime(2023, 8, 26, 15, 7, 52, 639, DateTimeKind.Local).AddTicks(2548),
+                            DataCriacao = new DateTime(2023, 8, 26, 17, 27, 17, 66, DateTimeKind.Local).AddTicks(6205),
                             DataModificacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DescMetodo = "Numerário",
                             EstadoMetodo = "A",
@@ -759,7 +759,7 @@ namespace AppGCT.Migrations
                         new
                         {
                             CodMetodo = "01",
-                            DataCriacao = new DateTime(2023, 8, 26, 15, 7, 52, 639, DateTimeKind.Local).AddTicks(2568),
+                            DataCriacao = new DateTime(2023, 8, 26, 17, 27, 17, 66, DateTimeKind.Local).AddTicks(6218),
                             DataModificacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DescMetodo = "Transferência Bancária",
                             EstadoMetodo = "A",
@@ -770,7 +770,7 @@ namespace AppGCT.Migrations
                         new
                         {
                             CodMetodo = "02",
-                            DataCriacao = new DateTime(2023, 8, 26, 15, 7, 52, 639, DateTimeKind.Local).AddTicks(2573),
+                            DataCriacao = new DateTime(2023, 8, 26, 17, 27, 17, 66, DateTimeKind.Local).AddTicks(6222),
                             DataModificacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DescMetodo = "Terminal Pagamento Automático(TPA)",
                             EstadoMetodo = "A",
@@ -883,6 +883,10 @@ namespace AppGCT.Migrations
                     b.Property<int>("GinastaId")
                         .HasColumnType("int");
 
+                    b.Property<string>("ILancado")
+                        .HasMaxLength(1)
+                        .HasColumnType("nvarchar(1)");
+
                     b.Property<string>("IdCriacao")
                         .HasMaxLength(36)
                         .HasColumnType("nvarchar(36)");
@@ -891,7 +895,14 @@ namespace AppGCT.Migrations
                         .HasMaxLength(36)
                         .HasColumnType("nvarchar(36)");
 
+                    b.Property<int?>("IdMovimento")
+                        .HasColumnType("int");
+
                     b.Property<decimal?>("ValorMensalidade")
+                        .HasPrecision(18, 2)
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal?>("ValorMensalidadeLanc")
                         .HasPrecision(18, 2)
                         .HasColumnType("decimal(18,2)");
 
@@ -996,7 +1007,7 @@ namespace AppGCT.Migrations
                         new
                         {
                             CodRubrica = "001",
-                            DataCriacao = new DateTime(2023, 8, 26, 15, 7, 52, 639, DateTimeKind.Local).AddTicks(2796),
+                            DataCriacao = new DateTime(2023, 8, 26, 17, 27, 17, 66, DateTimeKind.Local).AddTicks(6344),
                             DataModificacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DescricaoRubrica = "Inscrição",
                             EstadoRubrica = "A",
@@ -1016,7 +1027,7 @@ namespace AppGCT.Migrations
                         new
                         {
                             CodRubrica = "002",
-                            DataCriacao = new DateTime(2023, 8, 26, 15, 7, 52, 639, DateTimeKind.Local).AddTicks(2812),
+                            DataCriacao = new DateTime(2023, 8, 26, 17, 27, 17, 66, DateTimeKind.Local).AddTicks(6353),
                             DataModificacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DescricaoRubrica = "Filiação FGP",
                             EstadoRubrica = "A",
@@ -1036,7 +1047,7 @@ namespace AppGCT.Migrations
                         new
                         {
                             CodRubrica = "003",
-                            DataCriacao = new DateTime(2023, 8, 26, 15, 7, 52, 639, DateTimeKind.Local).AddTicks(2818),
+                            DataCriacao = new DateTime(2023, 8, 26, 17, 27, 17, 66, DateTimeKind.Local).AddTicks(6359),
                             DataModificacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DescricaoRubrica = "Seguro",
                             EstadoRubrica = "A",
@@ -1056,7 +1067,7 @@ namespace AppGCT.Migrations
                         new
                         {
                             CodRubrica = "004",
-                            DataCriacao = new DateTime(2023, 8, 26, 15, 7, 52, 639, DateTimeKind.Local).AddTicks(2826),
+                            DataCriacao = new DateTime(2023, 8, 26, 17, 27, 17, 66, DateTimeKind.Local).AddTicks(6366),
                             DataModificacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DescricaoRubrica = "Quota Sócio",
                             EstadoRubrica = "A",
@@ -1077,7 +1088,7 @@ namespace AppGCT.Migrations
                         {
                             CodRubrica = "005",
                             ClasseId = 1,
-                            DataCriacao = new DateTime(2023, 8, 26, 15, 7, 52, 639, DateTimeKind.Local).AddTicks(2835),
+                            DataCriacao = new DateTime(2023, 8, 26, 17, 27, 17, 66, DateTimeKind.Local).AddTicks(6371),
                             DataModificacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DescricaoRubrica = "Mens. Aprendizagem 1",
                             EstadoRubrica = "A",
@@ -1098,7 +1109,7 @@ namespace AppGCT.Migrations
                         {
                             CodRubrica = "006",
                             ClasseId = 2,
-                            DataCriacao = new DateTime(2023, 8, 26, 15, 7, 52, 639, DateTimeKind.Local).AddTicks(2843),
+                            DataCriacao = new DateTime(2023, 8, 26, 17, 27, 17, 66, DateTimeKind.Local).AddTicks(6376),
                             DataModificacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DescricaoRubrica = "Mens. Aprendizagem 2",
                             EstadoRubrica = "A",
@@ -1119,7 +1130,7 @@ namespace AppGCT.Migrations
                         {
                             CodRubrica = "007",
                             ClasseId = 3,
-                            DataCriacao = new DateTime(2023, 8, 26, 15, 7, 52, 639, DateTimeKind.Local).AddTicks(2850),
+                            DataCriacao = new DateTime(2023, 8, 26, 17, 27, 17, 66, DateTimeKind.Local).AddTicks(6381),
                             DataModificacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DescricaoRubrica = "Mens. Aprendizagem 3",
                             EstadoRubrica = "A",
@@ -1140,7 +1151,7 @@ namespace AppGCT.Migrations
                         {
                             CodRubrica = "008",
                             ClasseId = 4,
-                            DataCriacao = new DateTime(2023, 8, 26, 15, 7, 52, 639, DateTimeKind.Local).AddTicks(2863),
+                            DataCriacao = new DateTime(2023, 8, 26, 17, 27, 17, 66, DateTimeKind.Local).AddTicks(6388),
                             DataModificacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DescricaoRubrica = "Mens. Acrobática 1",
                             EstadoRubrica = "A",
@@ -1161,7 +1172,7 @@ namespace AppGCT.Migrations
                         {
                             CodRubrica = "009",
                             ClasseId = 5,
-                            DataCriacao = new DateTime(2023, 8, 26, 15, 7, 52, 639, DateTimeKind.Local).AddTicks(2870),
+                            DataCriacao = new DateTime(2023, 8, 26, 17, 27, 17, 66, DateTimeKind.Local).AddTicks(6393),
                             DataModificacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DescricaoRubrica = "Mens. Acrobática 2",
                             EstadoRubrica = "A",
@@ -1182,7 +1193,7 @@ namespace AppGCT.Migrations
                         {
                             CodRubrica = "010",
                             ClasseId = 6,
-                            DataCriacao = new DateTime(2023, 8, 26, 15, 7, 52, 639, DateTimeKind.Local).AddTicks(2877),
+                            DataCriacao = new DateTime(2023, 8, 26, 17, 27, 17, 66, DateTimeKind.Local).AddTicks(6398),
                             DataModificacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DescricaoRubrica = "Mens. Acrobática 3",
                             EstadoRubrica = "A",
@@ -1203,7 +1214,7 @@ namespace AppGCT.Migrations
                         {
                             CodRubrica = "011",
                             ClasseId = 7,
-                            DataCriacao = new DateTime(2023, 8, 26, 15, 7, 52, 639, DateTimeKind.Local).AddTicks(2884),
+                            DataCriacao = new DateTime(2023, 8, 26, 17, 27, 17, 66, DateTimeKind.Local).AddTicks(6403),
                             DataModificacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DescricaoRubrica = "Mens. Trampolins 1",
                             EstadoRubrica = "A",
@@ -1224,7 +1235,7 @@ namespace AppGCT.Migrations
                         {
                             CodRubrica = "012",
                             ClasseId = 8,
-                            DataCriacao = new DateTime(2023, 8, 26, 15, 7, 52, 639, DateTimeKind.Local).AddTicks(2891),
+                            DataCriacao = new DateTime(2023, 8, 26, 17, 27, 17, 66, DateTimeKind.Local).AddTicks(6414),
                             DataModificacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DescricaoRubrica = "Mens. Trampolins 2",
                             EstadoRubrica = "A",
@@ -1245,7 +1256,7 @@ namespace AppGCT.Migrations
                         {
                             CodRubrica = "013",
                             ClasseId = 9,
-                            DataCriacao = new DateTime(2023, 8, 26, 15, 7, 52, 639, DateTimeKind.Local).AddTicks(2897),
+                            DataCriacao = new DateTime(2023, 8, 26, 17, 27, 17, 66, DateTimeKind.Local).AddTicks(6458),
                             DataModificacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DescricaoRubrica = "Mens. GPT – Júnior",
                             EstadoRubrica = "A",
@@ -1266,7 +1277,7 @@ namespace AppGCT.Migrations
                         {
                             CodRubrica = "014",
                             ClasseId = 10,
-                            DataCriacao = new DateTime(2023, 8, 26, 15, 7, 52, 639, DateTimeKind.Local).AddTicks(2905),
+                            DataCriacao = new DateTime(2023, 8, 26, 17, 27, 17, 66, DateTimeKind.Local).AddTicks(6464),
                             DataModificacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DescricaoRubrica = "Mens. GPT – Universitários",
                             EstadoRubrica = "A",
@@ -1287,7 +1298,7 @@ namespace AppGCT.Migrations
                         {
                             CodRubrica = "015",
                             ClasseId = 1,
-                            DataCriacao = new DateTime(2023, 8, 26, 15, 7, 52, 639, DateTimeKind.Local).AddTicks(2913),
+                            DataCriacao = new DateTime(2023, 8, 26, 17, 27, 17, 66, DateTimeKind.Local).AddTicks(6469),
                             DataModificacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DescontoId = "00",
                             DescricaoRubrica = "Mens. APZ 1 - Bolsa",
@@ -1308,7 +1319,7 @@ namespace AppGCT.Migrations
                         {
                             CodRubrica = "016",
                             ClasseId = 2,
-                            DataCriacao = new DateTime(2023, 8, 26, 15, 7, 52, 639, DateTimeKind.Local).AddTicks(2925),
+                            DataCriacao = new DateTime(2023, 8, 26, 17, 27, 17, 66, DateTimeKind.Local).AddTicks(6475),
                             DataModificacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DescontoId = "00",
                             DescricaoRubrica = "Mens. APZ 2 - Bolsa",
@@ -1329,7 +1340,7 @@ namespace AppGCT.Migrations
                         {
                             CodRubrica = "017",
                             ClasseId = 3,
-                            DataCriacao = new DateTime(2023, 8, 26, 15, 7, 52, 639, DateTimeKind.Local).AddTicks(2936),
+                            DataCriacao = new DateTime(2023, 8, 26, 17, 27, 17, 66, DateTimeKind.Local).AddTicks(6480),
                             DataModificacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DescontoId = "00",
                             DescricaoRubrica = "Mens. APZ 3 - Bolsa",
@@ -1350,7 +1361,7 @@ namespace AppGCT.Migrations
                         {
                             CodRubrica = "018",
                             ClasseId = 4,
-                            DataCriacao = new DateTime(2023, 8, 26, 15, 7, 52, 639, DateTimeKind.Local).AddTicks(2943),
+                            DataCriacao = new DateTime(2023, 8, 26, 17, 27, 17, 66, DateTimeKind.Local).AddTicks(6488),
                             DataModificacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DescontoId = "00",
                             DescricaoRubrica = "Mens. Acro 1 - Bolsa",
@@ -1371,7 +1382,7 @@ namespace AppGCT.Migrations
                         {
                             CodRubrica = "019",
                             ClasseId = 5,
-                            DataCriacao = new DateTime(2023, 8, 26, 15, 7, 52, 639, DateTimeKind.Local).AddTicks(2951),
+                            DataCriacao = new DateTime(2023, 8, 26, 17, 27, 17, 66, DateTimeKind.Local).AddTicks(6493),
                             DataModificacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DescontoId = "00",
                             DescricaoRubrica = "Mens. Acro 2 - Bolsa",
@@ -1392,7 +1403,7 @@ namespace AppGCT.Migrations
                         {
                             CodRubrica = "020",
                             ClasseId = 6,
-                            DataCriacao = new DateTime(2023, 8, 26, 15, 7, 52, 639, DateTimeKind.Local).AddTicks(2958),
+                            DataCriacao = new DateTime(2023, 8, 26, 17, 27, 17, 66, DateTimeKind.Local).AddTicks(6499),
                             DataModificacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DescontoId = "00",
                             DescricaoRubrica = "Mens. Acro 3 - Bolsa",
@@ -1413,7 +1424,7 @@ namespace AppGCT.Migrations
                         {
                             CodRubrica = "021",
                             ClasseId = 7,
-                            DataCriacao = new DateTime(2023, 8, 26, 15, 7, 52, 639, DateTimeKind.Local).AddTicks(2966),
+                            DataCriacao = new DateTime(2023, 8, 26, 17, 27, 17, 66, DateTimeKind.Local).AddTicks(6504),
                             DataModificacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DescontoId = "00",
                             DescricaoRubrica = "Mens. TRAMP 1 - Bolsa",
@@ -1434,7 +1445,7 @@ namespace AppGCT.Migrations
                         {
                             CodRubrica = "022",
                             ClasseId = 8,
-                            DataCriacao = new DateTime(2023, 8, 26, 15, 7, 52, 639, DateTimeKind.Local).AddTicks(2975),
+                            DataCriacao = new DateTime(2023, 8, 26, 17, 27, 17, 66, DateTimeKind.Local).AddTicks(6509),
                             DataModificacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DescontoId = "00",
                             DescricaoRubrica = "Mens. TRAMP 2 - Bolsa",
@@ -1455,7 +1466,7 @@ namespace AppGCT.Migrations
                         {
                             CodRubrica = "023",
                             ClasseId = 9,
-                            DataCriacao = new DateTime(2023, 8, 26, 15, 7, 52, 639, DateTimeKind.Local).AddTicks(2989),
+                            DataCriacao = new DateTime(2023, 8, 26, 17, 27, 17, 66, DateTimeKind.Local).AddTicks(6518),
                             DataModificacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DescontoId = "00",
                             DescricaoRubrica = "Mens. GPT – Júnior - Bolsa",
@@ -1476,7 +1487,7 @@ namespace AppGCT.Migrations
                         {
                             CodRubrica = "024",
                             ClasseId = 10,
-                            DataCriacao = new DateTime(2023, 8, 26, 15, 7, 52, 639, DateTimeKind.Local).AddTicks(3003),
+                            DataCriacao = new DateTime(2023, 8, 26, 17, 27, 17, 66, DateTimeKind.Local).AddTicks(6523),
                             DataModificacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DescontoId = "00",
                             DescricaoRubrica = "Mens. GPT – Univ. - Bolsa",
@@ -1497,7 +1508,7 @@ namespace AppGCT.Migrations
                         {
                             CodRubrica = "025",
                             ClasseId = 1,
-                            DataCriacao = new DateTime(2023, 8, 26, 15, 7, 52, 639, DateTimeKind.Local).AddTicks(3019),
+                            DataCriacao = new DateTime(2023, 8, 26, 17, 27, 17, 66, DateTimeKind.Local).AddTicks(6529),
                             DataModificacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DescontoId = "01",
                             DescricaoRubrica = "Mens. APZ 1 - Par.(1º)",
@@ -1518,7 +1529,7 @@ namespace AppGCT.Migrations
                         {
                             CodRubrica = "026",
                             ClasseId = 2,
-                            DataCriacao = new DateTime(2023, 8, 26, 15, 7, 52, 639, DateTimeKind.Local).AddTicks(3032),
+                            DataCriacao = new DateTime(2023, 8, 26, 17, 27, 17, 66, DateTimeKind.Local).AddTicks(6547),
                             DataModificacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DescontoId = "01",
                             DescricaoRubrica = "Mens. APZ 2 - Par.(1º)",
@@ -1539,7 +1550,7 @@ namespace AppGCT.Migrations
                         {
                             CodRubrica = "027",
                             ClasseId = 3,
-                            DataCriacao = new DateTime(2023, 8, 26, 15, 7, 52, 639, DateTimeKind.Local).AddTicks(3232),
+                            DataCriacao = new DateTime(2023, 8, 26, 17, 27, 17, 66, DateTimeKind.Local).AddTicks(6555),
                             DataModificacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DescontoId = "01",
                             DescricaoRubrica = "Mens. APZ 3 - Par.(1º)",
@@ -1560,7 +1571,7 @@ namespace AppGCT.Migrations
                         {
                             CodRubrica = "028",
                             ClasseId = 4,
-                            DataCriacao = new DateTime(2023, 8, 26, 15, 7, 52, 639, DateTimeKind.Local).AddTicks(3253),
+                            DataCriacao = new DateTime(2023, 8, 26, 17, 27, 17, 66, DateTimeKind.Local).AddTicks(6562),
                             DataModificacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DescontoId = "01",
                             DescricaoRubrica = "Mens. Acro 1 - Par.(1º)",
@@ -1581,7 +1592,7 @@ namespace AppGCT.Migrations
                         {
                             CodRubrica = "029",
                             ClasseId = 5,
-                            DataCriacao = new DateTime(2023, 8, 26, 15, 7, 52, 639, DateTimeKind.Local).AddTicks(3270),
+                            DataCriacao = new DateTime(2023, 8, 26, 17, 27, 17, 66, DateTimeKind.Local).AddTicks(6568),
                             DataModificacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DescontoId = "01",
                             DescricaoRubrica = "Mens. Acro 2 - Par.(1º)",
@@ -1602,7 +1613,7 @@ namespace AppGCT.Migrations
                         {
                             CodRubrica = "030",
                             ClasseId = 6,
-                            DataCriacao = new DateTime(2023, 8, 26, 15, 7, 52, 639, DateTimeKind.Local).AddTicks(3287),
+                            DataCriacao = new DateTime(2023, 8, 26, 17, 27, 17, 66, DateTimeKind.Local).AddTicks(6575),
                             DataModificacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DescontoId = "01",
                             DescricaoRubrica = "Mens. Acro 3 - Par.(1º)",
@@ -1623,7 +1634,7 @@ namespace AppGCT.Migrations
                         {
                             CodRubrica = "031",
                             ClasseId = 7,
-                            DataCriacao = new DateTime(2023, 8, 26, 15, 7, 52, 639, DateTimeKind.Local).AddTicks(3306),
+                            DataCriacao = new DateTime(2023, 8, 26, 17, 27, 17, 66, DateTimeKind.Local).AddTicks(6582),
                             DataModificacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DescontoId = "01",
                             DescricaoRubrica = "Mens. TRAMP 1 - Par.(1º)",
@@ -1644,7 +1655,7 @@ namespace AppGCT.Migrations
                         {
                             CodRubrica = "032",
                             ClasseId = 8,
-                            DataCriacao = new DateTime(2023, 8, 26, 15, 7, 52, 639, DateTimeKind.Local).AddTicks(3324),
+                            DataCriacao = new DateTime(2023, 8, 26, 17, 27, 17, 66, DateTimeKind.Local).AddTicks(6588),
                             DataModificacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DescontoId = "01",
                             DescricaoRubrica = "Mens. TRAMP 2 - Par.(1º)",
@@ -1665,7 +1676,7 @@ namespace AppGCT.Migrations
                         {
                             CodRubrica = "033",
                             ClasseId = 9,
-                            DataCriacao = new DateTime(2023, 8, 26, 15, 7, 52, 639, DateTimeKind.Local).AddTicks(3340),
+                            DataCriacao = new DateTime(2023, 8, 26, 17, 27, 17, 66, DateTimeKind.Local).AddTicks(6597),
                             DataModificacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DescontoId = "01",
                             DescricaoRubrica = "Mens. GPT – Júnior - Par.(1º)",
@@ -1686,7 +1697,7 @@ namespace AppGCT.Migrations
                         {
                             CodRubrica = "034",
                             ClasseId = 10,
-                            DataCriacao = new DateTime(2023, 8, 26, 15, 7, 52, 639, DateTimeKind.Local).AddTicks(3350),
+                            DataCriacao = new DateTime(2023, 8, 26, 17, 27, 17, 66, DateTimeKind.Local).AddTicks(6602),
                             DataModificacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DescontoId = "01",
                             DescricaoRubrica = "Mens. GPT – Univ. - Par.(1º)",
@@ -1707,7 +1718,7 @@ namespace AppGCT.Migrations
                         {
                             CodRubrica = "035",
                             ClasseId = 1,
-                            DataCriacao = new DateTime(2023, 8, 26, 15, 7, 52, 639, DateTimeKind.Local).AddTicks(3366),
+                            DataCriacao = new DateTime(2023, 8, 26, 17, 27, 17, 66, DateTimeKind.Local).AddTicks(6607),
                             DataModificacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DescontoId = "02",
                             DescricaoRubrica = "Mens. APZ 1 - Par.(2º)",
@@ -1728,7 +1739,7 @@ namespace AppGCT.Migrations
                         {
                             CodRubrica = "036",
                             ClasseId = 2,
-                            DataCriacao = new DateTime(2023, 8, 26, 15, 7, 52, 639, DateTimeKind.Local).AddTicks(3384),
+                            DataCriacao = new DateTime(2023, 8, 26, 17, 27, 17, 66, DateTimeKind.Local).AddTicks(6613),
                             DataModificacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DescontoId = "02",
                             DescricaoRubrica = "Mens. APZ 2 - Par.(2º)",
@@ -1749,7 +1760,7 @@ namespace AppGCT.Migrations
                         {
                             CodRubrica = "037",
                             ClasseId = 3,
-                            DataCriacao = new DateTime(2023, 8, 26, 15, 7, 52, 639, DateTimeKind.Local).AddTicks(3403),
+                            DataCriacao = new DateTime(2023, 8, 26, 17, 27, 17, 66, DateTimeKind.Local).AddTicks(6618),
                             DataModificacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DescontoId = "02",
                             DescricaoRubrica = "Mens. APZ 3 - Par.(2º)",
@@ -1770,7 +1781,7 @@ namespace AppGCT.Migrations
                         {
                             CodRubrica = "038",
                             ClasseId = 4,
-                            DataCriacao = new DateTime(2023, 8, 26, 15, 7, 52, 639, DateTimeKind.Local).AddTicks(3423),
+                            DataCriacao = new DateTime(2023, 8, 26, 17, 27, 17, 66, DateTimeKind.Local).AddTicks(6624),
                             DataModificacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DescontoId = "02",
                             DescricaoRubrica = "Mens. Acro 1 - Par.(2º)",
@@ -1791,7 +1802,7 @@ namespace AppGCT.Migrations
                         {
                             CodRubrica = "039",
                             ClasseId = 5,
-                            DataCriacao = new DateTime(2023, 8, 26, 15, 7, 52, 639, DateTimeKind.Local).AddTicks(3431),
+                            DataCriacao = new DateTime(2023, 8, 26, 17, 27, 17, 66, DateTimeKind.Local).AddTicks(6629),
                             DataModificacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DescontoId = "02",
                             DescricaoRubrica = "Mens. Acro 2 - Par.(2º)",
@@ -1812,7 +1823,7 @@ namespace AppGCT.Migrations
                         {
                             CodRubrica = "040",
                             ClasseId = 6,
-                            DataCriacao = new DateTime(2023, 8, 26, 15, 7, 52, 639, DateTimeKind.Local).AddTicks(3449),
+                            DataCriacao = new DateTime(2023, 8, 26, 17, 27, 17, 66, DateTimeKind.Local).AddTicks(6634),
                             DataModificacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DescontoId = "02",
                             DescricaoRubrica = "Mens. Acro 3 - Par.(2º)",
@@ -1833,7 +1844,7 @@ namespace AppGCT.Migrations
                         {
                             CodRubrica = "041",
                             ClasseId = 7,
-                            DataCriacao = new DateTime(2023, 8, 26, 15, 7, 52, 639, DateTimeKind.Local).AddTicks(3460),
+                            DataCriacao = new DateTime(2023, 8, 26, 17, 27, 17, 66, DateTimeKind.Local).AddTicks(6640),
                             DataModificacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DescontoId = "02",
                             DescricaoRubrica = "Mens. TRAMP 1 - Par.(2º)",
@@ -1854,7 +1865,7 @@ namespace AppGCT.Migrations
                         {
                             CodRubrica = "042",
                             ClasseId = 8,
-                            DataCriacao = new DateTime(2023, 8, 26, 15, 7, 52, 639, DateTimeKind.Local).AddTicks(3478),
+                            DataCriacao = new DateTime(2023, 8, 26, 17, 27, 17, 66, DateTimeKind.Local).AddTicks(6645),
                             DataModificacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DescontoId = "02",
                             DescricaoRubrica = "Mens. TRAMP 2 - Par.(2º)",
@@ -1875,7 +1886,7 @@ namespace AppGCT.Migrations
                         {
                             CodRubrica = "043",
                             ClasseId = 9,
-                            DataCriacao = new DateTime(2023, 8, 26, 15, 7, 52, 639, DateTimeKind.Local).AddTicks(3494),
+                            DataCriacao = new DateTime(2023, 8, 26, 17, 27, 17, 66, DateTimeKind.Local).AddTicks(6652),
                             DataModificacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DescontoId = "02",
                             DescricaoRubrica = "Mens. GPT – Júnior - Par.(2º)",
@@ -1896,7 +1907,7 @@ namespace AppGCT.Migrations
                         {
                             CodRubrica = "044",
                             ClasseId = 10,
-                            DataCriacao = new DateTime(2023, 8, 26, 15, 7, 52, 639, DateTimeKind.Local).AddTicks(3502),
+                            DataCriacao = new DateTime(2023, 8, 26, 17, 27, 17, 66, DateTimeKind.Local).AddTicks(6657),
                             DataModificacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DescontoId = "02",
                             DescricaoRubrica = "Mens. GPT – Univ. - Par.(2º)",
@@ -1917,7 +1928,7 @@ namespace AppGCT.Migrations
                         {
                             CodRubrica = "045",
                             ClasseId = 1,
-                            DataCriacao = new DateTime(2023, 8, 26, 15, 7, 52, 639, DateTimeKind.Local).AddTicks(3518),
+                            DataCriacao = new DateTime(2023, 8, 26, 17, 27, 17, 66, DateTimeKind.Local).AddTicks(6662),
                             DataModificacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DescontoId = "03",
                             DescricaoRubrica = "Mens. APZ 1 - Par.(3º)",
@@ -1938,7 +1949,7 @@ namespace AppGCT.Migrations
                         {
                             CodRubrica = "046",
                             ClasseId = 2,
-                            DataCriacao = new DateTime(2023, 8, 26, 15, 7, 52, 639, DateTimeKind.Local).AddTicks(3529),
+                            DataCriacao = new DateTime(2023, 8, 26, 17, 27, 17, 66, DateTimeKind.Local).AddTicks(6671),
                             DataModificacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DescontoId = "03",
                             DescricaoRubrica = "Mens. APZ 2 - Par.(3º)",
@@ -1959,7 +1970,7 @@ namespace AppGCT.Migrations
                         {
                             CodRubrica = "047",
                             ClasseId = 3,
-                            DataCriacao = new DateTime(2023, 8, 26, 15, 7, 52, 639, DateTimeKind.Local).AddTicks(3536),
+                            DataCriacao = new DateTime(2023, 8, 26, 17, 27, 17, 66, DateTimeKind.Local).AddTicks(6677),
                             DataModificacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DescontoId = "03",
                             DescricaoRubrica = "Mens. APZ 3 - Par.(3º)",
@@ -1980,7 +1991,7 @@ namespace AppGCT.Migrations
                         {
                             CodRubrica = "048",
                             ClasseId = 4,
-                            DataCriacao = new DateTime(2023, 8, 26, 15, 7, 52, 639, DateTimeKind.Local).AddTicks(3544),
+                            DataCriacao = new DateTime(2023, 8, 26, 17, 27, 17, 66, DateTimeKind.Local).AddTicks(6683),
                             DataModificacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DescontoId = "03",
                             DescricaoRubrica = "Mens. Acro 1 - Par.(3º)",
@@ -2001,7 +2012,7 @@ namespace AppGCT.Migrations
                         {
                             CodRubrica = "049",
                             ClasseId = 5,
-                            DataCriacao = new DateTime(2023, 8, 26, 15, 7, 52, 639, DateTimeKind.Local).AddTicks(3555),
+                            DataCriacao = new DateTime(2023, 8, 26, 17, 27, 17, 66, DateTimeKind.Local).AddTicks(6688),
                             DataModificacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DescontoId = "03",
                             DescricaoRubrica = "Mens. Acro 2 - Par.(3º)",
@@ -2022,7 +2033,7 @@ namespace AppGCT.Migrations
                         {
                             CodRubrica = "050",
                             ClasseId = 6,
-                            DataCriacao = new DateTime(2023, 8, 26, 15, 7, 52, 639, DateTimeKind.Local).AddTicks(3596),
+                            DataCriacao = new DateTime(2023, 8, 26, 17, 27, 17, 66, DateTimeKind.Local).AddTicks(6694),
                             DataModificacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DescontoId = "03",
                             DescricaoRubrica = "Mens. Acro 3 - Par.(3º)",
@@ -2043,7 +2054,7 @@ namespace AppGCT.Migrations
                         {
                             CodRubrica = "051",
                             ClasseId = 7,
-                            DataCriacao = new DateTime(2023, 8, 26, 15, 7, 52, 639, DateTimeKind.Local).AddTicks(3634),
+                            DataCriacao = new DateTime(2023, 8, 26, 17, 27, 17, 66, DateTimeKind.Local).AddTicks(6699),
                             DataModificacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DescontoId = "03",
                             DescricaoRubrica = "Mens. TRAMP 1 - Par.(3º)",
@@ -2064,7 +2075,7 @@ namespace AppGCT.Migrations
                         {
                             CodRubrica = "052",
                             ClasseId = 8,
-                            DataCriacao = new DateTime(2023, 8, 26, 15, 7, 52, 639, DateTimeKind.Local).AddTicks(3650),
+                            DataCriacao = new DateTime(2023, 8, 26, 17, 27, 17, 66, DateTimeKind.Local).AddTicks(6704),
                             DataModificacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DescontoId = "03",
                             DescricaoRubrica = "Mens. TRAMP 2 - Par.(3º)",
@@ -2085,7 +2096,7 @@ namespace AppGCT.Migrations
                         {
                             CodRubrica = "053",
                             ClasseId = 9,
-                            DataCriacao = new DateTime(2023, 8, 26, 15, 7, 52, 639, DateTimeKind.Local).AddTicks(3666),
+                            DataCriacao = new DateTime(2023, 8, 26, 17, 27, 17, 66, DateTimeKind.Local).AddTicks(6711),
                             DataModificacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DescontoId = "03",
                             DescricaoRubrica = "Mens. GPT – Júnior - Par.(3º)",
@@ -2106,7 +2117,7 @@ namespace AppGCT.Migrations
                         {
                             CodRubrica = "054",
                             ClasseId = 10,
-                            DataCriacao = new DateTime(2023, 8, 26, 15, 7, 52, 639, DateTimeKind.Local).AddTicks(3674),
+                            DataCriacao = new DateTime(2023, 8, 26, 17, 27, 17, 66, DateTimeKind.Local).AddTicks(6716),
                             DataModificacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DescontoId = "03",
                             DescricaoRubrica = "Mens. GPT – Univ. - Par.(3º)",
@@ -2126,7 +2137,7 @@ namespace AppGCT.Migrations
                         new
                         {
                             CodRubrica = "055",
-                            DataCriacao = new DateTime(2023, 8, 26, 15, 7, 52, 639, DateTimeKind.Local).AddTicks(3680),
+                            DataCriacao = new DateTime(2023, 8, 26, 17, 27, 17, 66, DateTimeKind.Local).AddTicks(6722),
                             DataModificacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DescricaoRubrica = "Pagamento",
                             EstadoRubrica = "A",
@@ -2145,7 +2156,7 @@ namespace AppGCT.Migrations
                         new
                         {
                             CodRubrica = "056",
-                            DataCriacao = new DateTime(2023, 8, 26, 15, 7, 52, 639, DateTimeKind.Local).AddTicks(3688),
+                            DataCriacao = new DateTime(2023, 8, 26, 17, 27, 17, 66, DateTimeKind.Local).AddTicks(6727),
                             DataModificacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DescricaoRubrica = "Devolução",
                             EstadoRubrica = "A",
@@ -2164,7 +2175,7 @@ namespace AppGCT.Migrations
                         new
                         {
                             CodRubrica = "057",
-                            DataCriacao = new DateTime(2023, 8, 26, 15, 7, 52, 639, DateTimeKind.Local).AddTicks(3697),
+                            DataCriacao = new DateTime(2023, 8, 26, 17, 27, 17, 66, DateTimeKind.Local).AddTicks(6731),
                             DataModificacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DescricaoRubrica = "Regularização Débito",
                             EstadoRubrica = "A",
@@ -2183,7 +2194,7 @@ namespace AppGCT.Migrations
                         new
                         {
                             CodRubrica = "058",
-                            DataCriacao = new DateTime(2023, 8, 26, 15, 7, 52, 639, DateTimeKind.Local).AddTicks(3703),
+                            DataCriacao = new DateTime(2023, 8, 26, 17, 27, 17, 66, DateTimeKind.Local).AddTicks(6736),
                             DataModificacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DescricaoRubrica = "Regularização Crédito",
                             EstadoRubrica = "A",
@@ -2245,19 +2256,19 @@ namespace AppGCT.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "9c8c5c80-9d40-4d8f-a4b3-2c6c52638d1c",
+                            Id = "36ca485c-b28f-458b-b439-bb76f41531f3",
                             Name = "Administrador",
                             NormalizedName = "ADMINISTRADOR"
                         },
                         new
                         {
-                            Id = "1c286d44-f1a5-48b6-9bb2-d4d513e2bfd9",
+                            Id = "e4a8bacd-8b08-4e36-824b-6dcbc8613479",
                             Name = "Ginásio",
                             NormalizedName = "GINÁSIO"
                         },
                         new
                         {
-                            Id = "aa3a7faa-1d30-430b-84c0-0b10bdf34fe2",
+                            Id = "a0c4da20-1c85-4325-bbf7-eff45c0e9301",
                             Name = "Sócio",
                             NormalizedName = "SÓCIO"
                         });
@@ -2354,8 +2365,8 @@ namespace AppGCT.Migrations
                     b.HasData(
                         new
                         {
-                            UserId = "1f166811-1d5e-4327-8da8-1a3ca9ba0931",
-                            RoleId = "9c8c5c80-9d40-4d8f-a4b3-2c6c52638d1c"
+                            UserId = "005429a6-991b-4294-b0c6-b4bbe45bb656",
+                            RoleId = "36ca485c-b28f-458b-b439-bb76f41531f3"
                         });
                 });
 

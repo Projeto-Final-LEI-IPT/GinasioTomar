@@ -165,7 +165,10 @@ namespace AppGCT.Pages.Inscricoes.InscricaoEpoca
                         DataModificacao = DateTime.MinValue,
                         IdModificacao = "",
                         EpocaId = epocaId,
-                        GinastaId = Inscricao.GinastaId
+                        GinastaId = Inscricao.GinastaId,
+                        ILancado = "N",
+                        ValorMensalidadeLanc = 0,
+                        IdMovimento = null
                     };
                     _context.PlanoMensalidade.Add(planoMensalidade);
                 }

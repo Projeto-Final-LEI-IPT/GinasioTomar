@@ -91,6 +91,7 @@ namespace AppGCT.Data
                    .HasOne(p => p.FormaPagamento)
                    .WithMany(p => p.Movimentos)
                    .HasForeignKey(p => p.MetodoPagamentoId);
+
             builder.Entity<PlanoMensalidade>()
                    .HasOne(p => p.Epoca)
                    .WithMany(a => a.Planos)

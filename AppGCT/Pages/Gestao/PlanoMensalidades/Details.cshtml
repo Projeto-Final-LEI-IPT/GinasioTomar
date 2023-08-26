@@ -27,6 +27,25 @@
             @Html.DisplayFor(model => model.PlanoMensalidade.ValorMensalidade)
         </dd>
         <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.PlanoMensalidade.ILancado)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.RadioButtonFor(model => model.PlanoMensalidade.ILancado, "S", new { @disabled = "disabled" }) Sim
+            @Html.RadioButtonFor(model => model.PlanoMensalidade.ILancado, "N", new { @disabled = "disabled" }) Não
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.PlanoMensalidade.ValorMensalidadeLanc)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.PlanoMensalidade.ValorMensalidadeLanc)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.PlanoMensalidade.IdMovimento)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.PlanoMensalidade.IdMovimento)
+        </dd>
+        <dt class="col-sm-2">
             Época
         </dt>
         <dd class="col-sm-10">
