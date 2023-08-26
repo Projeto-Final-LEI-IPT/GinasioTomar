@@ -21,6 +21,21 @@ namespace AppGCT.Models
         [Display(Name = "Valor Mensalidade")]
         public Decimal? ValorMensalidade { get; set; }
 
+        [StringLength(1)]
+        [DataType(DataType.Text)]
+        [Display(Name = "Lançado")]
+        public string? ILancado { get; set; }
+
+        [DataType(DataType.Currency)]
+        [Range(0, 500.00, ErrorMessage = "Valores entre 0,00€ e 500,00€")]
+        [Precision(18, 2)]
+        [Display(Name = "Valor Mensalidade Lançado")]
+        public Decimal? ValorMensalidadeLanc { get; set; }
+
+        [DataType(DataType.Text)]
+        [Display(Name = "Id Movimento")]
+        public int? IdMovimento { get; set; }
+
         [Display(Name = "Data de Criação")]
         public DateTime DataCriacao { get; set; }
 
@@ -34,6 +49,22 @@ namespace AppGCT.Models
         [Display(Name = "Modificado por")]
         [StringLength(36)]
         public string? IdModificacao { get; set; }
+
+        public string ILancadoDescricao
+        {
+            get
+            {
+                switch (this.ILancado)
+                {
+                    case "S":
+                        return "Sim";
+                    case "N":
+                        return "Não";
+                    default:
+                        return "Desconhecido";
+                }
+            }
+        }
 
         public int EpocaId { get; set; }
 
