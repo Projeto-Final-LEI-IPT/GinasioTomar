@@ -71,7 +71,7 @@ namespace AppGCT.Models
         public string? LocalTreino { get; set; }
 
         [Display(Name = "Horário")]
-        [StringLength(50, ErrorMessage = "Horário não pode exceder 50 caracteres")]
+        [StringLength(65, ErrorMessage = "Horário não pode exceder 65 caracteres")]
         [DataType(DataType.Text)]
         public string? Horario { get; set; }
 
