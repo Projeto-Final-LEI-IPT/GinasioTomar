@@ -76,6 +76,20 @@ namespace AppGCT.Pages.Inscricoes.InscricaoEpoca
                 OnGet(Inscricao.GinastaId);
                 return Page();
             }
+            //VALIDA CONSENTIMENTO 
+            if (Inscricao.IConsentimento != "S")
+            {
+                ModelState.AddModelError("Inscricao.IConsentimento", "Só é possivel a inscrição com Consentimento de Dados");
+                OnGet(Inscricao.GinastaId);
+                return Page();
+            }
+            //VALIDA DATA CONSENTIMENTO
+            if (Inscricao.DtConsentimento.Date != DateTime.Now.Date)
+            {
+                ModelState.AddModelError("Inscricao.DtConsentimento", "Data Consentimento tem de ser a data inscrição");
+                OnGet(Inscricao.GinastaId);
+                return Page();
+            }
 
             //valida se Ginasta já tem inscrição na Época
             bool JaInscritoEpoca = await _context.Inscricao
@@ -208,7 +222,6 @@ namespace AppGCT.Pages.Inscricoes.InscricaoEpoca
 
             Inscricao.IdFGP = "";
             Inscricao.IdadeAgosto = years;
-            Inscricao.IConsentimento = "N";
             Inscricao.DtExamMed = DateTime.MinValue;
             Inscricao.ILeituraObrig = "N";
             Inscricao.IExamMed = "N";
