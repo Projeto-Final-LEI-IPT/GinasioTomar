@@ -107,16 +107,12 @@ namespace AppGCT.Pages.Gestao.Utilizadores
                 case "nomecompleto_desc":
                     UserIQ = UserIQ.OrderByDescending(s => s.Nome);
                     break;
-                //case "TipoUtilizador":
-                //    var users = await UserIQ.ToListAsync();
-                //users = users.OrderBy(user => _userManager.GetRolesAsync(user).Result.FirstOrDefault()).ToList();
-                //Users = users;
-                //break;
-                //case "tipoutilizador_desc":
-                //var usersDesc = await UserIQ.ToListAsync();
-                //usersDesc = usersDesc.OrderByDescending(user => _userManager.GetRolesAsync(user).Result.FirstOrDefault()).ToList();
-                //Users = usersDesc;
-                //break;
+                case "TipoUtilizador":
+                    UserIQ = UserIQ.OrderBy(s => s.RoleAux);
+                    break;
+                case "tipoutilizador_desc":
+                    UserIQ = UserIQ.OrderByDescending(s => s.RoleAux);
+                    break;
                 case "NumSocio":
                     UserIQ = UserIQ.OrderBy(s => s.NumSocio);
                     break;

@@ -75,6 +75,9 @@
             <div class="form-group d-inline-block">
                 <select asp-for="IdGinasta" class="form-control" asp-items="@Model.GinastasList"></select>
             </div>
+            <div class="form-group d-inline-block">
+                <input type="date" class="form-control"  name="SearchString" value="@Model.CurrentFilter" />
+            </div>
             <input type="submit" value="Procurar" class="btn btn-primary btn-sm" />
             <a class="btn btn-primary btn-sm" asp-area="" asp-page="/Gestao/Movimentos/Index">Limpar</a>
         </p>
