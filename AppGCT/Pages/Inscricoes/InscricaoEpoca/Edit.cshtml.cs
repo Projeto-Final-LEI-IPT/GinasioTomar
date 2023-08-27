@@ -152,17 +152,50 @@ namespace AppGCT.Pages.Inscricoes.InscricaoEpoca
                 for (int i = 0; i <= numberOfMonths; i++)
                 {
                     DateTime dataMensalidade = epoca.DataInicio.AddMonths(i);
+                    //se ainda não chegamos à data da mensalidade atualiza plano
                     if (dataMensalidade.Date > dataDia.Date)
                     {
                         var planoMensalidade = await _context.PlanoMensalidade
                             .FirstOrDefaultAsync(p => p.GinastaId == Inscricao.GinastaId && p.EpocaId == epocaId && p.DataMensalidade == dataMensalidade);
 
+                        //se for o último mês da época não cobra e coloca o valor da mensalidade a 0
+                        if (dataMensalidade.Month == epoca.DataFim.Month)
+                        {
+                            valorMensalidade = 0;
+                        }
+                        //atualiza plano
                         if (planoMensalidade != null)
                         {
                             // Atualiza Plano
                             planoMensalidade.ValorMensalidade = valorMensalidade;
                             planoMensalidade.DataModificacao = DateTime.Now;
                             planoMensalidade.IdModificacao = User.Identity.GetUserId();
+                        }
+                    }
+                    //se já chegamos à data da mensalidade só atualizamos se ainda não tivermos lançado a cobrança (ILANCADO != "S")
+                    //e estivermos no mesmo mês do plano
+                    //NÂO vamos atualizar planos que já deviam ter sido lançados em meses anteriores
+                    else
+                    {
+
+                        var planoMensalidade = await _context.PlanoMensalidade
+                            .FirstOrDefaultAsync(p => p.GinastaId == Inscricao.GinastaId && p.EpocaId == epocaId && p.DataMensalidade == dataMensalidade);
+
+                        if (planoMensalidade.ILancado != "S" && planoMensalidade.DataMensalidade.Month == DateTime.Now.Month)
+                        {
+                            //se for o último mês da época não cobra e coloca o valor da mensalidade a 0
+                            if (dataMensalidade.Month == epoca.DataFim.Month)
+                            {
+                                valorMensalidade = 0;
+                            }
+                            //atualiza plano
+                            if (planoMensalidade != null)
+                            {
+                                // Atualiza Plano
+                                planoMensalidade.ValorMensalidade = valorMensalidade;
+                                planoMensalidade.DataModificacao = DateTime.Now;
+                                planoMensalidade.IdModificacao = User.Identity.GetUserId();
+                            }
                         }
                     }
                 }
