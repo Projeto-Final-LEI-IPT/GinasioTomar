@@ -1,10 +1,12 @@
 using AppGCT.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 
-namespace AppGCT.Pages.Tarefas
+namespace AppGCT.Pages.Gestao.Tarefas
 {
+    [Authorize(Roles = "Administrador,Ginásio")]
     public class IndexModel : PageModel
     {
         private readonly AppGCT.Data.AppGCTContext _context;

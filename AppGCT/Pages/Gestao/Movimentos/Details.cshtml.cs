@@ -10,6 +10,9 @@ using AppGCT.Models;
 using Microsoft.AspNetCore.Authorization;
 using AppGCT.Areas.Identity.Data;
 using Microsoft.AspNetCore.Identity;
+using System.Security.Claims;
+using Microsoft.AspNet.Identity;
+using Microsoft.IdentityModel.Tokens;
 
 namespace AppGCT.Pages.Gestao.Movimentos
 {
@@ -17,12 +20,10 @@ namespace AppGCT.Pages.Gestao.Movimentos
     public class DetailsModel : PageModel
     {
         private readonly AppGCT.Data.AppGCTContext _context;
-        private readonly UserManager<Utilizador> _userManager;
 
-        public DetailsModel(AppGCT.Data.AppGCTContext context, UserManager<Utilizador> userManager)
+        public DetailsModel(AppGCT.Data.AppGCTContext context)
         {
             _context = context;
-            _userManager = userManager;
         }
         public string IdCriacaoName { get; set; }
         public string IdModificacaoName { get; set; }
@@ -41,6 +42,17 @@ namespace AppGCT.Pages.Gestao.Movimentos
                                                     .Include(i => i.TipoDespesa)
                                                     .Include(i => i.FormaPagamento)
                                                     .FirstOrDefaultAsync(m => m.Id == id);
+
+            // Só o Sócio a quem pertence o Movimento é que pode consultar o movimento
+            if (User.IsInRole("Sócio"))
+            {
+                string userId = User.Identity.GetUserId();
+                if (userId != movimento.UtilizadorId)
+                {
+                    return RedirectToPage("./AcessDenied");
+                }
+            }
+
             if (movimento == null)
             {
                 return NotFound();
@@ -48,10 +60,12 @@ namespace AppGCT.Pages.Gestao.Movimentos
             else
             {
                 Movimento = movimento;
-                var user = await _userManager.FindByIdAsync(Movimento.IdCriacao);
-                IdCriacaoName = user?.Nome;
-                var user2 = await _userManager.FindByIdAsync(Movimento.IdModificacao);
-                IdModificacaoName = user2?.Nome;
+                var user = _context.Users.Where(i => i.Id == Movimento.IdCriacao);
+                IdCriacaoName = user?.FirstOrDefault().Nome;
+                var user2 = _context.Users.Where(i => i.Id == Movimento.IdModificacao);
+                if (!user2.IsNullOrEmpty()) { 
+                IdModificacaoName = user2.FirstOrDefault().Nome;
+                }
             }
             return Page();
         }
