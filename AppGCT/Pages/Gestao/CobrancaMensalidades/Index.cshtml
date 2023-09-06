@@ -6,26 +6,45 @@
     Layout = "~/Pages/Shared/_Layout.cshtml";
 }
 
-<h1>Cobrança Mensalidades</h1>
+<h1>Plano Mensalidades</h1>
 
-<p>
-    <a class='btn btn-primary btn-sm' asp-area='' asp-page='/Gestao/CobrancaMensalidades/Create'>Lançar Cobranças(mensalidades)</a>
-</p>
+<form method="post"><button class="btn btn-default">Click to post</button></form>
+
+
 
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Epoca[0].NomeEpoca)
+                Data da Mensalidade
             </th>
+            <th>
+                Valor a lançar
+            </th>
+            <th>
+                Ginasta
+            </th>
+            <th>
+                Sócio
+            </th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model.Epoca)
+        @foreach (var item in Model.Mensalidades)
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.NomeEpoca)
+                    @Html.DisplayFor(modelItem => item.DataMensalidade)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ValorLancar)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Ginasta)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Socio)
                 </td>
             </tr>
         }
