@@ -27,7 +27,7 @@ namespace AppGCT.Pages.Gestao.CobrancaMensalidades
 
         public class DataViewModel
         {
-            public DateTime? DataMensalidade { get; set; }
+            public DateOnly? DataMensalidade { get; set; }
             public Decimal? ValorLancar { get; set; }
             public String? Ginasta { get; set; }
             public String? Socio { get; set; }
@@ -39,27 +39,44 @@ namespace AppGCT.Pages.Gestao.CobrancaMensalidades
         public async Task OnGetAsync()
         {
             var dataCorrente = DateTime.Today.Month;
-            // Consultar mensalidades planeadas para o mês corrente e que não tenham sido já lançadas
-            var mensalidades = await _context.PlanoMensalidade.Where(i => i.DataMensalidade.Month == dataCorrente
-                                                                          ).ToListAsync();
-
-            foreach (var mensalidade in mensalidades)
+            // Consultar todos os Sócios Ativos
+            var sociosAtivos = await _context.Users.Where(i => i.EstadoUtilizador == "A").ToListAsync();
+            foreach (var socioAtivo in sociosAtivos)
             {
+                // TODO - Verificar se há QUOTAS a lançar e popular tabela
+                if(dataCorrente == 9)
+                {
 
+                }
                 // Consultar Ginastas Ativos para o Sócio em tratamento
-                var ginasta = _context.Ginasta.Where(i => i.Id == mensalidade.GinastaId &&
+                var ginastasAtivos = await _context.Ginasta.Where(i => i.UtilizadorId == socioAtivo.Id &&
                                                                        i.EstadoGinasta == "A"
-                                                                 ).FirstOrDefault();
-
-                var socio = _context.Users.Where(i => i.Id == ginasta.UtilizadorId).FirstOrDefault();
-
-                DataViewModel model = new DataViewModel();
-                model.DataMensalidade = mensalidade.DataMensalidade;
-                model.ValorLancar = mensalidade.ValorMensalidade;
-                model.Ginasta = ginasta.NomeCompleto;
-                model.Socio = socio.Nome;
-                Mensalidades.Add(model);
+                                                                 ).ToListAsync();
+                foreach(var ginastaAtivo in ginastasAtivos)
+                {
+                    // Consultar mensalidades planeadas para o mês corrente e que não tenham sido já lançadas
+                    var mensalidades = await _context.PlanoMensalidade.Where(i => i.DataMensalidade.Month == dataCorrente     &&
+                                                                                  i.GinastaId             == ginastaAtivo.Id  &&
+                                                                                  i.ILancado              == "N"              &&
+                                                                                  !i.IdMovimento.HasValue
+                                                                              ).ToListAsync();
+                    foreach (var mensalidade in mensalidades)
+                    {
+                        var epocaAtiva = _context.Epoca.Where(i => i.IdEpoca == mensalidade.EpocaId).FirstOrDefault().EstadoEpoca;
+                        if(epocaAtiva == "A")
+                        {
+                            DataViewModel model = new DataViewModel();
+                            model.DataMensalidade = DateOnly.FromDateTime(mensalidade.DataMensalidade);
+                            model.ValorLancar = mensalidade.ValorMensalidade;
+                            model.Ginasta = ginastaAtivo.NomeCompleto;
+                            model.Socio = socioAtivo.Nome;
+                            Mensalidades.Add(model);
+                        }
+                    }
+                }
             }
+
+
         }
         public async Task<IActionResult> OnPost()
         {
