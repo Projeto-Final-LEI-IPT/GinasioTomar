@@ -22,6 +22,8 @@ namespace AppGCT.Pages.Gestao.CobrancaMensalidades
         {
             _context = context;
         }
+        [TempData]
+        public string StatusMessage { get; set; }
 
         public List<DataViewModel> Mensalidades { get; set; } = new List<DataViewModel>();
 
@@ -32,9 +34,6 @@ namespace AppGCT.Pages.Gestao.CobrancaMensalidades
             public String? Ginasta { get; set; }
             public String? Socio { get; set; }
         }
-
-        // some message to be shown on the page 
-        public string Message { get; set; }
 
         public async Task OnGetAsync()
         {
@@ -80,30 +79,89 @@ namespace AppGCT.Pages.Gestao.CobrancaMensalidades
         }
         public async Task<IActionResult> OnPost()
         {
-            var movimento = new Movimento
+            var dataCorrente = DateTime.Today.Month;
+            // Consultar todos os Sócios Ativos
+            var sociosAtivos = await _context.Users.Where(i => i.EstadoUtilizador == "A").ToListAsync();
+            foreach (var socioAtivo in sociosAtivos)
             {
-                DesRubrica = "Teste dia 6",
-                DtMovimento = DateTime.Now,
-                ValorMovimento = 14,
-                ValorDesconto = 1,
-                NumFatura = "",
-                NumNotaCredito = "",
-                MSaldo = 30,
-                DataCriacao = DateTime.Now,
-                IdCriacao = User.Identity.GetUserId(),
-                DataModificacao = DateTime.MinValue,
-                IdModificacao = " ",
-                UtilizadorId = User.Identity.GetUserId(),
-                AtletaMovimentoId = 2,
-                RubricaId = "001",
-                MetodoPagamentoId = null
-            };
-            _context.Movimento.Add(movimento);
-            await _context.SaveChangesAsync();
+                // TODO - Verificar se há QUOTAS a lançar e popular tabela
+                if (dataCorrente == 9)
+                {
+
+                }
+                // Consultar Ginastas Ativos para o Sócio em tratamento
+                var ginastasAtivos = await _context.Ginasta.Where(i => i.UtilizadorId == socioAtivo.Id &&
+                                                                       i.EstadoGinasta == "A"
+                                                                 ).ToListAsync();
+                foreach (var ginastaAtivo in ginastasAtivos)
+                {
+                    // Consultar mensalidades planeadas para o mês corrente e que não tenham sido já lançadas
+                    var mensalidades = await _context.PlanoMensalidade.Where(i => i.DataMensalidade.Month == dataCorrente &&
+                                                                                  i.GinastaId == ginastaAtivo.Id &&
+                                                                                  i.ILancado == "N" &&
+                                                                                  !i.IdMovimento.HasValue
+                                                                              ).ToListAsync();
+                    //TODO - validar se existe mais de uma mensalidade por lançar para o corrente mês, e dar erro se isso acontecer ???
+                    foreach (var mensalidade in mensalidades)
+                    {
+                        var epocaAtiva = _context.Epoca.Where(i => i.IdEpoca == mensalidade.EpocaId).FirstOrDefault().EstadoEpoca;
+                        if (epocaAtiva == "A")
+                        {
+                            // Consultar saldo do sócio, antes de efetivar movimento
+                            var saldoAnt = _context.Saldo.Where(i => i.IdSocio == socioAtivo.Id).FirstOrDefault().MSaldo;
+                            // Consultar valor da mensalidade
+                            //valida se Ginasta já tem inscrição na Época
+                            bool JaInscritoEpoca = await _context.Inscricao
+                                                          .AnyAsync(i => i.GinastaId == mensalidade.GinastaId && i.EpocaId == mensalidade.EpocaId);
+                            // Se atleta inscrito na epoca da mensalidade em tratamento, vamos lançar o respetivo movimento
+                            if (JaInscritoEpoca)
+                            {
+                                // Consultar inscrição para buscar Classe e Desconto associado
+                                var incricaoAtiva = _context.Inscricao
+                                                          .Where(i => i.GinastaId == mensalidade.GinastaId && i.EpocaId == mensalidade.EpocaId).FirstOrDefault();
+                                //obtem rubrica
+                                var rubrica = await _context.Rubrica
+                                                            .FirstOrDefaultAsync(r => r.ClasseId == incricaoAtiva.ClasseId && 
+                                                                                 r.DescontoId == incricaoAtiva.CodDesconto);
+                               
+                                if (rubrica == null)
+                                {
+                                    StatusMessage = "An error occurred while saving customer data!";
+                                    return RedirectToPage("./Index"); ;
+                                }
+                                decimal valorMensalidade = rubrica.ValorUnitario ?? 0m;
+
+                                var movimento = new Movimento
+                                {
+                                    DesRubrica = "Teste dia 8",
+                                    DtMovimento = DateTime.Now,
+                                    ValorMovimento = valorMensalidade,
+                                    ValorDesconto = 0,
+                                    NumFatura = "",
+                                    NumNotaCredito = "",
+                                    MSaldo = saldoAnt + valorMensalidade,
+                                    DataCriacao = DateTime.Now,
+                                    IdCriacao = User.Identity.GetUserId(),
+                                    DataModificacao = DateTime.MinValue,
+                                    IdModificacao = " ",
+                                    UtilizadorId = socioAtivo.Id,
+                                    AtletaMovimentoId = ginastaAtivo.Id,
+                                    RubricaId = rubrica.CodRubrica,
+                                    MetodoPagamentoId = null
+                                };
+                                _context.Movimento.Add(movimento);
+                                await _context.SaveChangesAsync();
+                            }
+                        }
+                    }
+                }
+            }
+
             // all  done
-            return Page();
+            return RedirectToPage("./Index");
         }
     }
+
 
 
 }

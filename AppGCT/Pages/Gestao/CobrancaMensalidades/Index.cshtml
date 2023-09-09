@@ -6,9 +6,38 @@
     Layout = "~/Pages/Shared/_Layout.cshtml";
 }
 
+
+
+
 <h1>Cobrança automática de Mensalidades</h1>
 
-<form method="post"><a class="btn btn-primary bt-sm">Lançar</a></form>
+<form method="post">
+    <script src = "https://cdn.jsdelivr.net/npm/sweetalert2@11.1.7/dist/sweetalert2.all.min.js" ></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            let msg = $('#StatusMessage').val();
+            if (msg.length > 0) {
+                swal.fire(msg);
+            }
+        });
+
+        <script>src="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.7/dist/sweetalert2.all.min.js" ></script>
+
+    <script>
+        $(document).ready(function () {
+            let msg = $('#StatusMessage').val();
+            if (msg.length > 0) {
+                swal.fire(msg);
+            }
+        }
+    </script>
+    </script>
+    <div class="d-none">
+        <input asp-for="StatusMessage" />
+    </div>
+    <button class="btn btn-primary bt-sm">Lançar</button>
+</form>
 
 
 <table class="table">
