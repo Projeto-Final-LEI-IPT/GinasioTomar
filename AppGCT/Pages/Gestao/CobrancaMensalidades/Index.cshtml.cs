@@ -23,7 +23,10 @@ namespace AppGCT.Pages.Gestao.CobrancaMensalidades
             _context = context;
         }
         [TempData]
-        public string StatusMessage { get; set; }
+        public string StatusMessageFinal { get; set; }
+        [TempData]
+        public string StatusMessageRub { get; set; }
+
 
         public List<DataViewModel> Mensalidades { get; set; } = new List<DataViewModel>();
 
@@ -123,13 +126,15 @@ namespace AppGCT.Pages.Gestao.CobrancaMensalidades
                                 var rubrica = await _context.Rubrica
                                                             .FirstOrDefaultAsync(r => r.ClasseId == incricaoAtiva.ClasseId && 
                                                                                  r.DescontoId == incricaoAtiva.CodDesconto);
-                               
+                                
                                 if (rubrica == null)
                                 {
-                                    StatusMessage = "An error occurred while saving customer data!";
-                                    return RedirectToPage("./Index"); ;
+                                    StatusMessageRub = "Rúbrica associada à inscrição não existe na BD";
+                                    return RedirectToPage("./Index");
                                 }
                                 decimal valorMensalidade = rubrica.ValorUnitario ?? 0m;
+
+                                Guid planoMovimento = Guid.NewGuid();
 
                                 var movimento = new Movimento
                                 {
@@ -139,7 +144,8 @@ namespace AppGCT.Pages.Gestao.CobrancaMensalidades
                                     ValorDesconto = 0,
                                     NumFatura = "",
                                     NumNotaCredito = "",
-                                    MSaldo = saldoAnt + valorMensalidade,
+                                    MSaldo = saldoAnt - valorMensalidade,
+                                    PlanoMovimento = planoMovimento,
                                     DataCriacao = DateTime.Now,
                                     IdCriacao = User.Identity.GetUserId(),
                                     DataModificacao = DateTime.MinValue,
@@ -150,7 +156,46 @@ namespace AppGCT.Pages.Gestao.CobrancaMensalidades
                                     MetodoPagamentoId = null
                                 };
                                 _context.Movimento.Add(movimento);
-                                await _context.SaveChangesAsync();
+
+                                // Atualiza Saldo do Sócio na tabela Saldos
+                                var saldoObj = _context.Saldo.FirstOrDefault(s => s.IdSocio == socioAtivo.Id);
+
+                                if (saldoObj != null)
+                                {
+                                    // Step 3: Modify the properties you want to update
+                                    saldoObj.MSaldo = saldoAnt - valorMensalidade;
+
+                                    // Step 4: Save the changes back to the database
+                                    _context.Saldo.Update(saldoObj);
+
+                                }
+                                // Atualiza ILancado, ValorMensalidadeLanc e IdMovimento
+                                var mensalidadeObj = _context.PlanoMensalidade.FirstOrDefault(s => s.IdPlanoM == mensalidade.IdPlanoM);
+
+                                if (mensalidadeObj != null)
+                                {
+                                    // Step 3: Modify the properties you want to update
+                                    mensalidadeObj.ILancado = "S";
+                                    mensalidadeObj.ValorMensalidadeLanc = valorMensalidade;
+                                    mensalidadeObj.IdMovimento = planoMovimento;
+
+                                    // Step 4: Save the changes back to the database
+                                    _context.PlanoMensalidade.Update(mensalidadeObj);
+
+                                }
+
+                                try
+                                {
+                                    await _context.SaveChangesAsync();
+                                    StatusMessageFinal = "Lançamento de movimentos realizado com sucesso";
+
+                                }
+                                catch (Exception ex)
+                                {
+                                    StatusMessageFinal = "Erro de base de dados no lançamento de movimentos - Solicitar apoio informático";
+                                }
+                               
+
                             }
                         }
                     }

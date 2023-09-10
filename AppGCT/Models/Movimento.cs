@@ -52,6 +52,10 @@ namespace AppGCT.Models
         [Display(Name = "Observações")]
         public string? Observacoes { get; set; }
 
+        [DataType((DataType.Text))]
+        [Display(Name = "Relação entre Movimento e Plano")]
+        public Guid? PlanoMovimento { get; set; }
+
         [DataType((DataType.Date))]
         [Display(Name = "Data de Criação")]
         public DateTime DataCriacao { get; set; }

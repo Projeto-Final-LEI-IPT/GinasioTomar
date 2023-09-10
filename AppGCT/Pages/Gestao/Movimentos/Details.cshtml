@@ -72,6 +72,12 @@
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Movimento.Observacoes)
         </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Movimento.PlanoMovimento)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Movimento.PlanoMovimento)
+        </dd>
         @if (User.IsInRole("Administrador") || User.IsInRole("Ginásio"))
         {
             <dt class="col-sm-2">

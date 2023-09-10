@@ -57,7 +57,7 @@ namespace AppGCT.Pages.Inscricoes.PlanoMensalidades
             if (PlanoMensalidade.ILancado == "S")
             {
                 //se movimento vazio
-                if (PlanoMensalidade.IdMovimento == null || PlanoMensalidade.IdMovimento == 0)
+                if (PlanoMensalidade.IdMovimento == null)
                 {
                     ModelState.AddModelError("PlanoMensalidade.IdMovimento", "Id Movimento não está preenchido");
                     ViewData["GinastaId"] = new SelectList(_context.Ginasta, "Id", "ID_DescrGinasta");
@@ -69,7 +69,7 @@ namespace AppGCT.Pages.Inscricoes.PlanoMensalidades
                 {
                     //obtem movimento
                     var movimento = await _context.Movimento
-                                                .FirstOrDefaultAsync(r => r.Id == PlanoMensalidade.IdMovimento);
+                                                .FirstOrDefaultAsync(r => r.PlanoMovimento == PlanoMensalidade.IdMovimento);
                     if (movimento == null)
                     {
                         ModelState.AddModelError("PlanoMensalidade.IdMovimento", "Id Movimento inexistente");
