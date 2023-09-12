@@ -207,9 +207,10 @@ namespace AppGCT.Pages.Inscricoes.InscricaoEpoca
                     saldo.MSaldo = saldo.MSaldo + rubricaini.ValorUnitario;
                 }
                 _context.Saldo.Update(saldo);
-
+                Guid IdMovimento = Guid.NewGuid();
                 var movimento = new Movimento 
                 {
+                    Id = IdMovimento,
                     DesRubrica = rubricaini.DescricaoRubrica,
                     DtMovimento = DateTime.Now,
                     ValorMovimento = rubricaini.ValorUnitario,

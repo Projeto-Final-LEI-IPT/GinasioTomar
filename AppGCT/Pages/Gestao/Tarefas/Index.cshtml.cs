@@ -32,6 +32,18 @@ namespace AppGCT.Pages.Gestao.Tarefas
             var sociosAtivos = await _context.Users.Where(i => i.EstadoUtilizador == "A").ToListAsync();
             foreach (var socioAtivo in sociosAtivos)
             {
+                // Por cada Sócio sem Número de Sócio Atribuído, é mostrado um item na lista a informar para
+                // ATRIBUIR NÚMERO DE SÓCIO
+                if(   socioAtivo.NumSocio.Trim() == "" 
+                   && socioAtivo.RoleAux         != "Administrador" 
+                   && socioAtivo.RoleAux         != "Ginásio") 
+                {
+                    DataViewModel model = new DataViewModel();
+                    model.Socio = socioAtivo.Nome;
+                    model.Ginasta = "N/A";
+                    model.DescrTarefa = "Atribuir número de sócio";
+                    Tarefas.Add(model);
+                }
 
                 // Consultar Ginastas Ativos para o Sócio em tratamento
                 var ginastasAtivos = await _context.Ginasta.Where(i => i.UtilizadorId == socioAtivo.Id &&

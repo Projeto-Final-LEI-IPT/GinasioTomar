@@ -27,14 +27,14 @@ namespace AppGCT.Pages.Gestao.Movimentos
         [BindProperty]
         public Movimento Movimento { get; set; } = default!;
 
-        public async Task<IActionResult> OnGetAsync(int? id)
+        public async Task<IActionResult> OnGetAsync(Guid? id)
         {
-            if (id == null || _context.Movimento == null)
+            if (id.Equals(null) || _context.Movimento == null)
             {
                 return NotFound();
             }
 
-            var movimento =  await _context.Movimento.FirstOrDefaultAsync(m => m.Id == id);
+            var movimento =  await _context.Movimento.FirstOrDefaultAsync(m => m.Id.Equals(id));
             if (movimento == null)
             {
                 return NotFound();
@@ -60,7 +60,7 @@ namespace AppGCT.Pages.Gestao.Movimentos
             {
                 return Page();
             }
-            var movimentoAtualizar = _context.Movimento.Where(i => i.Id == Movimento.Id).FirstOrDefault();
+            var movimentoAtualizar = _context.Movimento.Where(i => i.Id.Equals(Movimento.Id)).FirstOrDefault();
             movimentoAtualizar.DtMovimento = Movimento.DtMovimento;
             movimentoAtualizar.DataModificacao = DateTime.Now;
             // obtem User ID logado
