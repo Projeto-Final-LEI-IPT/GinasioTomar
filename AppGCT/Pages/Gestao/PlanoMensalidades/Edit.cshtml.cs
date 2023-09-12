@@ -69,7 +69,7 @@ namespace AppGCT.Pages.Inscricoes.PlanoMensalidades
                 {
                     //obtem movimento
                     var movimento = await _context.Movimento
-                                                .FirstOrDefaultAsync(r => r.PlanoMovimento == PlanoMensalidade.IdMovimento);
+                                                .FirstOrDefaultAsync(r => r.Id == PlanoMensalidade.IdMovimento);
                     if (movimento == null)
                     {
                         ModelState.AddModelError("PlanoMensalidade.IdMovimento", "Id Movimento inexistente");

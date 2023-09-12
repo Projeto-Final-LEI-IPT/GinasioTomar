@@ -82,6 +82,7 @@ namespace AppGCT.Pages.Gestao.CobrancaMensalidades
         }
         public async Task<IActionResult> OnPost()
         {
+            StatusMessageFinal = "Inicialização de controlo";
             var dataCorrente = DateTime.Today.Month;
             // Consultar todos os Sócios Ativos
             var sociosAtivos = await _context.Users.Where(i => i.EstadoUtilizador == "A").ToListAsync();
@@ -138,6 +139,7 @@ namespace AppGCT.Pages.Gestao.CobrancaMensalidades
 
                                 var movimento = new Movimento
                                 {
+                                    Id = planoMovimento,
                                     DesRubrica = "Teste dia 8",
                                     DtMovimento = DateTime.Now,
                                     ValorMovimento = valorMensalidade,
@@ -145,7 +147,6 @@ namespace AppGCT.Pages.Gestao.CobrancaMensalidades
                                     NumFatura = "",
                                     NumNotaCredito = "",
                                     MSaldo = saldoAnt - valorMensalidade,
-                                    PlanoMovimento = planoMovimento,
                                     DataCriacao = DateTime.Now,
                                     IdCriacao = User.Identity.GetUserId(),
                                     DataModificacao = DateTime.MinValue,
@@ -200,6 +201,10 @@ namespace AppGCT.Pages.Gestao.CobrancaMensalidades
                         }
                     }
                 }
+            }
+            if(StatusMessageFinal == "Inicialização de controlo")
+            {
+                StatusMessageFinal = "Sem movimentos válidos para lançar. Não foram lançados movimentos.";
             }
 
             // all  done

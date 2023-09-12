@@ -31,9 +31,9 @@ namespace AppGCT.Pages.Gestao.Movimentos
 
         public Movimento Movimento { get; set; } = default!;
 
-        public async Task<IActionResult> OnGetAsync(int? id)
+        public async Task<IActionResult> OnGetAsync(Guid? id)
         {
-            if (id == null || _context.Movimento == null)
+            if (id.Equals(null) || _context.Movimento == null)
             {
                 return NotFound();
             }
@@ -42,7 +42,7 @@ namespace AppGCT.Pages.Gestao.Movimentos
                                         .Include(i => i.Atleta)
                                         .Include(i => i.TipoDespesa)
                                         .Include(i => i.FormaPagamento)
-                                        .FirstOrDefaultAsync(m => m.Id == id);
+                                        .FirstOrDefaultAsync(m => m.Id.Equals(id));
 
 
 

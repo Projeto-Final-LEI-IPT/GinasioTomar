@@ -7,8 +7,9 @@ namespace AppGCT.Models
 {
     public class Movimento
     {
+        [Key]
         [Display(Name = "Identificação do Movimento")]
-        public int? Id { get; set; }
+        public Guid? Id { get; set; }
 
         [DataType(DataType.Text)]
         [StringLength(30, MinimumLength = 5, ErrorMessage = "Descrição da Rúbrica tem de ter entre 5 e 30 caracteres")]
@@ -51,10 +52,6 @@ namespace AppGCT.Models
         [StringLength(100, MinimumLength = 5, ErrorMessage = "Observações tem de ter entre 5 e 100 caracteres")]
         [Display(Name = "Observações")]
         public string? Observacoes { get; set; }
-
-        [DataType((DataType.Text))]
-        [Display(Name = "Relação entre Movimento e Plano")]
-        public Guid? PlanoMovimento { get; set; }
 
         [DataType((DataType.Date))]
         [Display(Name = "Data de Criação")]
