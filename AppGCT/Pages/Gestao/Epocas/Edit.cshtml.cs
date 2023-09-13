@@ -17,6 +17,10 @@ namespace AppGCT.Pages.Ginasio.Epocas
     public class EditModel : PageModel
     {
         private readonly AppGCT.Data.AppGCTContext _context;
+
+        [TempData]
+        public string StatusMessageFinal { get; set; }
+
         private async Task<bool> ValidaEpoca()
         {
             if (_context.Epoca == null || Epoca == null)
@@ -95,6 +99,24 @@ namespace AppGCT.Pages.Ginasio.Epocas
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             Epoca.IdModificacao = userId;
             Epoca.DataModificacao = DateTime.Now;
+            // Só permite Finalizar época após a data de fim ser ultrapassada
+            if(Epoca.EstadoEpoca == "F" &&
+               Epoca.DataFim     < DateTime.Now)
+            {
+                StatusMessageFinal = "Só é possível finalizar época após data de fim";
+                return RedirectToPage("./Edit", new { id = Epoca.IdEpoca });
+            }
+            // Verifica se existem Mensalidades lançadas para época
+               // Se sim, não deixa cancelar a época
+            bool JaCobrancasLancadas = await _context.PlanoMensalidade
+                                                     .AnyAsync(i => i.EpocaId == Epoca.IdEpoca &&
+                                                                    i.ILancado == "S");
+            if (Epoca.EstadoEpoca == "C" &&
+                JaCobrancasLancadas)
+            {
+                StatusMessageFinal = "Não é possível cancelar época pois já existem mensalidades lançadas";
+                return RedirectToPage("./Edit", new { id = Epoca.IdEpoca });
+            }
             try
             {
                 await _context.SaveChangesAsync();
