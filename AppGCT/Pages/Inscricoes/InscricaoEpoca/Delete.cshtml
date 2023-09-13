@@ -190,8 +190,24 @@
     </dl>
     
     <form method="post">
+
         <input type="hidden" asp-for="Inscricao.Id" />
         <input type="submit" value="Apagar" class="btn btn-danger btn-sm" />
         <a class='btn btn-primary btn-sm' asp-area='' asp-page='/Inscricoes/InscricaoEpoca/Index' asp-route-id='@Model.Inscricao.Atleta.Id'>Voltar</a>
-    </form>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.7/dist/sweetalert2.all.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script>
+            $(document).ready(function () {
+                let msg2 = $('#StatusMessageFinal1').val();
+                if (msg2.length > 0) {
+                    swal.fire(msg2);
+                }
+            });
+
+        </script>
+
+        <div class="d-none">
+            <input asp-for="StatusMessageFinal1" />
+        </div>
+   </form>
 </div>
