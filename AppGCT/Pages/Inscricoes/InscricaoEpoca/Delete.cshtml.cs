@@ -24,6 +24,8 @@ namespace AppGCT.Pages.Inscricoes.InscricaoEpoca
             _context = context;
             _userManager = userManager;
         }
+        [TempData]
+        public string StatusMessageFinal1 { get; set; }
 
         [BindProperty]
         public Inscricao Inscricao { get; set; } = default!;
@@ -66,15 +68,28 @@ namespace AppGCT.Pages.Inscricoes.InscricaoEpoca
             if (inscricao != null)
             {
                 Inscricao = inscricao;
-                // Obtem planoMensalidade associados
-                var planoMensalidades = await _context.PlanoMensalidade
-                    .Where(p => p.GinastaId == Inscricao.GinastaId && p.EpocaId == Inscricao.EpocaId)
-                    .ToListAsync();
-                //remove planoMensalidades
-                _context.PlanoMensalidade.RemoveRange(planoMensalidades);
-                //remove inscrição
-                _context.Inscricao.Remove(Inscricao);
-                await _context.SaveChangesAsync();
+                // Verifca se para inscrição existe pelo menos um mensalidade lançada, e se sim, não deixa Apagar
+                bool JaCobrancasLancadas = await _context.PlanoMensalidade
+                                                         .AnyAsync(i => i.GinastaId == Inscricao.GinastaId &&
+                                                                        i.EpocaId == Inscricao.EpocaId &&
+                                                                        i.ILancado == "S");
+                if (!JaCobrancasLancadas)
+                {
+                    // Obtem planoMensalidade associados
+                    var planoMensalidades = await _context.PlanoMensalidade
+                        .Where(p => p.GinastaId == Inscricao.GinastaId && p.EpocaId == Inscricao.EpocaId)
+                        .ToListAsync();
+                    //remove planoMensalidades
+                    _context.PlanoMensalidade.RemoveRange(planoMensalidades);
+                    //remove inscrição
+                    _context.Inscricao.Remove(Inscricao);
+                    await _context.SaveChangesAsync();
+                }
+                else
+                {
+                    StatusMessageFinal1 = "Mensalidades já lançadas impedem apagar Inscrição";
+                    return RedirectToPage("./Delete", new { id = Inscricao.Id });
+                }
             }
 
             return RedirectToPage("./Index", new { id = Inscricao.GinastaId });

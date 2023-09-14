@@ -34,7 +34,7 @@ namespace AppGCT.Models
 
         [DataType(DataType.Text)]
         [Display(Name = "Id Movimento")]
-        public int? IdMovimento { get; set; }
+        public Guid? IdMovimento { get; set; }
 
         [Display(Name = "Data de Criação")]
         public DateTime DataCriacao { get; set; }

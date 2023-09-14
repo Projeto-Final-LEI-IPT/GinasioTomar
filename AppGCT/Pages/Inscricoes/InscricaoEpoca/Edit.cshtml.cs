@@ -22,6 +22,9 @@ namespace AppGCT.Pages.Inscricoes.InscricaoEpoca
         {
             _context = context;
         }
+        [TempData]
+        public string StatusMessageFinal1 { get; set; }
+
 
         [BindProperty]
         public Inscricao Inscricao { get; set; } = default!;
@@ -111,9 +114,9 @@ namespace AppGCT.Pages.Inscricoes.InscricaoEpoca
             //VALIDA FICHA INDIVIDUAL E DATA 
             if (Inscricao.IFicFGP == "S")
             {
-                if (Inscricao.DtFicFGP.Date != DateTime.Now.Date)
+                if (Inscricao.DtFicFGP.Date == DateTime.MinValue)
                 {
-                    ModelState.AddModelError("Inscricao.DtFicFGP", "Data tem de ser a data do dia");
+                    ModelState.AddModelError("Inscricao.DtFicFGP", "Data é obrigatória");
                     await OnGetAsync(Inscricao.GinastaId);
                     return Page();
                 }
@@ -212,7 +215,16 @@ namespace AppGCT.Pages.Inscricoes.InscricaoEpoca
 
             try
             {
-                await _context.SaveChangesAsync();
+                // Só é permitido Editar uma inscrição até ao dia anterior ao fim da Epoca
+                if (epoca.DataFim >= DateTime.Now)
+                {
+                    await _context.SaveChangesAsync();
+                }
+                else
+                {
+                    StatusMessageFinal1 = " Só é possível editar a época até ao dia anterior à Época Terminar";
+                    return RedirectToPage("./Edit", new { id = Inscricao.Id });
+                }
             }
             catch (DbUpdateConcurrencyException)
             {
