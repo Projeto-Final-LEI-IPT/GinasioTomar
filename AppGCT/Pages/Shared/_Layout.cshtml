@@ -7,6 +7,12 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/AppGCT.styles.css" asp-append-version="true" />
+    <style>
+        .top-row {
+            background-color: #0074D9; /* Blue color */
+            color: white; /* Set text color to white or a contrasting color */
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -62,14 +68,15 @@
                                             <a class="dropdown-item" asp-area="" asp-page="/Gestao/PlanoMensalidades/Index">Plano Mensalidades</a>
                                         }
     
-                                </div>
-                            </li>
-                        }
-                    </ul>
-                    <partial name="_LoginPartial" />
+                                    </div>
+                                </li>
+                            }
+                        </ul>
+                        <partial name="_LoginPartial" />
+                    </div>
                 </div>
-            </div>
-        </nav>
+            </nav>
+        </div>
     </header>
     <div class="container">
         <main role="main" class="pb-3">
