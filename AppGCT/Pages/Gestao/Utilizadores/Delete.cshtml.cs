@@ -40,7 +40,7 @@ namespace AppGCT.Pages.Gestao.Utilizadores
 
             if (Utilizador != null)
             {
-                // Se for o "Administrador" devolve erro
+                // Se for o "Administrador" devolve erro;
                 if (Utilizador.UserName == "admin@localhost" || Utilizador.Id == currentUser.Id)
                 {
                     return RedirectToPage("./Error");
