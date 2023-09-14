@@ -241,6 +241,8 @@ namespace AppGCT.Pages.Gestao.Movimentos
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync()
         {
+            Guid IdMovimento = Guid.NewGuid();
+            
             var saldoAux = 0.0;
             var tipoRub = _context.Rubrica.Where(i => i.CodRubrica == Movimento.RubricaId).FirstOrDefault().TipoRubrica;
             switch (tipoRub)
@@ -277,6 +279,7 @@ namespace AppGCT.Pages.Gestao.Movimentos
                     } 
                     break;
             }
+            Movimento.Id = IdMovimento;
 
             if (!ModelState.IsValid || _context.Movimento == null || Movimento == null)
             {

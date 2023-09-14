@@ -13,6 +13,7 @@ using Microsoft.AspNetCore.Identity;
 using System.Security.Claims;
 using Microsoft.AspNet.Identity;
 using Microsoft.IdentityModel.Tokens;
+using SendGrid.Helpers.Mail;
 
 namespace AppGCT.Pages.Gestao.Movimentos
 {
@@ -30,18 +31,20 @@ namespace AppGCT.Pages.Gestao.Movimentos
 
         public Movimento Movimento { get; set; } = default!;
 
-        public async Task<IActionResult> OnGetAsync(int? id)
+        public async Task<IActionResult> OnGetAsync(Guid? id)
         {
-            if (id == null || _context.Movimento == null)
+            if (id.Equals(null) || _context.Movimento == null)
             {
                 return NotFound();
             }
 
             var movimento = await _context.Movimento.Include(i => i.Socio)
-                                                    .Include(i => i.Atleta)
-                                                    .Include(i => i.TipoDespesa)
-                                                    .Include(i => i.FormaPagamento)
-                                                    .FirstOrDefaultAsync(m => m.Id == id);
+                                        .Include(i => i.Atleta)
+                                        .Include(i => i.TipoDespesa)
+                                        .Include(i => i.FormaPagamento)
+                                        .FirstOrDefaultAsync(m => m.Id.Equals(id));
+
+
 
             // Só o Sócio a quem pertence o Movimento é que pode consultar o movimento
             if (User.IsInRole("Sócio"))

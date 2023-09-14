@@ -6,26 +6,68 @@
     Layout = "~/Pages/Shared/_Layout.cshtml";
 }
 
-<h1>Cobrança Mensalidades</h1>
 
-<p>
-    <a class='btn btn-primary btn-sm' asp-area='' asp-page='/Gestao/CobrancaMensalidades/Create'>Lançar Cobranças(mensalidades)</a>
-</p>
+
+
+<h1>Cobrança automática de Mensalidades</h1>
+
+<form method="post">
+    <script src = "https://cdn.jsdelivr.net/npm/sweetalert2@11.1.7/dist/sweetalert2.all.min.js" ></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            let msg1 = $('#StatusMessageRub').val();
+            if (msg1.length > 0) {
+                swal.fire(msg1);
+            }
+            let msg2 = $('#StatusMessageFinal').val();
+            if (msg2.length > 0) {
+                swal.fire(msg2);
+            }
+        });
+
+    </script>
+    <div class="d-none">
+        <input asp-for="StatusMessageRub" />
+        <input asp-for="StatusMessageFinal" />
+    </div>
+    <button class="btn btn-primary bt-sm">Lançar</button>
+</form>
+
 
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Epoca[0].NomeEpoca)
+                Data da Mensalidade
             </th>
+            <th>
+                Valor a lançar
+            </th>
+            <th>
+                Ginasta
+            </th>
+            <th>
+                Sócio
+            </th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model.Epoca)
+        @foreach (var item in Model.Mensalidades)
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.NomeEpoca)
+                    @Html.DisplayFor(modelItem => item.DataMensalidade)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ValorLancar)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Ginasta)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Socio)
                 </td>
             </tr>
         }

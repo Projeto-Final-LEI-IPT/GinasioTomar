@@ -7,8 +7,9 @@ namespace AppGCT.Models
 {
     public class Movimento
     {
+        [Key]
         [Display(Name = "Identificação do Movimento")]
-        public int? Id { get; set; }
+        public Guid? Id { get; set; }
 
         [DataType(DataType.Text)]
         [StringLength(30, MinimumLength = 5, ErrorMessage = "Descrição da Rúbrica tem de ter entre 5 e 30 caracteres")]
