@@ -251,8 +251,14 @@ namespace AppGCT.Areas.Identity.Pages.Account
                         values: new { area = "Identity", userId = userId, code = code, returnUrl = returnUrl },
                         protocol: Request.Scheme);
 
-                    await _emailSender.SendEmailAsync(Input.Email, "Confirmação Registo Ginásio Clube de Tomar",
-                        $"Por favor, confirme o seu registo <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>carregando aqui</a>.");
+                    await _emailSender.SendEmailAsync(Input.Email, "Ative o seu registo - Ginásio Clube de Tomar",
+                        $"<br><b>Obrigado pelo seu registo!</b><br>" +
+                        $"<br> Caro(a) Sócio(a) <b>{Input.Nome}</b>,<br> " +
+                        $"Para finalizar a ativação do seu registo, por favor, confirme o seu registo <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>carregando aqui</a>." +
+                        $"<br><br> Este e-mail foi enviado de forma automática, por favor não responda diretamente para este endereço." +
+                        $"<br>Alguma dúvida ou sugestão não hesite em contactar-nos.<br><br>" +
+                        $"Com os melhores cumprimentos,<br>" +
+                        $"<b>Ginásio Clube de Tomar</b>");
 
                     await _context.SaveChangesAsync();
 
