@@ -108,8 +108,8 @@ namespace AppGCT.Pages.Gestao.CobrancaMensalidades
                     //TODO - validar se existe mais de uma mensalidade por lançar para o corrente mês, e dar erro se isso acontecer ???
                     foreach (var mensalidade in mensalidades)
                     {
-                        var epocaAtiva = _context.Epoca.Where(i => i.IdEpoca == mensalidade.EpocaId).FirstOrDefault().EstadoEpoca;
-                        if (epocaAtiva == "A")
+                        var epocaAtiva = _context.Epoca.Where(i => i.IdEpoca == mensalidade.EpocaId).FirstOrDefault();
+                        if (epocaAtiva.EstadoEpoca == "A")
                         {
                             // Consultar saldo do sócio, antes de efetivar movimento
                             var saldoAnt = _context.Saldo.Where(i => i.IdSocio == socioAtivo.Id).FirstOrDefault().MSaldo;
@@ -117,59 +117,10 @@ namespace AppGCT.Pages.Gestao.CobrancaMensalidades
                             //valida se Ginasta já tem inscrição na Época
                             bool JaInscritoEpoca = await _context.Inscricao
                                                           .AnyAsync(i => i.GinastaId == mensalidade.GinastaId && i.EpocaId == mensalidade.EpocaId);
-                            // Se atleta inscrito na epoca da mensalidade em tratamento, vamos lançar o respetivo movimento
-                            if (JaInscritoEpoca)
+
+                            if (epocaAtiva.ICobrancUltimoMes == "N" &&
+                               epocaAtiva.DataFim.Month == mensalidade.DataMensalidade.Month)
                             {
-                                // Consultar inscrição para buscar Classe e Desconto associado
-                                var incricaoAtiva = _context.Inscricao
-                                                          .Where(i => i.GinastaId == mensalidade.GinastaId && i.EpocaId == mensalidade.EpocaId).FirstOrDefault();
-                                //obtem rubrica
-                                var rubrica = await _context.Rubrica
-                                                            .FirstOrDefaultAsync(r => r.ClasseId == incricaoAtiva.ClasseId && 
-                                                                                 r.DescontoId == incricaoAtiva.CodDesconto);
-                                
-                                if (rubrica == null)
-                                {
-                                    StatusMessageRub = "Rúbrica associada à inscrição não existe na BD";
-                                    return RedirectToPage("./Index");
-                                }
-                                decimal valorMensalidade = rubrica.ValorUnitario ?? 0m;
-
-                                Guid planoMovimento = Guid.NewGuid();
-
-                                var movimento = new Movimento
-                                {
-                                    Id = planoMovimento,
-                                    DesRubrica = "Teste dia 8",
-                                    DtMovimento = DateTime.Now,
-                                    ValorMovimento = valorMensalidade,
-                                    ValorDesconto = 0,
-                                    NumFatura = "",
-                                    NumNotaCredito = "",
-                                    MSaldo = saldoAnt - valorMensalidade,
-                                    DataCriacao = DateTime.Now,
-                                    IdCriacao = User.Identity.GetUserId(),
-                                    DataModificacao = DateTime.MinValue,
-                                    IdModificacao = " ",
-                                    UtilizadorId = socioAtivo.Id,
-                                    AtletaMovimentoId = ginastaAtivo.Id,
-                                    RubricaId = rubrica.CodRubrica,
-                                    MetodoPagamentoId = null
-                                };
-                                _context.Movimento.Add(movimento);
-
-                                // Atualiza Saldo do Sócio na tabela Saldos
-                                var saldoObj = _context.Saldo.FirstOrDefault(s => s.IdSocio == socioAtivo.Id);
-
-                                if (saldoObj != null)
-                                {
-                                    // Step 3: Modify the properties you want to update
-                                    saldoObj.MSaldo = saldoAnt - valorMensalidade;
-
-                                    // Step 4: Save the changes back to the database
-                                    _context.Saldo.Update(saldoObj);
-
-                                }
                                 // Atualiza ILancado, ValorMensalidadeLanc e IdMovimento
                                 var mensalidadeObj = _context.PlanoMensalidade.FirstOrDefault(s => s.IdPlanoM == mensalidade.IdPlanoM);
 
@@ -177,14 +128,11 @@ namespace AppGCT.Pages.Gestao.CobrancaMensalidades
                                 {
                                     // Step 3: Modify the properties you want to update
                                     mensalidadeObj.ILancado = "S";
-                                    mensalidadeObj.ValorMensalidadeLanc = valorMensalidade;
-                                    mensalidadeObj.IdMovimento = planoMovimento;
 
                                     // Step 4: Save the changes back to the database
                                     _context.PlanoMensalidade.Update(mensalidadeObj);
 
                                 }
-
                                 try
                                 {
                                     await _context.SaveChangesAsync();
@@ -193,10 +141,97 @@ namespace AppGCT.Pages.Gestao.CobrancaMensalidades
                                 }
                                 catch (Exception ex)
                                 {
-                                    StatusMessageFinal = "Erro de base de dados no lançamento de movimentos - Solicitar apoio informático";
+                                    StatusMessageFinal = "Erro de base de dados no lançamento de movimentos - Mensalidade: " +
+                                                          mensalidade.IdPlanoM + " Solicitar apoio informático";
+                                    return RedirectToPage("./Index");
                                 }
-                               
+                            }
+                            else 
+                            { 
+                                // Se atleta inscrito na epoca da mensalidade em tratamento, vamos lançar o respetivo movimento
+                                if (JaInscritoEpoca)
+                                {
+                                    // Consultar inscrição para buscar Classe e Desconto associado
+                                    var incricaoAtiva = _context.Inscricao
+                                                              .Where(i => i.GinastaId == mensalidade.GinastaId && i.EpocaId == mensalidade.EpocaId).FirstOrDefault();
+                                    //obtem rubrica
+                                    var rubrica = await _context.Rubrica
+                                                                .FirstOrDefaultAsync(r => r.ClasseId == incricaoAtiva.ClasseId &&
+                                                                                     r.DescontoId == incricaoAtiva.CodDesconto);
 
+                                    if (rubrica == null)
+                                    {
+                                        StatusMessageRub = "Rúbrica associada à inscrição não existe na BD";
+                                        return RedirectToPage("./Index");
+                                    }
+                                    decimal valorMensalidade = rubrica.ValorUnitario ?? 0m;
+
+                                    Guid planoMovimento = Guid.NewGuid();
+
+                                    var movimento = new Movimento
+                                    {
+                                        Id = planoMovimento,
+                                        DesRubrica = rubrica.DescricaoRubrica + " Proc. Automático",
+                                        DtMovimento = DateTime.Now,
+                                        ValorMovimento = valorMensalidade,
+                                        ValorDesconto = 0,
+                                        NumFatura = "",
+                                        NumNotaCredito = "",
+                                        MSaldo = saldoAnt - valorMensalidade,
+                                        DataCriacao = DateTime.Now,
+                                        IdCriacao = User.Identity.GetUserId(),
+                                        DataModificacao = DateTime.MinValue,
+                                        IdModificacao = " ",
+                                        UtilizadorId = socioAtivo.Id,
+                                        AtletaMovimentoId = ginastaAtivo.Id,
+                                        RubricaId = rubrica.CodRubrica,
+                                        MetodoPagamentoId = null
+                                    };
+                                    _context.Movimento.Add(movimento);
+
+                                    // Atualiza Saldo do Sócio na tabela Saldos
+                                    var saldoObj = _context.Saldo.FirstOrDefault(s => s.IdSocio == socioAtivo.Id);
+
+                                    if (saldoObj != null)
+                                    {
+                                        // Step 3: Modify the properties you want to update
+                                        saldoObj.MSaldo = saldoAnt - valorMensalidade;
+
+                                        // Step 4: Save the changes back to the database
+                                        _context.Saldo.Update(saldoObj);
+
+                                    }
+                                    // Atualiza ILancado, ValorMensalidadeLanc e IdMovimento
+                                    var mensalidadeObj = _context.PlanoMensalidade.FirstOrDefault(s => s.IdPlanoM == mensalidade.IdPlanoM);
+
+                                    if (mensalidadeObj != null)
+                                    {
+                                        // Step 3: Modify the properties you want to update
+                                        mensalidadeObj.ILancado = "S";
+                                        mensalidadeObj.ValorMensalidadeLanc = valorMensalidade;
+                                        mensalidadeObj.IdMovimento = planoMovimento;
+
+                                        // Step 4: Save the changes back to the database
+                                        _context.PlanoMensalidade.Update(mensalidadeObj);
+
+                                    }
+
+                                    try
+                                    {
+                                        await _context.SaveChangesAsync();
+                                        StatusMessageFinal = "Lançamento de movimentos realizado com sucesso";
+
+                                    }
+                                    catch (Exception ex)
+                                    {
+                                        StatusMessageFinal = "Erro de base de dados no lançamento de movimentos - Mensalidade: " +
+                                                              mensalidade.IdPlanoM + " Solicitar apoio informático";
+                                        return RedirectToPage("./Index");
+                                    }
+
+
+
+                                }
                             }
                         }
                     }

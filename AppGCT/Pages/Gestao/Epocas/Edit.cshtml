@@ -54,6 +54,22 @@
                 </div>
                 <span asp-validation-for="Epoca.EstadoEpoca" class="text-danger"></span>
             </div>
+            <div class="form-group">
+                <label asp-for="Epoca.ICobrancUltimoMes" class="control-label">Cobrar última mensalidade?</label>
+                <div class="form-check">
+                    <label class="form-check-label">
+                        <input type="radio" asp-for="Epoca.ICobrancUltimoMes" class="form-check-input" value="S" />
+                        Sim
+                    </label>
+                </div>
+                <div class="form-check">
+                    <label class="form-check-label">
+                        <input type="radio" asp-for="Epoca.ICobrancUltimoMes" class="form-check-input" value="N" />
+                        Não
+                    </label>
+                </div>
+                <span asp-validation-for="Epoca.ICobrancUltimoMes" class="text-danger"></span>
+            </div>
             <input type="hidden" asp-for="Epoca.DataCriacao" />
             <input type="hidden" asp-for="Epoca.IdCriacao" />
             <div class="form-group">

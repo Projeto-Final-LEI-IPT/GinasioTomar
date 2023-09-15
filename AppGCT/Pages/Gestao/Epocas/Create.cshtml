@@ -34,6 +34,22 @@
                 <span asp-validation-for="Epoca.DataFim" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <label asp-for="Epoca.ICobrancUltimoMes" class="control-label">Cobrar última mensalidade?</label>
+                <div class="form-check">
+                    <label class="form-check-label">
+                        <input type="radio" asp-for="Epoca.ICobrancUltimoMes" class="form-check-input" value="S" checked />
+                        Sim
+                    </label>
+                </div>
+                <div class="form-check">
+                    <label class="form-check-label">
+                        <input type="radio" asp-for="Epoca.ICobrancUltimoMes" class="form-check-input" value="N" />
+                        Não
+                    </label>
+                </div>
+                <span asp-validation-for="Epoca.ICobrancUltimoMes" class="text-danger"></span>
+            </div>
+            <div class="form-group">
                 <input type="submit" value="Criar" class="btn btn-primary" />
             </div>
         </form>
