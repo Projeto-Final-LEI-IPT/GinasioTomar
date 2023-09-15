@@ -66,8 +66,8 @@ namespace AppGCT.Pages.Gestao.Utilizadores
             public string Nome { get; set; }
 
             [Required(ErrorMessage = "NIF é campo obrigatório!")]
-            [StringLength(9, MinimumLength = 9, ErrorMessage = "NIF tem de ter 9 digitos numéricos.")]
-            [RegularExpression(@"^(1\d{8}|[2-3]\d{8}|45\d{7})$", ErrorMessage = "NIF inválido.")]
+            [StringLength(9, MinimumLength = 9, ErrorMessage = "NIF tem de ter 9 digitos numéricos")]
+            [RegularExpression(@"^(1\d{8}|[2-3]\d{8}|45\d{7})$", ErrorMessage = "NIF inválido")]
             [DataType((DataType.Text))]
             [Display(Name = "NIF")]
             public string NIF { get; set; }
@@ -148,10 +148,22 @@ namespace AppGCT.Pages.Gestao.Utilizadores
                 ModelState.AddModelError("Input.DtNascim", "Data de Nascimento inválida");
                 return Page();
             }
+            //valida se NIF já está registado mas apenas para os Sócios
+            if (Input.RoleName == "Sócio")
+            {
+                var NIFexistente = await _context.Users.FirstOrDefaultAsync(u => u.NIF == Input.NIF);
+
+                if (NIFexistente != null)
+                {
+                    ModelState.AddModelError("Input.NIF", "Já existe um Sócio com este NIF");
+                    return Page();
+                }
+            }
+
             //valida NIF
             if (!await NIFValido(Input.NIF))
             {
-                ModelState.AddModelError("Input.NIF", "NIF inválido.");
+                ModelState.AddModelError("Input.NIF", "NIF inválido");
                 return Page();
             }
 

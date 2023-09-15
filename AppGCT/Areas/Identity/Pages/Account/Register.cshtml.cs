@@ -21,6 +21,7 @@ using Microsoft.Extensions.Logging;
 using AppGCT.Outros;
 using AppGCT.Models;
 using System.Text.RegularExpressions;
+using Microsoft.EntityFrameworkCore;
 
 namespace AppGCT.Areas.Identity.Pages.Account
 {
@@ -182,10 +183,18 @@ namespace AppGCT.Areas.Identity.Pages.Account
                 ModelState.AddModelError("Input.DtNascim", "Data de Nascimento inválida");
                 return Page();
             }
+            //valida se NIF já está registado
+            var NIFexistente = await _context.Users.FirstOrDefaultAsync(u => u.NIF == Input.NIF && u.RoleAux == "Sócio");
+
+            if (NIFexistente != null)
+            {
+                ModelState.AddModelError("Input.NIF", "Já existe um Sócio com este NIF");
+                return Page();
+            }
             //valida NIF
             if (!await NIFValido(Input.NIF))
             {
-                ModelState.AddModelError("Input.NIF", "NIF inválido.");
+                ModelState.AddModelError("Input.NIF", "NIF inválido");
                 return Page();
             }
 
