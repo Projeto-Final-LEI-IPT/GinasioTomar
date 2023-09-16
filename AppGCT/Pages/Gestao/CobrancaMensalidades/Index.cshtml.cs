@@ -191,6 +191,7 @@ namespace AppGCT.Pages.Gestao.CobrancaMensalidades
 
                                 try
                                 {
+                                    await _context.SaveChangesAsync();
                                     //lança e-mail alerta
                                     await _emailSender.SendEmailAsync(socioAtivo.Email, "Lançamento Mensalidade - Ginásio Clube de Tomar",
                                             $"<br><b>Lançamento Mensalidade!</b><br>" +
@@ -206,7 +207,6 @@ namespace AppGCT.Pages.Gestao.CobrancaMensalidades
                                             $"<br>Alguma dúvida ou sugestão não hesite em contactar-nos.<br><br>" +
                                             $"Com os melhores cumprimentos,<br>" +
                                             $"<b>Ginásio Clube de Tomar</b>");
-                                    await _context.SaveChangesAsync();
                                     StatusMessageFinal = "Lançamento de movimentos realizado com sucesso";
 
                                 }

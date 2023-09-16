@@ -68,3 +68,23 @@ div:not(:first-child):not(:last-child) {
 .valoresCSS{
     font-size: 18px;
 }
+
+.sort {
+    color: #cf2525;
+    text-decoration: none;
+}
+
+.sort:hover {
+    color: white;
+    background-color: #cf2525
+}
+
+.btn-svg-container {
+    display: flex;
+    align-items: center;
+}
+
+.top {
+    color: #cf2525;
+    text-decoration: none;
+}
