@@ -14,6 +14,7 @@ using System.Security.Claims;
 using System.ComponentModel;
 using Microsoft.IdentityModel.Tokens;
 using System.Text.RegularExpressions;
+using SendGrid.Helpers.Mail;
 
 namespace AppGCT.Pages.Gestao.Utilizadores
 {
@@ -22,11 +23,13 @@ namespace AppGCT.Pages.Gestao.Utilizadores
     {
         private readonly UserManager<Utilizador> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
+        private readonly AppGCT.Data.AppGCTContext _context;
 
-        public EditModel(UserManager<Utilizador> userManager, RoleManager<IdentityRole> roleManager)
+        public EditModel(UserManager<Utilizador> userManager, RoleManager<IdentityRole> roleManager, Data.AppGCTContext context)
         {
             _userManager = userManager;
             _roleManager = roleManager;
+            _context = context; 
         }
 
         private async Task<bool> NIFValido(string nif)
@@ -152,6 +155,18 @@ namespace AppGCT.Pages.Gestao.Utilizadores
             {
                 ModelState.AddModelError("Input.DtNascim", "Data de Nascimento inválida");
                 return Page();
+            }
+
+            //valida se NIF já está registado mas apenas para os Sócios
+            if (Input.RoleName == "Sócio")
+            {
+                var NIFexistente = await _context.Users.FirstOrDefaultAsync(u => u.NIF == Input.NIF && u.Id != Input.Id);
+
+                if (NIFexistente != null)
+                {
+                    ModelState.AddModelError("Input.NIF", "Já existe um Sócio com este NIF");
+                    return Page();
+                }
             }
 
             //valida NIF

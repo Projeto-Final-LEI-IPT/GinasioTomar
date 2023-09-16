@@ -10,6 +10,8 @@ using AppGCT.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using System.Text.Encodings.Web;
+using AppGCT.Outros;
 
 namespace AppGCT.Pages.Gestao.CobrancaMensalidades
 {
@@ -17,10 +19,12 @@ namespace AppGCT.Pages.Gestao.CobrancaMensalidades
     public class IndexModel : PageModel
     {
         private readonly AppGCT.Data.AppGCTContext _context;
+        private readonly IEmailSender _emailSender;
 
-        public IndexModel(AppGCT.Data.AppGCTContext context)
+        public IndexModel(AppGCT.Data.AppGCTContext context, IEmailSender emailSender)
         {
             _context = context;
+            _emailSender = emailSender;
         }
         [TempData]
         public string StatusMessageFinal { get; set; }
@@ -122,7 +126,7 @@ namespace AppGCT.Pages.Gestao.CobrancaMensalidades
                             {
                                 // Consultar inscrição para buscar Classe e Desconto associado
                                 var incricaoAtiva = _context.Inscricao
-                                                          .Where(i => i.GinastaId == mensalidade.GinastaId && i.EpocaId == mensalidade.EpocaId).FirstOrDefault();
+                                                          .Where(i => i.GinastaId == mensalidade.GinastaId && i.EpocaId == mensalidade.EpocaId).Include(m => m.Class).FirstOrDefault();
                                 //obtem rubrica
                                 var rubrica = await _context.Rubrica
                                                             .FirstOrDefaultAsync(r => r.ClasseId == incricaoAtiva.ClasseId && 
@@ -187,6 +191,21 @@ namespace AppGCT.Pages.Gestao.CobrancaMensalidades
 
                                 try
                                 {
+                                    //lança e-mail alerta
+                                    await _emailSender.SendEmailAsync(socioAtivo.Email, "Lançamento Mensalidade - Ginásio Clube de Tomar",
+                                            $"<br><b>Lançamento Mensalidade!</b><br>" +
+                                            $"<br> Caro(a) Sócio(a) <b>{socioAtivo.Nome}</b>,<br> " +
+                                            $"Lançamos na sua conta corrente a mensalidade abaixo:<br><br>" +
+                                            $"<b>Ginasta:</b> {ginastaAtivo.NomeCompleto}<br>" +
+                                            $"<b>Classe:</b> {incricaoAtiva.Class.NomeClasse}<br>" +
+                                            $"<b>Data Mensalidade:</b> {mensalidade.DataMensalidade.Year}/{mensalidade.DataMensalidade.Month}<br>" +
+                                            $"<b>Valor Mensalidade:</b> {valorMensalidade}€<br>" +
+                                            $"<b>Saldo Conta Corrente:</b> {saldoObj.MSaldo}€<br>" +
+
+                                            $"<br>Este e-mail foi enviado de forma automática, por favor não responda diretamente para este endereço." +
+                                            $"<br>Alguma dúvida ou sugestão não hesite em contactar-nos.<br><br>" +
+                                            $"Com os melhores cumprimentos,<br>" +
+                                            $"<b>Ginásio Clube de Tomar</b>");
                                     await _context.SaveChangesAsync();
                                     StatusMessageFinal = "Lançamento de movimentos realizado com sucesso";
 

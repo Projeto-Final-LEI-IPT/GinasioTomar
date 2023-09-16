@@ -71,10 +71,14 @@ namespace AppGCT.Areas.Identity.Pages.Account
                     values: new { area = "Identity", code },
                     protocol: Request.Scheme);
 
-                await _emailSender.SendEmailAsync(
-                    Input.Email,
-                    "Reset Password Ginásio Clube de Tomar",
-                    $"Por favor, efetue o reset da password <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>carregando aqui</a>.");
+                await _emailSender.SendEmailAsync(Input.Email, "Reset Password - Ginásio Clube de Tomar",
+                        $"<br><b>Reset Password!</b><br>" +
+                        $"<br> Caro(a) Sócio(a) <b>{user.Nome}</b>,<br> " +
+                        $"Para efetuar o reset da password associada ao seu registo <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>carregue aqui</a>." +
+                        $"<br><br> Este e-mail foi enviado de forma automática, por favor não responda diretamente para este endereço." +
+                        $"<br>Alguma dúvida ou sugestão não hesite em contactar-nos.<br><br>" +
+                        $"Com os melhores cumprimentos,<br>" +
+                        $"<b>Ginásio Clube de Tomar</b>");
 
                 return RedirectToPage("./ForgotPasswordConfirmation");
             }
