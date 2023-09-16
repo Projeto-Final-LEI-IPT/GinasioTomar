@@ -302,6 +302,7 @@ namespace AppGCT.Pages.Gestao.Movimentos
             Movimento.DesRubrica = _context.Rubrica.Where(i => i.CodRubrica == Movimento.RubricaId).FirstOrDefault().DescricaoRubrica;
 
             Movimento.DataCriacao = DateTime.Now;
+            Movimento.DtMovimento = DateTime.Now;
             // obtem User ID logado
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             Movimento.IdCriacao = userId;
@@ -322,6 +323,7 @@ namespace AppGCT.Pages.Gestao.Movimentos
 
             if (saldoObj != null)
             {
+                // Step 3: Modify the properties you want to update
                 // Step 3: Modify the properties you want to update
                 saldoObj.MSaldo = Movimento.MSaldo;
 

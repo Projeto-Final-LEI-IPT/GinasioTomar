@@ -2,12 +2,12 @@
 @model AppGCT.Pages.Gestao.Movimentos.IndexModel
 
 @{
-    ViewData["Title"] = "Gestão Movimentos Contabilísticos";
+    ViewData["Title"] = "Movimentos Conta Corrente";
     Layout = "~/Pages/Shared/_Layout.cshtml";
 }
 <div class="wrapper1">
     <div>
-        <h1>Gestão Movimentos Contabilísticos</h1>
+        <h1>Movimentos Conta Corrente</h1>
     </div>
     @*
     Mostrar Saldo ao Sócio
@@ -76,7 +76,10 @@
                 <select asp-for="IdGinasta" class="form-control" asp-items="@Model.GinastasList"></select>
             </div>
             <div class="form-group d-inline-block">
-                <input type="date" class="form-control"  name="SearchString" value="@Model.CurrentFilter" />
+                <input type="date" class="form-control" name="SearchString" value="@Model.CurrentFilter" />
+            </div>
+            <div class="form-group d-inline-block">
+                <input type="date" class="form-control" name="SearchStringFim" value="@Model.CurrentFilterFim" />
             </div>
             <input type="submit" value="Procurar" class="btn btn-primary btn-sm" />
             <a class="btn btn-primary btn-sm" asp-area="" asp-page="/Gestao/Movimentos/Index">Limpar</a>
