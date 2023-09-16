@@ -11,6 +11,13 @@
 <h3>Pretende mesmo apagar a Inscrição?</h3>
 <div>
     <hr />
+    <a class='btn btn-success' asp-area='' asp-page='/Inscricoes/InscricaoEpoca/Index' asp-route-id='@Model.Inscricao.Atleta.Id'>
+        <span class="btn-svg-container">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z" />
+            </svg>
+        </span>
+    </a>
     <dl class="row">
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Inscricao.Atleta.Id)
@@ -193,7 +200,6 @@
 
         <input type="hidden" asp-for="Inscricao.Id" />
         <input type="submit" value="Apagar" class="btn btn-danger btn-sm" />
-        <a class='btn btn-primary btn-sm' asp-area='' asp-page='/Inscricoes/InscricaoEpoca/Index' asp-route-id='@Model.Inscricao.Atleta.Id'>Voltar</a>
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.7/dist/sweetalert2.all.min.js"></script>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script>

@@ -9,7 +9,13 @@
 <h1>Editar Época Desportiva</h1>
 <hr />
 <div>
-    <a class='btn btn-primary btn-sm' asp-area='' asp-page='/Gestao/Epocas/Index'>Voltar</a>
+    <a class='btn btn-success' asp-area='' asp-page='/Gestao/Epocas/Index'>
+        <span class="btn-svg-container">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z" />
+            </svg>
+        </span>
+    </a>
 </div>
 <br>
 <div class="row">
@@ -57,7 +63,7 @@
             <input type="hidden" asp-for="Epoca.DataCriacao" />
             <input type="hidden" asp-for="Epoca.IdCriacao" />
             <div class="form-group">
-                <input type="submit" value="Guardar" class="btn btn-primary" />
+                <input type="submit" value="Guardar" class="btn btn-success" />
             </div>
             <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.7/dist/sweetalert2.all.min.js"></script>
             <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

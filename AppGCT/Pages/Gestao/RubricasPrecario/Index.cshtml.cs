@@ -94,7 +94,7 @@ namespace AppGCT.Pages.Gestao.RubricasPrecario
 
             // preenche dropdown tipoMovimento para filtro
             var tipomovs = new List<SelectListItem>();
-            tipomovs.Insert(0, new SelectListItem { Value = null, Text = "Tipo Movimento?" });
+            tipomovs.Insert(0, new SelectListItem { Value = null, Text = "Tipo Mov.?" });
             tipomovs.Insert(1, new SelectListItem { Value = "C", Text = "Crédito" });
             tipomovs.Insert(2, new SelectListItem { Value = "D", Text = "Débito" });
 
@@ -102,7 +102,7 @@ namespace AppGCT.Pages.Gestao.RubricasPrecario
 
             // preenche dropdown IPrecario para filtro
             var iprecarios = new List<SelectListItem>();
-            iprecarios.Insert(0, new SelectListItem { Value = null, Text = "Preçário Público?" });
+            iprecarios.Insert(0, new SelectListItem { Value = null, Text = "Preç. Púb.?" });
             iprecarios.Insert(1, new SelectListItem { Value = "S", Text = "Sim" });
             iprecarios.Insert(2, new SelectListItem { Value = "N", Text = "Não" });
 
@@ -110,7 +110,7 @@ namespace AppGCT.Pages.Gestao.RubricasPrecario
 
             // preenche dropdown IVlrunit para filtro
             var ivlrunits = new List<SelectListItem>();
-            ivlrunits.Insert(0, new SelectListItem { Value = null, Text = "Valor unitário?" });
+            ivlrunits.Insert(0, new SelectListItem { Value = null, Text = "Vlr unit.?" });
             ivlrunits.Insert(1, new SelectListItem { Value = "S", Text = "Sim" });
             ivlrunits.Insert(2, new SelectListItem { Value = "N", Text = "Não" });
 
@@ -118,7 +118,7 @@ namespace AppGCT.Pages.Gestao.RubricasPrecario
 
             // preenche dropdown Icobinsc para filtro
             var icobinscs = new List<SelectListItem>();
-            icobinscs.Insert(0, new SelectListItem { Value = null, Text = "Cobra na Inscrição?" });
+            icobinscs.Insert(0, new SelectListItem { Value = null, Text = "Cob. Insc.?" });
             icobinscs.Insert(1, new SelectListItem { Value = "S", Text = "Sim" });
             icobinscs.Insert(2, new SelectListItem { Value = "N", Text = "Não" });
 
