@@ -62,6 +62,14 @@ namespace AppGCT.Pages.Gestao.Classes
             }
             var classe = await _context.Classe.FindAsync(id);
 
+            var rubricas = await _context.Rubrica.Where(u => u.ClasseId == classe.IdClasse).FirstOrDefaultAsync();
+
+            if (rubricas != null)
+            {
+                TempData["ErrorMessage"] = "Apagar Classe não é possivel. Já existem Rúbricas associadas à Classe.";
+                return RedirectToPage("./Erro");
+            }
+
             if (classe != null)
             {
                 Classe = classe;

@@ -63,6 +63,14 @@ namespace AppGCT.Pages.Gestao.Descontos
             }
             var desconto = await _context.Desconto.FindAsync(id);
 
+            var rubricas = await _context.Rubrica.Where(u => u.DescontoId == desconto.CodDesconto).FirstOrDefaultAsync();
+
+            if (rubricas != null)
+            {
+                TempData["ErrorMessage"] = "Apagar Desconto não é possivel. Já existem Rúbricas associadas ao Desconto.";
+                return RedirectToPage("./Erro");
+            }
+
             if (desconto != null)
             {
                 Desconto = desconto;

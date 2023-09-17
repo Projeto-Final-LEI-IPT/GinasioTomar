@@ -66,6 +66,11 @@ namespace AppGCT.Pages.Inscricoes.PlanoMensalidades
 
             if (planomensalidade != null)
             {
+                if (planomensalidade.ILancado == "S")
+                {
+                    TempData["ErrorMessage"] = "Apagar Plano não é possivel. Plano já lançado.";
+                    return RedirectToPage("./Erro");
+                }
                 PlanoMensalidade = planomensalidade;
                 _context.PlanoMensalidade.Remove(PlanoMensalidade);
                 await _context.SaveChangesAsync();
