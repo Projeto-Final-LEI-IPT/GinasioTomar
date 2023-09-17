@@ -368,52 +368,7 @@ namespace AppGCT.Pages.Gestao.CobrancaMensalidades
                                                 "considere que tratando-se do último mês da época, cujo o último mês está isento de cobrança, " +
                                                 "a mesma não gerou movimentação financeira.";
                                         }
-                                        //lança e-mail alerta
-                                        await _emailSender.SendEmailAsync(socioAtivo.Email, "Lançamento Mensalidade - Ginásio Clube de Tomar",
-                                                $"<br><b>Lançamento Mensalidade!</b><br>" +
-                                                $"<br> Caro(a) Sócio(a) <b>{socioAtivo.Nome}</b>,<br> " +
-                                                $"Usufruiu da isenção da mensalidade para a presente época, com os dados abaixo:<br><br>" +
-                                                $"<b>Ginasta:</b> {ginastaAtivo.NomeCompleto}<br>" +
-                                                $"<b>Classe:</b> {incricaoAtiva.Class.NomeClasse}<br>" +
-                                                $"<b>Data Mensalidade:</b> {mensalidade.DataMensalidade.Year}/{mensalidade.DataMensalidade.Month}<br>" +
-                                                $"<b>Valor Mensalidade:</b> {valorMensalidade}�<br>" +
-                                                $"<b>Saldo Conta Corrente:</b> {saldoObj.MSaldo}�<br>" +
-
-                                                $"<br>Este e-mail foi enviado de forma automática, por favor não responda diretamente para este endereço." +
-                                                $"<br>Alguma dúvida ou sugestão não hesite em contactar-nos.<br><br>" +
-                                                $"Com os melhores cumprimentos,<br>" +
-                                                $"<b>Ginásio Clube de Tomar</b>");
-
-                                        await _emailSender.SendEmailAsync(socioAtivo.Email, "Lançamento Mensalidade - Ginásio Clube de Tomar",
-                                                $"<br><b>Lançamento Mensalidade!</b><br>" +
-                                                $"<br> Caro(a) Sócio(a) <b>{socioAtivo.Nome}</b>,<br> " +
-                                                $"Usufruiu da isenção da mensalidade para a presente época, com os dados abaixo:<br><br>" +
-                                                $"<b>Ginasta:</b> {ginastaAtivo.NomeCompleto}<br>" +
-                                                $"<b>Classe:</b> {incricaoAtiva.Class.NomeClasse}<br>" +
-                                                $"<b>Data Mensalidade:</b> {mensalidade.DataMensalidade.Year}/{mensalidade.DataMensalidade.Month}<br>" +
-                                                $"<b>Valor Mensalidade:</b> {valorMensalidade}�<br>" +
-                                                $"<b>Saldo Conta Corrente:</b> {saldoObj.MSaldo}�<br>" +
-
-                                                $"<br>Este e-mail foi enviado de forma automática, por favor não responda diretamente para este endereço." +
-                                                $"<br>Alguma dúvida ou sugestão não hesite em contactar-nos.<br><br>" +
-                                                $"Com os melhores cumprimentos,<br>" +
-                                                $"<b>Ginásio Clube de Tomar</b>");
-
-                                        await _emailSender.SendEmailAsync(socioAtivo.Email, "Lançamento Mensalidade - Ginásio Clube de Tomar",
-                                                $"<br><b>Lançamento Mensalidade!</b><br>" +
-                                                $"<br> Caro(a) Sócio(a) <b>{socioAtivo.Nome}</b>,<br> " +
-                                                $"Usufruiu da isenção da mensalidade para a presente época, com os dados abaixo:<br><br>" +
-                                                $"<b>Ginasta:</b> {ginastaAtivo.NomeCompleto}<br>" +
-                                                $"<b>Classe:</b> {incricaoAtiva.Class.NomeClasse}<br>" +
-                                                $"<b>Data Mensalidade:</b> {mensalidade.DataMensalidade.Year}/{mensalidade.DataMensalidade.Month}<br>" +
-                                                $"<b>Valor Mensalidade:</b> {valorMensalidade}�<br>" +
-                                                $"<b>Saldo Conta Corrente:</b> {saldoObj.MSaldo}�<br>" +
-
-                                                $"<br>Este e-mail foi enviado de forma automática, por favor não responda diretamente para este endereço." +
-                                                $"<br>Alguma dúvida ou sugestão não hesite em contactar-nos.<br><br>" +
-                                                $"Com os melhores cumprimentos,<br>" +
-                                                $"<b>Ginásio Clube de Tomar</b>");
-
+                                      
                                     }
                                     else
                                     {
