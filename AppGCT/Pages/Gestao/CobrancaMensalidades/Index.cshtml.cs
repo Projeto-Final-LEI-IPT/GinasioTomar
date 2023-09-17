@@ -37,18 +37,120 @@ namespace AppGCT.Pages.Gestao.CobrancaMensalidades
             public String? Ginasta { get; set; }
             public String? Socio { get; set; }
         }
+        private async Task<bool> lancaQuota(Areas.Identity.Data.Utilizador socio)
+        {
+            // Consultar saldo do sócio, antes de efetivar movimento
+            var saldoAnt = _context.Saldo.Where(i => i.IdSocio == socio.Id).FirstOrDefault().MSaldo;
+            //obtem rubrica passível de gerar movimento de Quota ( Ativa e do Tipo Socio)
+            var rubrica = await _context.Rubrica
+                                        .FirstOrDefaultAsync(r => r.TipoRubrica == "S" &&
+                                                                  r.EstadoRubrica == "A");
+            // Listar todas as Rubricas do tipo de Socio, para posteriormente verificar se para o mês de Janeiro
+            // já foi criado algum movimetno para sócio, desse tipo
+            var rubricasTipoSocio = await _context.Rubrica.Where(i => i.TipoRubrica == "S").ToListAsync();
+            bool movimento = true;
+            foreach (var rubricaTipoSocio in rubricasTipoSocio)
+            {
+                movimento = await _context.Movimento.AnyAsync(i => i.UtilizadorId == socio.Id &&
+                                                                   i.DtMovimento.Year == DateTime.Now.Year &&
+                                                                   i.DtMovimento.Month == DateTime.Now.Month &&
+                                                                   i.RubricaId == rubricaTipoSocio.CodRubrica);
+                // A primeira rúbrica do tipoSocio encontrada, faz terminar o ciclo
+                if (movimento)
+                {
+                    break;
+                }
+            }
 
-        public async Task OnGetAsync()
+            if (rubrica != null && !movimento)
+            {
+
+                decimal valorQuota = rubrica.ValorUnitario ?? 0m;
+
+                Guid IdMovimento = Guid.NewGuid();
+
+                var movimentoQuota = new Movimento
+                {
+                    Id = IdMovimento,
+                    DesRubrica = rubrica.DescricaoRubrica,
+                    DtMovimento = DateTime.Now,
+                    ValorMovimento = valorQuota,
+                    ValorDesconto = 0,
+                    NumFatura = "",
+                    NumNotaCredito = "",
+                    MSaldo = saldoAnt - valorQuota,
+                    DataCriacao = DateTime.Now,
+                    IdCriacao = User.Identity.GetUserId(),
+                    DataModificacao = DateTime.MinValue,
+                    IdModificacao = " ",
+                    UtilizadorId = socio.Id,
+                    AtletaMovimentoId = null,
+                    RubricaId = rubrica.CodRubrica,
+                    MetodoPagamentoId = null
+                };
+                _context.Movimento.Add(movimentoQuota);
+
+                // Atualiza Saldo do Sócio na tabela Saldos
+                var saldoObj = _context.Saldo.FirstOrDefault(s => s.IdSocio == socio.Id);
+
+                if (saldoObj != null)
+                {
+                    // Step 3: Modify the properties you want to update
+                    saldoObj.MSaldo = saldoAnt - valorQuota;
+
+                    // Step 4: Save the changes back to the database
+                    _context.Saldo.Update(saldoObj);
+
+                }
+                return true;
+            }
+            return false;
+        }
+            public async Task OnGetAsync()
         {
             var dataCorrente = DateTime.Today.Month;
             // Consultar todos os Sócios Ativos
-            var sociosAtivos = await _context.Users.Where(i => i.EstadoUtilizador == "A").ToListAsync();
+            var sociosAtivos = await _context.Users.Where(i => i.EstadoUtilizador == "A" &&
+                                                               i.RoleAux == "Sócio").ToListAsync();
             foreach (var socioAtivo in sociosAtivos)
             {
-                // TODO - Verificar se há QUOTAS a lançar e popular tabela
+                // Verificar se há QUOTAS a lançar e popular tabela
                 if(dataCorrente == 9)
                 {
+                    //obtem rubrica passível de gerar movimento de Quota ( Ativa e do Tipo Socio)
+                    var rubrica = await _context.Rubrica
+                                                .FirstOrDefaultAsync(r => r.TipoRubrica == "S" &&
+                                                                          r.EstadoRubrica == "A");
+                    if (rubrica != null)
+                    {
 
+                    decimal valorMensalidade = rubrica.ValorUnitario ?? 0m;
+                    // Listar todas as Rubricas do tipo de Socio, para posteriormente verificar se para o mês de Janeiro
+                    // já foi criado algum movimetno para sócio, desse tipo
+                    var rubricasTipoSocio = await _context.Rubrica.Where(i => i.TipoRubrica == "S").ToListAsync();
+                    var movimento = true;
+                    foreach (var rubricaTipoSocio in rubricasTipoSocio)
+                    {
+                        movimento = await _context.Movimento.AnyAsync(i => i.UtilizadorId == socioAtivo.Id &&
+                                                                           i.DtMovimento.Year == DateTime.Now.Year &&
+                                                                           i.DtMovimento.Month == DateTime.Now.Month &&
+                                                                           i.RubricaId == rubricaTipoSocio.CodRubrica);
+                        // A primeira rúbrica do tipoSocio encontrada, faz terminar o ciclo
+                        if (movimento)
+                        {
+                            break;
+                        }
+                    }
+                    if (!movimento)
+                    {
+                        DataViewModel model = new DataViewModel();
+                        model.DataMensalidade = DateOnly.FromDateTime(DateTime.Now);
+                        model.ValorLancar = rubrica.ValorUnitario ?? 0m;
+                        model.Ginasta = "N/A - Quota de sócio";
+                        model.Socio = socioAtivo.Nome;
+                        Mensalidades.Add(model);
+                    }
+                    }
                 }
                 // Consultar Ginastas Ativos para o Sócio em tratamento
                 var ginastasAtivos = await _context.Ginasta.Where(i => i.UtilizadorId == socioAtivo.Id &&
@@ -77,21 +179,39 @@ namespace AppGCT.Pages.Gestao.CobrancaMensalidades
                     }
                 }
             }
-
-
         }
         public async Task<IActionResult> OnPost()
         {
+            bool rubQuotaAtiva = await _context.Rubrica.AnyAsync(e => e.TipoRubrica == "S" &&
+                                                                      e.EstadoRubrica == "A");
             StatusMessageFinal = "Inicialização de controlo";
             var dataCorrente = DateTime.Today.Month;
             // Consultar todos os Sócios Ativos
-            var sociosAtivos = await _context.Users.Where(i => i.EstadoUtilizador == "A").ToListAsync();
+            var sociosAtivos = await _context.Users.Where(i => i.EstadoUtilizador == "A" &&
+                                                               i.RoleAux == "Sócio").ToListAsync();
             foreach (var socioAtivo in sociosAtivos)
             {
                 // TODO - Verificar se há QUOTAS a lançar e popular tabela
                 if (dataCorrente == 9)
                 {
-
+                    if (rubQuotaAtiva)
+                    {
+                        if(await lancaQuota(socioAtivo))
+                        {
+                            try
+                            {
+                                await _context.SaveChangesAsync();
+                                StatusMessageFinal = "Lançamento de quotas efetuado com sucesso. " +
+                                                     "Não houveram mensalidades lançadas.";
+                            }
+                            catch (Exception ex)
+                            {
+                                StatusMessageFinal = "Erro no lançamento da quota do sócio " + socioAtivo.Nome + "(" +
+                                     socioAtivo.NumSocio + ")";
+                                return RedirectToPage("./Index");
+                            }
+                        };
+                    }
                 }
                 // Consultar Ginastas Ativos para o Sócio em tratamento
                 var ginastasAtivos = await _context.Ginasta.Where(i => i.UtilizadorId == socioAtivo.Id &&
@@ -117,39 +237,27 @@ namespace AppGCT.Pages.Gestao.CobrancaMensalidades
                             //valida se Ginasta já tem inscrição na Época
                             bool JaInscritoEpoca = await _context.Inscricao
                                                           .AnyAsync(i => i.GinastaId == mensalidade.GinastaId && i.EpocaId == mensalidade.EpocaId);
-
-                            if (epocaAtiva.ICobrancUltimoMes == "N" &&
-                               epocaAtiva.DataFim.Month == mensalidade.DataMensalidade.Month)
+                            // Se atleta inscrito na epoca da mensalidade em tratamento, vamos lançar o respetivo movimento
+                            if (JaInscritoEpoca)
                             {
-                                // Atualiza ILancado, ValorMensalidadeLanc e IdMovimento
-                                var mensalidadeObj = _context.PlanoMensalidade.FirstOrDefault(s => s.IdPlanoM == mensalidade.IdPlanoM);
-
-                                if (mensalidadeObj != null)
+                                if (epocaAtiva.ICobrancUltimoMes == "N" &&
+                                    epocaAtiva.DataFim.Month == mensalidade.DataMensalidade.Month &&
+                                    epocaAtiva.DataFim.Year == mensalidade.DataMensalidade.Year)
                                 {
-                                    // Step 3: Modify the properties you want to update
-                                    mensalidadeObj.ILancado = "S";
+                                    // Atualiza ILancado, ValorMensalidadeLanc e IdMovimento
+                                    var mensalidadeObj = _context.PlanoMensalidade.FirstOrDefault(s => s.IdPlanoM == mensalidade.IdPlanoM);
 
-                                    // Step 4: Save the changes back to the database
-                                    _context.PlanoMensalidade.Update(mensalidadeObj);
+                                    if (mensalidadeObj != null)
+                                    {
+                                        // Step 3: Modify the properties you want to update
+                                        mensalidadeObj.ILancado = "S";
 
-                                }
-                                try
-                                {
-                                    await _context.SaveChangesAsync();
-                                    StatusMessageFinal = "Lançamento de movimentos realizado com sucesso";
+                                        // Step 4: Save the changes back to the database
+                                        _context.PlanoMensalidade.Update(mensalidadeObj);
 
+                                    }
                                 }
-                                catch (Exception ex)
-                                {
-                                    StatusMessageFinal = "Erro de base de dados no lançamento de movimentos - Mensalidade: " +
-                                                          mensalidade.IdPlanoM + " Solicitar apoio informático";
-                                    return RedirectToPage("./Index");
-                                }
-                            }
-                            else 
-                            { 
-                                // Se atleta inscrito na epoca da mensalidade em tratamento, vamos lançar o respetivo movimento
-                                if (JaInscritoEpoca)
+                                else
                                 {
                                     // Consultar inscrição para buscar Classe e Desconto associado
                                     var incricaoAtiva = _context.Inscricao
@@ -171,7 +279,7 @@ namespace AppGCT.Pages.Gestao.CobrancaMensalidades
                                     var movimento = new Movimento
                                     {
                                         Id = planoMovimento,
-                                        DesRubrica = rubrica.DescricaoRubrica + " Proc. Automático",
+                                        DesRubrica = rubrica.DescricaoRubrica,
                                         DtMovimento = DateTime.Now,
                                         ValorMovimento = valorMensalidade,
                                         ValorDesconto = 0,
@@ -199,7 +307,6 @@ namespace AppGCT.Pages.Gestao.CobrancaMensalidades
 
                                         // Step 4: Save the changes back to the database
                                         _context.Saldo.Update(saldoObj);
-
                                     }
                                     // Atualiza ILancado, ValorMensalidadeLanc e IdMovimento
                                     var mensalidadeObj = _context.PlanoMensalidade.FirstOrDefault(s => s.IdPlanoM == mensalidade.IdPlanoM);
@@ -213,27 +320,33 @@ namespace AppGCT.Pages.Gestao.CobrancaMensalidades
 
                                         // Step 4: Save the changes back to the database
                                         _context.PlanoMensalidade.Update(mensalidadeObj);
-
                                     }
-
-                                    try
-                                    {
-                                        await _context.SaveChangesAsync();
-                                        StatusMessageFinal = "Lançamento de movimentos realizado com sucesso";
-
-                                    }
-                                    catch (Exception ex)
-                                    {
-                                        StatusMessageFinal = "Erro de base de dados no lançamento de movimentos - Mensalidade: " +
-                                                              mensalidade.IdPlanoM + " Solicitar apoio informático";
-                                        return RedirectToPage("./Index");
-                                    }
-
-
-
                                 }
+                                try
+                                {
+                                    await _context.SaveChangesAsync();
+                                    // Se estamos em janeiro e não existe rubrica de quotas ativas, as mesma não serão lançadas
+                                    if(!rubQuotaAtiva && dataCorrente == 1)
+                                    {
+                                        StatusMessageFinal = "Lançamento de movimentos realizado com sucesso, no entanto " +
+                                                             "considere que eventuais quotas em condições de serem lançadas " +
+                                                             "não o foram por não existir nenhuma rúbrica de quotas ativa";
+                                    }
+                                    else
+                                    {
+                                        StatusMessageFinal = "Lançamento de movimentos realizado com sucesso";
+                                    }
+                                }
+                                catch (Exception ex)
+                                {
+                                    StatusMessageFinal = "Erro de base de dados no lançamento de movimentos - Mensalidade: " +
+                                                          mensalidade.IdPlanoM + " Solicitar apoio informático";
+                                    return RedirectToPage("./Index");
+                                }
+
                             }
                         }
+
                     }
                 }
             }
@@ -241,13 +354,8 @@ namespace AppGCT.Pages.Gestao.CobrancaMensalidades
             {
                 StatusMessageFinal = "Sem movimentos válidos para lançar. Não foram lançados movimentos.";
             }
-
             // all  done
             return RedirectToPage("./Index");
         }
     }
-
-
-
 }
-

@@ -114,17 +114,10 @@ namespace AppGCT.Pages.Ginasio.Epocas
                 StatusMessageFinal = "Só é possível finalizar época após data de fim";
                 return RedirectToPage("./Edit", new { id = Epoca.IdEpoca });
             }
-            // Verifica se existem Mensalidades lançadas para época
-               // Se sim, não deixa cancelar a época
-            bool JaCobrancasLancadas = await _context.PlanoMensalidade
-                                                     .AnyAsync(i => i.EpocaId == Epoca.IdEpoca &&
-                                                                    i.ILancado == "S");
-            if (Epoca.EstadoEpoca == "C" &&
-                JaCobrancasLancadas)
-            {
-                StatusMessageFinal = "Não é possível cancelar época pois já existem mensalidades lançadas";
-                return RedirectToPage("./Edit", new { id = Epoca.IdEpoca });
-            }
+            //Decidimos permitir cancelar Época, mesmo que hajam mensalidades já lançadas
+            // ou seja, atletas inscritos na epoca (atualmente estamos a lançar mensalidades na inscrição)
+            // O cancelamento da época, provocará que o lançamentop automatico de cobranças não lançara esta mensalidade,
+            // pois o software valida a situação da EpocaID registada no PlanoMensalidade
             try
             {
                 await _context.SaveChangesAsync();
