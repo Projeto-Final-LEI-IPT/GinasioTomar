@@ -62,6 +62,14 @@ namespace AppGCT.Pages.Gestao.Metodos
             }
             var metodopagamento = await _context.MetodoPagamento.FindAsync(id);
 
+            var movimentos = await _context.Movimento.Where(u => u.MetodoPagamentoId == metodopagamento.CodMetodo).FirstOrDefaultAsync();
+
+            if (movimentos != null)
+            {
+                TempData["ErrorMessage"] = "Apagar Método não é possivel. Já existem Movimentos com este Método associado.";
+                return RedirectToPage("./Erro");
+            }
+
             if (metodopagamento != null)
             {
                 MetodoPagamento = metodopagamento;

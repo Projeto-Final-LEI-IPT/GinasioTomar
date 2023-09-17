@@ -13,7 +13,7 @@ using AppGCT.Areas.Identity.Data;
 
 namespace AppGCT.Pages.Inscricoes.InscricaoEpoca
 {
-    [Authorize(Roles = "Administrador")]
+    [Authorize(Roles = "Administrador123")]
     public class DeleteModel : PageModel
     {
         private readonly AppGCT.Data.AppGCTContext _context;

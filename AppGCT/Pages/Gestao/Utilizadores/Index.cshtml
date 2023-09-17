@@ -113,7 +113,7 @@
                     @{
                         @if (User.IsInRole("Administrador"))
                         {
-                            if (!user.Email.Equals("admin@localhost")) // NÃO MOSTRA BOTÃO APAGAR PARA O USER DE ADMINISTRAÇÃO
+                            if (user.RoleAux.Equals("Sócio")) // só mostra botão se for Sócio
                             {
                                 <a title="Apagar" class='btn btn-danger btn-sm' asp-area='' asp-page='/Gestao/Utilizadores/Delete' asp-route-id='@user.Id'>
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3-fill" viewBox="0 0 16 16">

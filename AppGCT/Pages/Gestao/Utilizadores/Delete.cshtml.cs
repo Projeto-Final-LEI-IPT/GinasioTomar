@@ -44,10 +44,11 @@ namespace AppGCT.Pages.Gestao.Utilizadores
 
             if (Utilizador != null)
             {
-                // Se for o "Administrador" devolve erro;
-                if (Utilizador.UserName == "admin@localhost" || Utilizador.Id == currentUser.Id)
+                // Não permite remoção de Admin's e Ginásio
+                if (Utilizador.RoleAux == "Administrador" || Utilizador.RoleAux == "Ginásio")
                 {
-                    return RedirectToPage("./Error");
+                    TempData["ErrorMessage"] = "Não é possivel realizar a acção pretendida!";
+                    return RedirectToPage("./Erro");
                 }
                 else
                 {
@@ -84,6 +85,21 @@ namespace AppGCT.Pages.Gestao.Utilizadores
             {
                 return NotFound();
             }
+            var movimentos = await _context.Movimento.Where(u => u.UtilizadorId == user.Id).FirstOrDefaultAsync();
+
+            if (movimentos != null)
+            {
+                TempData["ErrorMessage"] = "Apagar Sócio não é possivel. Já existem Movimentos associados ao Sócio.";
+                return RedirectToPage("./Erro");
+            }
+
+            var ginastas = await _context.Ginasta.Where(u => u.UtilizadorId == user.Id).FirstOrDefaultAsync();
+
+            if (ginastas != null)
+            {
+                TempData["ErrorMessage"] = "Apagar Sócio não é possivel. Já existem Ginastas associados ao Sócio.";
+                return RedirectToPage("./Erro");
+            }
 
             try
             {      
@@ -94,10 +110,11 @@ namespace AppGCT.Pages.Gestao.Utilizadores
                 var roleIds = roleNames.Select(name => _roleManager.Roles.FirstOrDefault(role => role.Name == name)?.Id)
                     .Where(id => id != null)
                     .ToList();
-                // Se for o "Administrador" devolve erro
-                if (user.UserName == "admin@localhost")
+                // Não permite remoção de Admin's e Ginásio
+                if (Utilizador.RoleAux == "Administrador" || Utilizador.RoleAux == "Ginásio")
                 {
-                    return RedirectToPage("./Error");
+                    TempData["ErrorMessage"] = "Não é possivel realizar a acção pretendida!";
+                    return RedirectToPage("./Erro");
                 }
                 else
                 {
