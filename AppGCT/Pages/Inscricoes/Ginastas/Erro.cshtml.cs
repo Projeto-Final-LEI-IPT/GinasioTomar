@@ -2,10 +2,10 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace AppGCT.Pages.Gestao.Movimentos
+namespace AppGCT.Pages.Inscricoes.Ginastas
 {
-    [Authorize(Roles = "Sócio")]
-    public class AcessDeniedModel : PageModel
+    [Authorize(Roles = "Administrador")]
+    public class ErroModel : PageModel
     {
         public void OnGet()
         {

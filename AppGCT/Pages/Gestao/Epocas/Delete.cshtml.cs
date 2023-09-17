@@ -24,7 +24,6 @@ namespace AppGCT.Pages.Ginasio.Epocas
             _context = context;
             _userManager = userManager;
         }
-
         [BindProperty]
         public Epoca Epoca { get; set; } = default!;
         public string IdCriacaoName { get; set; }
@@ -61,6 +60,14 @@ namespace AppGCT.Pages.Ginasio.Epocas
                 return NotFound();
             }
             var epoca = await _context.Epoca.FindAsync(id);
+
+            var inscricoes = await _context.Inscricao.Where(u  => u.EpocaId == epoca.IdEpoca).FirstOrDefaultAsync();
+
+            if (inscricoes != null)
+            {
+                TempData["ErrorMessage"] = "Apagar Época não é possivel. Já existem inscrições na Época.";
+                return RedirectToPage("./Erro");
+            }
 
             if (epoca != null)
             {
