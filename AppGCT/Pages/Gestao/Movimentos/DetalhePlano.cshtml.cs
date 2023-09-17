@@ -18,11 +18,11 @@ using SendGrid.Helpers.Mail;
 namespace AppGCT.Pages.Gestao.Movimentos
 {
     [Authorize(Roles = "Administrador,Ginásio,Sócio")]
-    public class Details1Model : PageModel
+    public class DetathePlanoModel : PageModel
     {
         private readonly AppGCT.Data.AppGCTContext _context;
 
-        public Details1Model(AppGCT.Data.AppGCTContext context)
+        public DetathePlanoModel(AppGCT.Data.AppGCTContext context)
         {
             _context = context;
         }
