@@ -111,7 +111,9 @@ div:not(:first-child):not(:last-child) {
 
 .itemdrop:active {
     background-color: #52b560;
-    color: #fff;
+    font-weight: bold;
+    color: #198754;
+    border:solid;
 }
 
 .itemdrop:hover {
