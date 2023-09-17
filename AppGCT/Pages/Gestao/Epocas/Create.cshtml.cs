@@ -41,6 +41,15 @@ namespace AppGCT.Pages.Ginasio.Epocas
                 return false;
             }
 
+
+            // Valida se o dia de ínicio de época escolhido é 1 ( é importante que seja para não gerar bug no lançamento automatico de
+            // cobranças e o Edit da Inscrição - Que mexe no plano de mensalidades )
+            if (Epoca.DataInicio.Day != 1)
+            {
+                ModelState.AddModelError("Epoca.DataInicio", "O ínicio de época tem de ser a dia 1 do mês pretendido.");
+                return false;
+            }
+
             var isOverlapping = _context.Epoca.Any(e =>
                                 (e.DataInicio >= Epoca.DataInicio && e.DataInicio <= Epoca.DataFim) ||
                                 (e.DataFim >= Epoca.DataInicio && e.DataFim <= Epoca.DataFim) ||
