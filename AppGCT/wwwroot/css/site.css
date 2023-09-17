@@ -87,3 +87,54 @@ div:not(:first-child):not(:last-child) {
     color: #cf2525;
     text-decoration: none;
 }
+
+.items {
+    color: #000000;
+    font-size: 1.3em;
+}
+
+.navbar-nav .items a.nav-link:hover {
+    background-color: #52b560;
+    color: #fff;
+    transition: all 3s;
+}
+.navbar-nav .items a.nav-link:focus {
+    background-color: #52b560;
+    color: #fff;
+}
+
+.items:hover {
+    background-color: #52b560;
+    color: #fff;
+    transition: all 3s;
+}
+
+.itemdrop:active {
+    background-color: #52b560;
+    font-weight: bold;
+    color: #198754;
+    border:solid;
+}
+
+.itemdrop:hover {
+    background-color: #e6f6e8;
+}
+
+.nav-pills .nav-link.active, .nav-pills .nav-link.active:hover, .nav-pills .nav-link.active:focus {
+    background-color: #e6f6e8;
+    color: #198754;
+    font-weight:bold;
+    border:solid;
+    font-size: 1.2em;
+}
+
+.nav-pills > li > a {
+    background-color: #777;
+    border-color: #FFFFFF;
+    color: #198754;
+    font-size: 1.2em;
+}
+
+.custom-logout-button {
+    color: #fff;
+}
