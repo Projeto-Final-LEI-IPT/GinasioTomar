@@ -48,6 +48,13 @@
             @Html.RadioButtonFor(model => model.Epoca.EstadoEpoca, "F", new { @disabled = "disabled" }) Finalizada
         </dd>
         <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Epoca.ICobrancUltimoMes)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.RadioButtonFor(model => model.Epoca.ICobrancUltimoMes, "S", new { @disabled = "disabled" }) Sim
+            @Html.RadioButtonFor(model => model.Epoca.ICobrancUltimoMes, "N", new { @disabled = "disabled" }) Não
+        </dd>
+        <dt class="col-sm-2">
             @Html.LabelFor(model=>model.Epoca.DataCriacao)
         </dt>
         <dd class="col-sm-10">

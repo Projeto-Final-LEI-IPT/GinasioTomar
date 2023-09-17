@@ -23,6 +23,9 @@ namespace AppGCT.Models
         [Display(Name = "Estado")]
         [StringLength(1, MinimumLength = 1, ErrorMessage = "Estado do Desconto deverá ser (A) Ativa, (C) Cancelado ou (F) Finalizada")]
         public string? EstadoEpoca { get; set; }
+        [Display(Name = "Cobrar última mensalidade?")]
+        [StringLength(1, MinimumLength = 1, ErrorMessage = "Indicador de cobrança do último mês deverá ser (S) SIM ou (N) NÃO")]
+        public string? ICobrancUltimoMes { get; set; }
         [Display(Name = "Data de Criação")]
         public DateTime DataCriacao { get; set; }
         [Display(Name = "Criado por")]

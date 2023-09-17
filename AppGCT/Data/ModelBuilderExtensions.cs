@@ -81,6 +81,7 @@ namespace AppGCT.Data
                 DataInicio = new DateTime(2023, 9, 1),
                 DataFim = new DateTime(2024, 7, 31),
                 EstadoEpoca = "A",
+                ICobrancUltimoMes = "N",
                 IdCriacao = "SEED",
                 DataCriacao = DateTime.Now,
                 IdModificacao = " ",
