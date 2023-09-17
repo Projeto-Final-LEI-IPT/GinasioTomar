@@ -43,25 +43,25 @@
                                 <div class="dropdown-menu" aria-labelledby="gestaoDropdown">
                                     @if (User.IsInRole("Administrador"))
                                     {
-                                        <a class="dropdown-item" asp-area="" asp-page="/Gestao/Epocas/Index">Épocas Desportivas</a>
-                                        <a class="dropdown-item" asp-area="" asp-page="/Gestao/Classes/Index">Classes</a>
-                                        <a class="dropdown-item" asp-area="" asp-page="/Gestao/Metodos/Index">Métodos de Pagamento</a>
-                                        <a class="dropdown-item" asp-area="" asp-page="/Gestao/Descontos/Index">Descontos</a>
-                                        <a class="dropdown-item" asp-area="" asp-page="/Gestao/RubricasPrecario/Index">Rúbricas Preçário</a>
-                                        <a class="dropdown-item" asp-area="" asp-page="/Gestao/Movimentos/Index">Movimentos</a>
-                                        <a class="dropdown-item" asp-area="" asp-page="/Inscricoes/Ginastas/Index">Ginastas</a>
-                                        <a class="dropdown-item" asp-area="" asp-page="/Gestao/Utilizadores/Index">Utilizadores</a>
-                                        <a class="dropdown-item" asp-area="" asp-page="/Gestao/PlanoMensalidades/Index">Plano Mensalidades</a>
-                                        <a class="dropdown-item" asp-area="" asp-page="/Gestao/Tarefas/Index">Tarefas</a>
-                                        <a class="dropdown-item" asp-area="" asp-page="/Gestao/CobrancaMensalidades/Index">Cobrança Mensalidades</a>
+                                        <a class="dropdown-item itemdrop" asp-area="" asp-page="/Gestao/Epocas/Index">Épocas Desportivas</a>
+                                        <a class="dropdown-item itemdrop" asp-area="" asp-page="/Gestao/Classes/Index">Classes</a>
+                                        <a class="dropdown-item itemdrop" asp-area="" asp-page="/Gestao/Metodos/Index">Métodos de Pagamento</a>
+                                        <a class="dropdown-item itemdrop" asp-area="" asp-page="/Gestao/Descontos/Index">Descontos</a>
+                                        <a class="dropdown-item itemdrop" asp-area="" asp-page="/Gestao/RubricasPrecario/Index">Rúbricas Preçário</a>
+                                        <a class="dropdown-item itemdrop" asp-area="" asp-page="/Gestao/Movimentos/Index">Movimentos</a>
+                                        <a class="dropdown-item itemdrop" asp-area="" asp-page="/Inscricoes/Ginastas/Index">Ginastas</a>
+                                        <a class="dropdown-item itemdrop" asp-area="" asp-page="/Gestao/Utilizadores/Index">Utilizadores</a>
+                                        <a class="dropdown-item itemdrop" asp-area="" asp-page="/Gestao/PlanoMensalidades/Index">Plano Mensalidades</a>
+                                        <a class="dropdown-item itemdrop" asp-area="" asp-page="/Gestao/Tarefas/Index">Tarefas</a>
+                                        <a class="dropdown-item itemdrop" asp-area="" asp-page="/Gestao/CobrancaMensalidades/Index">Cobrança Mensalidades</a>
                                     }
                                     else 
                                       if (User.IsInRole("Ginásio"))
                                         {
-                                            <a class="dropdown-item" asp-area="" asp-page="/Gestao/Movimentos/Index">Movimentos</a>
-                                            <a class="dropdown-item" asp-area="" asp-page="/Inscricoes/Ginastas/Index">Ginastas</a>
-                                            <a class="dropdown-item" asp-area="" asp-page="/Gestao/Utilizadores/Index">Utilizadores</a>
-                                            <a class="dropdown-item" asp-area="" asp-page="/Gestao/PlanoMensalidades/Index">Plano Mensalidades</a>
+                                            <a class="dropdown-item itemdrop" asp-area="" asp-page="/Gestao/Movimentos/Index">Movimentos</a>
+                                            <a class="dropdown-item itemdrop" asp-area="" asp-page="/Inscricoes/Ginastas/Index">Ginastas</a>
+                                            <a class="dropdown-item itemdrop" asp-area="" asp-page="/Gestao/Utilizadores/Index">Utilizadores</a>
+                                            <a class="dropdown-item itemdrop" asp-area="" asp-page="/Gestao/PlanoMensalidades/Index">Plano Mensalidades</a>
                                         }
     
                                     </div>

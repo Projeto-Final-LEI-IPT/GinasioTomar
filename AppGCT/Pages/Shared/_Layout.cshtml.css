@@ -15,22 +15,6 @@ a {
   background-color: #1b6ec2;
   border-color: #1861ac;
 }
-.items {
-    color: #000000; 
-    font-size: 1.3em;
-}
-
-.navbar-nav .items a.nav-link:hover {
-    background-color: #52b560; 
-    color: #fff;
-    transition: all 3s; 
-}
-
-.items:hover {
-    background-color: #52b560;
-    color: #fff;
-    transition: all 3s;
-}
 
 .border-top {
   border-top: 1px solid #e5e5e5;
