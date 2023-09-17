@@ -73,7 +73,6 @@ div:not(:first-child):not(:last-child) {
     color: #cf2525;
     text-decoration: none;
 }
-
 .sort:hover {
     color: white;
     background-color: #cf2525

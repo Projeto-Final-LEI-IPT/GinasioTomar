@@ -63,6 +63,14 @@ namespace AppGCT.Pages.Inscricoes.Ginastas
             }
             var ginasta = await _context.Ginasta.FindAsync(id);
 
+            var inscricoes = await _context.Inscricao.Where(u => u.GinastaId == ginasta.Id).FirstOrDefaultAsync();
+
+            if (inscricoes != null)
+            {
+                TempData["ErrorMessage"] = "Apagar Ginasta não é possivel. Já existem Inscrições associadas ao Ginasta.";
+                return RedirectToPage("./Erro");
+            }
+
             if (ginasta != null)
             {
                 Ginasta = ginasta;

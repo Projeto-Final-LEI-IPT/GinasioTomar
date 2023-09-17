@@ -63,6 +63,14 @@ namespace AppGCT.Pages.Gestao.RubricasPrecario
             }
             var rubrica = await _context.Rubrica.FindAsync(id);
 
+            var movimentos = await _context.Movimento.Where(u => u.RubricaId == rubrica.CodRubrica).FirstOrDefaultAsync();
+
+            if (movimentos != null)
+            {
+                TempData["ErrorMessage"] = "Apagar Rúbrica não é possivel. Já existem Movimentos associados à Rubrica.";
+                return RedirectToPage("./Erro");
+            }
+
             if (rubrica != null)
             {
                 Rubrica = rubrica;
