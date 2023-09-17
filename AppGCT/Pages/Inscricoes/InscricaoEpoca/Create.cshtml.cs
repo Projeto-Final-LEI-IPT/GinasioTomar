@@ -157,7 +157,8 @@ namespace AppGCT.Pages.Inscricoes.InscricaoEpoca
                 if (dataMensalidade.Month == dtInscricao.Month || dataMensalidade > dtInscricao)
                 {
                     //se for o último mês da época não cobra e coloca o valor da mensalidade a 0
-                    if (dataMensalidade.Month == epoca.DataFim.Month)
+                    if (dataMensalidade.Month   == epoca.DataFim.Month && 
+                        epoca.ICobrancUltimoMes == "N")
                     {
                         valorMensalidade = 0;
                     }

@@ -27,6 +27,8 @@ namespace AppGCT.Pages.Gestao.Tarefas
 
         public async Task OnGetAsync()
         {
+            // Mostrar várias parametrizações em falta
+            await consultaParametrizoesPendentes();
 
             // Consultar todos os Sócios Ativos
             var sociosAtivos = await _context.Users.Where(i => i.EstadoUtilizador == "A").ToListAsync();
@@ -85,6 +87,23 @@ namespace AppGCT.Pages.Gestao.Tarefas
              //       new {Socio = "SócioTeste", Ginasta = "GinastaTeste", DescrTarefa = "Descrição de teste"}
                //     };
 
+        }
+        private async Task<bool> consultaParametrizoesPendentes()
+        {
+            //obtem rubrica passível de gerar movimento de Quota ( Ativa e do Tipo Socio)
+            var rubrica = await _context.Rubrica
+                                        .AnyAsync(r => r.TipoRubrica == "S" &&
+                                                       r.EstadoRubrica == "A");
+            if (!rubrica)
+            {
+                DataViewModel model = new DataViewModel();
+                model.Socio = "Gestão";
+                model.Ginasta = "Ginásio";
+                model.DescrTarefa = "Considere que não existe nenhuma rúbrica de quotas ativa";
+                Tarefas.Add(model);
+                return false;
+            }
+            return true;
         }
     }
 }

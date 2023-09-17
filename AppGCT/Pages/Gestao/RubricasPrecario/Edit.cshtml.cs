@@ -60,6 +60,24 @@ namespace AppGCT.Pages.Gestao.RubricasPrecario
                 ModelState.AddModelError("Rubrica.ValorUnitario", "Valor unitário tem de ser superior a 0,00€");
                 return false;
             }
+
+            // Só é possível haver uma Rúbrica do Tipo Sócio Ativa
+            // isto é importante para que seja possível lançar as quotas automaticamente, em Janeiro de cada ano
+            // caso contrário não saberíamos qual lançar
+            if (Rubrica.TipoRubrica == "S" &&
+               Rubrica.EstadoRubrica == "A")
+            {
+                bool rubQuotaAtiva = await _context.Rubrica.AnyAsync(e => e.TipoRubrica == "S" &&
+                                                                          e.EstadoRubrica == "A" &&
+                                                                          e.CodRubrica != Rubrica.CodRubrica);
+                if (rubQuotaAtiva)
+                {
+                    ModelState.AddModelError("Rubrica.TipoRubrica", "Não é possível haver mais de uma rúbrica do tipo " +
+                                                                    "Sócio (Quota) ativa, em simultâneo. Primeiro, deve inativar " +
+                                                                    "a rúbrica que está atualmente Ativa e só depois Ativar outra rúbrica");
+                    return false;
+                }
+            }
             return true;
         }
         public EditModel(AppGCT.Data.AppGCTContext context)
