@@ -22,6 +22,8 @@ namespace AppGCT.Pages.Gestao.CobrancaMensalidades
         private readonly AppGCT.Data.AppGCTContext _context;
         private readonly IEmailSender _emailSender;
 
+        private Movimento movimentoQuota;
+
         public IndexModel(AppGCT.Data.AppGCTContext context, IEmailSender emailSender)
         {
             _context = context;
@@ -31,6 +33,8 @@ namespace AppGCT.Pages.Gestao.CobrancaMensalidades
         public string StatusMessageFinal { get; set; }
         [TempData]
         public string StatusMessageRub { get; set; }
+
+
 
 
         public List<DataViewModel> Mensalidades { get; set; } = new List<DataViewModel>();
@@ -74,7 +78,7 @@ namespace AppGCT.Pages.Gestao.CobrancaMensalidades
 
                 Guid IdMovimento = Guid.NewGuid();
 
-                var movimentoQuota = new Movimento
+                movimentoQuota = new Movimento
                 {
                     Id = IdMovimento,
                     DesRubrica = rubrica.DescricaoRubrica,
@@ -189,7 +193,7 @@ namespace AppGCT.Pages.Gestao.CobrancaMensalidades
         {
             bool rubQuotaAtiva = await _context.Rubrica.AnyAsync(e => e.TipoRubrica == "S" &&
                                                                       e.EstadoRubrica == "A");
-            StatusMessageFinal = "Inicializacao de controlo";
+            StatusMessageFinal = "Inicialização de controlo";
             var dataCorrente = DateTime.Today.Month;
             // Consultar todos os Socios Ativos
             var sociosAtivos = await _context.Users.Where(i => i.EstadoUtilizador == "A" &&
@@ -199,13 +203,28 @@ namespace AppGCT.Pages.Gestao.CobrancaMensalidades
                 // TODO - Verificar se ha QUOTAS a lancar e popular tabela
                 if (dataCorrente == 9)
                 {
+                    // Se existe rubrica de quota Ativa podemos lançar Quota
                     if (rubQuotaAtiva)
                     {
+                        // Faz a lógica para lançar movimentos de quotas e atualizar saldo
                         if(await lancaQuota(socioAtivo))
                         {
                             try
                             {
                                 await _context.SaveChangesAsync();
+                                //lança e-mail alerta
+                                await _emailSender.SendEmailAsync(socioAtivo.Email, "Lançamento Quota Sócio Anual - Ginásio Clube de Tomar",
+                                        $"<br><b>Lançamento Quota Anual!</b><br>" +
+                                        $"<br> Caro(a) Sócio(a) <b>{socioAtivo.Nome}</b>,<br> " +
+                                        $"Lançamos na sua conta corrente a Quota Anual abaixo:<br><br>" +
+                                        $"<b>Data Quota:</b> {movimentoQuota.DtMovimento.Year}/{movimentoQuota.DtMovimento.Month}<br>" +
+                                        $"<b>Valor Quota:</b> {movimentoQuota.ValorMovimento}€<br>" +
+                                        $"<b>Saldo Conta Corrente:</b> {movimentoQuota.MSaldo}€<br>" +
+
+                                        $"<br>Este e-mail foi enviado de forma automática, por favor não responda diretamente para este endereço." +
+                                        $"<br>Alguma dúvida ou sugestão não hesite em contactar-nos.<br><br>" +
+                                        $"Com os melhores cumprimentos,<br>" +
+                                        $"<b>Ginásio Clube de Tomar</b>");
                                 StatusMessageFinal = "Lançamento de quotas efetuado com sucesso. " +
                                                      "Não houveram mensalidades lançadas.";
                             }
@@ -247,7 +266,7 @@ namespace AppGCT.Pages.Gestao.CobrancaMensalidades
                             {
                                 // Consultar inscricao para buscar Classe e Desconto associado
                                 var incricaoAtiva = _context.Inscricao
-                                                          .Where(i => i.GinastaId == mensalidade.GinastaId && i.EpocaId == mensalidade.EpocaId).FirstOrDefault();
+                                                          .Where(i => i.GinastaId == mensalidade.GinastaId && i.EpocaId == mensalidade.EpocaId).Include(m => m.Class).FirstOrDefault();
                                 //obtem rubrica
                                 var rubrica = await _context.Rubrica
                                                             .FirstOrDefaultAsync(r => r.ClasseId == incricaoAtiva.ClasseId &&
@@ -349,21 +368,6 @@ namespace AppGCT.Pages.Gestao.CobrancaMensalidades
                                                 "considere que tratando-se do último mês da época, cujo o último mês está isento de cobrança, " +
                                                 "a mesma não gerou movimentação financeira.";
                                         }
-                                        //lança e-mail alerta
-                                        await _emailSender.SendEmailAsync(socioAtivo.Email, "Lançamento Mensalidade - Ginásio Clube de Tomar",
-                                                $"<br><b>Lançamento Mensalidade!</b><br>" +
-                                                $"<br> Caro(a) Sócio(a) <b>{socioAtivo.Nome}</b>,<br> " +
-                                                $"Usufruiu da isenção da mensalidade para a presente época, com os dados abaixo:<br><br>" +
-                                                $"<b>Ginasta:</b> {ginastaAtivo.NomeCompleto}<br>" +
-                                                $"<b>Classe:</b> {incricaoAtiva.Class.NomeClasse}<br>" +
-                                                $"<b>Data Mensalidade:</b> {mensalidade.DataMensalidade.Year}/{mensalidade.DataMensalidade.Month}<br>" +
-                                                $"<b>Valor Mensalidade:</b> {valorMensalidade}�<br>" +
-                                                $"<b>Saldo Conta Corrente:</b> {saldoObj.MSaldo}�<br>" +
-
-                                                $"<br>Este e-mail foi enviado de forma automática, por favor não responda diretamente para este endereço." +
-                                                $"<br>Alguma dúvida ou sugestão não hesite em contactar-nos.<br><br>" +
-                                                $"Com os melhores cumprimentos,<br>" +
-                                                $"<b>Ginásio Clube de Tomar</b>");
 
                                     }
                                     else
@@ -387,8 +391,8 @@ namespace AppGCT.Pages.Gestao.CobrancaMensalidades
                                                 $"<b>Ginasta:</b> {ginastaAtivo.NomeCompleto}<br>" +
                                                 $"<b>Classe:</b> {incricaoAtiva.Class.NomeClasse}<br>" +
                                                 $"<b>Data Mensalidade:</b> {mensalidade.DataMensalidade.Year}/{mensalidade.DataMensalidade.Month}<br>" +
-                                                $"<b>Valor Mensalidade:</b> {valorMensalidade}�<br>" +
-                                                $"<b>Saldo Conta Corrente:</b> {saldoObj.MSaldo}�<br>" +
+                                                $"<b>Valor Mensalidade:</b> {valorMensalidade}€<br>" +
+                                                $"<b>Saldo Conta Corrente:</b> {saldoObj.MSaldo}€<br>" +
 
                                                 $"<br>Este e-mail foi enviado de forma automática, por favor não responda diretamente para este endereço." +
                                                 $"<br>Alguma dúvida ou sugestão não hesite em contactar-nos.<br><br>" +
