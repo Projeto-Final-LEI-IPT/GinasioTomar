@@ -35,6 +35,8 @@ namespace AppGCT.Pages.Gestao.CobrancaMensalidades
         public string StatusMessageRub { get; set; }
 
 
+
+
         public List<DataViewModel> Mensalidades { get; set; } = new List<DataViewModel>();
 
         public class DataViewModel
@@ -191,7 +193,7 @@ namespace AppGCT.Pages.Gestao.CobrancaMensalidades
         {
             bool rubQuotaAtiva = await _context.Rubrica.AnyAsync(e => e.TipoRubrica == "S" &&
                                                                       e.EstadoRubrica == "A");
-            StatusMessageFinal = "Inicializacao de controlo";
+            StatusMessageFinal = "Inicialização de controlo";
             var dataCorrente = DateTime.Today.Month;
             // Consultar todos os Socios Ativos
             var sociosAtivos = await _context.Users.Where(i => i.EstadoUtilizador == "A" &&
@@ -201,8 +203,10 @@ namespace AppGCT.Pages.Gestao.CobrancaMensalidades
                 // TODO - Verificar se ha QUOTAS a lancar e popular tabela
                 if (dataCorrente == 9)
                 {
+                    // Se existe rubrica de quota Ativa podemos lançar Quota
                     if (rubQuotaAtiva)
                     {
+                        // Faz a lógica para lançar movimentos de quotas e atualizar saldo
                         if(await lancaQuota(socioAtivo))
                         {
                             try
@@ -364,6 +368,7 @@ namespace AppGCT.Pages.Gestao.CobrancaMensalidades
                                                 "considere que tratando-se do último mês da época, cujo o último mês está isento de cobrança, " +
                                                 "a mesma não gerou movimentação financeira.";
                                         }
+                                      
                                     }
                                     else
                                     {

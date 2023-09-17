@@ -61,7 +61,6 @@ namespace AppGCT.Pages.Gestao.Movimentos
                 return Page();
             }
             var movimentoAtualizar = _context.Movimento.Where(i => i.Id.Equals(Movimento.Id)).FirstOrDefault();
-            movimentoAtualizar.DtMovimento = Movimento.DtMovimento;
             movimentoAtualizar.DataModificacao = DateTime.Now;
             // obtem User ID logado
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);

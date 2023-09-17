@@ -1,0 +1,139 @@
+﻿@page
+@model AppGCT.Pages.Gestao.Movimentos.DetathePlanoModel
+
+@{
+    ViewData["Title"] = "Detalhes de Movimento";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<h1>Detalhes Movimento</h1>
+
+<hr />
+<div>
+    <a title="Voltar" class='btn btn-success' asp-area='' asp-page='/Gestao/PlanoMensalidades/Index'>
+        <span class="btn-svg-container">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z" />
+            </svg>
+        </span>
+    </a>
+</div>
+<br>
+<div>
+    <dl class="row">
+        @if (User.IsInRole("Administrador"))
+        {
+            <dt class="col-sm-2">
+                Id Movimento
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Movimento.Id)
+            </dd>
+        }
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Movimento.DesRubrica)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Movimento.DesRubrica)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Movimento.DtMovimento)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Movimento.DtMovimento)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Movimento.ValorMovimento)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Movimento.ValorMovimento)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Movimento.ValorDesconto)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Movimento.ValorDesconto)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Movimento.NumFatura)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Movimento.NumFatura)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Movimento.NumNotaCredito)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Movimento.NumNotaCredito)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Movimento.MSaldo)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Movimento.MSaldo)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Movimento.Observacoes)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Movimento.Observacoes)
+        </dd>
+        @if (User.IsInRole("Administrador") || User.IsInRole("Ginásio"))
+        {
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Movimento.DataCriacao)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Movimento.DataCriacao)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Movimento.IdCriacao)
+            </dt>
+            <dd class="col-sm-10">
+                @Model.IdCriacaoName
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Movimento.DataModificacao)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Movimento.DataModificacao)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Movimento.IdModificacao)
+            </dt>
+            <dd class="col-sm-10">
+                @Model.IdModificacaoName
+        </dd>
+        }
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Movimento.Socio)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Movimento.Socio.ID_Description)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Movimento.Atleta)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Movimento.Atleta.ID_DescrGinasta)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Movimento.TipoDespesa)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Movimento.TipoDespesa.ID_DescriptionRubrica)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Movimento.FormaPagamento)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Movimento.FormaPagamento.ID_DescrMetodo)
+        </dd>
+    </dl>
+</div>
+    @if (User.IsInRole("Administrador"))
+    {
+    <div>
+        <a class='btn btn-success' asp-area='' asp-page='/Gestao/Movimentos/Edit' asp-route-id='@Model.Movimento?.Id'>Editar</a>
+    </div>
+}
