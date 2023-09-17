@@ -7,6 +7,8 @@ using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 using System.Threading;
 using Microsoft.EntityFrameworkCore;
 using static System.Runtime.InteropServices.JavaScript.JSType;
+using AppGCT.Models;
+using SendGrid.Helpers.Mail;
 
 namespace AppGCT.Pages.Gestao.Utilizadores
 {
@@ -15,10 +17,12 @@ namespace AppGCT.Pages.Gestao.Utilizadores
     {
         private readonly UserManager<Utilizador> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
-        public DeleteModel(UserManager<Utilizador> userManager, RoleManager<IdentityRole> roleManager)
+        private readonly AppGCT.Data.AppGCTContext _context;
+        public DeleteModel(UserManager<Utilizador> userManager, RoleManager<IdentityRole> roleManager,AppGCT.Data.AppGCTContext context)
         {
             _userManager = userManager;
             _roleManager = roleManager;
+            _context = context;
         }
 
         [BindProperty]
@@ -106,6 +110,14 @@ namespace AppGCT.Pages.Gestao.Utilizadores
                         {
                             throw new InvalidOperationException($"Unexpected error occurred removing user '{user.UserName}' from roles.");
                         }
+                    }
+                    // Verifica se utilizador (sócio) tem saldo 0, se sim elimina da tabela saldos
+                    var saldo = await _context.Saldo.FirstOrDefaultAsync(i => i.IdSocio == user.Id);
+
+                    if (saldo != null && saldo.MSaldo == 0)
+                    {
+                        _context.Saldo.Remove(saldo);
+                        await _context.SaveChangesAsync();
                     }
 
                     // APAGA UTILIZADOR DA TABELA ASPNETUSERS

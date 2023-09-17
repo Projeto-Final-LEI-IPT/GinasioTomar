@@ -10,17 +10,21 @@ using AppGCT.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using System.Text.Encodings.Web;
+using AppGCT.Outros;
 
 namespace AppGCT.Pages.Gestao.CobrancaMensalidades
 {
-    [Authorize(Roles = "Administrador,Ginásio")]
+    [Authorize(Roles = "Administrador,Ginï¿½sio")]
     public class IndexModel : PageModel
     {
         private readonly AppGCT.Data.AppGCTContext _context;
+        private readonly IEmailSender _emailSender;
 
-        public IndexModel(AppGCT.Data.AppGCTContext context)
+        public IndexModel(AppGCT.Data.AppGCTContext context, IEmailSender emailSender)
         {
             _context = context;
+            _emailSender = emailSender;
         }
         [TempData]
         public string StatusMessageFinal { get; set; }
@@ -39,14 +43,14 @@ namespace AppGCT.Pages.Gestao.CobrancaMensalidades
         }
         private async Task<bool> lancaQuota(Areas.Identity.Data.Utilizador socio)
         {
-            // Consultar saldo do sócio, antes de efetivar movimento
+            // Consultar saldo do sï¿½cio, antes de efetivar movimento
             var saldoAnt = _context.Saldo.Where(i => i.IdSocio == socio.Id).FirstOrDefault().MSaldo;
-            //obtem rubrica passível de gerar movimento de Quota ( Ativa e do Tipo Socio)
+            //obtem rubrica passï¿½vel de gerar movimento de Quota ( Ativa e do Tipo Socio)
             var rubrica = await _context.Rubrica
                                         .FirstOrDefaultAsync(r => r.TipoRubrica == "S" &&
                                                                   r.EstadoRubrica == "A");
-            // Listar todas as Rubricas do tipo de Socio, para posteriormente verificar se para o mês de Janeiro
-            // já foi criado algum movimetno para sócio, desse tipo
+            // Listar todas as Rubricas do tipo de Socio, para posteriormente verificar se para o mï¿½s de Janeiro
+            // jï¿½ foi criado algum movimetno para sï¿½cio, desse tipo
             var rubricasTipoSocio = await _context.Rubrica.Where(i => i.TipoRubrica == "S").ToListAsync();
             bool movimento = true;
             foreach (var rubricaTipoSocio in rubricasTipoSocio)
@@ -55,7 +59,7 @@ namespace AppGCT.Pages.Gestao.CobrancaMensalidades
                                                                    i.DtMovimento.Year == DateTime.Now.Year &&
                                                                    i.DtMovimento.Month == DateTime.Now.Month &&
                                                                    i.RubricaId == rubricaTipoSocio.CodRubrica);
-                // A primeira rúbrica do tipoSocio encontrada, faz terminar o ciclo
+                // A primeira rï¿½brica do tipoSocio encontrada, faz terminar o ciclo
                 if (movimento)
                 {
                     break;
@@ -90,7 +94,7 @@ namespace AppGCT.Pages.Gestao.CobrancaMensalidades
                 };
                 _context.Movimento.Add(movimentoQuota);
 
-                // Atualiza Saldo do Sócio na tabela Saldos
+                // Atualiza Saldo do Sï¿½cio na tabela Saldos
                 var saldoObj = _context.Saldo.FirstOrDefault(s => s.IdSocio == socio.Id);
 
                 if (saldoObj != null)
@@ -109,15 +113,15 @@ namespace AppGCT.Pages.Gestao.CobrancaMensalidades
             public async Task OnGetAsync()
         {
             var dataCorrente = DateTime.Today.Month;
-            // Consultar todos os Sócios Ativos
+            // Consultar todos os Sï¿½cios Ativos
             var sociosAtivos = await _context.Users.Where(i => i.EstadoUtilizador == "A" &&
-                                                               i.RoleAux == "Sócio").ToListAsync();
+                                                               i.RoleAux == "Sï¿½cio").ToListAsync();
             foreach (var socioAtivo in sociosAtivos)
             {
-                // Verificar se há QUOTAS a lançar e popular tabela
+                // Verificar se hï¿½ QUOTAS a lanï¿½ar e popular tabela
                 if(dataCorrente == 9)
                 {
-                    //obtem rubrica passível de gerar movimento de Quota ( Ativa e do Tipo Socio)
+                    //obtem rubrica passï¿½vel de gerar movimento de Quota ( Ativa e do Tipo Socio)
                     var rubrica = await _context.Rubrica
                                                 .FirstOrDefaultAsync(r => r.TipoRubrica == "S" &&
                                                                           r.EstadoRubrica == "A");
@@ -125,8 +129,8 @@ namespace AppGCT.Pages.Gestao.CobrancaMensalidades
                     {
 
                     decimal valorMensalidade = rubrica.ValorUnitario ?? 0m;
-                    // Listar todas as Rubricas do tipo de Socio, para posteriormente verificar se para o mês de Janeiro
-                    // já foi criado algum movimetno para sócio, desse tipo
+                    // Listar todas as Rubricas do tipo de Socio, para posteriormente verificar se para o mï¿½s de Janeiro
+                    // jï¿½ foi criado algum movimetno para sï¿½cio, desse tipo
                     var rubricasTipoSocio = await _context.Rubrica.Where(i => i.TipoRubrica == "S").ToListAsync();
                     var movimento = true;
                     foreach (var rubricaTipoSocio in rubricasTipoSocio)
@@ -135,7 +139,7 @@ namespace AppGCT.Pages.Gestao.CobrancaMensalidades
                                                                            i.DtMovimento.Year == DateTime.Now.Year &&
                                                                            i.DtMovimento.Month == DateTime.Now.Month &&
                                                                            i.RubricaId == rubricaTipoSocio.CodRubrica);
-                        // A primeira rúbrica do tipoSocio encontrada, faz terminar o ciclo
+                        // A primeira rï¿½brica do tipoSocio encontrada, faz terminar o ciclo
                         if (movimento)
                         {
                             break;
@@ -146,19 +150,19 @@ namespace AppGCT.Pages.Gestao.CobrancaMensalidades
                         DataViewModel model = new DataViewModel();
                         model.DataMensalidade = DateOnly.FromDateTime(DateTime.Now);
                         model.ValorLancar = rubrica.ValorUnitario ?? 0m;
-                        model.Ginasta = "N/A - Quota de sócio";
+                        model.Ginasta = "N/A - Quota de sï¿½cio";
                         model.Socio = socioAtivo.Nome;
                         Mensalidades.Add(model);
                     }
                     }
                 }
-                // Consultar Ginastas Ativos para o Sócio em tratamento
+                // Consultar Ginastas Ativos para o Sï¿½cio em tratamento
                 var ginastasAtivos = await _context.Ginasta.Where(i => i.UtilizadorId == socioAtivo.Id &&
                                                                        i.EstadoGinasta == "A"
                                                                  ).ToListAsync();
                 foreach(var ginastaAtivo in ginastasAtivos)
                 {
-                    // Consultar mensalidades planeadas para o mês corrente e que não tenham sido já lançadas
+                    // Consultar mensalidades planeadas para o mï¿½s corrente e que nï¿½o tenham sido jï¿½ lanï¿½adas
                     var mensalidades = await _context.PlanoMensalidade.Where(i => i.DataMensalidade.Month == dataCorrente     &&
                                                                                   i.GinastaId             == ginastaAtivo.Id  &&
                                                                                   i.ILancado              == "N"              &&
@@ -184,14 +188,14 @@ namespace AppGCT.Pages.Gestao.CobrancaMensalidades
         {
             bool rubQuotaAtiva = await _context.Rubrica.AnyAsync(e => e.TipoRubrica == "S" &&
                                                                       e.EstadoRubrica == "A");
-            StatusMessageFinal = "Inicialização de controlo";
+            StatusMessageFinal = "Inicializaï¿½ï¿½o de controlo";
             var dataCorrente = DateTime.Today.Month;
-            // Consultar todos os Sócios Ativos
+            // Consultar todos os Sï¿½cios Ativos
             var sociosAtivos = await _context.Users.Where(i => i.EstadoUtilizador == "A" &&
-                                                               i.RoleAux == "Sócio").ToListAsync();
+                                                               i.RoleAux == "Sï¿½cio").ToListAsync();
             foreach (var socioAtivo in sociosAtivos)
             {
-                // TODO - Verificar se há QUOTAS a lançar e popular tabela
+                // TODO - Verificar se hï¿½ QUOTAS a lanï¿½ar e popular tabela
                 if (dataCorrente == 9)
                 {
                     if (rubQuotaAtiva)
@@ -201,43 +205,43 @@ namespace AppGCT.Pages.Gestao.CobrancaMensalidades
                             try
                             {
                                 await _context.SaveChangesAsync();
-                                StatusMessageFinal = "Lançamento de quotas efetuado com sucesso. " +
-                                                     "Não houveram mensalidades lançadas.";
+                                StatusMessageFinal = "Lanï¿½amento de quotas efetuado com sucesso. " +
+                                                     "Nï¿½o houveram mensalidades lanï¿½adas.";
                             }
                             catch (Exception ex)
                             {
-                                StatusMessageFinal = "Erro no lançamento da quota do sócio " + socioAtivo.Nome + "(" +
+                                StatusMessageFinal = "Erro no lanï¿½amento da quota do sï¿½cio " + socioAtivo.Nome + "(" +
                                      socioAtivo.NumSocio + ")";
                                 return RedirectToPage("./Index");
                             }
                         };
                     }
                 }
-                // Consultar Ginastas Ativos para o Sócio em tratamento
+                // Consultar Ginastas Ativos para o Sï¿½cio em tratamento
                 var ginastasAtivos = await _context.Ginasta.Where(i => i.UtilizadorId == socioAtivo.Id &&
                                                                        i.EstadoGinasta == "A"
                                                                  ).ToListAsync();
                 foreach (var ginastaAtivo in ginastasAtivos)
                 {
-                    // Consultar mensalidades planeadas para o mês corrente e que não tenham sido já lançadas
+                    // Consultar mensalidades planeadas para o mï¿½s corrente e que nï¿½o tenham sido jï¿½ lanï¿½adas
                     var mensalidades = await _context.PlanoMensalidade.Where(i => i.DataMensalidade.Month == dataCorrente &&
                                                                                   i.GinastaId == ginastaAtivo.Id &&
                                                                                   i.ILancado == "N" &&
                                                                                   !i.IdMovimento.HasValue
                                                                               ).ToListAsync();
-                    //TODO - validar se existe mais de uma mensalidade por lançar para o corrente mês, e dar erro se isso acontecer ???
+                    //TODO - validar se existe mais de uma mensalidade por lanï¿½ar para o corrente mï¿½s, e dar erro se isso acontecer ???
                     foreach (var mensalidade in mensalidades)
                     {
                         var epocaAtiva = _context.Epoca.Where(i => i.IdEpoca == mensalidade.EpocaId).FirstOrDefault();
                         if (epocaAtiva.EstadoEpoca == "A")
                         {
-                            // Consultar saldo do sócio, antes de efetivar movimento
+                            // Consultar saldo do sï¿½cio, antes de efetivar movimento
                             var saldoAnt = _context.Saldo.Where(i => i.IdSocio == socioAtivo.Id).FirstOrDefault().MSaldo;
                             // Consultar valor da mensalidade
-                            //valida se Ginasta já tem inscrição na Época
+                            //valida se Ginasta jï¿½ tem inscriï¿½ï¿½o na ï¿½poca
                             bool JaInscritoEpoca = await _context.Inscricao
                                                           .AnyAsync(i => i.GinastaId == mensalidade.GinastaId && i.EpocaId == mensalidade.EpocaId);
-                            // Se atleta inscrito na epoca da mensalidade em tratamento, vamos lançar o respetivo movimento
+                            // Se atleta inscrito na epoca da mensalidade em tratamento, vamos lanï¿½ar o respetivo movimento
                             if (JaInscritoEpoca)
                             {
                                 if (epocaAtiva.ICobrancUltimoMes == "N" &&
@@ -259,7 +263,7 @@ namespace AppGCT.Pages.Gestao.CobrancaMensalidades
                                 }
                                 else
                                 {
-                                    // Consultar inscrição para buscar Classe e Desconto associado
+                                    // Consultar inscriï¿½ï¿½o para buscar Classe e Desconto associado
                                     var incricaoAtiva = _context.Inscricao
                                                               .Where(i => i.GinastaId == mensalidade.GinastaId && i.EpocaId == mensalidade.EpocaId).FirstOrDefault();
                                     //obtem rubrica
@@ -269,7 +273,7 @@ namespace AppGCT.Pages.Gestao.CobrancaMensalidades
 
                                     if (rubrica == null)
                                     {
-                                        StatusMessageRub = "Rúbrica associada à inscrição não existe na BD";
+                                        StatusMessageRub = "Rï¿½brica associada ï¿½ inscriï¿½ï¿½o nï¿½o existe na BD";
                                         return RedirectToPage("./Index");
                                     }
                                     decimal valorMensalidade = rubrica.ValorUnitario ?? 0m;
@@ -297,7 +301,7 @@ namespace AppGCT.Pages.Gestao.CobrancaMensalidades
                                     };
                                     _context.Movimento.Add(movimento);
 
-                                    // Atualiza Saldo do Sócio na tabela Saldos
+                                    // Atualiza Saldo do Sï¿½cio na tabela Saldos
                                     var saldoObj = _context.Saldo.FirstOrDefault(s => s.IdSocio == socioAtivo.Id);
 
                                     if (saldoObj != null)
@@ -325,22 +329,38 @@ namespace AppGCT.Pages.Gestao.CobrancaMensalidades
                                 try
                                 {
                                     await _context.SaveChangesAsync();
-                                    // Se estamos em janeiro e não existe rubrica de quotas ativas, as mesma não serão lançadas
+                                    // Se estamos em janeiro e nï¿½o existe rubrica de quotas ativas, as mesma nï¿½o serï¿½o lanï¿½adas
                                     if(!rubQuotaAtiva && dataCorrente == 1)
                                     {
-                                        StatusMessageFinal = "Lançamento de movimentos realizado com sucesso, no entanto " +
-                                                             "considere que eventuais quotas em condições de serem lançadas " +
-                                                             "não o foram por não existir nenhuma rúbrica de quotas ativa";
+                                        StatusMessageFinal = "Lanï¿½amento de movimentos realizado com sucesso, no entanto " +
+                                                             "considere que eventuais quotas em condiï¿½ï¿½es de serem lanï¿½adas " +
+                                                             "nï¿½o o foram por nï¿½o existir nenhuma rï¿½brica de quotas ativa";
                                     }
                                     else
                                     {
-                                        StatusMessageFinal = "Lançamento de movimentos realizado com sucesso";
+                                        StatusMessageFinal = "Lanï¿½amento de movimentos realizado com sucesso";
                                     }
+                                    //lanï¿½a e-mail alerta
+                                    await _emailSender.SendEmailAsync(socioAtivo.Email, "Lanï¿½amento Mensalidade - Ginï¿½sio Clube de Tomar",
+                                            $"<br><b>Lanï¿½amento Mensalidade!</b><br>" +
+                                            $"<br> Caro(a) Sï¿½cio(a) <b>{socioAtivo.Nome}</b>,<br> " +
+                                            $"Lanï¿½amos na sua conta corrente a mensalidade abaixo:<br><br>" +
+                                            $"<b>Ginasta:</b> {ginastaAtivo.NomeCompleto}<br>" +
+                                            $"<b>Classe:</b> {incricaoAtiva.Class.NomeClasse}<br>" +
+                                            $"<b>Data Mensalidade:</b> {mensalidade.DataMensalidade.Year}/{mensalidade.DataMensalidade.Month}<br>" +
+                                            $"<b>Valor Mensalidade:</b> {valorMensalidade}ï¿½<br>" +
+                                            $"<b>Saldo Conta Corrente:</b> {saldoObj.MSaldo}ï¿½<br>" +
+
+                                            $"<br>Este e-mail foi enviado de forma automï¿½tica, por favor nï¿½o responda diretamente para este endereï¿½o." +
+                                            $"<br>Alguma dï¿½vida ou sugestï¿½o nï¿½o hesite em contactar-nos.<br><br>" +
+                                            $"Com os melhores cumprimentos,<br>" +
+                                            $"<b>Ginï¿½sio Clube de Tomar</b>");
+
                                 }
                                 catch (Exception ex)
                                 {
-                                    StatusMessageFinal = "Erro de base de dados no lançamento de movimentos - Mensalidade: " +
-                                                          mensalidade.IdPlanoM + " Solicitar apoio informático";
+                                    StatusMessageFinal = "Erro de base de dados no lanï¿½amento de movimentos - Mensalidade: " +
+                                                          mensalidade.IdPlanoM + " Solicitar apoio informï¿½tico";
                                     return RedirectToPage("./Index");
                                 }
 
@@ -350,9 +370,9 @@ namespace AppGCT.Pages.Gestao.CobrancaMensalidades
                     }
                 }
             }
-            if(StatusMessageFinal == "Inicialização de controlo")
+            if(StatusMessageFinal == "Inicializaï¿½ï¿½o de controlo")
             {
-                StatusMessageFinal = "Sem movimentos válidos para lançar. Não foram lançados movimentos.";
+                StatusMessageFinal = "Sem movimentos vï¿½lidos para lanï¿½ar. Nï¿½o foram lanï¿½ados movimentos.";
             }
             // all  done
             return RedirectToPage("./Index");

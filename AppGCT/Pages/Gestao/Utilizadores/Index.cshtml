@@ -15,7 +15,7 @@
 <h1>Gestão Utilizadores</h1>
 
 <p>
-    <a class='btn btn-outline-primary btn-sm' asp-area='' asp-page='/Gestao/Utilizadores/Create'>
+    <a class='btn btn-success btn-sm' asp-area='' asp-page='/Gestao/Utilizadores/Create'>
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-plus-fill" viewBox="0 0 16 16">
             <path d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
             <path fill-rule="evenodd" d="M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5z" />
@@ -25,42 +25,47 @@
 <form asp-page="./Index" method="get">
    Pesquisa
    <input type="text" name="SearchString" value="@Model.CurrentFilter" />
-   <input type="submit" value="Procurar" class="btn btn-primary btn-sm">
-   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
-       <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
-   </svg>
-   <a class='btn btn-primary btn-sm' asp-area='' asp-page='/Gestao/Utilizadores/Index'>Limpar</a>
+   <button class="btn btn-success btn-sm" type="submit">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+            <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
+        </svg> Procurar
+   </button>
+   <a class='btn btn-success btn-sm' asp-area='' asp-page='/Gestao/Utilizadores/Index'>
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eraser-fill" viewBox="0 0 16 16">
+            <path d="M8.086 2.207a2 2 0 0 1 2.828 0l3.879 3.879a2 2 0 0 1 0 2.828l-5.5 5.5A2 2 0 0 1 7.879 15H5.12a2 2 0 0 1-1.414-.586l-2.5-2.5a2 2 0 0 1 0-2.828l6.879-6.879zm.66 11.34L3.453 8.254 1.914 9.793a1 1 0 0 0 0 1.414l2.5 2.5a1 1 0 0 0 .707.293H7.88a1 1 0 0 0 .707-.293l.16-.16z" />
+        </svg> Limpar
+   </a>
 </form>
 <table class="table">
     <thead>
         <tr>
             <th>
-                <a asp-page="./Index" asp-route-sortOrder="@Model.NomeCompletoSort">
+                <a class="sort"  asp-page="./Index" asp-route-sortOrder="@Model.NomeCompletoSort">
                     Nome Completo
                 </a>
             </th>
             <th>
-                <a asp-page="./Index" asp-route-sortOrder="@Model.TipoUtilizadorSort">
+                <a class="sort"  asp-page="./Index" asp-route-sortOrder="@Model.TipoUtilizadorSort">
                     Tipo Utilizador
                 </a>
             </th>
             <th>
-                <a asp-page="./Index" asp-route-sortOrder="@Model.NumSocioSort">
+                <a class="sort" asp-page="./Index" asp-route-sortOrder="@Model.NumSocioSort">
                     Nº Sócio
                 </a>
             </th>
             <th>
-                <a asp-page="./Index" asp-route-sortOrder="@Model.EstadoUtilizadorSort">
+                <a class="sort" asp-page="./Index" asp-route-sortOrder="@Model.EstadoUtilizadorSort">
                     Estado Utilizador
                 </a>
             </th>
             <th>
-                <a asp-page="./Index" asp-route-sortOrder="@Model.ContactoSort">
+                <a class="sort" asp-page="./Index" asp-route-sortOrder="@Model.ContactoSort">
                     Contacto
                 </a>
             </th>
             <th>
-                <a asp-page="./Index" asp-route-sortOrder="@Model.EmailSort">
+                <a class="sort"  asp-page="./Index" asp-route-sortOrder="@Model.EmailSort">
                     E-mail
                 </a>
             </th>
@@ -93,14 +98,28 @@
                     @Html.DisplayFor(modelItem => user.Email)
                 </td>
                 <td>
-                    <a class='btn btn-primary btn-sm' asp-area='' asp-page='/Gestao/Utilizadores/Edit' asp-route-id='@user.Id'>Editar</a>
-                    <a class='btn btn-primary btn-sm' asp-area='' asp-page='/Gestao/Utilizadores/Details' asp-route-id='@user.Id'>Detalhes</a>
+                    <a title="Editar" class='btn btn-success btn-sm' asp-area='' asp-page='/Gestao/Utilizadores/Edit' asp-route-id='@user.Id'>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+                            <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
+                            <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
+                        </svg>
+                    </a>
+                    <a title ="Detalhes" class='btn btn-success btn-sm' asp-area='' asp-page='/Gestao/Utilizadores/Details' asp-route-id='@user.Id'>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye-fill" viewBox="0 0 16 16">
+                            <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z" />
+                            <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z" />
+                        </svg>
+                    </a>
                     @{
                         @if (User.IsInRole("Administrador"))
                         {
                             if (!user.Email.Equals("admin@localhost")) // NÃO MOSTRA BOTÃO APAGAR PARA O USER DE ADMINISTRAÇÃO
                             {
-                                <a class='btn btn-danger btn-sm' asp-area='' asp-page='/Gestao/Utilizadores/Delete' asp-route-id='@user.Id'>Apagar</a>
+                                <a title="Apagar" class='btn btn-danger btn-sm' asp-area='' asp-page='/Gestao/Utilizadores/Delete' asp-route-id='@user.Id'>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3-fill" viewBox="0 0 16 16">
+                                        <path d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5Zm-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5ZM4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06Zm6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528ZM8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5Z" />
+                                    </svg>
+                                </a>
                             }
                         }
                     }

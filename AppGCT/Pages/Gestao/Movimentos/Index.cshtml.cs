@@ -33,20 +33,23 @@ namespace AppGCT.Pages.Gestao.Movimentos
         [BindProperty(SupportsGet = true)]
         public int IdGinasta { get; set; }
         public string CurrentFilter { get; set; }
+        public string CurrentFilterFim { get; set; }
         public IList<Movimento> Movimento { get;set; } = default!;
 
         public SelectList SociosList { get; set; }
         public SelectList GinastasList { get; set; }
 
-        public async Task OnGetAsync(string? idsocio, int? idginasta, string searchString)
+        public async Task OnGetAsync(string? idsocio, int? idginasta, string searchString, string searchStringFim)
         {
             DateTime searchDate;
+            DateTime searchDateFim;
 
-            if (idsocio != null || idginasta.HasValue || (!string.IsNullOrEmpty(searchString)))
+            if (idsocio != null || idginasta.HasValue || (!string.IsNullOrEmpty(searchString)) || (!string.IsNullOrEmpty(searchStringFim)))
             {
                 IdSocio = idsocio;
                 IdGinasta = idginasta.Value;
                 CurrentFilter = searchString;
+                CurrentFilterFim = searchStringFim;
             }
 
             if (!string.IsNullOrEmpty(searchString))
@@ -57,7 +60,18 @@ namespace AppGCT.Pages.Gestao.Movimentos
             {
                 searchDate = DateTime.MinValue;
             }
-            
+
+            if (!string.IsNullOrEmpty(searchStringFim))
+            {
+                searchDateFim = DateTime.Parse(searchStringFim);
+                //para forçar a última hora/min/segundo da data fim
+                searchDateFim = searchDateFim.Date.AddHours(23).AddMinutes(59).AddSeconds(59);
+            }
+            else
+            {
+                searchDateFim = DateTime.MaxValue;
+            }
+
             string userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
             // Preenche VIEWBAG com SALDO, para apresentar o mesmo ao Sócio, quando entra nésta página  (INDEX dos Movimentos)
@@ -134,8 +148,8 @@ namespace AppGCT.Pages.Gestao.Movimentos
                                     .Include(m => m.FormaPagamento)
                                     .Include(m => m.Socio)
                                     .Include(m => m.TipoDespesa)
-                                    .Where(m => m.UtilizadorId == idsocio && m.AtletaMovimentoId == idginasta && m.DtMovimento >= searchDate)
-                                    .OrderByDescending(m => m.DataCriacao)
+                                    .Where(m => m.UtilizadorId == idsocio && m.AtletaMovimentoId == idginasta && m.DtMovimento >= searchDate && m.DtMovimento <= searchDateFim)
+                                    .OrderByDescending(m => m.DtMovimento)
                                     .ToListAsync();
                     }
                     else
@@ -147,8 +161,8 @@ namespace AppGCT.Pages.Gestao.Movimentos
                                     .Include(m => m.FormaPagamento)
                                     .Include(m => m.Socio)
                                     .Include(m => m.TipoDespesa)
-                                    .Where(m => m.UtilizadorId == idsocio && m.DtMovimento >= searchDate)
-                                    .OrderByDescending(m => m.DataCriacao)
+                                    .Where(m => m.UtilizadorId == idsocio && m.AtletaMovimentoId == null && m.DtMovimento >= searchDate && m.DtMovimento <= searchDateFim)
+                                    .OrderByDescending(m => m.DtMovimento)
                                     .ToListAsync();
                     }
                     else
@@ -160,8 +174,8 @@ namespace AppGCT.Pages.Gestao.Movimentos
                                     .Include(m => m.FormaPagamento)
                                     .Include(m => m.Socio)
                                     .Include(m => m.TipoDespesa)
-                                    .Where(m => m.AtletaMovimentoId == idginasta && m.DtMovimento >= searchDate)
-                                    .OrderByDescending(m => m.DataCriacao)
+                                    .Where(m => m.AtletaMovimentoId == idginasta && m.DtMovimento >= searchDate && m.DtMovimento <= searchDateFim)
+                                    .OrderByDescending(m => m.DtMovimento)
                                     .ToListAsync();
                     }
                     else
@@ -171,21 +185,22 @@ namespace AppGCT.Pages.Gestao.Movimentos
                                     .Include(m => m.FormaPagamento)
                                     .Include(m => m.Socio)
                                     .Include(m => m.TipoDespesa)
-                                    .Where(m => m.DtMovimento >= searchDate)
-                                    .OrderByDescending(m => m.DataCriacao)
+                                    .Where(m => m.DtMovimento >= searchDate && m.DtMovimento <= searchDateFim)
+                                    .OrderByDescending(m => m.DtMovimento)
                                     .ToListAsync();
                     }
                 }
                 else
                 {
+                    //se ginasta preenchido
                     if (idginasta != 0 && idginasta != null)
                     {
                         Movimento = await _context.Movimento
                                    .Include(m => m.Atleta)
                                    .Include(m => m.FormaPagamento)
                                    .Include(m => m.Socio)
-                                   .Include(m => m.TipoDespesa).Where(m => m.UtilizadorId.Equals(userId) && m.AtletaMovimentoId == idginasta && m.DtMovimento >= searchDate)
-                                   .OrderByDescending(m => m.DataCriacao)
+                                   .Include(m => m.TipoDespesa).Where(m => m.UtilizadorId.Equals(userId) && m.AtletaMovimentoId == idginasta && m.DtMovimento >= searchDate && m.DtMovimento <= searchDateFim)
+                                   .OrderByDescending(m => m.DtMovimento)
                                    .ToListAsync();
                     }
                     else
@@ -195,8 +210,8 @@ namespace AppGCT.Pages.Gestao.Movimentos
                                    .Include(m => m.FormaPagamento)
                                    .Include(m => m.Socio)
                                    .Include(m => m.TipoDespesa)
-                                   .Where(m => m.UtilizadorId.Equals(userId) && m.DtMovimento >= searchDate)
-                                   .OrderByDescending(m => m.DataCriacao)
+                                   .Where(m => m.UtilizadorId.Equals(userId) && m.DtMovimento >= searchDate && m.DtMovimento <= searchDateFim)
+                                   .OrderByDescending(m => m.DtMovimento)
                                    .ToListAsync();
                     }
                     
