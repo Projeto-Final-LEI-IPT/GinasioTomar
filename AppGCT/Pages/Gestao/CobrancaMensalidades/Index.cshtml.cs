@@ -124,7 +124,7 @@ namespace AppGCT.Pages.Gestao.CobrancaMensalidades
             foreach (var socioAtivo in sociosAtivos)
             {
                 // Verificar se ha QUOTAS a lancar e popular tabela
-                if(dataCorrente == 9)
+                if(dataCorrente == 10)
                 {
                     //obtem rubrica passivel de gerar movimento de Quota ( Ativa e do Tipo Socio)
                     var rubrica = await _context.Rubrica
@@ -201,7 +201,7 @@ namespace AppGCT.Pages.Gestao.CobrancaMensalidades
             foreach (var socioAtivo in sociosAtivos)
             {
                 // TODO - Verificar se ha QUOTAS a lancar e popular tabela
-                if (dataCorrente == 9)
+                if (dataCorrente == 10)
                 {
                     // Se existe rubrica de quota Ativa podemos lançar Quota
                     if (rubQuotaAtiva)
@@ -355,7 +355,7 @@ namespace AppGCT.Pages.Gestao.CobrancaMensalidades
                                         epocaAtiva.DataFim.Year == mensalidade.DataMensalidade.Year)
                                     {
                                         // Se estamos em janeiro e não existe rubrica de quotas ativas, as mesma não serão lançadas
-                                        if (!rubQuotaAtiva && dataCorrente == 1)
+                                        if (!rubQuotaAtiva && dataCorrente == 10)
                                         {
                                             StatusMessageFinal = "Lançamento de mensalidades realizado com sucesso, no entanto, " +
                                                 "considere que tratando-se do último mês da época, cujo o último mês está isento de cobrança, " +
@@ -373,7 +373,7 @@ namespace AppGCT.Pages.Gestao.CobrancaMensalidades
                                     else
                                     {
                                         // Se estamos em janeiro e não existe rubrica de quotas ativas, as mesma não serão lançadas
-                                        if (!rubQuotaAtiva && dataCorrente == 1)
+                                        if (!rubQuotaAtiva && dataCorrente == 10)
                                         {
                                             StatusMessageFinal = "Lançamento de movimentos realizado com sucesso, no entanto " +
                                                                  "considere que eventuais quotas em condições de serem lançadas " +
