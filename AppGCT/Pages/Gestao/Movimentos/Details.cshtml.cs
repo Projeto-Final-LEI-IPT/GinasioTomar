@@ -50,7 +50,7 @@ namespace AppGCT.Pages.Gestao.Movimentos
             if (User.IsInRole("Sócio"))
             {
                 string userId = User.Identity.GetUserId();
-                if (userId != movimento.UtilizadorId)
+                if (movimento == null || userId != movimento.UtilizadorId)
                 {
                     return RedirectToPage("./AcessDenied");
                 }
