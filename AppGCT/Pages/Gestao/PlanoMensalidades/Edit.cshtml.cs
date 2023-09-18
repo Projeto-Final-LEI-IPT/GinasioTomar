@@ -13,7 +13,7 @@ using System.Security.Claims;
 
 namespace AppGCT.Pages.Inscricoes.PlanoMensalidades
 {
-    [Authorize(Roles = "Administrador")]
+    [Authorize(Roles = "Administrador,Ginásio")]
     public class EditModel : PageModel
     {
         private readonly AppGCT.Data.AppGCTContext _context;
