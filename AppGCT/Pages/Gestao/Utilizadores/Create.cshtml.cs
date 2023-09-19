@@ -151,7 +151,7 @@ namespace AppGCT.Pages.Gestao.Utilizadores
             //valida se NIF já está registado mas apenas para os Sócios
             if (Input.RoleName == "Sócio")
             {
-                var NIFexistente = await _context.Users.FirstOrDefaultAsync(u => u.NIF == Input.NIF);
+                var NIFexistente = await _context.Users.FirstOrDefaultAsync(u => u.NIF == Input.NIF && u.RoleAux == "Sócio");
 
                 if (NIFexistente != null)
                 {
