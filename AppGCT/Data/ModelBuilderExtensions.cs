@@ -37,6 +37,7 @@ namespace AppGCT.Data
                 Email = "admin@localhost",
                 EmailConfirmed = true,
                 Nome = "Administrador",
+                CodPostal = "9999-999",
                 NumSocio = " ",
                 RoleAux = "Administrador",
                 Morada = "Ginásio Clube de Tomar",

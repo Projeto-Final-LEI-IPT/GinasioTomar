@@ -37,6 +37,13 @@ public class Utilizador : IdentityUser
     [Display(Name = "Estado Utilizador")]
     public string EstadoUtilizador { get; set; }
 
+    [Required(ErrorMessage = "Código Postal é campo obrigatório!")]
+    [RegularExpression(@"^[0-9]{4}-[0-9]{3}$", ErrorMessage = "Código Postal deve obedecer ao seguinte critério XXXX-YYY")]
+    [StringLength(8)]
+    [DataType((DataType.Text))]
+    [Display(Name = "Código Postal")]
+    public string CodPostal { get; set; }
+
     [StringLength(15)]
     [DataType(DataType.Text)]
     [Display(Name = "Role Aux")]
