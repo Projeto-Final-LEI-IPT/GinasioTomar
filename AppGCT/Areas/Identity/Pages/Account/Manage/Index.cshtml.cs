@@ -64,6 +64,12 @@ namespace AppGCT.Areas.Identity.Pages.Account.Manage
             [Display(Name = "Morada")]
             public string Morada { get; set; }
 
+            [Required(ErrorMessage = "Código Postal é campo obrigatório!")]
+            [RegularExpression(@"^[0-9]{4}-[0-9]{3}$", ErrorMessage = "Código Postal deve obedecer ao seguinte critério XXXX-YYY")]
+            [StringLength(8)]
+            [DataType((DataType.Text))]
+            [Display(Name = "Código Postal")]
+            public string CodPostal { get; set; }
 
             [Phone]
             [Required(ErrorMessage = "Contacto é campo obrigatório!")]
@@ -90,6 +96,7 @@ namespace AppGCT.Areas.Identity.Pages.Account.Manage
             Input = new InputModel
             {
                 Morada = user.Morada,
+                CodPostal = user.CodPostal,
                 PhoneNumber = phoneNumber
             };
         }
@@ -121,6 +128,10 @@ namespace AppGCT.Areas.Identity.Pages.Account.Manage
             }
 
             var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
+            var phoneNumberAnt = phoneNumber;
+            var moradaAnt = user.Morada;
+            var codPostalAnt = user.CodPostal;
+
             if (Input.PhoneNumber != phoneNumber)
             {
                 var setPhoneResult = await _userManager.SetPhoneNumberAsync(user, Input.PhoneNumber);
@@ -138,9 +149,10 @@ namespace AppGCT.Areas.Identity.Pages.Account.Manage
 
             }
 
-            if (Input.Morada != user.Morada)
+            if (Input.Morada != user.Morada || Input.CodPostal != user.CodPostal)
             {
                 user.Morada = Input.Morada;
+                user.CodPostal = Input.CodPostal;
                 //atualização de morada com sucesso e atualização dos campos de histórico
                 user.DataModificacao = DateTime.Now;
                 user.IdModificacao = user.Id;
@@ -149,7 +161,7 @@ namespace AppGCT.Areas.Identity.Pages.Account.Manage
             await _userManager.UpdateAsync(user);
 
             await _signInManager.RefreshSignInAsync(user);
-            if ((Input.PhoneNumber != phoneNumber) || (Input.Morada != user.Morada))
+            if ((Input.PhoneNumber != phoneNumberAnt) || (Input.Morada != moradaAnt) || (Input.CodPostal != codPostalAnt))
             {
                 StatusMessage = "Perfil Atualizado";
             }else
