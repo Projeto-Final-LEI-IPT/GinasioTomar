@@ -132,6 +132,13 @@ namespace AppGCT.Areas.Identity.Pages.Account
             [Display(Name = "Morada")]
             public string Morada { get; set; }
 
+            [Required(ErrorMessage = "Código Postal é campo obrigatório!")]
+            [RegularExpression(@"^[0-9]{4}-[0-9]{3}$", ErrorMessage = "Código Postal deve obedecer ao seguinte critério XXXX-YYY")]
+            [StringLength(8)]
+            [DataType((DataType.Text))]
+            [Display(Name = "Código Postal")]
+            public string CodPostal { get; set; }
+
             [Required(ErrorMessage = "Contacto é campo obrigatório!")]
             [StringLength(9, MinimumLength =9, ErrorMessage = "Contacto tem de ter 9 digitos.")]
             [RegularExpression(@"^[0-9]*$", ErrorMessage = "Apenas digitos de 0 a 9 são permitidos")]
@@ -208,6 +215,7 @@ namespace AppGCT.Areas.Identity.Pages.Account
                 user.NIF = Input.NIF;
                 user.DataNascim = Input.Dtnascim;
                 user.Morada = Input.Morada;
+                user.CodPostal = Input.CodPostal;
                 user.PhoneNumber = Input.Contato;
                 user.RoleAux = "Sócio";
                 // REGISTA UTILIZADOR COMO 'P-PRÉ ATIVO'

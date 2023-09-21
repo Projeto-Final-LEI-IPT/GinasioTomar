@@ -20,7 +20,7 @@ namespace AppGCT.Models
         [DataType(DataType.Date)]
         [Display(Name = "Data de Fim")]
         public DateTime DataFim { get; set; }
-        [Display(Name = "Estado")]
+        [Display(Name = "Estado Época")]
         [StringLength(1, MinimumLength = 1, ErrorMessage = "Estado do Desconto deverá ser (A) Ativa, (C) Cancelado ou (F) Finalizada")]
         public string? EstadoEpoca { get; set; }
         [Display(Name = "Cobrar última mensalidade?")]

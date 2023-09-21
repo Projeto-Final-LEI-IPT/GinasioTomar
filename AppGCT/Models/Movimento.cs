@@ -34,12 +34,12 @@ namespace AppGCT.Models
         public Decimal? ValorDesconto { get; set; }
 
         [DataType((DataType.Text))]
-        [StringLength(15, MinimumLength = 5, ErrorMessage = "Número de Fatura tem de ter entre 5 e 15 caracteres")]
+        [StringLength(30, MinimumLength = 5, ErrorMessage = "Número de Fatura tem de ter entre 5 e 15 caracteres")]
         [Display(Name = "Número de Fatura")]
         public string? NumFatura { get; set; }
 
         [DataType((DataType.Text))]
-        [StringLength(15, MinimumLength = 5, ErrorMessage = "Número de Nota de Crédito tem de ter entre 5 e 15 caracteres")]
+        [StringLength(30, MinimumLength = 5, ErrorMessage = "Número de Nota de Crédito tem de ter entre 5 e 15 caracteres")]
         [Display(Name = "Número de Nota de Crédito")]
         public string? NumNotaCredito { get; set; }
 
