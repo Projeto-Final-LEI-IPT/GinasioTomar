@@ -95,6 +95,13 @@ namespace AppGCT.Pages.Gestao.Utilizadores
             [Display(Name = "Contacto")]
             public string Contato { get; set; }
 
+            [Required(ErrorMessage = "Código Postal é campo obrigatório!")]
+            [RegularExpression(@"^[0-9]{4}-[0-9]{3}$", ErrorMessage = "Código Postal deve obedecer ao seguinte critério XXXX-YYY")]
+            [StringLength(8)]
+            [DataType((DataType.Text))]
+            [Display(Name = "Código Postal")]
+            public string CodPostal { get; set; }
+
             [Required(ErrorMessage = "Email é campo obrigatório!")]
             [EmailAddress(ErrorMessage = "Email inválido")]
             [Display(Name = "Email")]
@@ -133,6 +140,7 @@ namespace AppGCT.Pages.Gestao.Utilizadores
                 NIF = user.NIF,
                 Dtnascim = user.DataNascim,
                 Morada = user.Morada,
+                CodPostal = user.CodPostal,
                 Contato = user.PhoneNumber,
                 Email = user.Email,
                 Id = user.Id,
@@ -191,6 +199,7 @@ namespace AppGCT.Pages.Gestao.Utilizadores
             user.NIF = Input.NIF;
             user.DataNascim = Input.Dtnascim;
             user.Morada = Input.Morada;
+            user.CodPostal = Input.CodPostal;
             user.PhoneNumber = Input.Contato;
             user.DataModificacao = DateTime.Now;
             if (Input.NumSocio != null)

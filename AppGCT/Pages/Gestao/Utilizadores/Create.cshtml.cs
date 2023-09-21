@@ -83,6 +83,13 @@ namespace AppGCT.Pages.Gestao.Utilizadores
             [Display(Name = "Morada")]
             public string Morada { get; set; }
 
+            [Required(ErrorMessage = "Código Postal é campo obrigatório!")]
+            [RegularExpression(@"^[0-9]{4}-[0-9]{3}$", ErrorMessage = "Código Postal deve obedecer ao seguinte critério XXXX-YYY")]
+            [StringLength(8)]
+            [DataType((DataType.Text))]
+            [Display(Name = "Código Postal")]
+            public string CodPostal { get; set; }
+
             [Required(ErrorMessage = "Contacto é campo obrigatório!")]
             [StringLength(9, MinimumLength = 9, ErrorMessage = "Contacto tem de ter 9 digitos.")]
             [RegularExpression(@"^[0-9]*$", ErrorMessage = "Apenas digitos de 0 a 9 são permitidos")]
@@ -178,6 +185,7 @@ namespace AppGCT.Pages.Gestao.Utilizadores
                     NIF = Input.NIF,
                     RoleAux = Input.RoleName,
                     Morada = Input.Morada,
+                    CodPostal = Input.CodPostal,
                     PhoneNumber = Input.Contato,
                     EmailConfirmed = true,
                     EstadoUtilizador = "A",
