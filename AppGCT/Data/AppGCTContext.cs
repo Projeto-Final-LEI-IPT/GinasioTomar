@@ -31,7 +31,11 @@ namespace AppGCT.Data
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
-            builder.Seed();
+            var configuration = new ConfigurationBuilder()
+                                    .AddUserSecrets<Program>()
+                                    .Build();
+
+            builder.Seed(configuration);
 
             builder.Entity<Ginasta>()
                    .HasOne(p => p.Socio)
