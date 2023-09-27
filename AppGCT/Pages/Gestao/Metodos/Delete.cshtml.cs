@@ -46,8 +46,15 @@ namespace AppGCT.Pages.Gestao.Metodos
             else 
             {
                 MetodoPagamento = metodopagamento;
-                var user = await _userManager.FindByIdAsync(MetodoPagamento.IdCriacao);
-                IdCriacaoName = user?.Nome;
+                if (MetodoPagamento.IdCriacao == "SEED")
+                {
+                    IdCriacaoName = "SEED INICIAL";
+                }
+                else
+                {
+                    var user = await _userManager.FindByIdAsync(MetodoPagamento.IdCriacao);
+                    IdCriacaoName = user?.Nome;
+                }
                 var user2 = await _userManager.FindByIdAsync(MetodoPagamento.IdModificacao);
                 IdModificacaoName = user2?.Nome;
             }

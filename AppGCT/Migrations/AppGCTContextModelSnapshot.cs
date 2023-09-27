@@ -210,7 +210,7 @@ namespace AppGCT.Migrations
 
                     b.HasKey("IdClasse");
 
-                    b.ToTable("Classe");
+                    b.ToTable("Classe", (string)null);
 
                     b.HasData(
                         new
@@ -346,7 +346,7 @@ namespace AppGCT.Migrations
 
                     b.HasKey("CodDesconto");
 
-                    b.ToTable("Desconto");
+                    b.ToTable("Desconto", (string)null);
 
                     b.HasData(
                         new
@@ -434,7 +434,7 @@ namespace AppGCT.Migrations
 
                     b.HasKey("IdEpoca");
 
-                    b.ToTable("Epoca");
+                    b.ToTable("Epoca", (string)null);
 
                     b.HasData(
                         new
@@ -597,7 +597,7 @@ namespace AppGCT.Migrations
 
                     b.HasIndex("UtilizadorId");
 
-                    b.ToTable("Ginasta");
+                    b.ToTable("Ginasta", (string)null);
                 });
 
             modelBuilder.Entity("AppGCT.Models.Inscricao", b =>
@@ -715,7 +715,7 @@ namespace AppGCT.Migrations
 
                     b.HasIndex("GinastaId");
 
-                    b.ToTable("Inscricao");
+                    b.ToTable("Inscricao", (string)null);
                 });
 
             modelBuilder.Entity("AppGCT.Models.MetodoPagamento", b =>
@@ -753,7 +753,7 @@ namespace AppGCT.Migrations
 
                     b.HasKey("CodMetodo");
 
-                    b.ToTable("MetodoPagamento");
+                    b.ToTable("MetodoPagamento", (string)null);
 
                     b.HasData(
                         new
@@ -866,7 +866,7 @@ namespace AppGCT.Migrations
 
                     b.HasIndex("UtilizadorId");
 
-                    b.ToTable("Movimento");
+                    b.ToTable("Movimento", (string)null);
                 });
 
             modelBuilder.Entity("AppGCT.Models.PlanoMensalidade", b =>
@@ -921,7 +921,7 @@ namespace AppGCT.Migrations
 
                     b.HasIndex("GinastaId");
 
-                    b.ToTable("PlanoMensalidade");
+                    b.ToTable("PlanoMensalidade", (string)null);
                 });
 
             modelBuilder.Entity("AppGCT.Models.Rubrica", b =>
@@ -1010,7 +1010,7 @@ namespace AppGCT.Migrations
 
                     b.HasIndex("DescontoId");
 
-                    b.ToTable("Rubrica");
+                    b.ToTable("Rubrica", (string)null);
 
                     b.HasData(
                         new
@@ -2233,7 +2233,7 @@ namespace AppGCT.Migrations
 
                     b.HasKey("IdSocio");
 
-                    b.ToTable("Saldo");
+                    b.ToTable("Saldo", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>

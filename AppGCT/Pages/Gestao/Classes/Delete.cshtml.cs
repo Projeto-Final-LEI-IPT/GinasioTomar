@@ -46,8 +46,16 @@ namespace AppGCT.Pages.Gestao.Classes
             else 
             {
                 Classe = classe;
-                var user = await _userManager.FindByIdAsync(Classe.IdCriacao);
-                IdCriacaoName = user?.Nome;
+                if (Classe.IdCriacao == "SEED")
+                {
+                    IdCriacaoName = "SEED INICIAL";
+                }
+                else
+                {
+                    var user = await _userManager.FindByIdAsync(Classe.IdCriacao);
+                    IdCriacaoName = user?.Nome;
+                }
+                    
                 var user2 = await _userManager.FindByIdAsync(Classe.IdModificacao);
                 IdModificacaoName = user2?.Nome;
             }

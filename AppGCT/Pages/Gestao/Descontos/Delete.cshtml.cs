@@ -47,8 +47,15 @@ namespace AppGCT.Pages.Gestao.Descontos
             else 
             {
                 Desconto = desconto;
-                var user = await _userManager.FindByIdAsync(Desconto.IdCriacao);
-                IdCriacaoName = user?.Nome;
+                if (Desconto.IdCriacao == "SEED")
+                {
+                    IdCriacaoName = "SEED INICIAL";
+                }
+                else
+                {
+                    var user = await _userManager.FindByIdAsync(Desconto.IdCriacao);
+                    IdCriacaoName = user?.Nome;
+                }
                 var user2 = await _userManager.FindByIdAsync(Desconto.IdModificacao);
                 IdModificacaoName = user2?.Nome;
             }
