@@ -36,6 +36,11 @@ namespace AppGCT.Data
                                     .Build();
 
             builder.Seed(configuration);
+            //define campo Id do Identity de 36 posições (GUID)
+            builder.Entity<Utilizador>(b =>
+            {
+                b.Property(u => u.Id).HasMaxLength(36);
+            });
 
             builder.Entity<Ginasta>()
                    .HasOne(p => p.Socio)

@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace AppGCT.Migrations
 {
     /// <inheritdoc />
-    public partial class initialCreate : Migration
+    public partial class initialcreate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -31,7 +31,7 @@ namespace AppGCT.Migrations
                 name: "AspNetUsers",
                 columns: table => new
                 {
-                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Id = table.Column<string>(type: "nvarchar(36)", maxLength: 36, nullable: false),
                     Nome = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     NumSocio = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: false),
                     NIF = table.Column<string>(type: "nvarchar(9)", maxLength: 9, nullable: false),
@@ -179,7 +179,7 @@ namespace AppGCT.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    UserId = table.Column<string>(type: "nvarchar(36)", nullable: false),
                     ClaimType = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ClaimValue = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
@@ -201,7 +201,7 @@ namespace AppGCT.Migrations
                     LoginProvider = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false),
                     ProviderKey = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false),
                     ProviderDisplayName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                    UserId = table.Column<string>(type: "nvarchar(36)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -218,7 +218,7 @@ namespace AppGCT.Migrations
                 name: "AspNetUserRoles",
                 columns: table => new
                 {
-                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    UserId = table.Column<string>(type: "nvarchar(36)", nullable: false),
                     RoleId = table.Column<string>(type: "nvarchar(450)", nullable: false)
                 },
                 constraints: table =>
@@ -242,7 +242,7 @@ namespace AppGCT.Migrations
                 name: "AspNetUserTokens",
                 columns: table => new
                 {
-                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    UserId = table.Column<string>(type: "nvarchar(36)", nullable: false),
                     LoginProvider = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false),
                     Name = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false),
                     Value = table.Column<string>(type: "nvarchar(max)", nullable: true)
@@ -294,7 +294,7 @@ namespace AppGCT.Migrations
                     IdCriacao = table.Column<string>(type: "nvarchar(36)", maxLength: 36, nullable: true),
                     DataModificacao = table.Column<DateTime>(type: "datetime2", nullable: false),
                     IdModificacao = table.Column<string>(type: "nvarchar(36)", maxLength: 36, nullable: true),
-                    UtilizadorId = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                    UtilizadorId = table.Column<string>(type: "nvarchar(36)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -459,7 +459,7 @@ namespace AppGCT.Migrations
                     IdCriacao = table.Column<string>(type: "nvarchar(36)", maxLength: 36, nullable: true),
                     DataModificacao = table.Column<DateTime>(type: "datetime2", nullable: false),
                     IdModificacao = table.Column<string>(type: "nvarchar(36)", maxLength: 36, nullable: true),
-                    UtilizadorId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    UtilizadorId = table.Column<string>(type: "nvarchar(36)", nullable: false),
                     AtletaMovimentoId = table.Column<int>(type: "int", nullable: true),
                     RubricaId = table.Column<string>(type: "nvarchar(3)", nullable: false),
                     MetodoPagamentoId = table.Column<string>(type: "nvarchar(2)", nullable: true)
@@ -496,31 +496,31 @@ namespace AppGCT.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "7f0a141b-d593-4899-b87e-75443188572d", null, "Administrador", "ADMINISTRADOR" },
-                    { "a6e08c5b-efa3-4c2f-8e73-d96c55ce5662", null, "Sócio", "SÓCIO" },
-                    { "eca0d915-55d4-4300-ba8f-f5fa8f2cb409", null, "Ginásio", "GINÁSIO" }
+                    { "4d278633-ec92-477c-b26b-a0c98a3dcf06", null, "Administrador", "ADMINISTRADOR" },
+                    { "e92c9f36-89cd-400a-98a6-0336764f0f25", null, "Sócio", "SÓCIO" },
+                    { "fab9f852-0247-4f3b-b264-262d84270fc7", null, "Ginásio", "GINÁSIO" }
                 });
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "CodPostal", "ConcurrencyStamp", "DataAprovacao", "DataCriacao", "DataModificacao", "DataNascim", "Email", "EmailConfirmed", "EstadoUtilizador", "IdCriacao", "IdModificacao", "LockoutEnabled", "LockoutEnd", "Morada", "NIF", "Nome", "NormalizedEmail", "NormalizedUserName", "NumSocio", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "RoleAux", "SecurityStamp", "TwoFactorEnabled", "UltimoLogin", "UserName" },
-                values: new object[] { "93c9724c-55a8-4528-b0d9-21b2db06524e", 0, "9999-999", "d4192314-db73-431d-b97a-7d191b80138c", new DateTime(2023, 9, 21, 22, 28, 28, 918, DateTimeKind.Local).AddTicks(6299), new DateTime(2023, 9, 21, 22, 28, 28, 918, DateTimeKind.Local).AddTicks(6240), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2023, 9, 21, 22, 28, 28, 918, DateTimeKind.Local).AddTicks(6308), "admin@localhost", true, "A", "SEED", " ", false, null, "Ginásio Clube de Tomar", "999999999", "Administrador", "ADMIN@LOCALHOST", "ADMIN@LOCALHOST", " ", "AQAAAAIAAYagAAAAEFAGoDxhzxEJ7KevIQDqQ3on9aTNW3JsEoQ4V33r9ySoCYG2JsgiYWUYPXyUyQU3uw==", "999999999", false, "Administrador", "6139f429-e46a-4e88-a62c-7ac6d390d61c", false, null, "admin@localhost" });
+                values: new object[] { "aa70173c-7552-4701-937b-c6fc4375479a", 0, "9999-999", "b262ab61-231e-4f52-9376-51eb9af97167", new DateTime(2023, 10, 5, 14, 36, 17, 68, DateTimeKind.Local).AddTicks(2975), new DateTime(2023, 10, 5, 14, 36, 17, 68, DateTimeKind.Local).AddTicks(2894), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2023, 10, 5, 14, 36, 17, 68, DateTimeKind.Local).AddTicks(2985), "admin@localhost", true, "A", "SEED", " ", false, null, "Ginásio Clube de Tomar", "999999999", "Administrador", "ADMIN@LOCALHOST", "ADMIN@LOCALHOST", " ", "AQAAAAIAAYagAAAAEPlAbFDLLvAANCz5Kt14NTQ7wsQmJw8pvouTt4CzS8iQ7hP9D7O7VTMmuwS2i4oeoQ==", "999999999", false, "Administrador", "e26df283-99a9-4040-845e-aed52a6b6cca", false, null, "admin@localhost" });
 
             migrationBuilder.InsertData(
                 table: "Classe",
                 columns: new[] { "IdClasse", "DataCriacao", "DataModificacao", "EstadoClasse", "IdCriacao", "IdModificacao", "NomeClasse" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(2023, 9, 21, 22, 28, 29, 28, DateTimeKind.Local).AddTicks(2729), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "A", "SEED", " ", "Aprendizagem 1" },
-                    { 2, new DateTime(2023, 9, 21, 22, 28, 29, 28, DateTimeKind.Local).AddTicks(2742), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "A", "SEED", " ", "Aprendizagem 2" },
-                    { 3, new DateTime(2023, 9, 21, 22, 28, 29, 28, DateTimeKind.Local).AddTicks(2787), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "A", "SEED", " ", "Aprendizagem 3" },
-                    { 4, new DateTime(2023, 9, 21, 22, 28, 29, 28, DateTimeKind.Local).AddTicks(2802), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "A", "SEED", " ", "Acrobática 1" },
-                    { 5, new DateTime(2023, 9, 21, 22, 28, 29, 28, DateTimeKind.Local).AddTicks(2830), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "A", "SEED", " ", "Acrobática 2" },
-                    { 6, new DateTime(2023, 9, 21, 22, 28, 29, 28, DateTimeKind.Local).AddTicks(2847), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "A", "SEED", " ", "Acrobática 3" },
-                    { 7, new DateTime(2023, 9, 21, 22, 28, 29, 28, DateTimeKind.Local).AddTicks(2864), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "A", "SEED", " ", "Trampolins 1" },
-                    { 8, new DateTime(2023, 9, 21, 22, 28, 29, 28, DateTimeKind.Local).AddTicks(2872), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "A", "SEED", " ", "Trampolins 2" },
-                    { 9, new DateTime(2023, 9, 21, 22, 28, 29, 28, DateTimeKind.Local).AddTicks(2884), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "A", "SEED", " ", "Ginástica para todos–Júnior" },
-                    { 10, new DateTime(2023, 9, 21, 22, 28, 29, 28, DateTimeKind.Local).AddTicks(2904), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "A", "SEED", " ", "Ginástica para todos–Universitários" }
+                    { 1, new DateTime(2023, 10, 5, 14, 36, 17, 442, DateTimeKind.Local).AddTicks(208), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "A", "SEED", " ", "Aprendizagem 1" },
+                    { 2, new DateTime(2023, 10, 5, 14, 36, 17, 442, DateTimeKind.Local).AddTicks(230), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "A", "SEED", " ", "Aprendizagem 2" },
+                    { 3, new DateTime(2023, 10, 5, 14, 36, 17, 442, DateTimeKind.Local).AddTicks(244), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "A", "SEED", " ", "Aprendizagem 3" },
+                    { 4, new DateTime(2023, 10, 5, 14, 36, 17, 442, DateTimeKind.Local).AddTicks(251), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "A", "SEED", " ", "Acrobática 1" },
+                    { 5, new DateTime(2023, 10, 5, 14, 36, 17, 442, DateTimeKind.Local).AddTicks(257), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "A", "SEED", " ", "Acrobática 2" },
+                    { 6, new DateTime(2023, 10, 5, 14, 36, 17, 442, DateTimeKind.Local).AddTicks(267), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "A", "SEED", " ", "Acrobática 3" },
+                    { 7, new DateTime(2023, 10, 5, 14, 36, 17, 442, DateTimeKind.Local).AddTicks(273), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "A", "SEED", " ", "Trampolins 1" },
+                    { 8, new DateTime(2023, 10, 5, 14, 36, 17, 442, DateTimeKind.Local).AddTicks(279), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "A", "SEED", " ", "Trampolins 2" },
+                    { 9, new DateTime(2023, 10, 5, 14, 36, 17, 442, DateTimeKind.Local).AddTicks(285), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "A", "SEED", " ", "Ginástica para todos–Júnior" },
+                    { 10, new DateTime(2023, 10, 5, 14, 36, 17, 442, DateTimeKind.Local).AddTicks(293), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "A", "SEED", " ", "Ginástica para todos–Universitários" }
                 });
 
             migrationBuilder.InsertData(
@@ -528,25 +528,25 @@ namespace AppGCT.Migrations
                 columns: new[] { "CodDesconto", "DataCriacao", "DataModificacao", "DescDesconto", "EstadoDesconto", "IdCriacao", "IdModificacao" },
                 values: new object[,]
                 {
-                    { "00", new DateTime(2023, 9, 21, 22, 28, 29, 28, DateTimeKind.Local).AddTicks(3166), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Bolsa", "A", "SEED", " " },
-                    { "01", new DateTime(2023, 9, 21, 22, 28, 29, 28, DateTimeKind.Local).AddTicks(3224), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Parentesco(1º familiar)", "A", "SEED", " " },
-                    { "02", new DateTime(2023, 9, 21, 22, 28, 29, 28, DateTimeKind.Local).AddTicks(3234), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Parentesco(2º familiar)", "A", "SEED", " " },
-                    { "03", new DateTime(2023, 9, 21, 22, 28, 29, 28, DateTimeKind.Local).AddTicks(3243), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Parentesco(3º familiar)", "A", "SEED", " " }
+                    { "00", new DateTime(2023, 10, 5, 14, 36, 17, 442, DateTimeKind.Local).AddTicks(542), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Bolsa", "A", "SEED", " " },
+                    { "01", new DateTime(2023, 10, 5, 14, 36, 17, 442, DateTimeKind.Local).AddTicks(559), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Parentesco(1º familiar)", "A", "SEED", " " },
+                    { "02", new DateTime(2023, 10, 5, 14, 36, 17, 442, DateTimeKind.Local).AddTicks(566), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Parentesco(2º familiar)", "A", "SEED", " " },
+                    { "03", new DateTime(2023, 10, 5, 14, 36, 17, 442, DateTimeKind.Local).AddTicks(573), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Parentesco(3º familiar)", "A", "SEED", " " }
                 });
 
             migrationBuilder.InsertData(
                 table: "Epoca",
                 columns: new[] { "IdEpoca", "DataCriacao", "DataFim", "DataInicio", "DataModificacao", "EstadoEpoca", "ICobrancUltimoMes", "IdCriacao", "IdModificacao", "NomeEpoca" },
-                values: new object[] { 1, new DateTime(2023, 9, 21, 22, 28, 29, 28, DateTimeKind.Local).AddTicks(2569), new DateTime(2024, 7, 31, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2023, 9, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "A", "N", "SEED", " ", "2023/2024" });
+                values: new object[] { 1, new DateTime(2023, 10, 5, 14, 36, 17, 441, DateTimeKind.Local).AddTicks(9887), new DateTime(2024, 7, 31, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2023, 9, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "A", "N", "SEED", " ", "2023/2024" });
 
             migrationBuilder.InsertData(
                 table: "MetodoPagamento",
                 columns: new[] { "CodMetodo", "DataCriacao", "DataModificacao", "DescMetodo", "EstadoMetodo", "IdCriacao", "IdModificacao", "ValorDesconto" },
                 values: new object[,]
                 {
-                    { "00", new DateTime(2023, 9, 21, 22, 28, 29, 28, DateTimeKind.Local).AddTicks(3046), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Numerário", "A", "SEED", " ", 0m },
-                    { "01", new DateTime(2023, 9, 21, 22, 28, 29, 28, DateTimeKind.Local).AddTicks(3066), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Transferência Bancária", "A", "SEED", " ", 1m },
-                    { "02", new DateTime(2023, 9, 21, 22, 28, 29, 28, DateTimeKind.Local).AddTicks(3074), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Terminal Pagamento Automático(TPA)", "A", "SEED", " ", 0m }
+                    { "00", new DateTime(2023, 10, 5, 14, 36, 17, 442, DateTimeKind.Local).AddTicks(434), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Numerário", "A", "SEED", " ", 0m },
+                    { "01", new DateTime(2023, 10, 5, 14, 36, 17, 442, DateTimeKind.Local).AddTicks(450), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Transferência Bancária", "A", "SEED", " ", 1m },
+                    { "02", new DateTime(2023, 10, 5, 14, 36, 17, 442, DateTimeKind.Local).AddTicks(457), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Terminal Pagamento Automático(TPA)", "A", "SEED", " ", 0m }
                 });
 
             migrationBuilder.InsertData(
@@ -554,76 +554,76 @@ namespace AppGCT.Migrations
                 columns: new[] { "CodRubrica", "ClasseId", "DataCriacao", "DataModificacao", "DescontoId", "DescricaoRubrica", "EstadoRubrica", "Horario", "HorasSemanais", "IPagInscricao", "IPrecario", "IVlrUnit", "IdCriacao", "IdModificacao", "LocalTreino", "OrdemPrecario", "TipoMovimento", "TipoRubrica", "ValorUnitario" },
                 values: new object[,]
                 {
-                    { "001", null, new DateTime(2023, 9, 21, 22, 28, 29, 28, DateTimeKind.Local).AddTicks(3336), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "Inscrição", "A", "", "", "S", "S", "S", "SEED", " ", "", 1, "D", "G", 15m },
-                    { "002", null, new DateTime(2023, 9, 21, 22, 28, 29, 28, DateTimeKind.Local).AddTicks(3353), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "Filiação FGP", "A", "", "", "S", "S", "S", "SEED", " ", "", 2, "D", "G", 10m },
-                    { "003", null, new DateTime(2023, 9, 21, 22, 28, 29, 28, DateTimeKind.Local).AddTicks(3369), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "Seguro", "A", "", "", "S", "S", "S", "SEED", " ", "", 3, "D", "G", 30m },
-                    { "004", null, new DateTime(2023, 9, 21, 22, 28, 29, 28, DateTimeKind.Local).AddTicks(3385), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "Quota Sócio", "A", "", "", "N", "S", "S", "SEED", " ", "", 4, "D", "S", 15m },
-                    { "055", null, new DateTime(2023, 9, 21, 22, 28, 29, 28, DateTimeKind.Local).AddTicks(4160), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "Pagamento", "A", "", "", "N", "N", "N", "SEED", " ", "", null, "C", "P", 0m },
-                    { "056", null, new DateTime(2023, 9, 21, 22, 28, 29, 28, DateTimeKind.Local).AddTicks(4166), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "Devolução", "A", "", "", "N", "N", "N", "SEED", " ", "", null, "C", "D", 0m },
-                    { "057", null, new DateTime(2023, 9, 21, 22, 28, 29, 28, DateTimeKind.Local).AddTicks(4173), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "Regularização Débito", "A", "", "", "N", "N", "N", "SEED", " ", "", null, "D", "R", 0m },
-                    { "058", null, new DateTime(2023, 9, 21, 22, 28, 29, 28, DateTimeKind.Local).AddTicks(4179), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "Regularização Crédito", "A", "", "", "N", "N", "N", "SEED", " ", "", null, "C", "R", 0m }
+                    { "001", null, new DateTime(2023, 10, 5, 14, 36, 17, 442, DateTimeKind.Local).AddTicks(661), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "Inscrição", "A", "", "", "S", "S", "S", "SEED", " ", "", 1, "D", "G", 15m },
+                    { "002", null, new DateTime(2023, 10, 5, 14, 36, 17, 442, DateTimeKind.Local).AddTicks(694), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "Filiação FGP", "A", "", "", "S", "S", "S", "SEED", " ", "", 2, "D", "G", 10m },
+                    { "003", null, new DateTime(2023, 10, 5, 14, 36, 17, 442, DateTimeKind.Local).AddTicks(703), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "Seguro", "A", "", "", "S", "S", "S", "SEED", " ", "", 3, "D", "G", 30m },
+                    { "004", null, new DateTime(2023, 10, 5, 14, 36, 17, 442, DateTimeKind.Local).AddTicks(713), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "Quota Sócio", "A", "", "", "N", "S", "S", "SEED", " ", "", 4, "D", "S", 15m },
+                    { "055", null, new DateTime(2023, 10, 5, 14, 36, 17, 442, DateTimeKind.Local).AddTicks(3587), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "Pagamento", "A", "", "", "N", "N", "N", "SEED", " ", "", null, "C", "P", 0m },
+                    { "056", null, new DateTime(2023, 10, 5, 14, 36, 17, 442, DateTimeKind.Local).AddTicks(3598), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "Devolução", "A", "", "", "N", "N", "N", "SEED", " ", "", null, "C", "D", 0m },
+                    { "057", null, new DateTime(2023, 10, 5, 14, 36, 17, 442, DateTimeKind.Local).AddTicks(3609), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "Regularização Débito", "A", "", "", "N", "N", "N", "SEED", " ", "", null, "D", "R", 0m },
+                    { "058", null, new DateTime(2023, 10, 5, 14, 36, 17, 442, DateTimeKind.Local).AddTicks(3617), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "Regularização Crédito", "A", "", "", "N", "N", "N", "SEED", " ", "", null, "C", "R", 0m }
                 });
 
             migrationBuilder.InsertData(
                 table: "AspNetUserRoles",
                 columns: new[] { "RoleId", "UserId" },
-                values: new object[] { "7f0a141b-d593-4899-b87e-75443188572d", "93c9724c-55a8-4528-b0d9-21b2db06524e" });
+                values: new object[] { "4d278633-ec92-477c-b26b-a0c98a3dcf06", "aa70173c-7552-4701-937b-c6fc4375479a" });
 
             migrationBuilder.InsertData(
                 table: "Rubrica",
                 columns: new[] { "CodRubrica", "ClasseId", "DataCriacao", "DataModificacao", "DescontoId", "DescricaoRubrica", "EstadoRubrica", "Horario", "HorasSemanais", "IPagInscricao", "IPrecario", "IVlrUnit", "IdCriacao", "IdModificacao", "LocalTreino", "OrdemPrecario", "TipoMovimento", "TipoRubrica", "ValorUnitario" },
                 values: new object[,]
                 {
-                    { "005", 1, new DateTime(2023, 9, 21, 22, 28, 29, 28, DateTimeKind.Local).AddTicks(3402), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "Mens. Aprendizagem 1", "A", "2ª e 5ª 17h45 às 18h30 (2x semana)", "1h30m", "N", "S", "S", "SEED", " ", "Gualdim Pais", 1, "D", "G", 27m },
-                    { "006", 2, new DateTime(2023, 9, 21, 22, 28, 29, 28, DateTimeKind.Local).AddTicks(3421), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "Mens. Aprendizagem 2", "A", "2ª e 5ª 18h15 às 19h30  (2x semana)", "2h30m", "N", "S", "S", "SEED", " ", "Gualdim Pais", 2, "D", "G", 30m },
-                    { "007", 3, new DateTime(2023, 9, 21, 22, 28, 29, 28, DateTimeKind.Local).AddTicks(3436), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "Mens. Aprendizagem 3", "A", "3ª e 6ª 17h45 às 19h15  (2x semana)", "3h00m", "N", "S", "S", "SEED", " ", "Gualdim Pais", 3, "D", "G", 32m },
-                    { "008", 4, new DateTime(2023, 9, 21, 22, 28, 29, 28, DateTimeKind.Local).AddTicks(3453), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "Mens. Acrobática 1", "A", "3ª, 4ª 17h45 às 20h00 e 6ª 17h45 às 20h15 (3x semana)", "7h00m", "N", "S", "S", "SEED", " ", "Stª Iria", 4, "D", "G", 40m },
-                    { "009", 5, new DateTime(2023, 9, 21, 22, 28, 29, 28, DateTimeKind.Local).AddTicks(3474), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "Mens. Acrobática 2", "A", "3ª, 4ª e 6ª 17h45 às 20h45  (3x semana)", "9h00m", "N", "S", "S", "SEED", " ", "Stª Iria", 5, "D", "G", 45m },
-                    { "010", 6, new DateTime(2023, 9, 21, 22, 28, 29, 28, DateTimeKind.Local).AddTicks(3490), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "Mens. Acrobática 3", "A", "2ª, 3ª, 5ª 18h00 às 21h00 e Sábado 10h00 às 13h00  (4x semana)", "12h00m", "N", "S", "S", "SEED", " ", "Stª Iria", 6, "D", "G", 52m },
-                    { "011", 7, new DateTime(2023, 9, 21, 22, 28, 29, 28, DateTimeKind.Local).AddTicks(3505), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "Mens. Trampolins 1", "A", "2ª, 5ª 18h00 às 19h45 e Sábado 11h00 às 13h00  (3x semana)", "5h30m", "N", "S", "S", "SEED", " ", "Gualdim Pais", 7, "D", "G", 36m },
-                    { "012", 8, new DateTime(2023, 9, 21, 22, 28, 29, 28, DateTimeKind.Local).AddTicks(3527), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "Mens. Trampolins 2", "A", "2ª 18h30 às 21h00 e 3ª, 4ª e 6ª 18h00 às 20h15  (4x semana)", "9h15m", "N", "S", "S", "SEED", " ", "Gualdim Pais", 8, "D", "G", 45m },
-                    { "013", 9, new DateTime(2023, 9, 21, 22, 28, 29, 28, DateTimeKind.Local).AddTicks(3597), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "Mens. GPT – Júnior", "A", "4ª 18h00 às 20h30 e Sábados 10h30 às 13h00  (2x semana)", "5h00m", "N", "S", "S", "SEED", " ", "Gualdim Pais", 9, "D", "G", 35m },
-                    { "014", 10, new DateTime(2023, 9, 21, 22, 28, 29, 28, DateTimeKind.Local).AddTicks(3613), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "Mens. GPT – Universitários", "A", "Sábado 10h00 às 13h00 (1x semana)", "3h00m", "N", "S", "S", "SEED", " ", "Gualdim Pais", 10, "D", "G", 18m },
-                    { "015", 1, new DateTime(2023, 9, 21, 22, 28, 29, 28, DateTimeKind.Local).AddTicks(3629), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "00", "Mens. APZ 1 - Bolsa", "A", "2ª e 5ª 17h45 às 18h30 (2x semana)", "1h30m", "N", "N", "S", "SEED", " ", "Gualdim Pais", null, "D", "G", 0m },
-                    { "016", 2, new DateTime(2023, 9, 21, 22, 28, 29, 28, DateTimeKind.Local).AddTicks(3644), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "00", "Mens. APZ 2 - Bolsa", "A", "2ª e 5ª 18h15 às 19h30  (2x semana)", "2h30m", "N", "N", "S", "SEED", " ", "Gualdim Pais", null, "D", "G", 0m },
-                    { "017", 3, new DateTime(2023, 9, 21, 22, 28, 29, 28, DateTimeKind.Local).AddTicks(3654), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "00", "Mens. APZ 3 - Bolsa", "A", "3ª e 6ª 17h45 às 19h15  (2x semana)", "3h00m", "N", "N", "S", "SEED", " ", "Gualdim Pais", null, "D", "G", 0m },
-                    { "018", 4, new DateTime(2023, 9, 21, 22, 28, 29, 28, DateTimeKind.Local).AddTicks(3667), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "00", "Mens. Acro 1 - Bolsa", "A", "3ª, 4ª 17h45 às 20h00 e 6ª 17h45 às 20h15 (3x semana)", "7h00m", "N", "N", "S", "SEED", " ", "Stª Iria", null, "D", "G", 0m },
-                    { "019", 5, new DateTime(2023, 9, 21, 22, 28, 29, 28, DateTimeKind.Local).AddTicks(3684), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "00", "Mens. Acro 2 - Bolsa", "A", "3ª, 4ª e 6ª 17h45 às 20h45  (3x semana)", "9h00m", "N", "N", "S", "SEED", " ", "Stª Iria", null, "D", "G", 0m },
-                    { "020", 6, new DateTime(2023, 9, 21, 22, 28, 29, 28, DateTimeKind.Local).AddTicks(3699), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "00", "Mens. Acro 3 - Bolsa", "A", "2ª, 3ª, 5ª 18h00 às 21h00 e Sábado 10h00 às 13h00  (4x semana)", "12h00m", "N", "N", "S", "SEED", " ", "Stª Iria", null, "D", "G", 0m },
-                    { "021", 7, new DateTime(2023, 9, 21, 22, 28, 29, 28, DateTimeKind.Local).AddTicks(3715), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "00", "Mens. TRAMP 1 - Bolsa", "A", "2ª, 5ª 18h00 às 19h45 e Sábado 11h00 às 13h00  (3x semana)", "5h30m", "N", "N", "S", "SEED", " ", "Gualdim Pais", null, "D", "G", 0m },
-                    { "022", 8, new DateTime(2023, 9, 21, 22, 28, 29, 28, DateTimeKind.Local).AddTicks(3746), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "00", "Mens. TRAMP 2 - Bolsa", "A", "2ª 18h30 às 21h00 e 3ª, 4ª e 6ª 18h00 às 20h15  (4x semana)", "9h15m", "N", "N", "S", "SEED", " ", "Gualdim Pais", null, "D", "G", 0m },
-                    { "023", 9, new DateTime(2023, 9, 21, 22, 28, 29, 28, DateTimeKind.Local).AddTicks(3765), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "00", "Mens. GPT – Júnior - Bolsa", "A", "4ª 18h00 às 20h30 e Sábados 10h30 às 13h00  (2x semana)", "5h00m", "N", "N", "S", "SEED", " ", "Gualdim Pais", null, "D", "G", 0m },
-                    { "024", 10, new DateTime(2023, 9, 21, 22, 28, 29, 28, DateTimeKind.Local).AddTicks(3780), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "00", "Mens. GPT – Univ. - Bolsa", "A", "Sábado 10h00 às 13h00 (1x semana)", "3h00m", "N", "N", "S", "SEED", " ", "Gualdim Pais", null, "D", "G", 0m },
-                    { "025", 1, new DateTime(2023, 9, 21, 22, 28, 29, 28, DateTimeKind.Local).AddTicks(3797), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "01", "Mens. APZ 1 - Par.(1º)", "A", "2ª e 5ª 17h45 às 18h30 (2x semana)", "1h30m", "N", "N", "S", "SEED", " ", "Gualdim Pais", null, "D", "G", 24.3m },
-                    { "026", 2, new DateTime(2023, 9, 21, 22, 28, 29, 28, DateTimeKind.Local).AddTicks(3811), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "01", "Mens. APZ 2 - Par.(1º)", "A", "2ª e 5ª 18h15 às 19h30  (2x semana)", "2h30m", "N", "N", "S", "SEED", " ", "Gualdim Pais", null, "D", "G", 27m },
-                    { "027", 3, new DateTime(2023, 9, 21, 22, 28, 29, 28, DateTimeKind.Local).AddTicks(3832), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "01", "Mens. APZ 3 - Par.(1º)", "A", "3ª e 6ª 17h45 às 19h15  (2x semana)", "3h00m", "N", "N", "S", "SEED", " ", "Gualdim Pais", null, "D", "G", 28.8m },
-                    { "028", 4, new DateTime(2023, 9, 21, 22, 28, 29, 28, DateTimeKind.Local).AddTicks(3843), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "01", "Mens. Acro 1 - Par.(1º)", "A", "3ª, 4ª 17h45 às 20h00 e 6ª 17h45 às 20h15 (3x semana)", "7h00m", "N", "N", "S", "SEED", " ", "Stª Iria", null, "D", "G", 36m },
-                    { "029", 5, new DateTime(2023, 9, 21, 22, 28, 29, 28, DateTimeKind.Local).AddTicks(3859), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "01", "Mens. Acro 2 - Par.(1º)", "A", "3ª, 4ª e 6ª 17h45 às 20h45  (3x semana)", "9h00m", "N", "N", "S", "SEED", " ", "Stª Iria", null, "D", "G", 40.5m },
-                    { "030", 6, new DateTime(2023, 9, 21, 22, 28, 29, 28, DateTimeKind.Local).AddTicks(3873), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "01", "Mens. Acro 3 - Par.(1º)", "A", "2ª, 3ª, 5ª 18h00 às 21h00 e Sábado 10h00 às 13h00  (4x semana)", "12h00m", "N", "N", "S", "SEED", " ", "Stª Iria", null, "D", "G", 46.8m },
-                    { "031", 7, new DateTime(2023, 9, 21, 22, 28, 29, 28, DateTimeKind.Local).AddTicks(3891), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "01", "Mens. TRAMP 1 - Par.(1º)", "A", "2ª, 5ª 18h00 às 19h45 e Sábado 11h00 às 13h00  (3x semana)", "5h30m", "N", "N", "S", "SEED", " ", "Gualdim Pais", null, "D", "G", 32.4m },
-                    { "032", 8, new DateTime(2023, 9, 21, 22, 28, 29, 28, DateTimeKind.Local).AddTicks(3909), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "01", "Mens. TRAMP 2 - Par.(1º)", "A", "2ª 18h30 às 21h00 e 3ª, 4ª e 6ª 18h00 às 20h15  (4x semana)", "9h15m", "N", "N", "S", "SEED", " ", "Gualdim Pais", null, "D", "G", 40.5m },
-                    { "033", 9, new DateTime(2023, 9, 21, 22, 28, 29, 28, DateTimeKind.Local).AddTicks(3925), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "01", "Mens. GPT – Júnior - Par.(1º)", "A", "4ª 18h00 às 20h30 e Sábados 10h30 às 13h00  (2x semana)", "5h00m", "N", "N", "S", "SEED", " ", "Gualdim Pais", null, "D", "G", 31.5m },
-                    { "034", 10, new DateTime(2023, 9, 21, 22, 28, 29, 28, DateTimeKind.Local).AddTicks(3940), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "01", "Mens. GPT – Univ. - Par.(1º)", "A", "Sábado 10h00 às 13h00 (1x semana)", "3h00m", "N", "N", "S", "SEED", " ", "Gualdim Pais", null, "D", "G", 16.2m },
-                    { "035", 1, new DateTime(2023, 9, 21, 22, 28, 29, 28, DateTimeKind.Local).AddTicks(3955), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "02", "Mens. APZ 1 - Par.(2º)", "A", "2ª e 5ª 17h45 às 18h30 (2x semana)", "1h30m", "N", "N", "S", "SEED", " ", "Gualdim Pais", null, "D", "G", 22.95m },
-                    { "036", 2, new DateTime(2023, 9, 21, 22, 28, 29, 28, DateTimeKind.Local).AddTicks(3974), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "02", "Mens. APZ 2 - Par.(2º)", "A", "2ª e 5ª 18h15 às 19h30  (2x semana)", "2h30m", "N", "N", "S", "SEED", " ", "Gualdim Pais", null, "D", "G", 25.5m },
-                    { "037", 3, new DateTime(2023, 9, 21, 22, 28, 29, 28, DateTimeKind.Local).AddTicks(3988), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "02", "Mens. APZ 3 - Par.(2º)", "A", "3ª e 6ª 17h45 às 19h15  (2x semana)", "3h00m", "N", "N", "S", "SEED", " ", "Gualdim Pais", null, "D", "G", 27.2m },
-                    { "038", 4, new DateTime(2023, 9, 21, 22, 28, 29, 28, DateTimeKind.Local).AddTicks(4004), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "02", "Mens. Acro 1 - Par.(2º)", "A", "3ª, 4ª 17h45 às 20h00 e 6ª 17h45 às 20h15 (3x semana)", "7h00m", "N", "N", "S", "SEED", " ", "Stª Iria", null, "D", "G", 34m },
-                    { "039", 5, new DateTime(2023, 9, 21, 22, 28, 29, 28, DateTimeKind.Local).AddTicks(4017), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "02", "Mens. Acro 2 - Par.(2º)", "A", "3ª, 4ª e 6ª 17h45 às 20h45  (3x semana)", "9h00m", "N", "N", "S", "SEED", " ", "Stª Iria", null, "D", "G", 38.25m },
-                    { "040", 6, new DateTime(2023, 9, 21, 22, 28, 29, 28, DateTimeKind.Local).AddTicks(4032), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "02", "Mens. Acro 3 - Par.(2º)", "A", "2ª, 3ª, 5ª 18h00 às 21h00 e Sábado 10h00 às 13h00  (4x semana)", "12h00m", "N", "N", "S", "SEED", " ", "Stª Iria", null, "D", "G", 44.2m },
-                    { "041", 7, new DateTime(2023, 9, 21, 22, 28, 29, 28, DateTimeKind.Local).AddTicks(4047), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "02", "Mens. TRAMP 1 - Par.(2º)", "A", "2ª, 5ª 18h00 às 19h45 e Sábado 11h00 às 13h00  (3x semana)", "5h30m", "N", "N", "S", "SEED", " ", "Gualdim Pais", null, "D", "G", 30.6m },
-                    { "042", 8, new DateTime(2023, 9, 21, 22, 28, 29, 28, DateTimeKind.Local).AddTicks(4055), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "02", "Mens. TRAMP 2 - Par.(2º)", "A", "2ª 18h30 às 21h00 e 3ª, 4ª e 6ª 18h00 às 20h15  (4x semana)", "9h15m", "N", "N", "S", "SEED", " ", "Gualdim Pais", null, "D", "G", 38.25m },
-                    { "043", 9, new DateTime(2023, 9, 21, 22, 28, 29, 28, DateTimeKind.Local).AddTicks(4062), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "02", "Mens. GPT – Júnior - Par.(2º)", "A", "4ª 18h00 às 20h30 e Sábados 10h30 às 13h00  (2x semana)", "5h00m", "N", "N", "S", "SEED", " ", "Gualdim Pais", null, "D", "G", 29.75m },
-                    { "044", 10, new DateTime(2023, 9, 21, 22, 28, 29, 28, DateTimeKind.Local).AddTicks(4068), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "02", "Mens. GPT – Univ. - Par.(2º)", "A", "Sábado 10h00 às 13h00 (1x semana)", "3h00m", "N", "N", "S", "SEED", " ", "Gualdim Pais", null, "D", "G", 15.3m },
-                    { "045", 1, new DateTime(2023, 9, 21, 22, 28, 29, 28, DateTimeKind.Local).AddTicks(4074), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "03", "Mens. APZ 1 - Par.(3º)", "A", "2ª e 5ª 17h45 às 18h30 (2x semana)", "1h30m", "N", "N", "S", "SEED", " ", "Gualdim Pais", null, "D", "G", 21.6m },
-                    { "046", 2, new DateTime(2023, 9, 21, 22, 28, 29, 28, DateTimeKind.Local).AddTicks(4087), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "03", "Mens. APZ 2 - Par.(3º)", "A", "2ª e 5ª 18h15 às 19h30  (2x semana)", "2h30m", "N", "N", "S", "SEED", " ", "Gualdim Pais", null, "D", "G", 24m },
-                    { "047", 3, new DateTime(2023, 9, 21, 22, 28, 29, 28, DateTimeKind.Local).AddTicks(4093), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "03", "Mens. APZ 3 - Par.(3º)", "A", "3ª e 6ª 17h45 às 19h15  (2x semana)", "3h00m", "N", "N", "S", "SEED", " ", "Gualdim Pais", null, "D", "G", 25.6m },
-                    { "048", 4, new DateTime(2023, 9, 21, 22, 28, 29, 28, DateTimeKind.Local).AddTicks(4100), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "03", "Mens. Acro 1 - Par.(3º)", "A", "3ª, 4ª 17h45 às 20h00 e 6ª 17h45 às 20h15 (3x semana)", "7h00m", "N", "N", "S", "SEED", " ", "Stª Iria", null, "D", "G", 32m },
-                    { "049", 5, new DateTime(2023, 9, 21, 22, 28, 29, 28, DateTimeKind.Local).AddTicks(4117), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "03", "Mens. Acro 2 - Par.(3º)", "A", "3ª, 4ª e 6ª 17h45 às 20h45  (3x semana)", "9h00m", "N", "N", "S", "SEED", " ", "Stª Iria", null, "D", "G", 36m },
-                    { "050", 6, new DateTime(2023, 9, 21, 22, 28, 29, 28, DateTimeKind.Local).AddTicks(4124), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "03", "Mens. Acro 3 - Par.(3º)", "A", "2ª, 3ª, 5ª 18h00 às 21h00 e Sábado 10h00 às 13h00  (4x semana)", "12h00m", "N", "N", "S", "SEED", " ", "Stª Iria", null, "D", "G", 41.6m },
-                    { "051", 7, new DateTime(2023, 9, 21, 22, 28, 29, 28, DateTimeKind.Local).AddTicks(4132), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "03", "Mens. TRAMP 1 - Par.(3º)", "A", "2ª, 5ª 18h00 às 19h45 e Sábado 11h00 às 13h00  (3x semana)", "5h30m", "N", "N", "S", "SEED", " ", "Gualdim Pais", null, "D", "G", 28.8m },
-                    { "052", 8, new DateTime(2023, 9, 21, 22, 28, 29, 28, DateTimeKind.Local).AddTicks(4139), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "03", "Mens. TRAMP 2 - Par.(3º)", "A", "2ª 18h30 às 21h00 e 3ª, 4ª e 6ª 18h00 às 20h15  (4x semana)", "9h15m", "N", "N", "S", "SEED", " ", "Gualdim Pais", null, "D", "G", 36m },
-                    { "053", 9, new DateTime(2023, 9, 21, 22, 28, 29, 28, DateTimeKind.Local).AddTicks(4146), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "03", "Mens. GPT – Júnior - Par.(3º)", "A", "4ª 18h00 às 20h30 e Sábados 10h30 às 13h00  (2x semana)", "5h00m", "N", "N", "S", "SEED", " ", "Gualdim Pais", null, "D", "G", 28m },
-                    { "054", 10, new DateTime(2023, 9, 21, 22, 28, 29, 28, DateTimeKind.Local).AddTicks(4152), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "03", "Mens. GPT – Univ. - Par.(3º)", "A", "Sábado 10h00 às 13h00 (1x semana)", "3h00m", "N", "N", "S", "SEED", " ", "Gualdim Pais", null, "D", "G", 14.4m }
+                    { "005", 1, new DateTime(2023, 10, 5, 14, 36, 17, 442, DateTimeKind.Local).AddTicks(726), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "Mens. Aprendizagem 1", "A", "2ª e 5ª 17h45 às 18h30 (2x semana)", "1h30m", "N", "S", "S", "SEED", " ", "Gualdim Pais", 1, "D", "G", 27m },
+                    { "006", 2, new DateTime(2023, 10, 5, 14, 36, 17, 442, DateTimeKind.Local).AddTicks(736), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "Mens. Aprendizagem 2", "A", "2ª e 5ª 18h15 às 19h30  (2x semana)", "2h30m", "N", "S", "S", "SEED", " ", "Gualdim Pais", 2, "D", "G", 30m },
+                    { "007", 3, new DateTime(2023, 10, 5, 14, 36, 17, 442, DateTimeKind.Local).AddTicks(747), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "Mens. Aprendizagem 3", "A", "3ª e 6ª 17h45 às 19h15  (2x semana)", "3h00m", "N", "S", "S", "SEED", " ", "Gualdim Pais", 3, "D", "G", 32m },
+                    { "008", 4, new DateTime(2023, 10, 5, 14, 36, 17, 442, DateTimeKind.Local).AddTicks(757), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "Mens. Acrobática 1", "A", "3ª, 4ª 17h45 às 20h00 e 6ª 17h45 às 20h15 (3x semana)", "7h00m", "N", "S", "S", "SEED", " ", "Stª Iria", 4, "D", "G", 40m },
+                    { "009", 5, new DateTime(2023, 10, 5, 14, 36, 17, 442, DateTimeKind.Local).AddTicks(863), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "Mens. Acrobática 2", "A", "3ª, 4ª e 6ª 17h45 às 20h45  (3x semana)", "9h00m", "N", "S", "S", "SEED", " ", "Stª Iria", 5, "D", "G", 45m },
+                    { "010", 6, new DateTime(2023, 10, 5, 14, 36, 17, 442, DateTimeKind.Local).AddTicks(879), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "Mens. Acrobática 3", "A", "2ª, 3ª, 5ª 18h00 às 21h00 e Sábado 10h00 às 13h00  (4x semana)", "12h00m", "N", "S", "S", "SEED", " ", "Stª Iria", 6, "D", "G", 52m },
+                    { "011", 7, new DateTime(2023, 10, 5, 14, 36, 17, 442, DateTimeKind.Local).AddTicks(895), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "Mens. Trampolins 1", "A", "2ª, 5ª 18h00 às 19h45 e Sábado 11h00 às 13h00  (3x semana)", "5h30m", "N", "S", "S", "SEED", " ", "Gualdim Pais", 7, "D", "G", 36m },
+                    { "012", 8, new DateTime(2023, 10, 5, 14, 36, 17, 442, DateTimeKind.Local).AddTicks(916), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "Mens. Trampolins 2", "A", "2ª 18h30 às 21h00 e 3ª, 4ª e 6ª 18h00 às 20h15  (4x semana)", "9h15m", "N", "S", "S", "SEED", " ", "Gualdim Pais", 8, "D", "G", 45m },
+                    { "013", 9, new DateTime(2023, 10, 5, 14, 36, 17, 442, DateTimeKind.Local).AddTicks(925), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "Mens. GPT – Júnior", "A", "4ª 18h00 às 20h30 e Sábados 10h30 às 13h00  (2x semana)", "5h00m", "N", "S", "S", "SEED", " ", "Gualdim Pais", 9, "D", "G", 35m },
+                    { "014", 10, new DateTime(2023, 10, 5, 14, 36, 17, 442, DateTimeKind.Local).AddTicks(933), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "Mens. GPT – Universitários", "A", "Sábado 10h00 às 13h00 (1x semana)", "3h00m", "N", "S", "S", "SEED", " ", "Gualdim Pais", 10, "D", "G", 18m },
+                    { "015", 1, new DateTime(2023, 10, 5, 14, 36, 17, 442, DateTimeKind.Local).AddTicks(942), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "00", "Mens. APZ 1 - Bolsa", "A", "2ª e 5ª 17h45 às 18h30 (2x semana)", "1h30m", "N", "N", "S", "SEED", " ", "Gualdim Pais", null, "D", "G", 0m },
+                    { "016", 2, new DateTime(2023, 10, 5, 14, 36, 17, 442, DateTimeKind.Local).AddTicks(957), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "00", "Mens. APZ 2 - Bolsa", "A", "2ª e 5ª 18h15 às 19h30  (2x semana)", "2h30m", "N", "N", "S", "SEED", " ", "Gualdim Pais", null, "D", "G", 0m },
+                    { "017", 3, new DateTime(2023, 10, 5, 14, 36, 17, 442, DateTimeKind.Local).AddTicks(974), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "00", "Mens. APZ 3 - Bolsa", "A", "3ª e 6ª 17h45 às 19h15  (2x semana)", "3h00m", "N", "N", "S", "SEED", " ", "Gualdim Pais", null, "D", "G", 0m },
+                    { "018", 4, new DateTime(2023, 10, 5, 14, 36, 17, 442, DateTimeKind.Local).AddTicks(1014), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "00", "Mens. Acro 1 - Bolsa", "A", "3ª, 4ª 17h45 às 20h00 e 6ª 17h45 às 20h15 (3x semana)", "7h00m", "N", "N", "S", "SEED", " ", "Stª Iria", null, "D", "G", 0m },
+                    { "019", 5, new DateTime(2023, 10, 5, 14, 36, 17, 442, DateTimeKind.Local).AddTicks(1033), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "00", "Mens. Acro 2 - Bolsa", "A", "3ª, 4ª e 6ª 17h45 às 20h45  (3x semana)", "9h00m", "N", "N", "S", "SEED", " ", "Stª Iria", null, "D", "G", 0m },
+                    { "020", 6, new DateTime(2023, 10, 5, 14, 36, 17, 442, DateTimeKind.Local).AddTicks(1041), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "00", "Mens. Acro 3 - Bolsa", "A", "2ª, 3ª, 5ª 18h00 às 21h00 e Sábado 10h00 às 13h00  (4x semana)", "12h00m", "N", "N", "S", "SEED", " ", "Stª Iria", null, "D", "G", 0m },
+                    { "021", 7, new DateTime(2023, 10, 5, 14, 36, 17, 442, DateTimeKind.Local).AddTicks(1049), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "00", "Mens. TRAMP 1 - Bolsa", "A", "2ª, 5ª 18h00 às 19h45 e Sábado 11h00 às 13h00  (3x semana)", "5h30m", "N", "N", "S", "SEED", " ", "Gualdim Pais", null, "D", "G", 0m },
+                    { "022", 8, new DateTime(2023, 10, 5, 14, 36, 17, 442, DateTimeKind.Local).AddTicks(1058), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "00", "Mens. TRAMP 2 - Bolsa", "A", "2ª 18h30 às 21h00 e 3ª, 4ª e 6ª 18h00 às 20h15  (4x semana)", "9h15m", "N", "N", "S", "SEED", " ", "Gualdim Pais", null, "D", "G", 0m },
+                    { "023", 9, new DateTime(2023, 10, 5, 14, 36, 17, 442, DateTimeKind.Local).AddTicks(1067), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "00", "Mens. GPT – Júnior - Bolsa", "A", "4ª 18h00 às 20h30 e Sábados 10h30 às 13h00  (2x semana)", "5h00m", "N", "N", "S", "SEED", " ", "Gualdim Pais", null, "D", "G", 0m },
+                    { "024", 10, new DateTime(2023, 10, 5, 14, 36, 17, 442, DateTimeKind.Local).AddTicks(1075), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "00", "Mens. GPT – Univ. - Bolsa", "A", "Sábado 10h00 às 13h00 (1x semana)", "3h00m", "N", "N", "S", "SEED", " ", "Gualdim Pais", null, "D", "G", 0m },
+                    { "025", 1, new DateTime(2023, 10, 5, 14, 36, 17, 442, DateTimeKind.Local).AddTicks(1088), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "01", "Mens. APZ 1 - Par.(1º)", "A", "2ª e 5ª 17h45 às 18h30 (2x semana)", "1h30m", "N", "N", "S", "SEED", " ", "Gualdim Pais", null, "D", "G", 24.3m },
+                    { "026", 2, new DateTime(2023, 10, 5, 14, 36, 17, 442, DateTimeKind.Local).AddTicks(1095), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "01", "Mens. APZ 2 - Par.(1º)", "A", "2ª e 5ª 18h15 às 19h30  (2x semana)", "2h30m", "N", "N", "S", "SEED", " ", "Gualdim Pais", null, "D", "G", 27m },
+                    { "027", 3, new DateTime(2023, 10, 5, 14, 36, 17, 442, DateTimeKind.Local).AddTicks(1139), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "01", "Mens. APZ 3 - Par.(1º)", "A", "3ª e 6ª 17h45 às 19h15  (2x semana)", "3h00m", "N", "N", "S", "SEED", " ", "Gualdim Pais", null, "D", "G", 28.8m },
+                    { "028", 4, new DateTime(2023, 10, 5, 14, 36, 17, 442, DateTimeKind.Local).AddTicks(1151), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "01", "Mens. Acro 1 - Par.(1º)", "A", "3ª, 4ª 17h45 às 20h00 e 6ª 17h45 às 20h15 (3x semana)", "7h00m", "N", "N", "S", "SEED", " ", "Stª Iria", null, "D", "G", 36m },
+                    { "029", 5, new DateTime(2023, 10, 5, 14, 36, 17, 442, DateTimeKind.Local).AddTicks(1160), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "01", "Mens. Acro 2 - Par.(1º)", "A", "3ª, 4ª e 6ª 17h45 às 20h45  (3x semana)", "9h00m", "N", "N", "S", "SEED", " ", "Stª Iria", null, "D", "G", 40.5m },
+                    { "030", 6, new DateTime(2023, 10, 5, 14, 36, 17, 442, DateTimeKind.Local).AddTicks(1171), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "01", "Mens. Acro 3 - Par.(1º)", "A", "2ª, 3ª, 5ª 18h00 às 21h00 e Sábado 10h00 às 13h00  (4x semana)", "12h00m", "N", "N", "S", "SEED", " ", "Stª Iria", null, "D", "G", 46.8m },
+                    { "031", 7, new DateTime(2023, 10, 5, 14, 36, 17, 442, DateTimeKind.Local).AddTicks(1183), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "01", "Mens. TRAMP 1 - Par.(1º)", "A", "2ª, 5ª 18h00 às 19h45 e Sábado 11h00 às 13h00  (3x semana)", "5h30m", "N", "N", "S", "SEED", " ", "Gualdim Pais", null, "D", "G", 32.4m },
+                    { "032", 8, new DateTime(2023, 10, 5, 14, 36, 17, 442, DateTimeKind.Local).AddTicks(1192), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "01", "Mens. TRAMP 2 - Par.(1º)", "A", "2ª 18h30 às 21h00 e 3ª, 4ª e 6ª 18h00 às 20h15  (4x semana)", "9h15m", "N", "N", "S", "SEED", " ", "Gualdim Pais", null, "D", "G", 40.5m },
+                    { "033", 9, new DateTime(2023, 10, 5, 14, 36, 17, 442, DateTimeKind.Local).AddTicks(1202), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "01", "Mens. GPT – Júnior - Par.(1º)", "A", "4ª 18h00 às 20h30 e Sábados 10h30 às 13h00  (2x semana)", "5h00m", "N", "N", "S", "SEED", " ", "Gualdim Pais", null, "D", "G", 31.5m },
+                    { "034", 10, new DateTime(2023, 10, 5, 14, 36, 17, 442, DateTimeKind.Local).AddTicks(1211), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "01", "Mens. GPT – Univ. - Par.(1º)", "A", "Sábado 10h00 às 13h00 (1x semana)", "3h00m", "N", "N", "S", "SEED", " ", "Gualdim Pais", null, "D", "G", 16.2m },
+                    { "035", 1, new DateTime(2023, 10, 5, 14, 36, 17, 442, DateTimeKind.Local).AddTicks(1242), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "02", "Mens. APZ 1 - Par.(2º)", "A", "2ª e 5ª 17h45 às 18h30 (2x semana)", "1h30m", "N", "N", "S", "SEED", " ", "Gualdim Pais", null, "D", "G", 22.95m },
+                    { "036", 2, new DateTime(2023, 10, 5, 14, 36, 17, 442, DateTimeKind.Local).AddTicks(1263), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "02", "Mens. APZ 2 - Par.(2º)", "A", "2ª e 5ª 18h15 às 19h30  (2x semana)", "2h30m", "N", "N", "S", "SEED", " ", "Gualdim Pais", null, "D", "G", 25.5m },
+                    { "037", 3, new DateTime(2023, 10, 5, 14, 36, 17, 442, DateTimeKind.Local).AddTicks(1280), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "02", "Mens. APZ 3 - Par.(2º)", "A", "3ª e 6ª 17h45 às 19h15  (2x semana)", "3h00m", "N", "N", "S", "SEED", " ", "Gualdim Pais", null, "D", "G", 27.2m },
+                    { "038", 4, new DateTime(2023, 10, 5, 14, 36, 17, 442, DateTimeKind.Local).AddTicks(1300), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "02", "Mens. Acro 1 - Par.(2º)", "A", "3ª, 4ª 17h45 às 20h00 e 6ª 17h45 às 20h15 (3x semana)", "7h00m", "N", "N", "S", "SEED", " ", "Stª Iria", null, "D", "G", 34m },
+                    { "039", 5, new DateTime(2023, 10, 5, 14, 36, 17, 442, DateTimeKind.Local).AddTicks(1309), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "02", "Mens. Acro 2 - Par.(2º)", "A", "3ª, 4ª e 6ª 17h45 às 20h45  (3x semana)", "9h00m", "N", "N", "S", "SEED", " ", "Stª Iria", null, "D", "G", 38.25m },
+                    { "040", 6, new DateTime(2023, 10, 5, 14, 36, 17, 442, DateTimeKind.Local).AddTicks(1319), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "02", "Mens. Acro 3 - Par.(2º)", "A", "2ª, 3ª, 5ª 18h00 às 21h00 e Sábado 10h00 às 13h00  (4x semana)", "12h00m", "N", "N", "S", "SEED", " ", "Stª Iria", null, "D", "G", 44.2m },
+                    { "041", 7, new DateTime(2023, 10, 5, 14, 36, 17, 442, DateTimeKind.Local).AddTicks(1334), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "02", "Mens. TRAMP 1 - Par.(2º)", "A", "2ª, 5ª 18h00 às 19h45 e Sábado 11h00 às 13h00  (3x semana)", "5h30m", "N", "N", "S", "SEED", " ", "Gualdim Pais", null, "D", "G", 30.6m },
+                    { "042", 8, new DateTime(2023, 10, 5, 14, 36, 17, 442, DateTimeKind.Local).AddTicks(1354), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "02", "Mens. TRAMP 2 - Par.(2º)", "A", "2ª 18h30 às 21h00 e 3ª, 4ª e 6ª 18h00 às 20h15  (4x semana)", "9h15m", "N", "N", "S", "SEED", " ", "Gualdim Pais", null, "D", "G", 38.25m },
+                    { "043", 9, new DateTime(2023, 10, 5, 14, 36, 17, 442, DateTimeKind.Local).AddTicks(1372), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "02", "Mens. GPT – Júnior - Par.(2º)", "A", "4ª 18h00 às 20h30 e Sábados 10h30 às 13h00  (2x semana)", "5h00m", "N", "N", "S", "SEED", " ", "Gualdim Pais", null, "D", "G", 29.75m },
+                    { "044", 10, new DateTime(2023, 10, 5, 14, 36, 17, 442, DateTimeKind.Local).AddTicks(1390), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "02", "Mens. GPT – Univ. - Par.(2º)", "A", "Sábado 10h00 às 13h00 (1x semana)", "3h00m", "N", "N", "S", "SEED", " ", "Gualdim Pais", null, "D", "G", 15.3m },
+                    { "045", 1, new DateTime(2023, 10, 5, 14, 36, 17, 442, DateTimeKind.Local).AddTicks(1412), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "03", "Mens. APZ 1 - Par.(3º)", "A", "2ª e 5ª 17h45 às 18h30 (2x semana)", "1h30m", "N", "N", "S", "SEED", " ", "Gualdim Pais", null, "D", "G", 21.6m },
+                    { "046", 2, new DateTime(2023, 10, 5, 14, 36, 17, 442, DateTimeKind.Local).AddTicks(1432), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "03", "Mens. APZ 2 - Par.(3º)", "A", "2ª e 5ª 18h15 às 19h30  (2x semana)", "2h30m", "N", "N", "S", "SEED", " ", "Gualdim Pais", null, "D", "G", 24m },
+                    { "047", 3, new DateTime(2023, 10, 5, 14, 36, 17, 442, DateTimeKind.Local).AddTicks(1807), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "03", "Mens. APZ 3 - Par.(3º)", "A", "3ª e 6ª 17h45 às 19h15  (2x semana)", "3h00m", "N", "N", "S", "SEED", " ", "Gualdim Pais", null, "D", "G", 25.6m },
+                    { "048", 4, new DateTime(2023, 10, 5, 14, 36, 17, 442, DateTimeKind.Local).AddTicks(1959), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "03", "Mens. Acro 1 - Par.(3º)", "A", "3ª, 4ª 17h45 às 20h00 e 6ª 17h45 às 20h15 (3x semana)", "7h00m", "N", "N", "S", "SEED", " ", "Stª Iria", null, "D", "G", 32m },
+                    { "049", 5, new DateTime(2023, 10, 5, 14, 36, 17, 442, DateTimeKind.Local).AddTicks(3399), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "03", "Mens. Acro 2 - Par.(3º)", "A", "3ª, 4ª e 6ª 17h45 às 20h45  (3x semana)", "9h00m", "N", "N", "S", "SEED", " ", "Stª Iria", null, "D", "G", 36m },
+                    { "050", 6, new DateTime(2023, 10, 5, 14, 36, 17, 442, DateTimeKind.Local).AddTicks(3457), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "03", "Mens. Acro 3 - Par.(3º)", "A", "2ª, 3ª, 5ª 18h00 às 21h00 e Sábado 10h00 às 13h00  (4x semana)", "12h00m", "N", "N", "S", "SEED", " ", "Stª Iria", null, "D", "G", 41.6m },
+                    { "051", 7, new DateTime(2023, 10, 5, 14, 36, 17, 442, DateTimeKind.Local).AddTicks(3479), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "03", "Mens. TRAMP 1 - Par.(3º)", "A", "2ª, 5ª 18h00 às 19h45 e Sábado 11h00 às 13h00  (3x semana)", "5h30m", "N", "N", "S", "SEED", " ", "Gualdim Pais", null, "D", "G", 28.8m },
+                    { "052", 8, new DateTime(2023, 10, 5, 14, 36, 17, 442, DateTimeKind.Local).AddTicks(3501), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "03", "Mens. TRAMP 2 - Par.(3º)", "A", "2ª 18h30 às 21h00 e 3ª, 4ª e 6ª 18h00 às 20h15  (4x semana)", "9h15m", "N", "N", "S", "SEED", " ", "Gualdim Pais", null, "D", "G", 36m },
+                    { "053", 9, new DateTime(2023, 10, 5, 14, 36, 17, 442, DateTimeKind.Local).AddTicks(3523), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "03", "Mens. GPT – Júnior - Par.(3º)", "A", "4ª 18h00 às 20h30 e Sábados 10h30 às 13h00  (2x semana)", "5h00m", "N", "N", "S", "SEED", " ", "Gualdim Pais", null, "D", "G", 28m },
+                    { "054", 10, new DateTime(2023, 10, 5, 14, 36, 17, 442, DateTimeKind.Local).AddTicks(3543), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "03", "Mens. GPT – Univ. - Par.(3º)", "A", "Sábado 10h00 às 13h00 (1x semana)", "3h00m", "N", "N", "S", "SEED", " ", "Gualdim Pais", null, "D", "G", 14.4m }
                 });
 
             migrationBuilder.CreateIndex(
