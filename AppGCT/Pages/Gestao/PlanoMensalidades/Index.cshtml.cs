@@ -29,18 +29,23 @@ namespace AppGCT.Pages.Inscricoes.PlanoMensalidades
         [BindProperty(SupportsGet = true)]
         public int IdGinasta { get; set; }
 
+        [BindProperty(SupportsGet = true)]
+        public string ILancado { get; set; }
+
         public IList<PlanoMensalidade> PlanoMensalidade { get; set; } = default!;
 
         public SelectList EpocaList { get; set; }
 
         public SelectList GinastaList { get; set; }
+        public SelectList LancadoList { get; set; }
 
-        public async Task<IActionResult> OnGetAsync(int? idGinasta, int? idEpoca, string IInscricao)
+        public async Task<IActionResult> OnGetAsync(int? idGinasta, int? idEpoca, string? iLancado, string IInscricao)
         {
-            if (idGinasta.HasValue && idEpoca.HasValue)
+            if (idGinasta.HasValue || idEpoca.HasValue)
             {
                 IdGinasta = idGinasta.Value;
                 IdEpoca = idEpoca.Value;
+                ILancado = iLancado;
             }
 
             if (_context.PlanoMensalidade != null)
@@ -68,8 +73,16 @@ namespace AppGCT.Pages.Inscricoes.PlanoMensalidades
 
                     GinastaList = new SelectList(ginastas, "Id", "NomeCompleto");
 
+                    // preenche dropdown Lançado para filtro
+                    var Ilancado = new List<SelectListItem>();
+                    Ilancado.Insert(0, new SelectListItem { Value = null, Text = "Lançado?" });
+                    Ilancado.Insert(1, new SelectListItem { Value = "S", Text = "Sim" });
+                    Ilancado.Insert(2, new SelectListItem { Value = "N", Text = "Não" });
+
+                    LancadoList = new SelectList(Ilancado, "Value", "Text");
+
                     //Se veio direto de uma inscrição ou filtro
-                    if (IInscricao == "S" || idGinasta != null || idEpoca != null)
+                    if (IInscricao == "S")
                     {
                         PlanoMensalidade = await _context.PlanoMensalidade
                                             .Include(p => p.Aluno)
@@ -80,12 +93,34 @@ namespace AppGCT.Pages.Inscricoes.PlanoMensalidades
                     else
                     //Se acedeu diretamente à area de Planos
                     {
-                        PlanoMensalidade = await _context.PlanoMensalidade
-                                           .Include(p => p.Aluno)
-                                           .Include(p => p.Epoca)
-                                           .ToListAsync();
+                        if ((idGinasta != null && idGinasta != 0) && idEpoca != null)
+                        {
+                            PlanoMensalidade = await _context.PlanoMensalidade
+                                            .Include(p => p.Aluno)
+                                            .Include(p => p.Epoca)
+                                            .Where(p => p.EpocaId == IdEpoca && p.GinastaId == IdGinasta)
+                                            .ToListAsync();
+                        }
+                        else
+                        {
+                            if (iLancado != null && idEpoca != null)
+                            {
+                                PlanoMensalidade = await _context.PlanoMensalidade
+                                            .Include(p => p.Aluno)
+                                            .Include(p => p.Epoca)
+                                            .Where(p => p.EpocaId == IdEpoca && p.ILancado == ILancado)
+                                            .OrderBy(p => p.DataMensalidade)
+                                            .ToListAsync();
+                            }
+                            else
+                            {
+                                PlanoMensalidade = await _context.PlanoMensalidade
+                                                                           .Include(p => p.Aluno)
+                                                                           .Include(p => p.Epoca)
+                                                                           .ToListAsync();
+                            }
+                        }    
                     }
-
                 }
                 else
                 {

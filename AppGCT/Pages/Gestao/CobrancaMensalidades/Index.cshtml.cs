@@ -153,7 +153,7 @@ namespace AppGCT.Pages.Gestao.CobrancaMensalidades
                     if (!movimento)
                     {
                         DataViewModel model = new DataViewModel();
-                        model.DataMensalidade = DateOnly.FromDateTime(DateTime.Now);
+                        model.DataMensalidade = new DateOnly(DateTime.Now.Year, DateTime.Now.Month, 1);
                         model.ValorLancar = rubrica.ValorUnitario ?? 0m;
                         model.Ginasta = "N/A - Quota de sócio";
                         model.Socio = socioAtivo.Nome;
