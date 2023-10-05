@@ -21,6 +21,15 @@ namespace AppGCT.Pages.Ginasio.Epocas
         [TempData]
         public string StatusMessageFinal { get; set; }
 
+        public async Task<string> GetEstadoEpocaAsync(int epocaId)
+        {
+            var estadoEpoca = await _context.Epoca
+                                        .Where(e => e.IdEpoca == epocaId)
+                                        .Select(e => e.EstadoEpoca)
+                                        .FirstOrDefaultAsync();
+
+            return estadoEpoca;
+        }
         private async Task<bool> ValidaEpoca()
         {
             if (_context.Epoca == null || Epoca == null)
@@ -98,6 +107,26 @@ namespace AppGCT.Pages.Ginasio.Epocas
             {
                 return Page();
             }
+            //obtem estado atual da Época
+            var estado = await GetEstadoEpocaAsync(Epoca.IdEpoca);
+            // Só permite Finalizar época após a data de fim ser ultrapassada
+            if (estado != "F")
+            {
+                if (Epoca.EstadoEpoca == "F" &&
+                    Epoca.DataFim > DateTime.Now)
+                {
+                    StatusMessageFinal = "Só é possível finalizar época após data de fim";
+                    return RedirectToPage("./Edit", new { id = Epoca.IdEpoca });
+                }
+            }
+            
+            //Se a época já está finalizada não permite alterações
+            if (estado == "F")
+            {
+                StatusMessageFinal = "Época já finalizada. Não permite alterações";
+                return RedirectToPage("./Edit", new { id = Epoca.IdEpoca });
+            }
+
             if (!await ValidaEpoca())
             {
                 return Page();
@@ -107,13 +136,7 @@ namespace AppGCT.Pages.Ginasio.Epocas
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             Epoca.IdModificacao = userId;
             Epoca.DataModificacao = DateTime.Now;
-            // Só permite Finalizar época após a data de fim ser ultrapassada
-            if(Epoca.EstadoEpoca == "F" &&
-               Epoca.DataFim     < DateTime.Now)
-            {
-                StatusMessageFinal = "Só é possível finalizar época após data de fim";
-                return RedirectToPage("./Edit", new { id = Epoca.IdEpoca });
-            }
+            
             //Decidimos permitir cancelar Época, mesmo que hajam mensalidades já lançadas
             // ou seja, atletas inscritos na epoca (atualmente estamos a lançar mensalidades na inscrição)
             // O cancelamento da época, provocará que o lançamentop automatico de cobranças não lançara esta mensalidade,
