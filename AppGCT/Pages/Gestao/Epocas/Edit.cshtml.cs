@@ -115,16 +115,20 @@ namespace AppGCT.Pages.Ginasio.Epocas
                 if (Epoca.EstadoEpoca == "F" &&
                     Epoca.DataFim > DateTime.Now)
                 {
-                    StatusMessageFinal = "Só é possível finalizar época após data de fim";
-                    return RedirectToPage("./Edit", new { id = Epoca.IdEpoca });
+                    //StatusMessageFinal = "Só é possível finalizar época após data de fim";
+                    //return RedirectToPage("./Edit", new { id = Epoca.IdEpoca });
+                    TempData["ErrorMessage"] = "Só é possível finalizar época após data de fim!";
+                    return RedirectToPage("./Erro");
                 }
             }
             
             //Se a época já está finalizada não permite alterações
             if (estado == "F")
             {
-                StatusMessageFinal = "Época já finalizada. Não permite alterações";
-                return RedirectToPage("./Edit", new { id = Epoca.IdEpoca });
+                //StatusMessageFinal = "Época já finalizada. Não permite alterações";
+                //return RedirectToPage("./Edit", new { id = Epoca.IdEpoca });
+                TempData["ErrorMessage"] = "Época já finalizada. Não permite alterações!";
+                return RedirectToPage("./Erro");
             }
 
             if (!await ValidaEpoca())

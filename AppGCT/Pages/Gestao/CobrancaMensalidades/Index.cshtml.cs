@@ -270,11 +270,12 @@ namespace AppGCT.Pages.Gestao.CobrancaMensalidades
                                 //obtem rubrica
                                 var rubrica = await _context.Rubrica
                                                             .FirstOrDefaultAsync(r => r.ClasseId == incricaoAtiva.ClasseId &&
-                                                                                 r.DescontoId == incricaoAtiva.CodDesconto);
+                                                                                 r.DescontoId == incricaoAtiva.CodDesconto &&
+                                                                                 r.EstadoRubrica == "A");
 
                                 if (rubrica == null)
                                 {
-                                    StatusMessageRub = "Rúbrica associada à inscrição não existe na BD";
+                                    StatusMessageRub = "Rúbrica associada à inscrição não existe na BD ou está inativa" + "(Ginasta: " + ginastaAtivo.NomeCompleto + ")";
                                     return RedirectToPage("./Index");
                                 }
 
