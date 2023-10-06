@@ -153,7 +153,7 @@ namespace AppGCT.Pages.Gestao.CobrancaMensalidades
                     if (!movimento)
                     {
                         DataViewModel model = new DataViewModel();
-                        model.DataMensalidade = DateOnly.FromDateTime(DateTime.Now);
+                        model.DataMensalidade = new DateOnly(DateTime.Now.Year, DateTime.Now.Month, 1);
                         model.ValorLancar = rubrica.ValorUnitario ?? 0m;
                         model.Ginasta = "N/A - Quota de sócio";
                         model.Socio = socioAtivo.Nome;
@@ -270,11 +270,12 @@ namespace AppGCT.Pages.Gestao.CobrancaMensalidades
                                 //obtem rubrica
                                 var rubrica = await _context.Rubrica
                                                             .FirstOrDefaultAsync(r => r.ClasseId == incricaoAtiva.ClasseId &&
-                                                                                 r.DescontoId == incricaoAtiva.CodDesconto);
+                                                                                 r.DescontoId == incricaoAtiva.CodDesconto &&
+                                                                                 r.EstadoRubrica == "A");
 
                                 if (rubrica == null)
                                 {
-                                    StatusMessageRub = "Rúbrica associada à inscrição não existe na BD";
+                                    StatusMessageRub = "Rúbrica associada à inscrição não existe na BD ou está inativa" + "(Ginasta: " + ginastaAtivo.NomeCompleto + ")";
                                     return RedirectToPage("./Index");
                                 }
 

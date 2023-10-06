@@ -45,8 +45,16 @@ namespace AppGCT.Pages.Ginasio.Epocas
             else 
             {
                 Epoca = epoca;
-                var user = await _userManager.FindByIdAsync(Epoca.IdCriacao);
-                IdCriacaoName = user?.Nome;
+                if (Epoca.IdCriacao == "SEED")
+                {
+                    IdCriacaoName = "SEED INICIAL";
+                }
+                else
+                {
+                    var user = await _userManager.FindByIdAsync(Epoca.IdCriacao);
+                    IdCriacaoName = user?.Nome;
+                }
+                
                 var user2 = await _userManager.FindByIdAsync(Epoca.IdModificacao);
                 IdModificacaoName = user2?.Nome;
             }

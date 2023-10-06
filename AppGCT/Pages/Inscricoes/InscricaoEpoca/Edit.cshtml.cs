@@ -92,7 +92,7 @@ namespace AppGCT.Pages.Inscricoes.InscricaoEpoca
                                         .FirstOrDefaultAsync(r => r.Id == Inscricao.GinastaId && r.EstadoGinasta == "A");
             if (ginasta == null)
             {
-                ModelState.AddModelError("Inscricao.GinastaId", "Ginasta Inativo, deverá ativar para modificar inscrição");
+                ModelState.AddModelError("Inscricao.ClasseId", "Ginasta Inativo, deverá ativar para modificar inscrição");
                 await OnGetAsync(Inscricao.GinastaId);
                 return Page();
             }
@@ -128,10 +128,12 @@ namespace AppGCT.Pages.Inscricoes.InscricaoEpoca
 
             //obtem rubrica
             var rubrica = await _context.Rubrica
-                                        .FirstOrDefaultAsync(r => r.ClasseId == Inscricao.ClasseId && r.DescontoId == Inscricao.CodDesconto);
+                                        .FirstOrDefaultAsync(r => r.ClasseId == Inscricao.ClasseId && 
+                                                                  r.DescontoId == Inscricao.CodDesconto &&
+                                                                  r.EstadoRubrica == "A");
             if (rubrica == null)
             {
-                ModelState.AddModelError("Inscricao.GinastaId", "Rúbrica não definida no Preçário");
+                ModelState.AddModelError("Inscricao.ClasseId", "Rúbrica não definida no Preçário ou inativa");
                 await OnGetAsync(Inscricao.GinastaId);
                 return Page();
             }
@@ -142,7 +144,7 @@ namespace AppGCT.Pages.Inscricoes.InscricaoEpoca
 
             if (epoca == null)
             {
-                ModelState.AddModelError("Inscricao.GinastaId", "Época não está definida");
+                ModelState.AddModelError("Inscricao.ClasseId", "Época não está definida");
                 await OnGetAsync(Inscricao.GinastaId);
                 return Page();
             }
@@ -184,23 +186,27 @@ namespace AppGCT.Pages.Inscricoes.InscricaoEpoca
 
                         var planoMensalidade = await _context.PlanoMensalidade
                             .FirstOrDefaultAsync(p => p.GinastaId == Inscricao.GinastaId && p.EpocaId == epocaId && p.DataMensalidade == dataMensalidade);
-
-                        if (planoMensalidade.ILancado != "S" && planoMensalidade.DataMensalidade.Month == DateTime.Now.Month)
+                        
+                        if (planoMensalidade != null)
                         {
-                            //se for o último mês da época não cobra e coloca o valor da mensalidade a 0
-                            if (dataMensalidade.Month == epoca.DataFim.Month)
+                            if (planoMensalidade.ILancado != "S" && planoMensalidade.DataMensalidade.Month == DateTime.Now.Month)
                             {
-                                valorMensalidade = 0;
-                            }
-                            //atualiza plano
-                            if (planoMensalidade != null)
-                            {
-                                // Atualiza Plano
-                                planoMensalidade.ValorMensalidade = valorMensalidade;
-                                planoMensalidade.DataModificacao = DateTime.Now;
-                                planoMensalidade.IdModificacao = User.Identity.GetUserId();
+                                //se for o último mês da época não cobra e coloca o valor da mensalidade a 0
+                                if (dataMensalidade.Month == epoca.DataFim.Month)
+                                {
+                                    valorMensalidade = 0;
+                                }
+                                //atualiza plano
+                                if (planoMensalidade != null)
+                                {
+                                    // Atualiza Plano
+                                    planoMensalidade.ValorMensalidade = valorMensalidade;
+                                    planoMensalidade.DataModificacao = DateTime.Now;
+                                    planoMensalidade.IdModificacao = User.Identity.GetUserId();
+                                }
                             }
                         }
+                        
                     }
                 }
 

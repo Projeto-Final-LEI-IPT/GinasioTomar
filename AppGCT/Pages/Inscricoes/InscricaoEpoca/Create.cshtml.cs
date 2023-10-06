@@ -104,13 +104,16 @@ namespace AppGCT.Pages.Inscricoes.InscricaoEpoca
 
             //obtem rubrica
             var rubrica = await _context.Rubrica
-                                        .FirstOrDefaultAsync(r => r.ClasseId == Inscricao.ClasseId && r.DescontoId == Inscricao.CodDesconto);
+                                        .FirstOrDefaultAsync(r => r.ClasseId == Inscricao.ClasseId && 
+                                                                  r.DescontoId == Inscricao.CodDesconto && 
+                                                                  r.EstadoRubrica == "A");
             if (rubrica == null)
             {
-                ModelState.AddModelError("Inscricao.GinastaId", "Rúbrica não definida no Preçário");
+                ModelState.AddModelError("Inscricao.GinastaId", "Rúbrica não definida no Preçário ou inativa");
                 OnGet(Inscricao.GinastaId);
                 return Page();
             }
+
             decimal valorMensalidade = rubrica.ValorUnitario ?? 0m;
 
             // Valida se a época existe

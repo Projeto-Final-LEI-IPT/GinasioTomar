@@ -35,8 +35,16 @@ namespace AppGCT.Pages.Gestao.Utilizadores
                 var roles = await _userManager.GetRolesAsync(User);
                 var roleId = await _roleManager.FindByNameAsync(roles.First());
                 Role = await _roleManager.FindByIdAsync(roleId.Id);
-                var user = await _userManager.FindByIdAsync(User.IdCriacao);
-                IdCriacaoName = user?.Nome;
+                if (User.IdCriacao == "SEED")
+                {
+                    IdCriacaoName = "SEED INICIAL";
+                }
+                else
+                {
+                    var user = await _userManager.FindByIdAsync(User.IdCriacao);
+                    IdCriacaoName = user?.Nome;
+                }
+                
                 var user2 = await _userManager.FindByIdAsync(User.IdModificacao);
                 IdModificacaoName = user2?.Nome;
             }

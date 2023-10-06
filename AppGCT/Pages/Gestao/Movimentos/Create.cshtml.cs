@@ -207,7 +207,7 @@ namespace AppGCT.Pages.Gestao.Movimentos
 
             });
             ViewData["AtletaMovimentoId"] = new SelectList(atletas, "Id", "ID_DescrGinastaSocio");
-            var metodos = _context.MetodoPagamento.ToList();
+            var metodos = _context.MetodoPagamento.Where(m => m.EstadoMetodo == "A").ToList();
             metodos.Insert(0, new MetodoPagamento
             {
                 CodMetodo  = "",
@@ -223,7 +223,7 @@ namespace AppGCT.Pages.Gestao.Movimentos
                                                     .ToList();
 
             ViewData["UtilizadorId"] = new SelectList(socios, "Id", "ID_Description");
-            var rubricas = _context.Rubrica.ToList();
+            var rubricas = _context.Rubrica.Where(i => i.EstadoRubrica == "A").ToList();
             rubricas.Insert(0, new Rubrica
             {
                 CodRubrica = "",

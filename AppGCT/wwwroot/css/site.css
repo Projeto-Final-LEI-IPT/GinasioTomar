@@ -135,6 +135,15 @@ div:not(:first-child):not(:last-child) {
     font-size: 1.2em;
 }
 
+.nav-pills > li > a:hover {
+    color: #cf2525;
+    font-weight:bold;
+}
+.swal2-popup .swal2-actions button.swal2-confirm {
+    background-color: #198754 !important;
+}
+
+
 .custom-logout-button {
     color: #fff;
 }

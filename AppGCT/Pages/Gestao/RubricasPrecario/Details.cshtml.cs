@@ -45,8 +45,15 @@ namespace AppGCT.Pages.Gestao.RubricasPrecario
             else 
             {
                 Rubrica = rubrica;
-                var user = await _userManager.FindByIdAsync(Rubrica.IdCriacao);
-                IdCriacaoName = user?.Nome;
+                if (Rubrica.IdCriacao == "SEED")
+                {
+                    IdCriacaoName = "SEED INICIAL";
+                }
+                else
+                {
+                    var user = await _userManager.FindByIdAsync(Rubrica.IdCriacao);
+                    IdCriacaoName = user?.Nome;
+                }
                 var user2 = await _userManager.FindByIdAsync(Rubrica.IdModificacao);
                 IdModificacaoName = user2?.Nome;
             }
