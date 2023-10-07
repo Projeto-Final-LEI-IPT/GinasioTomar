@@ -52,6 +52,7 @@ namespace AppGCT.Pages.Estatisticas
         public class DataViewModel4
         {
             public string? NomeEpoca { get; set; }
+            public int? CountMovimentos { get; set; }
             [Precision(18, 2)]
             public Decimal? SaldoDebitos { get; set; }
             [Precision(18, 2)]
@@ -123,6 +124,10 @@ namespace AppGCT.Pages.Estatisticas
                 modelItem.CountInscricoes = countTOT;
                 Inscricoes.Add(modelItem);
 
+                //obtêm total de movimentos efetuados para a época
+                int countMOV = _context.Movimento
+                                    .Count(m => m.DtMovimento >= epocaInfo.DataInicio && m.DtMovimento <= epocaInfo.DataFim);
+
                 //obtem os movimentos a Débito entre a DataInicio e DataFim da época
                 decimal? saldoDEB = _context.Movimento
                                             .Where(m => m.DtMovimento >= epocaInfo.DataInicio && m.DtMovimento <= epocaInfo.DataFim)
@@ -166,6 +171,7 @@ namespace AppGCT.Pages.Estatisticas
                 // formata dataviewmodel movimentos
                 DataViewModel4 modelItemMov = new DataViewModel4();
                 modelItemMov.NomeEpoca = epoca;
+                modelItemMov.CountMovimentos = countMOV;
                 modelItemMov.SaldoDebitos = saldoDEB;
                 modelItemMov.SaldoCreditos = saldocredfinal;
                 modelItemMov.SaldoFinal = saldofinal;

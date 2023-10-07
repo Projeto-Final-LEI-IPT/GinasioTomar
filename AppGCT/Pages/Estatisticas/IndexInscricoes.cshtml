@@ -1,4 +1,62 @@
 ﻿@page
 @model AppGCT.Pages.Estatisticas.IndexInscricoesModel
 @{
+    ViewData["Title"] = "Inscrições por Época";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
 }
+
+
+<div>
+    <a title="Voltar" class='btn btn-success' asp-area='' asp-page='/Estatisticas/Index'>
+        <span class="btn-svg-container">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z" />
+            </svg>
+        </span>
+    </a>
+</div>
+<br />
+<h1>Inscrições por Época</h1>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Época
+            </th>
+            <th>
+                Nome Ginasta
+            </th>
+            <th>
+                Nome Sócio
+            </th>
+            <th>
+                Classe
+            </th>
+            <th>
+                Desconto
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Inscricoes)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NomeEpoca)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NomeGinasta)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NomeSocio)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NomeClasse)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NomeDesconto)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

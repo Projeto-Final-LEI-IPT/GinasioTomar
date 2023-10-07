@@ -95,7 +95,10 @@
                     @Html.DisplayFor(modelItem => item.CountInscricoes)
                 </td>
                 <td>
-                    <a title="Detalhe" class='btn btn-success' asp-area='' asp-page='/Estatisticas/IndexInscricoes' asp-route-id='@item.NomeEpoca'>Ver Inscrições</a>
+                    @if (item.CountInscricoes > 0)
+                    {
+                        <a title="Detalhe" class='btn btn-success' asp-area='' asp-page='/Estatisticas/IndexInscricoes' asp-route-nomeEpoca='@item.NomeEpoca'>Ver Inscrições</a>
+                    } 
                 </td>
             </tr>
         }
@@ -108,6 +111,9 @@
         <tr>
             <th>
                 Época
+            </th>
+            <th>
+                Nº Movimentos
             </th>
             <th>
                 Débitos(€)
@@ -130,6 +136,9 @@
                     @Html.DisplayFor(modelItem => item.NomeEpoca)
                 </td>
                 <td>
+                    @Html.DisplayFor(modelItem => item.CountMovimentos)
+                </td>
+                <td>
                     @Html.DisplayFor(modelItem => item.SaldoDebitos)
                 </td>
                 <td>
@@ -139,7 +148,10 @@
                     @Html.DisplayFor(modelItem => item.SaldoFinal)
                 </td>
                 <td>
-                    <a title="Detalhe" class='btn btn-success' asp-area='' asp-page='/Estatisticas/IndexMovimentos' asp-route-id='@item.NomeEpoca'>Ver Movimentos</a>
+                    @if (item.CountMovimentos > 0)
+                    {
+                        <a title="Detalhe" class='btn btn-success' asp-area='' asp-page='/Estatisticas/IndexMovimentos' asp-route-id='@item.NomeEpoca'>Ver Movimentos</a>
+                    }
                 </td>
             </tr>
         }
