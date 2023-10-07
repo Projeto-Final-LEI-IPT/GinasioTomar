@@ -22,7 +22,7 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model.utilizadores)
+        @foreach (var item in Model.Utilizadores)
         {
             <tr>
                 <td>
@@ -55,16 +55,16 @@
     <tbody>
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => Model.ginastas[0].CountGinACT)
+                @Html.DisplayFor(modelItem => Model.Ginastas[0].CountGinACT)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => Model.ginastas[0].CountGinINA)
+                @Html.DisplayFor(modelItem => Model.Ginastas[0].CountGinINA)
             </td>
         </tr>
     </tbody>
 </table>
 <br />
-<h1>Inscrições por Época(Totais)</h1>
+<h1>Inscrições por Época</h1>
 <table class="table">
     <thead>
         <tr>
@@ -72,26 +72,37 @@
                 Época
             </th>
             <th>
+                Estado Época
+            </th>
+            <th>
                 Nº Inscrições
+            </th>
+            <th>
             </th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model.inscricoes)
+        @foreach (var item in Model.Inscricoes)
         {
             <tr>
                 <td>
                     @Html.DisplayFor(modelItem => item.NomeEpoca)
                 </td>
                 <td>
+                    @Html.DisplayFor(modelItem => item.EstadoEpoca)
+                </td>
+                <td>
                     @Html.DisplayFor(modelItem => item.CountInscricoes)
+                </td>
+                <td>
+                    <a title="Detalhe" class='btn btn-success' asp-area='' asp-page='/Estatisticas/IndexInscricoes' asp-route-id='@item.NomeEpoca'>Ver Inscrições</a>
                 </td>
             </tr>
         }
     </tbody>
 </table>
 <br />
-<h1>Inscrições por Época(detalhe)</h1>
+<h1>Movimentos por Época</h1>
 <table class="table">
     <thead>
         <tr>
@@ -99,25 +110,36 @@
                 Época
             </th>
             <th>
-                Classe
+                Débitos(€)
             </th>
             <th>
-                Nº Inscrições
+                Créditos(€)
+            </th>
+            <th>
+                Saldo Final(€)
+            </th>
+            <th>
             </th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model.inscricoesdet)
+        @foreach (var item in Model.Movimentos)
         {
             <tr>
                 <td>
                     @Html.DisplayFor(modelItem => item.NomeEpoca)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.NomeClasse)
+                    @Html.DisplayFor(modelItem => item.SaldoDebitos)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.CountInscricoes)
+                    @Html.DisplayFor(modelItem => item.SaldoCreditos)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SaldoFinal)
+                </td>
+                <td>
+                    <a title="Detalhe" class='btn btn-success' asp-area='' asp-page='/Estatisticas/IndexMovimentos' asp-route-id='@item.NomeEpoca'>Ver Movimentos</a>
                 </td>
             </tr>
         }
