@@ -18,7 +18,6 @@ namespace AppGCT.Pages.Estatisticas
 
         public class DataViewModel
         {
-            public String? NomeEpoca { get; set; }
             public String? NomeRubrica { get; set; }
             [Precision(18,2)]
             public decimal? ValorRubrica { get; set; }
@@ -63,7 +62,6 @@ namespace AppGCT.Pages.Estatisticas
 
                 //formata data view model
                 DataViewModel modelItem = new DataViewModel();
-                modelItem.NomeEpoca = nomeEpoca;
                 modelItem.NomeRubrica = rubricaInfo.CodRubrica + " - " + rubricaInfo.DescricaoRubrica;
                 if (rubricaInfo.IVlrUnit == "S")
                 {

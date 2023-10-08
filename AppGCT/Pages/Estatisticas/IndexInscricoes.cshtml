@@ -4,7 +4,9 @@
     ViewData["Title"] = "Inscrições por Época";
     Layout = "~/Pages/Shared/_Layout.cshtml";
 }
-
+@{
+    string nomeEpoca = Request.Query["nomeEpoca"];
+}
 
 <div>
     <a title="Voltar" class='btn btn-success' asp-area='' asp-page='/Estatisticas/Index'>
@@ -16,13 +18,10 @@
     </a>
 </div>
 <br />
-<h1>Inscrições por Época</h1>
+<h1>Inscrições por Época - Época @nomeEpoca</h1>
 <table class="table">
     <thead>
         <tr>
-            <th>
-                Época
-            </th>
             <th>
                 Nome Ginasta
             </th>
@@ -41,9 +40,6 @@
         @foreach (var item in Model.Inscricoes)
         {
             <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.NomeEpoca)
-                </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.NomeGinasta)
                 </td>

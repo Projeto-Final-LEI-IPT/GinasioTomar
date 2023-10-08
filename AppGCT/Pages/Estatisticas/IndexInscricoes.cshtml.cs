@@ -18,7 +18,6 @@ namespace AppGCT.Pages.Estatisticas
 
         public class DataViewModel
         {
-            public String? NomeEpoca { get; set; }
             public String? NomeGinasta { get; set; }
             public String? NomeSocio { get; set; }
             public String? NomeClasse { get; set; }
@@ -56,7 +55,6 @@ namespace AppGCT.Pages.Estatisticas
                 var descontoInfo = _context.Desconto.SingleOrDefault(i => i.CodDesconto == inscricaoInfo.CodDesconto);
 
                 DataViewModel modelItem = new DataViewModel();
-                modelItem.NomeEpoca = nomeEpoca;
                 modelItem.NomeGinasta = ginastaInfo.NomeCompleto;
                 modelItem.NomeSocio = socioInfo.Nome;
                 modelItem.NomeClasse = classeInfo.NomeClasse;

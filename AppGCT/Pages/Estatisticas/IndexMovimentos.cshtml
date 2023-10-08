@@ -4,6 +4,9 @@
     ViewData["Title"] = "Movimentos por Época";
     Layout = "~/Pages/Shared/_Layout.cshtml";
 }
+@{
+    string nomeEpoca = Request.Query["nomeEpoca"];
+}
 <div>
     <a title="Voltar" class='btn btn-success' asp-area='' asp-page='/Estatisticas/Index'>
         <span class="btn-svg-container">
@@ -14,13 +17,10 @@
     </a>
 </div>
 <br />
-<h1>Movimentos por Época (totais por rúbrica)</h1>
+<h1>Movimentos por Época (totais por rúbrica) - Época @nomeEpoca</h1>
 <table class="table">
     <thead>
         <tr>
-            <th>
-                Época
-            </th>
             <th>
                 Rúbrica
             </th>
@@ -39,9 +39,6 @@
         @foreach (var item in Model.Movimentos)
         {
             <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.NomeEpoca)
-                </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.NomeRubrica)
                 </td>
