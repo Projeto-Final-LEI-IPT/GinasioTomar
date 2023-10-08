@@ -1,0 +1,57 @@
+﻿@page
+@model AppGCT.Pages.Estatisticas.IndexMovimentosModel
+@{
+    ViewData["Title"] = "Movimentos por Época";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+@{
+    string nomeEpoca = Request.Query["nomeEpoca"];
+}
+<div>
+    <a title="Voltar" class='btn btn-success' asp-area='' asp-page='/Estatisticas/Index'>
+        <span class="btn-svg-container">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z" />
+            </svg>
+        </span>
+    </a>
+</div>
+<br />
+<h1>Movimentos por Época (totais por rúbrica) - Época @nomeEpoca</h1>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Rúbrica
+            </th>
+            <th>
+                Valor Rúbrica(€)
+            </th>
+            <th>
+                Quantidade Movimentos
+            </th>
+            <th>
+                Total Movimentos(€)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Movimentos)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NomeRubrica)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ValorRubrica)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.QtdMovimentos)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TotMovimentos)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

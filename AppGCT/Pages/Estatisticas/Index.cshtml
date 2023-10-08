@@ -1,0 +1,159 @@
+﻿@page
+@model AppGCT.Pages.Estatisticas.IndexModel
+@{
+    ViewData["Title"] = "Estatísticas";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<h1>Utilizadores do Sistema</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Tipo Utilizador
+            </th>
+            <th>
+                Ativos
+            </th>
+            <th>
+                Inativos
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Utilizadores)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RoleAux)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CountACT)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CountINA)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<br/>
+
+<h1>Ginastas</h1>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Ativos
+            </th>
+            <th>
+                Inativos
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => Model.Ginastas[0].CountGinACT)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => Model.Ginastas[0].CountGinINA)
+            </td>
+        </tr>
+    </tbody>
+</table>
+<br />
+<h1>Inscrições por Época</h1>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Época
+            </th>
+            <th>
+                Estado Época
+            </th>
+            <th>
+                Nº Inscrições
+            </th>
+            <th>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Inscricoes)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NomeEpoca)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EstadoEpoca)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CountInscricoes)
+                </td>
+                <td>
+                    @if (item.CountInscricoes > 0)
+                    {
+                        <a title="Detalhe" class='btn btn-success' asp-area='' asp-page='/Estatisticas/IndexInscricoes' asp-route-nomeEpoca='@item.NomeEpoca'>Ver Inscrições</a>
+                    } 
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<br />
+<h1>Movimentos por Época</h1>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Época
+            </th>
+            <th>
+                Nº Movimentos
+            </th>
+            <th>
+                Débitos(€)
+            </th>
+            <th>
+                Créditos(€)
+            </th>
+            <th>
+                Saldo Final(€)
+            </th>
+            <th>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Movimentos)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NomeEpoca)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CountMovimentos)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SaldoDebitos)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SaldoCreditos)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SaldoFinal)
+                </td>
+                <td>
+                    @if (item.CountMovimentos > 0)
+                    {
+                        <a title="Detalhe" class='btn btn-success' asp-area='' asp-page='/Estatisticas/IndexMovimentos' asp-route-nomeEpoca='@item.NomeEpoca'>Ver Movimentos</a>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

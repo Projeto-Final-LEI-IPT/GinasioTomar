@@ -275,7 +275,10 @@ namespace AppGCT.Pages.Gestao.CobrancaMensalidades
 
                                 if (rubrica == null)
                                 {
-                                    StatusMessageRub = "Rúbrica associada à inscrição não existe na BD ou está inativa" + "(Ginasta: " + ginastaAtivo.NomeCompleto + ")";
+                                    StatusMessageFinal = "Rúbrica associada à inscrição não existe na BD ou está inativa" +
+                                                         "<br/><br/>Ginasta: " + ginastaAtivo.NomeCompleto +
+                                                         "<br/>Sócio: " + socioAtivo.Nome +
+                                                         "<br/>Nº Sócio: " + socioAtivo.NumSocio ;
                                     return RedirectToPage("./Index");
                                 }
 
