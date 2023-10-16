@@ -25,7 +25,7 @@
     }
 </style>
 
-<h1>Criar Inscrição</h1>
+<h1>Nova Inscrição</h1>
 
 <hr />
 <div>
@@ -46,6 +46,7 @@
                 <select asp-for="Inscricao.GinastaId" class="form-control" asp-items="ViewBag.GinastaId"></select>
                 @Html.ValidationMessageFor(model => model.Inscricao.GinastaId, null, new { @class = "validation-error" })
             </div>
+            <br />
             <div class="form-group">
                 <label asp-for="Inscricao.Periodo.NomeEpoca" class="control-label"></label>
                 <select asp-for="Inscricao.EpocaId" class="form-control" asp-items="ViewBag.EpocaId"></select>
@@ -108,7 +109,7 @@
                 <span asp-validation-for="Inscricao.DtConsentimento" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Inscricao.IFotos" class="control-label">Claro que AUTORIZO / NÃO AUTORIZO (seleccionar o que interessa), o meu educando a ser fotografado e filmado em contexto desportivo ou atividades lúdicas, promovidas pelo Ginásio Clube de Tomar. Tomo conhecimento de que a imagem recolhida pode servir para documentação interna do GCT e para divulgação nos jornais, redes socias e outros fins publicitários.</label>
+                <label asp-for="Inscricao.IFotos" class="control-label">Declaro que AUTORIZO / NÃO AUTORIZO (seleccionar o que interessa), o meu educando a ser fotografado e filmado em contexto desportivo ou atividades lúdicas, promovidas pelo Ginásio Clube de Tomar. Tomo conhecimento de que a imagem recolhida pode servir para documentação interna do GCT e para divulgação nos jornais, redes socias e outros fins publicitários.</label>
                 <div class="form-check">
                     <label class="form-check-label">
                         <input type="radio" asp-for="Inscricao.IFotos" class="form-check-input" value="S" />
