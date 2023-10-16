@@ -9,7 +9,7 @@ namespace AppGCT.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int? IdClasse { get; set; }
         [Required(ErrorMessage = "Nome da Classe é campo obrigatório!")]
-        [Display(Name = "Nome Classe")]
+        [Display(Name = "Classe")]
         [StringLength(50, ErrorMessage = "Nome da Classe não pode exceder 50 caracteres")]
         public string? NomeClasse { get; set; }
         [Display(Name = "Estado Classe")]

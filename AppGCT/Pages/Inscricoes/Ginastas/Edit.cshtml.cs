@@ -89,6 +89,8 @@ namespace AppGCT.Pages.Inscricoes.Ginastas
                 /// Utilizamos LINQ para ir buscar apenas o USERID autenticado, quando o ROLE é <> Administrador                
                 ViewData["UtilizadorId"] = new SelectList(_context.Users.Where(x => x.Id == User.Identity.GetUserId()), "Id", "ID_Description");
             }
+            //Enviar para pagina campo do IIrmaos
+            ViewData["FlagIrmaos"] = Ginasta.IIrmaos;
 
             return Page();
         }

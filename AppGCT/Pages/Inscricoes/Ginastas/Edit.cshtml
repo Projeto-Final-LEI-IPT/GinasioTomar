@@ -23,6 +23,29 @@
         <form method="post" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Ginasta.Id" />
+            <!-- código js para proteger/desproteger campos preenchidos apenas se existir classe preenchida -->
+            <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+            <script>
+                $(document).ready(function () {
+
+                    // Obter nome campos
+                    var IIrmaosField = $('#Ginasta_IIrmaos');
+                    var NomeIrmaosField = $('#Ginasta_NomeIrmaos');
+
+                    // Função para alterações sobre o campo Classe
+                    $('input[type=radio][name="Ginasta.IIrmaos"]').on('change', function () {
+                        var selectedValue = $(this).val();
+                        console.log("Cá estou", selectedValue);
+                        if (selectedValue == "S") {
+                            NomeIrmaosField.prop('disabled', false);
+                        }
+                        else {
+                            NomeIrmaosField.prop('disabled', true);
+                            NomeIrmaosField.val('');
+                        }
+                    });
+                });     // Protege ou desprotege campos com base no valor do ClasseId
+            </script>
             <div class="form-group">
                 <label asp-for="Ginasta.NomeCompleto" class="control-label"></label>
                 <input asp-for="Ginasta.NomeCompleto" class="form-control" />
@@ -147,11 +170,22 @@
                 </div>
                 <span asp-validation-for="Ginasta.IIrmaos" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="Ginasta.NomeIrmaos" class="control-label"></label>
-                <input asp-for="Ginasta.NomeIrmaos" class="form-control" />
+            @if (String.Compare(@ViewBag.FlagIrmaos, "N") == 0)
+            {
+                <div class="form-group">
+                    <label asp-for="Ginasta.NomeIrmaos" class="control-label"></label>
+                <input asp-for="Ginasta.NomeIrmaos" class="form-control" disabled/>
                 <span asp-validation-for="Ginasta.NomeIrmaos" class="text-danger"></span>
-            </div>
+                </div>
+            }
+            else
+            {
+                <div class="form-group">
+                    <label asp-for="Ginasta.NomeIrmaos" class="control-label"></label>
+                    <input asp-for="Ginasta.NomeIrmaos" class="form-control" />
+                    <span asp-validation-for="Ginasta.NomeIrmaos" class="text-danger"></span>
+                </div>
+            }
             <div class="form-group">
                 <label asp-for="Ginasta.Email" class="control-label"></label>
                 <input asp-for="Ginasta.Email" class="form-control" />
