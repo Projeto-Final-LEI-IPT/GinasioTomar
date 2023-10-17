@@ -185,6 +185,12 @@ namespace AppGCT.Areas.Identity.Pages.Account
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
             var dataDia = DateTime.Now;
+            //data nascimento superior a 1900
+            if (Input.Dtnascim.Year < 1900)
+            {
+                ModelState.AddModelError("Input.DtNascim", "Data Nascimento(ano) tem de ser superior ou igual a 1900");
+                return Page();
+            }
             //valida data nascimento
             if (Input.Dtnascim >= dataDia)
             {

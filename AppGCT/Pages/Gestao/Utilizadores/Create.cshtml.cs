@@ -150,6 +150,14 @@ namespace AppGCT.Pages.Gestao.Utilizadores
             Roles = await _roleManager.Roles.ToListAsync();
             //valida data nascimento
             var dataDia = DateTime.Now;
+
+            //data nascimento superior a 1900
+            if (Input.Dtnascim.Year < 1900)
+            {
+                ModelState.AddModelError("Input.DtNascim", "Data Nascimento(ano) tem de ser superior ou igual a 1900");
+                return Page();
+            }
+
             if (Input.Dtnascim >= dataDia)
             {
                 ModelState.AddModelError("Input.DtNascim", "Data de Nascimento inválida");
