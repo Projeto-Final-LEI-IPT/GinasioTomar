@@ -157,8 +157,8 @@ namespace AppGCT.Areas.Identity.Pages.Account
             /// </summary>
             [Required(ErrorMessage = "Password é campo obrigatório!")]
             [StringLength(50, ErrorMessage = "A {0} tem de ter pelo menos {2} e um máximo de {1} caracteres.", MinimumLength = 6)]
-            [RegularExpression(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9]).+$",
-             ErrorMessage = "Password tem de ter uma letra minúscula, uma letra maiúscula e um carater não alfanumérico")]
+            [RegularExpression(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^a-zA-Z0-9]).+$",
+             ErrorMessage = "Password deve conter uma letra minúscula, uma letra maiúscula, um número(0 a 9) e um caracter especial.")]
             [DataType(DataType.Password)]
             [Display(Name = "Password")]
             public string Password { get; set; }
@@ -180,10 +180,17 @@ namespace AppGCT.Areas.Identity.Pages.Account
             ReturnUrl = returnUrl;
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
         }
-
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
             var dataDia = DateTime.Now;
+            //data nascimento superior a 1900
+            if (Input.Dtnascim.Year < 1900)
+            {
+                ModelState.AddModelError("Input.DtNascim", "Data Nascimento(ano) tem de ser superior ou igual a 1900");
+                return Page();
+            }
             //valida data nascimento
             if (Input.Dtnascim >= dataDia)
             {

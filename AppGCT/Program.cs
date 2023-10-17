@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Identity;
 using AppGCT.Areas.Identity.Data;
 using System.Runtime.InteropServices;
 using AppGCT.Outros;
+using Microsoft.AspNetCore.Mvc;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -22,7 +23,10 @@ builder.Services.AddTransient<IEmailSender>(sp =>
     var mailApp = builder.Configuration["mailApp:GmailService"];
     return new EmailSender(mailApp, passApp);
 });
-
+builder.Services.AddMvc(options =>
+{
+    options.Filters.Add(new AutoValidateAntiforgeryTokenAttribute());
+});
 var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())

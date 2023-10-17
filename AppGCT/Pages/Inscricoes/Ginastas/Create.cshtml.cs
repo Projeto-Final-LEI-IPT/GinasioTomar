@@ -86,6 +86,13 @@ namespace AppGCT.Pages.Inscricoes.Ginastas
             {
                 return Page();
             }
+            //data nascimento superior a 1900
+            if (Ginasta.DtNascim.Year < 1900)
+            {
+                ModelState.AddModelError("Ginasta.DtNascim", "Data Nascimento(ano) tem de ser superior ou igual a 1900");
+                OnGet();
+                return Page();
+            }
             //valida data nascimento
             if (Ginasta.DtNascim.Date >= DateTime.Now.Date)
             {

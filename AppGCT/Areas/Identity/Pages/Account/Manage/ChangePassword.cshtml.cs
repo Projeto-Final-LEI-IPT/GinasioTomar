@@ -56,8 +56,8 @@ namespace AppGCT.Areas.Identity.Pages.Account.Manage
 
             [Required(ErrorMessage = "Password atual é campo obrigatório!")]
             [StringLength(50, ErrorMessage = "A {0} tem de ter pelo menos {2} e um máximo de {1} caracteres.", MinimumLength = 6)]
-            [RegularExpression(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9]).+$",
-             ErrorMessage = "Password tem de ter uma letra minúscula, uma letra maiúscula e um carater não alfanumérico")]
+            ///[RegularExpression(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^a-zA-Z0-9]).+$",
+            /// ErrorMessage = "Password deve conter uma letra minúscula, uma letra maiúscula, um número(0 a 9) e um caracter especial.")]
             [DataType(DataType.Password)]
             [Display(Name = "Password atual")]
             public string OldPassword { get; set; }
@@ -68,8 +68,8 @@ namespace AppGCT.Areas.Identity.Pages.Account.Manage
             /// </summary>
             [Required(ErrorMessage = "Nova Password é campo obrigatório!")]
             [StringLength(50, ErrorMessage = "A {0} tem de ter pelo menos {2} e um máximo de {1} caracteres.", MinimumLength = 6)]
-            [RegularExpression(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9]).+$",
-             ErrorMessage = "Password tem de ter uma letra minúscula, uma letra maiúscula e um carater não alfanumérico")]
+            [RegularExpression(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^a-zA-Z0-9]).+$",
+             ErrorMessage = "Password deve conter uma letra minúscula, uma letra maiúscula, um número(0 a 9) e um caracter especial.")]
             [DataType(DataType.Password)]
             [Display(Name = "Nova Password")]
             public string NewPassword { get; set; }
@@ -124,7 +124,14 @@ namespace AppGCT.Areas.Identity.Pages.Account.Manage
             {
                 foreach (var error in changePasswordResult.Errors)
                 {
-                    ModelState.AddModelError(string.Empty, error.Description);
+                    if (error.Code == "PasswordMismatch")
+                    {
+                        ModelState.AddModelError(string.Empty, "Password atual inválida");
+                    }
+                    else
+                    {
+                        ModelState.AddModelError(string.Empty, error.Description);
+                    } 
                 }
                 return Page();
             }else

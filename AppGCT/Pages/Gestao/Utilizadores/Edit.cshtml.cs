@@ -158,6 +158,12 @@ namespace AppGCT.Pages.Gestao.Utilizadores
             ModelState.Remove("Input.NumSocio"); // Remove validação para o campo RoleName que não é editavel
 
             var dataDia = DateTime.Now;
+            //data nascimento superior a 1900
+            if (Input.Dtnascim.Year < 1900)
+            {
+                ModelState.AddModelError("Input.DtNascim", "Data Nascimento(ano) tem de ser superior ou igual a 1900");
+                return Page();
+            }
             //valida data nascimento
             if (Input.Dtnascim >= dataDia)
             {
