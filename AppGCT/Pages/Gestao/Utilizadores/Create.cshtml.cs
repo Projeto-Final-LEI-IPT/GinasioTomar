@@ -104,8 +104,8 @@ namespace AppGCT.Pages.Gestao.Utilizadores
 
             [Required(ErrorMessage = "Password é campo obrigatório!")]
             [StringLength(50, ErrorMessage = "A {0} tem de ter pelo menos {2} e um máximo de {1} caracteres.", MinimumLength = 6)]
-            [RegularExpression(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9]).+$",
-             ErrorMessage = "Password tem de ter uma letra minúscula, uma letra maiúscula e um carater não alfanumérico")]
+            [RegularExpression(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^a-zA-Z0-9]).+$",
+             ErrorMessage = "Password deve conter uma letra minúscula, uma letra maiúscula, um número(0 a 9) e um caracter especial.")]
             [DataType(DataType.Password)]
             [Display(Name = "Password")]
             public string Password { get; set; }
