@@ -36,6 +36,7 @@ namespace AppGCT.Data
             //                        .Build();
 
             //builder.Seed(configuration);
+            builder.Seed();
             //define campo Id do Identity de 36 posições (GUID)
             builder.Entity<Utilizador>(b =>
             {
