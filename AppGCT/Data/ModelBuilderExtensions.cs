@@ -10,9 +10,9 @@ namespace AppGCT.Data
 {
     public static class ModelBuilderExtensions
     {
-        public static void Seed(this ModelBuilder builder, IConfiguration configuration)
+        public static void Seed(this ModelBuilder builder)
         {
-            var pwd = configuration["passAdmin:Seed"];
+            var pwd = "admin_GCT23";
             var passwordHasher = new PasswordHasher<Utilizador>();
 
             //seed roles
