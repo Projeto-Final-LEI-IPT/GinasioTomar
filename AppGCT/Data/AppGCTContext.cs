@@ -31,11 +31,11 @@ namespace AppGCT.Data
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
-            var configuration = new ConfigurationBuilder()
-                                    .AddUserSecrets<Program>()
-                                    .Build();
+            //var configuration = new ConfigurationBuilder()
+            //                        .AddUserSecrets<Program>()
+            //                        .Build();
 
-            builder.Seed(configuration);
+            //builder.Seed(configuration);
             //define campo Id do Identity de 36 posições (GUID)
             builder.Entity<Utilizador>(b =>
             {
