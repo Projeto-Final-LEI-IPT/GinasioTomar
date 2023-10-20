@@ -42,8 +42,8 @@ namespace AppGCT.Pages.Gestao.RubricasPrecario
                 }
             }
 
-            // Validações se rubrica com valor unitário(IVlrUnit = S) e valor inferior ou igual a 0
-            if (Rubrica.IVlrUnit == "S" && Rubrica.ValorUnitario <= 0)
+            // Validações se rubrica com valor unitário(IVlrUnit = S) e valor inferior ou igual a 0 e desconto vazio
+            if (Rubrica.IVlrUnit == "S" && Rubrica.ValorUnitario <= 0 && Rubrica.DescontoId == null)
             {
                 ModelState.AddModelError("Rubrica.ValorUnitario", "Valor unitário tem de ser superior a 0,00€");
                 return false;
