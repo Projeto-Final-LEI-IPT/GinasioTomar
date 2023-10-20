@@ -43,16 +43,24 @@ namespace AppGCT.Pages.Gestao.RubricasPrecario
             }
 
             // Validações se rubrica com valor unitário(IVlrUnit = S) e valor inferior ou igual a 0 e desconto vazio
-            if (Rubrica.IVlrUnit == "S" && Rubrica.ValorUnitario <= 0 && Rubrica.DescontoId == null)
+            if (Rubrica.IVlrUnit == "S" && (Rubrica.ValorUnitario <= 0 || Rubrica.ValorUnitario == null ) &&
+                Rubrica.DescontoId == null )
             {
                 ModelState.AddModelError("Rubrica.ValorUnitario", "Valor unitário tem de ser superior a 0,00€");
                 return false;
             }
+            // Validações se rubrica com valor unitário(IVlrUnit = S) e valor inferior ou igual a 0 e desconto preenchido
+            if (Rubrica.IVlrUnit == "S" && (Rubrica.ValorUnitario < 0 || Rubrica.ValorUnitario == null) &&
+                Rubrica.DescontoId != null && Rubrica.TipoRubrica == "G")
+            {
+                ModelState.AddModelError("Rubrica.ValorUnitario", "Valor unitário tem de ser superior ou igual a 0,00€");
+                return false;
+            }
 
             // Só é possível haver uma Rúbrica do Tipo Sócio Ativa
-               // isto é importante para que seja possível lançar as quotas automaticamente, em Janeiro de cada ano
-                 // caso contrário não saberíamos qual lançar
-            if(Rubrica.TipoRubrica   == "S" &&
+            // isto é importante para que seja possível lançar as quotas automaticamente, em Janeiro de cada ano
+            // caso contrário não saberíamos qual lançar
+            if (Rubrica.TipoRubrica   == "S" &&
                Rubrica.EstadoRubrica == "A")
             {
                 bool rubQuotaAtiva = await _context.Rubrica.AnyAsync(e => e.TipoRubrica == "S" &&
@@ -117,6 +125,11 @@ namespace AppGCT.Pages.Gestao.RubricasPrecario
                 //faz refresh das dropdown's
                 OnGet();
                 return Page();
+            }
+            // Validações se rubrica com valor unitário(IVlrUnit = N)
+            if (Rubrica.IVlrUnit == "N")
+            {
+                Rubrica.ValorUnitario = 0;
             }
 
             Rubrica.DataCriacao = DateTime.Now;
