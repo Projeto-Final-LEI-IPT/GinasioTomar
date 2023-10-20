@@ -96,15 +96,31 @@ namespace AppGCT.Pages.Gestao.Movimentos
                         break;
                 }
             }
-
-            // Validações se Valor Movimento é superior a zero
-            if (Movimento.ValorMovimento <= 0)
+            var rubricaObjetoCompleto = _context.Rubrica.Where(i => i.CodRubrica == Movimento.RubricaId).FirstOrDefault();
+ // Se a rubrica tem um desconto, é do tipo Ginasta, e se o valor unitário associado é ZERO ou NULL
+  // deixamos criar o movimento
+            if (!rubricaObjetoCompleto.DescontoId.Equals(null) && tipoRubrica == "G" &&
+                 ((rubricaObjetoCompleto.IVlrUnit == "S" && rubricaObjetoCompleto.ValorUnitario == 0)    ||
+                  (rubricaObjetoCompleto.IVlrUnit == "N" && rubricaObjetoCompleto.ValorUnitario == null) ||
+                  (rubricaObjetoCompleto.IVlrUnit == "N" && rubricaObjetoCompleto.ValorUnitario == 0) ||
+                  (rubricaObjetoCompleto.IVlrUnit == "S" && rubricaObjetoCompleto.ValorUnitario == null)   )
+               )
             {
-
-                ModelState.AddModelError("Movimento.ValorMovimento", "Valor movimento tem de ser superior a 0,00€");
-                return false;
-
+               // Se entra aqui estamos a inserir um movimento de mensalidade sem Valor Unitario Associado,
+               // pelo que temos de permitir criar movimento
             }
+            else
+            {
+                // Validações se Valor Movimento é superior a zero
+                if (Movimento.ValorMovimento <= 0)
+                {
+
+                    ModelState.AddModelError("Movimento.ValorMovimento", "Valor movimento tem de ser superior a 0,00€");
+                    return false;
+
+                }
+            }
+
             // Validações se Valor Desconto é igual ou inferior ao valor paramentrizado no Método de Pagamento
             // apenas se deve validar qu7ando a rubrica é de pagamento, pois se não for, a avriavés descontoAux será populada com NULL, dando erro o IF
             if (tipoRub == "P")
@@ -249,7 +265,7 @@ namespace AppGCT.Pages.Gestao.Movimentos
             {
                 case "G":
                 case "S":
-                    Movimento.ValorMovimento = _context.Rubrica.Where(i => i.CodRubrica == Movimento.RubricaId).FirstOrDefault().ValorUnitario;
+                    Movimento.ValorMovimento = _context.Rubrica.Where(i => i.CodRubrica == Movimento.RubricaId).FirstOrDefault().ValorUnitario ?? 0m;
                     Movimento.ValorDesconto = 0;
                     saldoAux = (double)(Movimento.ValorMovimento) * -1.0;
                     break;

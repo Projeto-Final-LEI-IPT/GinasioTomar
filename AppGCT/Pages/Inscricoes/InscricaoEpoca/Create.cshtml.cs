@@ -84,7 +84,7 @@ namespace AppGCT.Pages.Inscricoes.InscricaoEpoca
                 return Page();
             }
             //VALIDA DATA CONSENTIMENTO
-            if (Inscricao.DtConsentimento.Date != DateTime.Now.Date)
+            if (Inscricao.DtConsentimento.Date != Inscricao.DtInscricao.Date)
             {
                 ModelState.AddModelError("Inscricao.DtConsentimento", "Data Consentimento tem de ser a data inscrição");
                 OnGet(Inscricao.GinastaId);
