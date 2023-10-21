@@ -117,7 +117,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="Rubrica.ValorUnitario" class="control-label"></label>
-                <input type="number" asp-for="Rubrica.ValorUnitario" class="form-control" disabled/>
+                <input type="number" asp-for="Rubrica.ValorUnitario" class="form-control" onkeydown="return event.keyCode !== 69 && event.keyCode !== 189" disabled />
                 <span asp-validation-for="Rubrica.ValorUnitario" class="text-danger"></span>
             </div>
             <div class="form-group">
