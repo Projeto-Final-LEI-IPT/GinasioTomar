@@ -99,7 +99,7 @@ namespace AppGCT.Pages.Gestao.Movimentos
             var rubricaObjetoCompleto = _context.Rubrica.Where(i => i.CodRubrica == Movimento.RubricaId).FirstOrDefault();
  // Se a rubrica tem um desconto, é do tipo Ginasta, e se o valor unitário associado é ZERO ou NULL
   // deixamos criar o movimento
-            if (!rubricaObjetoCompleto.DescontoId.Equals(null) && tipoRubrica == "G" &&
+            if (!(rubricaObjetoCompleto.DescontoId == null) && tipoRubrica == "G" &&
                  ((rubricaObjetoCompleto.IVlrUnit == "S" && rubricaObjetoCompleto.ValorUnitario == 0)    ||
                   (rubricaObjetoCompleto.IVlrUnit == "N" && rubricaObjetoCompleto.ValorUnitario == null) ||
                   (rubricaObjetoCompleto.IVlrUnit == "N" && rubricaObjetoCompleto.ValorUnitario == 0) ||

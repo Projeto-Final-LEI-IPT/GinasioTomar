@@ -35,7 +35,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="PlanoMensalidade.ValorMensalidade" class="control-label"></label>
-                <input type="number" asp-for="PlanoMensalidade.ValorMensalidade" class="form-control" />
+                <input type="number" asp-for="PlanoMensalidade.ValorMensalidade" class="form-control" onkeydown="return event.keyCode !== 69 && event.keyCode !== 189" />
                 <span asp-validation-for="PlanoMensalidade.ValorMensalidade" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -56,7 +56,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="PlanoMensalidade.ValorMensalidadeLanc" class="control-label"></label>
-                <input type="number" asp-for="PlanoMensalidade.ValorMensalidadeLanc" class="form-control" />
+                <input type="number" asp-for="PlanoMensalidade.ValorMensalidadeLanc" class="form-control" onkeydown="return event.keyCode !== 69 && event.keyCode !== 189" />
                 <span asp-validation-for="PlanoMensalidade.ValorMensalidadeLanc" class="text-danger"></span>
             </div>
             <div class="form-group">

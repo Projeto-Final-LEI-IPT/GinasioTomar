@@ -362,12 +362,12 @@
             </div>
             <div class="form-group">
                 <label asp-for="Movimento.ValorMovimento" class="control-label"></label>
-                <input asp-for="Movimento.ValorMovimento" class="form-control" value=0 disabled />
+                <input type="number" asp-for="Movimento.ValorMovimento" class="form-control" value=0 disabled onkeydown="return event.keyCode !== 69 && event.keyCode !== 189" />
                 <span asp-validation-for="Movimento.ValorMovimento" class="text-danger"></span>
             </div>
             <div id="lblvalDesconto" class="form-group">
                 <label asp-for="Movimento.ValorDesconto" class="control-label"></label>
-                <input asp-for="Movimento.ValorDesconto" class="form-control" value=0 disabled />
+                <input type="number" asp-for="Movimento.ValorDesconto" class="form-control" value=0 disabled onkeydown="return event.keyCode !== 69 && event.keyCode !== 189" />
                 <span asp-validation-for="Movimento.ValorDesconto" class="text-danger"></span>
             </div>
             <div id="lblObservacoes" class="form-group">

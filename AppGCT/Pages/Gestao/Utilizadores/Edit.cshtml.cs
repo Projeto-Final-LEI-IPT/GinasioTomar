@@ -256,23 +256,48 @@ namespace AppGCT.Pages.Gestao.Utilizadores
             var email = user.Email;
             if (email != Input.Email)
             {
-                var setEmailResult = await _userManager.SetEmailAsync(user, Input.Email);
-                if (!setEmailResult.Succeeded)
+                //valida se e-mail já atribuido
+                var existeEmail = _userManager.Users.Any(u => u.Email == Input.Email && u.Id != Input.Id);
+                if(existeEmail)
                 {
-                    throw new InvalidOperationException($"Unexpected error occurred setting email for user with ID '{user.Nome}'.");
+                    ModelState.AddModelError("Input.Email", "Email já se encontra registado!");
+                    return Page();
                 }
                 else
                 {
-                    user.NormalizedUserName = Input.Email;
-                    user.UserName = Input.Email;
-                    user.EmailConfirmed = true;
+                    var setEmailResult = await _userManager.SetEmailAsync(user, Input.Email);
+                    if (!setEmailResult.Succeeded)
+                    {
+                        ModelState.AddModelError("Input.Email", "Erro a alterar Email!");
+                        return Page();
+                    }
+                    else
+                    {
+                        user.NormalizedUserName = Input.Email;
+                        user.UserName = Input.Email;
+                        user.EmailConfirmed = true;
+                    }
                 }
+                
             }
 
             var result = await _userManager.UpdateAsync(user);
             if (!result.Succeeded)
             {
-                throw new InvalidOperationException($"Unexpected error occurred updating user with ID '{user.Nome}'.");
+                foreach (var error in result.Errors)
+                {
+                    if (error.Code == "DuplicateUserName")
+                    {
+                        ModelState.AddModelError("Input.Email", "Email já se encontra registado!");
+                        return Page();
+                    }
+                    else
+                    {
+                        ModelState.AddModelError("Input.Email", error.Description);
+                        return Page();
+                    }
+                }
+                //throw new InvalidOperationException($"Unexpected error occurred updating user with ID '{user.Nome}'.");
             }
 
             return RedirectToPage("./Index");
