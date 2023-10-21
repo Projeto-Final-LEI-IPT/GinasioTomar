@@ -227,7 +227,16 @@ namespace AppGCT.Pages.Gestao.Utilizadores
 
             foreach (var error in result.Errors)
             {
-                    ModelState.AddModelError(string.Empty, error.Description);
+                    if (error.Code == "DuplicateUserName")
+                    {
+                        ModelState.AddModelError("Input.Email", "Email já se encontra registado!");
+                        return Page();
+                    }
+                    else
+                    {
+                        ModelState.AddModelError("Input.Email", error.Description);
+                        return Page();
+                    }
             }
             }
             return Page();
